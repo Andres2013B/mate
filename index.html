@@ -8,737 +8,755 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --violet-900:#2E1147;
-    --violet-700:#5B2C87;
-    --violet-500:#8B5FBF;
-    --violet-200:#E6D9F5;
-    --violet-050:#F6F0FC;
-    --paper:#FCFAF7;
-    --ink:#241A2E;
-    --ink-soft:#5A5066;
-    --gold:#D9A441;
-    --green:#3E8E5C;
-    --red:#C4493C;
-    --line:#E2D6EE;
-    --radius:14px;
+    --violet-900:#2E1147; --violet-700:#5B2C87; --violet-500:#8B5FBF;
+    --violet-200:#E6D9F5; --violet-050:#F6F0FC; --paper:#FCFAF7;
+    --ink:#241A2E; --ink-soft:#5A5066; --gold:#D9A441; --green:#3E8E5C;
+    --red:#C4493C; --line:#E2D6EE; --radius:14px;
   }
   *{box-sizing:border-box;}
   html,body{margin:0;padding:0;}
   body{
     background:var(--paper);
-    background-image:
-      radial-gradient(circle at 1px 1px, rgba(91,44,135,0.07) 1px, transparent 0);
-    background-size: 22px 22px;
-    color:var(--ink);
-    font-family:'Space Grotesk', sans-serif;
-    min-height:100vh;
+    background-image:radial-gradient(circle at 1px 1px, rgba(91,44,135,0.07) 1px, transparent 0);
+    background-size:22px 22px;
+    color:var(--ink); font-family:'Space Grotesk', sans-serif; min-height:100vh;
   }
   ::selection{background:var(--violet-200);}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 24px 100px;}
 
-  .wrap{max-width:980px;margin:0 auto;padding:0 24px 100px;}
-
-  header.top{
-    padding:56px 24px 40px;
-    max-width:980px;margin:0 auto;
-    position:relative;
-  }
+  header.top{padding:48px 24px 28px;max-width:1040px;margin:0 auto;}
   .eyebrow{
-    font-family:'JetBrains Mono',monospace;
-    font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;
-    color:var(--violet-700);
-    display:flex;align-items:center;gap:10px;
-    margin-bottom:18px;
+    font-family:'JetBrains Mono',monospace;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--violet-700);display:flex;align-items:center;gap:10px;margin-bottom:16px;
   }
-  .eyebrow::before{
-    content:'';width:26px;height:2px;background:var(--gold);display:inline-block;
-  }
+  .eyebrow::before{content:'';width:26px;height:2px;background:var(--gold);display:inline-block;}
   h1.title{
-    font-family:'Fraunces',serif;
-    font-weight:700;
-    font-size:clamp(34px,5.4vw,58px);
-    line-height:1.02;
-    margin:0 0 14px;
-    color:var(--violet-900);
-    letter-spacing:-.01em;
+    font-family:'Fraunces',serif;font-weight:700;font-size:clamp(30px,4.8vw,50px);
+    line-height:1.03;margin:0 0 12px;color:var(--violet-900);letter-spacing:-.01em;
   }
-  h1.title em{
-    font-style:italic;font-weight:500;color:var(--violet-500);
-  }
-  .subtitle{
-    max-width:560px;
-    color:var(--ink-soft);
-    font-size:16px;
-    line-height:1.55;
-  }
+  h1.title em{font-style:italic;font-weight:500;color:var(--violet-500);}
+  .subtitle{max-width:600px;color:var(--ink-soft);font-size:15.5px;line-height:1.55;margin:0 0 24px;}
 
-  .stats-row{
-    display:flex;gap:28px;margin-top:30px;flex-wrap:wrap;
+  /* search */
+  .search-wrap{position:relative;max-width:480px;}
+  .search-input{
+    width:100%;font-family:'Space Grotesk',sans-serif;font-size:15px;
+    border:1.5px solid var(--line);border-radius:12px;padding:13px 16px 13px 42px;
+    background:#fff;color:var(--ink);outline:none;transition:border-color .15s ease;
   }
-  .stat{
-    font-family:'JetBrains Mono',monospace;
+  .search-input:focus{border-color:var(--violet-500);}
+  .search-icon{
+    position:absolute;left:14px;top:50%;transform:translateY(-50%);
+    width:16px;height:16px;color:var(--ink-soft);pointer-events:none;
   }
-  .stat .num{
-    font-size:26px;font-weight:600;color:var(--violet-700);
-    display:block;
+  .search-clear{
+    position:absolute;right:10px;top:50%;transform:translateY(-50%);
+    background:none;border:none;color:var(--ink-soft);cursor:pointer;font-size:18px;
+    display:none;padding:4px;line-height:1;
   }
-  .stat .lbl{
-    font-size:11.5px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.06em;
-  }
+  .search-clear.show{display:block;}
 
-  /* Progress ring in corner */
-  .ring-wrap{
-    position:absolute; top:56px; right:24px;
-    display:flex;flex-direction:column;align-items:center;gap:6px;
-  }
-  .ring-wrap svg{transform:rotate(-90deg);}
-  .ring-label{
-    font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink-soft);
-    text-align:center;
-  }
-  #ringPct{font-weight:700;color:var(--violet-700);font-size:14px;}
-  @media (max-width:640px){ .ring-wrap{display:none;} }
+  .stats-row{display:flex;gap:26px;margin-top:20px;flex-wrap:wrap;}
+  .stat{font-family:'JetBrains Mono',monospace;}
+  .stat .num{font-size:22px;font-weight:600;color:var(--violet-700);display:block;}
+  .stat .lbl{font-size:11px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.06em;}
 
-  nav.tabs{
-    position:sticky; top:0; z-index:20;
-    background:rgba(252,250,247,0.92);
-    backdrop-filter:blur(6px);
-    border-bottom:1px solid var(--line);
-    padding:14px 24px;
-    display:flex;gap:8px;overflow-x:auto;
-    scrollbar-width:none;
+  /* category + topic pills */
+  nav.browser{padding:8px 24px 0;max-width:1040px;margin:0 auto;}
+  .category-block{margin-bottom:18px;}
+  .category-label{
+    font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--gold);font-weight:700;margin:0 0 10px;display:block;
   }
-  nav.tabs::-webkit-scrollbar{display:none;}
-  .tab-btn{
-    font-family:'Space Grotesk',sans-serif;
-    font-weight:600;font-size:14px;
+  .pill-row{display:flex;flex-wrap:wrap;gap:8px;}
+  .topic-pill{
+    font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:13.5px;
+    border:1.5px solid var(--line);background:#fff;color:var(--ink-soft);
+    padding:9px 15px;border-radius:999px;cursor:pointer;transition:all .15s ease;
     white-space:nowrap;
-    border:1px solid var(--line);
-    background:#fff;
-    color:var(--ink-soft);
-    padding:9px 16px;
-    border-radius:999px;
-    cursor:pointer;
-    transition:all .15s ease;
   }
-  .tab-btn .n{
-    font-family:'JetBrains Mono',monospace;
-    font-size:11px;
-    opacity:.65;
-    margin-left:6px;
-  }
-  .tab-btn:hover{border-color:var(--violet-500);color:var(--violet-700);}
-  .tab-btn.active{
-    background:var(--violet-700);border-color:var(--violet-700);color:#fff;
-  }
-  .tab-btn.active .n{opacity:.85;}
+  .topic-pill .n{font-family:'JetBrains Mono',monospace;font-size:10.5px;opacity:.6;margin-left:5px;}
+  .topic-pill:hover{border-color:var(--violet-500);color:var(--violet-700);}
+  .topic-pill.active{background:var(--violet-700);border-color:var(--violet-700);color:#fff;}
+  .topic-pill.active .n{opacity:.85;}
+  .no-results{color:var(--ink-soft);font-size:14px;padding:20px 0;font-style:italic;}
 
-  main{padding-top:36px;}
+  main{padding-top:32px;}
+  .topic-panel{display:none;}
+  .topic-panel.active{display:block;animation:fade .3s ease;}
+  @keyframes fade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
 
-  .unit-head{
-    display:flex;align-items:baseline;gap:14px;margin-bottom:6px;
+  .back-link{
+    font-family:'JetBrains Mono',monospace;font-size:12.5px;color:var(--violet-700);
+    background:none;border:none;cursor:pointer;padding:0;margin-bottom:18px;
+    display:inline-flex;align-items:center;gap:6px;font-weight:600;
   }
-  .unit-num{
-    font-family:'JetBrains Mono',monospace;
-    color:var(--gold); font-size:14px; font-weight:600;
-  }
-  .unit-title{
-    font-family:'Fraunces',serif;font-weight:700;font-size:28px;color:var(--violet-900);
-  }
-  .unit-desc{color:var(--ink-soft);font-size:14.5px;margin:0 0 28px;max-width:620px;line-height:1.5;}
+  .back-link:hover{text-decoration:underline;}
 
-  .card{
-    background:#fff;
-    border:1px solid var(--line);
-    border-radius:var(--radius);
-    padding:22px 24px;
-    margin-bottom:16px;
-    position:relative;
-    transition:border-color .15s ease, box-shadow .15s ease;
-  }
-  .card:hover{border-color:var(--violet-500); box-shadow:0 4px 18px -8px rgba(91,44,135,.25);}
-  .card.solved{border-left:3px solid var(--green);}
-  .qhead{
-    display:flex;justify-content:space-between;align-items:flex-start;gap:16px;
-  }
-  .qnum{
-    font-family:'JetBrains Mono',monospace;color:var(--violet-500);font-size:13px;
-    flex:none;padding-top:2px;
-  }
-  .qtext{
-    font-size:16px;line-height:1.55;flex:1;
-  }
-  .qtext .math{font-family:'JetBrains Mono',monospace;font-size:15px;color:var(--violet-900);}
+  .topic-head{display:flex;align-items:baseline;gap:12px;margin-bottom:6px;flex-wrap:wrap;}
+  .topic-cat{font-family:'JetBrains Mono',monospace;color:var(--gold);font-size:13px;font-weight:600;}
+  .topic-title{font-family:'Fraunces',serif;font-weight:700;font-size:27px;color:var(--violet-900);}
+  .topic-desc{color:var(--ink-soft);font-size:14.5px;margin:0 0 24px;max-width:640px;line-height:1.5;}
 
-  .reveal-btn{
-    font-family:'Space Grotesk',sans-serif;
-    font-weight:600;font-size:13px;
-    background:var(--violet-050);
-    border:1px solid var(--violet-200);
-    color:var(--violet-700);
-    padding:8px 14px;border-radius:8px;cursor:pointer;
-    flex:none;
-    transition:background .15s ease;
-  }
-  .reveal-btn:hover{background:var(--violet-200);}
-  .reveal-btn.shown{background:var(--green);border-color:var(--green);color:#fff;}
-
-  .answer{
-    max-height:0;overflow:hidden;
-    transition:max-height .25s ease, margin-top .25s ease, opacity .2s ease;
-    opacity:0;
-  }
-  .answer.open{
-    max-height:400px;margin-top:14px;opacity:1;
-  }
-  .answer-inner{
-    border-top:1px dashed var(--line);
-    padding-top:12px;
-    font-family:'JetBrains Mono',monospace;
-    font-size:14.5px;
-    color:var(--violet-900);
-    background:var(--violet-050);
-    margin:0 -24px -22px;
-    padding:12px 24px 18px;
-    border-bottom-left-radius:var(--radius);
-    border-bottom-right-radius:var(--radius);
-  }
-  .answer-inner .steps{color:var(--ink-soft);font-family:'Space Grotesk',sans-serif;font-size:13.5px;margin-top:4px;display:block;}
-
-  .theory-box{
-    background:var(--violet-900);
-    color:#F3ECFB;
-    border-radius:var(--radius);
-    padding:26px 28px;
-    margin-bottom:20px;
-  }
-  .theory-box h3{
-    font-family:'Fraunces',serif;font-size:19px;margin:0 0 12px;color:#fff;font-weight:700;
-  }
-  .theory-box .intro{font-size:14.5px;line-height:1.65;color:#D9C9EE;margin:0 0 14px;}
+  .theory-box{background:var(--violet-900);color:#F3ECFB;border-radius:var(--radius);padding:24px 26px;margin-bottom:18px;}
+  .theory-box h3{font-family:'Fraunces',serif;font-size:18px;margin:0 0 10px;color:#fff;font-weight:700;}
+  .theory-box .intro{font-size:14px;line-height:1.62;color:#D9C9EE;margin:0 0 12px;}
   .theory-box .formula{
-    font-family:'JetBrains Mono',monospace;
-    font-size:15px;
-    background:rgba(255,255,255,.08);
-    padding:10px 14px;border-radius:8px;
-    display:inline-block;margin:6px 8px 6px 0;
-    color:var(--gold);
+    font-family:'JetBrains Mono',monospace;font-size:14.5px;background:rgba(255,255,255,.08);
+    padding:9px 13px;border-radius:8px;display:inline-block;margin:5px 7px 5px 0;color:var(--gold);
   }
-  .theory-box p{font-size:14px;line-height:1.6;color:#D9C9EE;margin:8px 0 0;}
+  .theory-box p{font-size:13.5px;line-height:1.6;color:#D9C9EE;margin:8px 0 0;}
 
-  .example-box{
-    background:#fff;
-    border:1.5px dashed var(--gold);
-    border-radius:var(--radius);
-    padding:22px 24px;
-    margin-bottom:28px;
-    position:relative;
-  }
+  .example-box{background:#fff;border:1.5px dashed var(--gold);border-radius:var(--radius);padding:20px 22px;margin-bottom:26px;}
   .example-box .tag{
     font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;
-    color:var(--gold);font-weight:600;
-    display:inline-block;margin-bottom:10px;
-    background:#FBF3E2;padding:4px 10px;border-radius:6px;
+    color:var(--gold);font-weight:600;display:inline-block;margin-bottom:9px;background:#FBF3E2;padding:4px 10px;border-radius:6px;
   }
-  .example-box .ex-q{font-size:15.5px;font-weight:600;color:var(--violet-900);margin-bottom:12px;line-height:1.5;}
-  .example-box .ex-step{
-    display:flex;gap:10px;font-size:14px;line-height:1.6;color:var(--ink-soft);margin-bottom:8px;
-    padding-left:2px;
-  }
+  .example-box .ex-q{font-size:15px;font-weight:600;color:var(--violet-900);margin-bottom:11px;line-height:1.5;}
+  .example-box .ex-step{display:flex;gap:10px;font-size:13.5px;line-height:1.6;color:var(--ink-soft);margin-bottom:7px;}
   .example-box .ex-step .bullet{
-    flex:none;width:20px;height:20px;border-radius:50%;background:var(--violet-050);
-    color:var(--violet-700);font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;
-    display:flex;align-items:center;justify-content:center;margin-top:1px;
+    flex:none;width:19px;height:19px;border-radius:50%;background:var(--violet-050);color:var(--violet-700);
+    font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-top:1px;
   }
   .example-box .ex-result{
-    font-family:'JetBrains Mono',monospace;font-size:15px;color:var(--green);font-weight:600;
-    margin-top:12px;padding-top:12px;border-top:1px dashed var(--line);
+    font-family:'JetBrains Mono',monospace;font-size:14.5px;color:var(--green);font-weight:600;
+    margin-top:11px;padding-top:11px;border-top:1px dashed var(--line);
   }
 
-  .answer-row{
-    display:flex;gap:10px;margin-top:16px;flex-wrap:wrap;align-items:center;
-  }
+  .card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px;margin-bottom:14px;transition:border-color .15s ease, box-shadow .15s ease;}
+  .card:hover{border-color:var(--violet-500);box-shadow:0 4px 18px -8px rgba(91,44,135,.25);}
+  .card.solved{border-left:3px solid var(--green);}
+  .qhead{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;}
+  .qnum{font-family:'JetBrains Mono',monospace;color:var(--violet-500);font-size:12.5px;flex:none;padding-top:2px;}
+  .qtext{font-size:15px;line-height:1.55;flex:1;}
+
+  .answer-row{display:flex;gap:9px;margin-top:14px;flex-wrap:wrap;align-items:center;}
   .answer-input{
-    flex:1;min-width:160px;
-    font-family:'Space Grotesk',sans-serif;font-size:14.5px;
-    border:1.5px solid var(--line);border-radius:8px;
-    padding:10px 14px;
-    background:var(--violet-050);
-    color:var(--ink);
-    outline:none;
-    transition:border-color .15s ease;
+    flex:1;min-width:150px;font-family:'Space Grotesk',sans-serif;font-size:14px;
+    border:1.5px solid var(--line);border-radius:8px;padding:9px 13px;background:var(--violet-050);
+    color:var(--ink);outline:none;transition:border-color .15s ease;
   }
   .answer-input:focus{border-color:var(--violet-500);}
   .answer-input.correct{border-color:var(--green);background:#EFF8F1;}
   .answer-input.wrong{border-color:var(--red);background:#FBEEEC;}
   .check-btn{
-    font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:13.5px;
-    background:var(--violet-700);color:#fff;border:none;
-    padding:10px 18px;border-radius:8px;cursor:pointer;flex:none;
-    transition:background .15s ease;
+    font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:13px;background:var(--violet-700);
+    color:#fff;border:none;padding:9px 16px;border-radius:8px;cursor:pointer;flex:none;transition:background .15s ease;
   }
   .check-btn:hover{background:var(--violet-900);}
-  .feedback{
-    font-family:'Space Grotesk',sans-serif;font-size:13.5px;font-weight:600;
-    display:none;align-items:center;gap:6px;flex:none;
+  .reveal-btn{
+    font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:12.5px;background:var(--violet-050);
+    border:1px solid var(--violet-200);color:var(--violet-700);padding:8px 13px;border-radius:8px;cursor:pointer;flex:none;transition:background .15s ease;
   }
+  .reveal-btn:hover{background:var(--violet-200);}
+  .reveal-btn.shown{background:var(--green);border-color:var(--green);color:#fff;}
+  .feedback{font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:600;display:none;align-items:center;gap:6px;flex:none;}
   .feedback.show{display:flex;}
   .feedback.ok{color:var(--green);}
   .feedback.no{color:var(--red);}
 
-  .unit{display:none;}
-  .unit.active{display:block; animation:fade .35s ease;}
-  @keyframes fade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
-
-  footer{
-    text-align:center;padding:50px 24px 30px;color:var(--ink-soft);font-size:13px;
-    font-family:'JetBrains Mono',monospace;
+  .answer{max-height:0;overflow:hidden;transition:max-height .25s ease, margin-top .25s ease, opacity .2s ease;opacity:0;}
+  .answer.open{max-height:400px;margin-top:13px;opacity:1;}
+  .answer-inner{
+    border-top:1px dashed var(--line);padding-top:11px;font-family:'JetBrains Mono',monospace;font-size:14px;
+    color:var(--violet-900);background:var(--violet-050);margin:0 -22px -20px;padding:11px 22px 16px;
+    border-bottom-left-radius:var(--radius);border-bottom-right-radius:var(--radius);
   }
+  .answer-inner .steps{color:var(--ink-soft);font-family:'Space Grotesk',sans-serif;font-size:13px;margin-top:4px;display:block;}
+
+  footer{text-align:center;padding:50px 24px 30px;color:var(--ink-soft);font-size:13px;font-family:'JetBrains Mono',monospace;}
   footer span{color:var(--gold);}
 
-  @media (prefers-reduced-motion: reduce){
-    *{transition:none !important;animation:none !important;}
-  }
+  @media (prefers-reduced-motion: reduce){*{transition:none !important;animation:none !important;}}
 </style>
 </head>
 <body>
 
 <header class="top">
   <div class="eyebrow">Guía interactiva · Matemáticas 2025-2026</div>
-  <h1 class="title">Repasa cada tema,<br><em>un problema a la vez.</em></h1>
-  <p class="subtitle">Preguntas reales tomadas de tu clase, organizadas por unidad. Intenta resolver antes de revelar la respuesta — así se queda de verdad.</p>
-  <div class="stats-row">
-    <div class="stat"><span class="num" id="totalQ">0</span><span class="lbl">Ejercicios</span></div>
-    <div class="stat"><span class="num" id="totalUnits">0</span><span class="lbl">Unidades</span></div>
-    <div class="stat"><span class="num" id="solvedCount">0</span><span class="lbl">Resueltos</span></div>
+  <h1 class="title">Busca tu tema,<br><em>repasa a tu ritmo.</em></h1>
+  <p class="subtitle">Cada tema por separado, con su propio ejemplo resuelto y ejercicios reales de tu clase.</p>
+
+  <div class="search-wrap">
+    <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input class="search-input" id="searchInput" type="text" placeholder="Buscar tema (ej. porcentajes, Pitágoras, factorización...)" autocomplete="off">
+    <button class="search-clear" id="searchClear">✕</button>
   </div>
-  <div class="ring-wrap">
-    <svg width="72" height="72" viewBox="0 0 72 72">
-      <circle cx="36" cy="36" r="30" fill="none" stroke="#E6D9F5" stroke-width="7"/>
-      <circle id="ringFg" cx="36" cy="36" r="30" fill="none" stroke="#5B2C87" stroke-width="7"
-        stroke-linecap="round" stroke-dasharray="188.5" stroke-dashoffset="188.5"/>
-    </svg>
-    <div class="ring-label"><span id="ringPct">0%</span><br>completado</div>
+
+  <div class="stats-row">
+    <div class="stat"><span class="num" id="totalTopics">0</span><span class="lbl">Temas</span></div>
+    <div class="stat"><span class="num" id="totalQ">0</span><span class="lbl">Ejercicios</span></div>
+    <div class="stat"><span class="num" id="solvedCount">0</span><span class="lbl">Resueltos</span></div>
   </div>
 </header>
 
-<nav class="tabs" id="tabs"></nav>
+<nav class="browser" id="browser"></nav>
 
-<main class="wrap"><div id="units"></div></main>
+<main class="wrap"><div id="panels"></div></main>
 
 <footer>Hecho a partir de tus apuntes de Google Classroom · <span>ánimo con el repaso ✦</span></footer>
 
 <script>
-const DATA = [
-  {
-    id:'conjuntos', title:'Conjuntos', desc:'Conjunto universo, complemento y operaciones con diagramas de Venn.',
-    theory:{h:'¿De qué trata este tema?',
-      intro:'Un conjunto es simplemente una colección de elementos. El conjunto Universo (U) reúne TODOS los elementos posibles de un contexto, y cualquier otro conjunto (A, B, C…) vive dentro de él. Con diagramas de Venn (círculos que se traslapan) podemos combinar conjuntos: juntarlos (unión), quedarnos solo con lo que comparten (intersección), quitar elementos (diferencia) o quedarnos con "todo lo que no es" un conjunto (complemento).',
-      formulas:['A′ = U − A'], text:'A ∪ B = unión · A ∩ B = intersección · A \\ B = diferencia · Aᶜ = complemento'},
-    example:{
-      q:'U = {1,2,3,4,5,6,7,8,9,10}, A = {2,4,6,8}, B = {1,2,3,4,5}. Encuentra A ∩ B.',
-      steps:[
-        'La intersección (∩) pide los elementos que están en A y en B al mismo tiempo.',
-        'Revisa elemento por elemento de A: 2 → ¿está en B? sí. 4 → ¿está en B? sí. 6 → ¿está en B? no. 8 → ¿está en B? no.',
-        'Los que cumplen en ambos conjuntos son 2 y 4.'
-      ],
-      result:'A ∩ B = {2, 4}'
-    },
-    qs:[
-      {q:'U = {−5..15}, A={1,2,3,4,5,6,7}, C={−5,−4,−3,−2,−1}. Calcula A ∪ C.', a:'{−5,−4,−3,−2,−1,1,2,3,4,5,6,7}', steps:'Junta todos los elementos de A y de C, sin repetir.', accept:['{-5,-4,-3,-2,-1,1,2,3,4,5,6,7}']},
-      {q:'B={4,5,6,7,8,9,10,11,12,13,14,15}, D={−5,−3,−1,1,3,5,7,9,11,13,15}. Calcula B \\ D.', a:'{4,6,8,10,12,14}', steps:'Quita de B los elementos que también están en D.', accept:['{4,6,8,10,12,14}']},
-      {q:'A={1,2,3,4,5,6,7}, U={−5..15}. Calcula Aᶜ.', a:'{−5,−4,−3,−2,−1,0,8,9,10,11,12,13,14,15}', steps:'Todo lo que está en U pero no en A.', accept:['{-5,-4,-3,-2,-1,0,8,9,10,11,12,13,14,15}']},
-      {q:'C={−5,−4,−3,−2,−1}, A={1,2,3,4,5,6,7}. Calcula C \\ A.', a:'{−5,−4,−3,−2,−1}', steps:'C y A no comparten elementos, así que C \\ A = C completo.', accept:['{-5,-4,-3,-2,-1}']},
-      {q:'C={−5,−4,−3,−2,−1}, D={−5,−3,−1,1,3,5,7,9,11,13,15}. Calcula (C ∩ D)ᶜ.', a:'U menos {−5,−3,−1}', steps:'Primero C∩D = {−5,−3,−1}. Su complemento es todo el universo excepto esos tres.', qType:'open'},
-      {q:'X={2,−5,6,−7,8}, A={−1,−2,−3,1,2,3}. Calcula X ∩ A.', a:'{2}', accept:['{2}']},
-      {q:'B={−7,−5,−3,−1}, A={−1,−2,−3,1,2,3}. Calcula B ∩ A.', a:'{−1,−3}', accept:['{-1,-3}','{-3,-1}']},
-      {q:'X={2,−5,6,−7,8}, Y={1,2,3,4,5,6}. Calcula X ∩ Y.', a:'{2,6}', accept:['{2,6}','{6,2}']},
-      {q:'Y={1,2,3,4,5,6}, A={−1,−2,−3,1,2,3}. Calcula Y ∩ A.', a:'{1,2,3}', accept:['{1,2,3}']},
-      {q:'A={0,1,2,3,4,5,6,7,8,9}, B={1,3,5,7,9}, C={2,4,6,8}. Calcula B ∪ (A ∩ C).', a:'{1,2,3,4,5,6,7,8,9}', qType:'open'},
-    ]
-  },
-  {
-    id:'sucesiones', title:'Sucesiones', desc:'Sucesiones aritméticas, geométricas y patrones numéricos.',
-    theory:{h:'¿De qué trata este tema?',
-      intro:'Una sucesión es una lista ordenada de números que sigue un patrón. En una sucesión aritmética, cada término se obtiene sumando siempre la misma cantidad (d) al anterior. En una sucesión geométrica, cada término se obtiene multiplicando siempre por la misma razón (r). También existen patrones especiales, como los cuadrados, los cubos o la sucesión de Fibonacci.',
-      formulas:['aₙ = a₁ + (n − 1)d'], text:'d = diferencia constante entre términos consecutivos.'},
-    example:{
-      q:'Encuentra el término 15 de la sucesión aritmética: 5, 9, 13, 17…',
-      steps:[
-        'Identifica el primer término: a₁ = 5.',
-        'Encuentra la diferencia constante: d = 9 − 5 = 4.',
-        'Aplica la fórmula: aₙ = a₁ + (n−1)d, con n = 15.',
-        'a₁₅ = 5 + (15−1)(4) = 5 + 56 = 61.'
-      ],
-      result:'a₁₅ = 61'
-    },
-    qs:[
-      {q:'Encuentra el término 20 en: 1, 6, 11, 16…', a:'96', steps:'a1=1, d=5 → a20 = 1 + 19(5) = 96', accept:['96']},
-      {q:'Encuentra el término 6 en: 3, 7, 11, 15…', a:'23', steps:'a1=3, d=4 → a6 = 3 + 5(4) = 23', accept:['23']},
-      {q:'Encuentra el término 12 en: −4, 0, 4, 8…', a:'40', steps:'a1=−4, d=4 → a12 = −4 + 11(4) = 40', accept:['40']},
-      {q:'Encuentra el término 8 en: −20, −15, −10, −5…', a:'15', steps:'a1=−20, d=5 → a8 = −20 + 7(5) = 15', accept:['15']},
-      {q:'Encuentra el término 4 en: 100, 200, 300…', a:'400', steps:'a1=100, d=100 → a4 = 100 + 3(100) = 400', accept:['400']},
-      {q:'Encuentra el término 9 en: −19, −17, −15…', a:'−3', steps:'a1=−19, d=2 → a9 = −19 + 8(2) = −3', accept:['-3']},
-      {q:'Completa: 2, 4, __, 8', a:'6', steps:'Progresión aritmética simple, d = 2.', accept:['6']},
-      {q:'Completa: 1, 5, __, 13', a:'9', steps:'d = 4.', accept:['9']},
-      {q:'Completa: 3, 6, __, 12', a:'9', steps:'d = 3.', accept:['9']},
-      {q:'Completa: 1, __, 9, 27', a:'3', steps:'Sucesión geométrica, razón 3.', accept:['3']},
-      {q:'Completa: 4, __, 16, 32', a:'8', steps:'Sucesión geométrica, razón 2.', accept:['8']},
-      {q:'Completa: 4, 9, 16, __', a:'25', steps:'Cuadrados: 2², 3², 4², 5².', accept:['25']},
-      {q:'Completa: 8, 27, 64, 125, __', a:'216', steps:'Cubos: 2³,3³,4³,5³,6³.', accept:['216']},
-      {q:'Completa: 0, 1, 1, 2, 3, 5, __', a:'8', steps:'Sucesión de Fibonacci: cada término es la suma de los dos anteriores.', accept:['8']},
-      {q:'Completa: 500, 100, 20, __', a:'4', steps:'Cada término se divide entre 5.', accept:['4']},
-      {q:'Completa: 81, 27, 9, __', a:'3', steps:'Cada término se divide entre 3.', accept:['3']},
-    ]
-  },
-  {
-    id:'exponentes', title:'Exponentes', desc:'Leyes de los exponentes: multiplicación, división y potencias.',
-    theory:{h:'¿De qué trata este tema?',
-      intro:'Las leyes de los exponentes son atajos para simplificar expresiones con potencias sin tener que escribir cada multiplicación. Lo esencial: cuando multiplicas potencias de la misma base, sumas los exponentes; cuando divides, los restas; y cuando tienes una potencia elevada a otra potencia, los multiplicas.',
-      formulas:['xᵃ·xᵇ = xᵃ⁺ᵇ','xᵃ÷xᵇ = xᵃ⁻ᵇ','(xᵃ)ᵇ = xᵃᵇ'], text:''},
-    example:{
-      q:'Simplifica: (3x²y⁴)(2x⁵y)',
-      steps:[
-        'Multiplica los coeficientes numéricos: 3 × 2 = 6.',
-        'Suma los exponentes de la misma base x: x² · x⁵ = x²⁺⁵ = x⁷.',
-        'Suma los exponentes de la misma base y: y⁴ · y¹ = y⁴⁺¹ = y⁵.'
-      ],
-      result:'6x⁷y⁵'
-    },
-    qs:[
-      {q:'Simplifica (2x⁵y²)(3y³)', a:'6x⁵y⁵', accept:['6x^5y^5']},
-      {q:'Simplifica (12y⁵z³) ÷ (4y²z⁴)', a:'3y³/z', accept:['3y^3/z']},
-      {q:'Simplifica (3a⁶b⁵)(5a²bc³)', a:'15a⁸b⁶c³', accept:['15a^8b^6c^3']},
-      {q:'Simplifica (30x⁶y⁴z²) ÷ (5x²y²z⁵)', a:'6x⁴y²/z³', accept:['6x^4y^2/z^3']},
-      {q:'Simplifica (10x³y)(2xy⁶) ÷ (4x²y³)', a:'5x²y⁴', accept:['5x^2y^4']},
-      {q:'Simplifica (10x³y) ÷ (2xy⁶) · (4x²y³)', a:'20x⁴/y²', accept:['20x^4/y^2']},
-    ]
-  },
-  {
-    id:'polinomios', title:'Multiplicación de polinomios', desc:'Monomio por monomio, monomio por binomio y binomio por binomio.',
-    theory:{h:'¿De qué trata este tema?',
-      intro:'Para multiplicar polinomios, cada término del primero se multiplica por cada término del segundo, y al final se suman los términos semejantes. Con un término solo (monomio) es más simple: multiplicas constantes y sumas exponentes de la misma variable.',
-      formulas:['(2xy)(4y) = 8xy²'], text:'monomio×monomio · monomio×binomio · binomio×binomio (primeros, exteriores, interiores, últimos)'},
-    example:{
-      q:'Multiplica: (x + 3)(x + 5)',
-      steps:[
-        'Primeros: x · x = x².',
-        'Exteriores: x · 5 = 5x.',
-        'Interiores: 3 · x = 3x.',
-        'Últimos: 3 · 5 = 15.',
-        'Suma los términos semejantes: 5x + 3x = 8x.'
-      ],
-      result:'x² + 8x + 15'
-    },
-    qs:[
-      {q:'Multiplica: (2xy)(4y)', a:'8xy²', accept:['8xy^2']},
-      {q:'Multiplica: 2x(x + 3xy)', a:'2x² + 6x²y', accept:['2x^2+6x^2y']},
-      {q:'Multiplica: (x² − x)(3y)', a:'3x²y − 3xy', accept:['3x^2y-3xy']},
-      {q:'Multiplica: (3x² + 2x − 8)(x + 5)', a:'3x³ + 17x² + 2x − 40', accept:['3x^3+17x^2+2x-40']},
-    ]
-  },
-  {
-    id:'notables', title:'Productos notables', desc:'Binomio al cuadrado, binomios conjugados y binomio al cubo.',
-    theory:{h:'¿De qué trata este tema?',
-      intro:'Los productos notables son multiplicaciones de binomios tan comunes que ya tienen un resultado "de memoria", sin necesidad de multiplicar término por término cada vez. Reconocer el patrón (¿es un cuadrado? ¿son conjugados? ¿es un cubo?) te ahorra muchísimos pasos.',
-      formulas:['(a+b)² = a²+2ab+b²','(a+b)(a−b) = a²−b²','(a+b)³ = a³+3a²b+3ab²+b³'], text:''},
-    example:{
-      q:'Desarrolla (x + 4)²',
-      steps:[
-        'Identifica el patrón: (a+b)² = a² + 2ab + b², con a = x y b = 4.',
-        'Calcula a²: x² = x².',
-        'Calcula 2ab: 2(x)(4) = 8x.',
-        'Calcula b²: 4² = 16.'
-      ],
-      result:'x² + 8x + 16'
-    },
-    qs:[
-      {q:'Desarrolla (x + 2)³', a:'x³ + 6x² + 12x + 8', accept:['x^3+6x^2+12x+8']},
-      {q:'Desarrolla (3x − 2)³', a:'27x³ − 54x² + 36x − 8', accept:['27x^3-54x^2+36x-8']},
-      {q:'Desarrolla (2x + 5)³', a:'8x³ + 60x² + 150x + 125', accept:['8x^3+60x^2+150x+125']},
-    ]
-  },
-  {
-    id:'factorizacion', title:'Factorización', desc:'Factor común, diferencia de cuadrados, trinomio cuadrado perfecto y factorización combinada.',
-    theory:{h:'¿De qué trata este tema?',
-      intro:'Factorizar es el proceso inverso a multiplicar: partes de un polinomio "expandido" y lo escribes como un producto de factores más simples. La estrategia siempre es la misma: primero busca si hay un factor común a todos los términos, y luego identifica qué patrón queda (diferencia de cuadrados, trinomio cuadrado perfecto, o un trinomio general que se factoriza buscando dos números).',
-      formulas:['a²−b² = (a+b)(a−b)','a²±2ab+b² = (a±b)²'], text:'Siempre busca primero el factor común antes de aplicar otro caso.'},
-    example:{
-      q:'Factoriza por completo: 3x² − 27',
-      steps:[
-        'Busca primero el factor común: el 3 divide a ambos términos → 3(x² − 9).',
-        'Observa lo que queda dentro del paréntesis: x² − 9 es una diferencia de cuadrados (x² y 3²).',
-        'Aplica a² − b² = (a+b)(a−b), con a = x y b = 3.'
-      ],
-      result:'3(x + 3)(x − 3)'
-    },
-    qs:[
-      {q:'Factoriza: x² − 2x + 1', a:'(x − 1)²', accept:['(x-1)^2']},
-      {q:'Factoriza: x² − 6x + 9', a:'(x − 3)²', accept:['(x-3)^2']},
-      {q:'Factoriza: x² − 20x + 100', a:'(x − 10)²', accept:['(x-10)^2']},
-      {q:'Factoriza: x² + 10x + 25', a:'(x + 5)²', accept:['(x+5)^2']},
-      {q:'Factoriza: x² + 14x + 49', a:'(x + 7)²', accept:['(x+7)^2']},
-      {q:'Factoriza: 9x² + 30x + 25', a:'(3x + 5)²', accept:['(3x+5)^2']},
-      {q:'Factoriza: x⁶ + 10x³ + 25', a:'(x³ + 5)²', accept:['(x^3+5)^2']},
-      {q:'Factoriza: 4x² + 4xa³ + a⁶', a:'(2x + a³)²', accept:['(2x+a^3)^2']},
-      {q:'Resuelve: x² − 4 = 0', a:'x = 2, x = −2', steps:'Diferencia de cuadrados: (x−2)(x+2)=0', accept:['x=2,x=-2','2,-2','-2,2']},
-      {q:'Resuelve: w² − 100 = 0', a:'w = 10, w = −10', accept:['w=10,w=-10','10,-10','-10,10']},
-      {q:'Resuelve: 3x² − 192 = 0', a:'x = 8, x = −8', steps:'x² = 64', accept:['x=8,x=-8','8,-8','-8,8']},
-      {q:'Resuelve: 4y² − 12 = 0', a:'y = ±√3', qType:'open'},
-      {q:'Resuelve: 25z² − 36 = 0', a:'z = 6/5, z = −6/5', accept:['z=6/5,z=-6/5','6/5,-6/5','-6/5,6/5','1.2,-1.2','-1.2,1.2']},
-      {q:'Factoriza por completo: 2x² + 16x + 30', a:'2(x + 3)(x + 5)', accept:['2(x+3)(x+5)']},
-      {q:'Factoriza por completo: 5x² − 70x + 245', a:'5(x − 7)²', accept:['5(x-7)^2']},
-      {q:'Factoriza por completo: −x³ + 17x² − 70x', a:'−x(x − 7)(x − 10)', accept:['-x(x-7)(x-10)']},
-      {q:'Factoriza por completo: 2x⁴ − 512', a:'2(x−4)(x+4)(x²+16)', accept:['2(x-4)(x+4)(x^2+16)']},
-      {q:'Factoriza por completo: 25x⁴ − 20x³ + 4x²', a:'x²(5x − 2)²', accept:['x^2(5x-2)^2']},
-      {q:'Factoriza por completo: 12x³ + 12x² + 3x', a:'3x(2x + 1)²', accept:['3x(2x+1)^2']},
-      {q:'Factoriza por completo: 12c² − 75', a:'3(2c − 5)(2c + 5)', accept:['3(2c-5)(2c+5)','3(2c+5)(2c-5)']},
-      {q:'Factoriza por completo: 6x² − 600', a:'6(x − 10)(x + 10)', accept:['6(x-10)(x+10)','6(x+10)(x-10)']},
-      {q:'Factoriza por completo: −5t² − 20t − 20', a:'−5(t + 2)²', accept:['-5(t+2)^2']},
-      {q:'Factoriza por completo: 6x² + 18x − 24', a:'6(x + 4)(x − 1)', accept:['6(x+4)(x-1)']},
-      {q:'Factoriza por completo: −n² + 10n − 21', a:'−(n − 3)(n − 7)', accept:['-(n-3)(n-7)']},
-      {q:'Factoriza por completo: 2a² − 14a − 16', a:'2(a − 8)(a + 1)', accept:['2(a-8)(a+1)']},
-    ]
-  },
-  {
-    id:'sistemas', title:'Sistemas de ecuaciones', desc:'Sustitución, igualación, suma y resta, método gráfico y determinantes.',
-    theory:{h:'¿De qué trata este tema?',
-      intro:'Un sistema de ecuaciones 2×2 tiene dos incógnitas (x, y) y dos ecuaciones que deben cumplirse a la vez. Hay varios caminos para encontrar la solución: despejar y sustituir, igualar dos despejes, sumar/restar para eliminar una variable, graficar las dos rectas, o usar determinantes (regla de Cramer). Todos llegan al mismo resultado — usa el que te resulte más cómodo según el sistema.',
-      formulas:['ΔS = a₁b₂ − a₂b₁'], text:'Método gráfico: solución única = rectas que se cruzan · infinitas = rectas coincidentes · sin solución = rectas paralelas.'},
-    example:{
-      q:'Resuelve por suma y resta: 3x − 4y = −6,  2x + 4y = 16',
-      steps:[
-        'Como el término "−4y" y "+4y" ya son opuestos, súmalas directamente: (3x−4y) + (2x+4y) = −6+16.',
-        'Esto da 5x = 10, entonces x = 2.',
-        'Sustituye x=2 en la segunda ecuación: 2(2)+4y=16 → 4+4y=16 → 4y=12 → y=3.'
-      ],
-      result:'x = 2, y = 3'
-    },
-    qs:[
-      {q:'Resuelve por sustitución: 2x+5y=21,  x+y=3', a:'x = −2, y = 5', accept:['x=-2,y=5','-2,5']},
-      {q:'Resuelve por sustitución: 7x+2y=3,  x−3y=30', a:'x = 3, y = −9', accept:['x=3,y=-9','3,-9']},
-      {q:'Resuelve por igualación: 2x+5y=−1,  3x−2y=27', a:'x = 7, y = −3', accept:['x=7,y=-3','7,-3']},
-      {q:'Resuelve por igualación: 4x−3y=−18,  6x+7y=−4', a:'x = −3, y = 2', accept:['x=-3,y=2','-3,2']},
-      {q:'Usando determinantes: 5x−2y=−2,  −3x+7y=−22', a:'x = −2, y = −4', steps:'ΔS=29, ΔX=−58, ΔY=−116', accept:['x=-2,y=-4','-2,-4']},
-    ]
-  },
-  {
-    id:'geometria', title:'Geometría', desc:'Pitágoras, Tales, triángulos, congruencia, transformaciones y conversión de unidades.',
-    theory:{h:'¿De qué trata este tema?',
-      intro:'En todo triángulo rectángulo, los tres lados están relacionados por el Teorema de Pitágoras: el cuadrado de la hipotenusa (el lado más largo, opuesto al ángulo recto) es igual a la suma de los cuadrados de los otros dos lados (catetos). El Teorema de Tales usa esa misma idea de proporción para relacionar segmentos entre rectas paralelas. Y las figuras pueden ser congruentes (idénticas, movidas con rotación, reflexión o traslación) o semejantes (misma forma, distinto tamaño, con lados proporcionales).',
-      formulas:['c² = a² + b²'], text:'Rotación: gira sobre un eje · Reflexión: se voltea como espejo · Traslación: se desliza sin girar.'},
-    example:{
-      q:'Un triángulo rectángulo tiene catetos de 9 cm y 12 cm. ¿Cuánto mide la hipotenusa?',
-      steps:[
-        'Identifica los catetos: a = 9, b = 12.',
-        'Aplica el teorema: c² = a² + b² = 9² + 12² = 81 + 144 = 225.',
-        'Saca raíz cuadrada: c = √225.'
-      ],
-      result:'c = 15 cm'
-    },
-    qs:[
-      {q:'Triángulo rectángulo con catetos de 6 cm y 8 cm. ¿Cuánto mide la hipotenusa?', a:'10 cm', steps:'c = √(6²+8²) = √100 = 10', accept:['10','10cm']},
-      {q:'Dos puntos están separados 560 km (horizontal) y 130 km (vertical). ¿Cuál es la distancia directa entre ellos?', a:'≈ 574.8 km', steps:'d = √(560² + 130²) = √(313 600 + 16 900) = √330 500 ≈ 574.9 km', qType:'open'},
-      {q:'Triángulo con a=10, b=20. ¿Cuánto mide la hipotenusa c?', a:'≈ 22.36', steps:'c = √(10²+20²) = √500 ≈ 22.36', accept:['22.36','22.4']},
-      {q:'Rectas a y b paralelas (Tales). OA=2cm, AB=3cm, O′A′=3cm. ¿Cuánto mide A′B′?', a:'4.5 cm', steps:'OA/O′A′ = AB/A′B′ → 2/3 = 3/x → x=4.5', accept:['4.5','4.5cm']},
-      {q:'¿Qué distingue a la rotación, la reflexión y la traslación?', a:'Rotación: gira alrededor de un punto. Reflexión: se voltea como en un espejo. Traslación: se desliza sin girar ni voltear.', qType:'open'},
-      {q:'¿Cuáles son los tres criterios de semejanza de triángulos?', a:'AA (ángulo-ángulo), LAL (lado-ángulo-lado) y LLL (lado-lado-lado).', qType:'open'},
-    ]
-  },
-  {
-    id:'unidades', title:'Conversión de unidades', desc:'Unidades lineales, de superficie, de volumen y su relación con litros.',
-    theory:{h:'¿De qué trata este tema?',
-      intro:'Convertir unidades es "mover el punto decimal" el número correcto de posiciones. En unidades lineales (m, cm, km…) cada escalón es ×10. En superficie (m², cm²…) cada escalón es ×100, porque son 2 dimensiones. En volumen (m³, cm³…) cada escalón es ×1,000, porque son 3 dimensiones. El truco más útil: 1 dm³ = 1 litro exacto.',
-      formulas:['1 m³ = 1,000 L','1 dm³ = 1 L','1 cm³ = 1 mL'], text:'Hacia la derecha en la escala: multiplicas. Hacia la izquierda: divides.'},
-    example:{
-      q:'Convierte 2.5 m³ a litros',
-      steps:[
-        'Recuerda la equivalencia clave: 1 m³ = 1,000 L.',
-        'Multiplica: 2.5 × 1,000.'
-      ],
-      result:'2,500 L'
-    },
-    qs:[
-      {q:'Convierte 3.5 km a metros', a:'3,500 m', accept:['3500','3500m','3,500']},
-      {q:'Convierte 250 cm a metros', a:'2.5 m', accept:['2.5','2.5m']},
-      {q:'Convierte 0.75 m a milímetros', a:'750 mm', accept:['750','750mm']},
-      {q:'Convierte 1,500 mm a centímetros', a:'150 cm', accept:['150','150cm']},
-      {q:'Convierte 2 m² a centímetros cuadrados', a:'20,000 cm²', accept:['20000','20,000']},
-      {q:'Convierte 4 m³ a centímetros cúbicos', a:'4,000,000 cm³', accept:['4000000','4,000,000']},
-      {q:'Convierte 5 dm³ a litros', a:'5 L', accept:['5','5l','5L']},
-      {q:'Convierte 350 cm³ a mililitros', a:'350 mL', accept:['350','350ml']},
-    ]
-  },
-  {
-    id:'aplicaciones', title:'Aplicaciones', desc:'Interés simple y regla de tres compuesta.',
-    theory:{h:'¿De qué trata este tema?',
-      intro:'Estos son problemas de la vida real que se resuelven con álgebra básica. El interés simple calcula cuánto se gana o se paga por un préstamo o ahorro, según el capital, la tasa y el tiempo. La regla de tres compuesta se usa cuando hay tres o más cantidades relacionadas (por ejemplo personas, días y trabajo), algunas de forma directa y otras de forma inversa.',
-      formulas:['I = C · i · t'], text:'C = capital, i = tasa anual, t = tiempo en años.'},
-    example:{
-      q:'¿Cuánto interés genera un capital de $80,000 a una tasa del 5% anual durante 2 años?',
-      steps:[
-        'Identifica los datos: C = 80,000, i = 0.05, t = 2.',
-        'Aplica la fórmula: I = C × i × t.',
-        'Sustituye: I = 80000 × 0.05 × 2 = 8,000.'
-      ],
-      result:'I = $8,000'
-    },
-    qs:[
-      {q:'Julio pidió prestado $35,000 por 3 años al 7.5% anual. ¿Cuánto interés pagará?', a:'$7,875', steps:'I = 35000 × 0.075 × 3', accept:['7875','$7875','7,875','$7,875']},
-      {q:'Daniel pidió $200,000 por 6 meses al 12% anual. ¿Cuánto interés pagará?', a:'$12,000', steps:'I = 200000 × 0.12 × 0.5 (t en años)', accept:['12000','$12000','12,000','$12,000']},
-      {q:'Jonathan ahorró $50,000 por 3 años y ganó $13,500 de interés. ¿Qué tasa le dieron?', a:'9% anual', steps:'i = I/(C·t) = 13500/150000', accept:['9%','9','0.09']},
-      {q:'Samuel pidió $45,000 por 2 años y pagó $6,300 de interés. ¿Cuál fue la tasa?', a:'7% anual', accept:['7%','7','0.07']},
-      {q:'Sandra pidió $70,000 al 3% anual y pagó $8,400 de interés total. ¿Cuántos años duró?', a:'4 años', steps:'t = I/(C·i) = 8400/2100', accept:['4','4años','4 años']},
-      {q:'Dos ruedas unidas por correa: radios 25 cm y 75 cm. Si la primera da 300 vueltas, ¿cuántas da la segunda?', a:'100 vueltas', steps:'25 × 300 = 75 × n → n = 100 (relación inversa)', accept:['100','100vueltas']},
-      {q:'6 personas viven 12 días en un hotel por 792 €. ¿Cuánto costará para 15 personas durante 8 días?', a:'1,320 €', steps:'costo por persona-día = 792/(6×12)=11 € → 15×8×11', accept:['1320','1,320','1320€']},
-      {q:'11 obreros labran 220×48 m en 6 días. ¿Cuántos obreros para 300×56 m en 5 días?', a:'21 obreros', accept:['21']},
-      {q:'6 grifos llenan un depósito de 400 m³ en 10 horas. ¿Cuánto tardan 4 grifos en llenar 2 depósitos de 500 m³?', a:'37.5 horas', accept:['37.5','37.5horas']},
-      {q:'4 agricultores recolectan 10,000 kg de cerezas en 9 días. ¿Cuántos kg recolectarán 6 agricultores en 15 días?', a:'25,000 kg', accept:['25000','25,000']},
-      {q:'5 trabajadores tardan 16 días en construir una caseta a 6 horas diarias. ¿Cuántos trabajadores para hacerlo en 10 días a 8 horas diarias?', a:'6 trabajadores', accept:['6']},
-      {q:'8 obreros en 9 días a 6 horas/día hacen un muro de 30m. ¿Cuántos días necesitan 10 obreros a 8 horas/día para los 50m que faltan?', a:'9 días', accept:['9','9dias','9 días']},
-    ]
-  },
-  {
-    id:'interescompuesto', title:'Interés compuesto', desc:'A diferencia del simple, el interés se reinvierte en cada periodo.',
-    theory:{h:'¿De qué trata este tema?',
-      intro:'En el interés compuesto, el interés de cada periodo se suma al capital ANTES de calcular el interés del siguiente periodo — por eso "crece más rápido" que el interés simple. La fórmula usa una potencia porque el capital se multiplica una y otra vez por (1+tasa).',
-      formulas:['Mf = Mi (1 + r)ⁿ'], text:'Mi = capital inicial · r = tasa por periodo (decimal) · n = número de periodos.'},
-    example:{
-      q:'Se depositan $1,000 al 10% anual compuesto durante 2 años. ¿Monto final?',
-      steps:[
-        'Año 1: interés = 1000×0.10 = 100 → nuevo capital = 1,100.',
-        'Año 2: interés = 1100×0.10 = 110 → nuevo capital = 1,210.',
-        'O directo con la fórmula: Mf = 1000×(1.10)² = 1000×1.21.'
-      ],
-      result:'Mf = $1,210'
-    },
-    qs:[
-      {q:'Dalia depositó $2,000 al 9% capitalizable mensualmente (r=0.0075). ¿Cuánto tenía al final de un año (12 meses)?', a:'≈ $2,187.61', qType:'open'},
-      {q:'¿Qué significa que la tasa sea "capitalizable mensualmente"?', a:'Que el interés se calcula y se suma al capital cada mes (no solo una vez al año), usando la tasa anual dividida entre 12.', qType:'open'},
-      {q:'Si Mi=1,000, r=0.05 y n=3, ¿cuál es Mf?', a:'≈ $1,157.63', steps:'Mf = 1000×(1.05)³ = 1000×1.157625', accept:['1157.63','1157.6','1157.625']},
-    ]
-  },
-  {
-    id:'porcentajes', title:'Porcentajes', desc:'Descuentos, aumentos, IVA y ganancias sobre precios.',
-    theory:{h:'¿De qué trata este tema?',
-      intro:'Un descuento o aumento del p% sobre un precio se calcula multiplicando el precio original por (1 ± p/100). Para saber qué porcentaje representa una parte de un total, divides la parte entre el total y multiplicas por 100.',
-      formulas:['Precio final = Precio original × (1 ± p/100)'], text:'Descuento: resta. Aumento, ganancia o IVA: suma.'},
-    example:{
-      q:'Un pantalón sin IVA cuesta $625. Si el IVA es del 16%, ¿cuánto se paga?',
-      steps:[
-        'El IVA es un aumento del 16% sobre el precio.',
-        'Precio final = 625 × (1 + 0.16) = 625 × 1.16.'
-      ],
-      result:'$725'
-    },
-    qs:[
-      {q:'De 800 alumnos, 600 fueron de viaje. ¿Qué porcentaje fue de viaje?', a:'75%', accept:['75%','75','0.75']},
-      {q:'Una moto de $50,000 cuesta ahora $2,500 más. ¿Cuál es el porcentaje de aumento?', a:'5%', accept:['5%','5','0.05']},
-      {q:'Vehículo de $88,000 con descuento del 7.5%. ¿Cuánto hay que pagar?', a:'$81,400', accept:['81400','81,400','$81,400']},
-      {q:'Monitor de $450 con descuento del 8%. ¿Cuánto se paga?', a:'$414', accept:['414','$414']},
-      {q:'Artículo comprado en $800, se vende con ganancia del 15%. ¿Precio de venta?', a:'$920', accept:['920','$920']},
-      {q:'Compra de 180€, para ganar 10% al vender, ¿qué precio marcar?', a:'198€', accept:['198','198€']},
-      {q:'Objeto comprado en $150, se vende perdiendo 20% sobre el precio de compra. ¿Precio de venta?', a:'$120', accept:['120','$120']},
-      {q:'Zapatos de $360 con descuento del 10%. ¿Cuánto se paga?', a:'$324', accept:['324','$324']},
-      {q:'Libro de $150 ahora cuesta $165. ¿Qué porcentaje más caro es?', a:'10%', accept:['10%','10','0.1']},
-      {q:'Bosque con 65% de pinos, de 12,000 árboles totales. ¿Cuántos pinos hay?', a:'7,800 pinos', accept:['7800','7,800']},
-      {q:'Salario de $80,000/mes, el IPC sube 3.5%. ¿Cuánto debe ganar este año?', a:'$82,800', accept:['82800','82,800','$82,800']},
-      {q:'Camisa de $380 con rebaja del 15%. ¿Cuánto se paga?', a:'$323', accept:['323','$323']},
-    ]
-  },
-  {
-    id:'probabilidad', title:'Probabilidad y estadística', desc:'Probabilidad frecuencial, eventos combinados y medidas de dispersión.',
-    theory:{h:'¿De qué trata este tema?',
-      intro:'La probabilidad mide qué tan posible es que ocurra un evento, en una escala de 0 (imposible) a 1 (seguro). La probabilidad teórica se calcula con lógica (casos favorables entre casos totales); la frecuencial se obtiene repitiendo un experimento y observando qué tan seguido ocurre algo. Cuando dos eventos pueden ocurrir juntos, hay que restar esa parte compartida para no contarla dos veces. En estadística, la varianza y la desviación estándar miden qué tan dispersos están los datos respecto al promedio.',
-      formulas:['P(A) = casos favorables / casos totales'], text:'Varianza: σ² = Σ(x−media)²/n · Desviación estándar: σ = √σ²'},
-    example:{
-      q:'Se lanza un dado normal de 6 caras. ¿Cuál es la probabilidad de obtener un número par o un 5?',
-      steps:[
-        'Casos favorables a "par": {2,4,6} → 3 de 6.',
-        'Casos favorables a "5": {5} → 1 de 6.',
-        'Como par y 5 no se traslapan (5 no es par), simplemente se suman: 3/6 + 1/6.'
-      ],
-      result:'P = 4/6 = 2/3 ≈ 66.7%'
-    },
-    qs:[
-      {q:'Lanzas una moneda 60 veces y obtienes 25 soles. ¿Cuál es la probabilidad frecuencial y en cuánto difiere de la teórica?', a:'Frecuencial ≈ 41.7% (25/60); teórica = 50%; difieren en 8.3 puntos.', qType:'open'},
-      {q:'Cristina encesta 42 de 50 tiros. ¿Cuál es la probabilidad experimental de que falle?', a:'16% (8/50)', accept:['16%','16','0.16']},
-      {q:'De una baraja de 52 cartas, ¿cuál es la probabilidad de sacar un 8 o un trébol?', a:'4/13 ≈ 30.8%', steps:'P(8)+P(trébol)−P(8 de trébol) = 4/52+13/52−1/52 = 16/52', accept:['4/13','30.8%','0.308']},
-      {q:'Se elige un número entero entre 1 y 30. ¿Probabilidad de que sea primo o múltiplo de 5?', a:'50% (15/30)', steps:'10 primos + 6 múltiplos de 5 − 1 en común (el 5) = 15', accept:['50%','1/2','0.5']},
-      {q:'Ruleta de 36 sectores (1-12 rojo, 13-24 azul, 25-36 negro). ¿Probabilidad de número impar o rojo?', a:'≈ 66.7% (2/3)', steps:'P(impar)+P(rojo)−P(impar y rojo) = 1/2+1/3−1/6', accept:['2/3','66.7%','0.667']},
-      {q:'¿Qué mide la desviación estándar y cómo se obtiene a partir de la varianza?', a:'Mide qué tan dispersos están los datos respecto a la media; se obtiene sacando la raíz cuadrada de la varianza.', qType:'open'},
-    ]
-  },
+// ======================= DATOS =======================
+const CATEGORIES = [
+  { id:'conjuntos', label:'Conjuntos' },
+  { id:'algebra', label:'Álgebra' },
+  { id:'geometria', label:'Geometría' },
+  { id:'aplicaciones', label:'Aplicaciones' },
+  { id:'probabilidad', label:'Estadística y probabilidad' },
 ];
 
-const unitsEl = document.getElementById('units');
-const tabsEl = document.getElementById('tabs');
+const TOPICS = [
+// ---------------- CONJUNTOS ----------------
+{
+  id:'universo', cat:'conjuntos', title:'Universo y complemento', desc:'Conjunto universo, subconjuntos y complemento.',
+  theory:{h:'¿De qué trata este tema?',
+    intro:'El conjunto Universo (U) reúne todos los elementos posibles de un contexto, y cualquier otro conjunto vive dentro de él. El complemento de A (se escribe A′) son los elementos de U que NO están en A.',
+    formulas:['A′ = U − A'], text:''},
+  example:{ q:'U = {1,2,3,4,5,6,7,8,9,10}, A = {2,4,6,8}. Encuentra A′.',
+    steps:['Toma todos los elementos del universo.','Quita los que ya están en A (2,4,6,8).'],
+    result:'A′ = {1,3,5,7,9,10}' },
+  qs:[
+    {q:'U={−5..15}, A={1,2,3,4,5,6,7}. Calcula Aᶜ.', a:'{−5,−4,−3,−2,−1,0,8,9,10,11,12,13,14,15}', qType:'open'},
+  ]
+},
+{
+  id:'interseccion', cat:'conjuntos', title:'Intersección de conjuntos', desc:'Elementos que comparten dos conjuntos.',
+  theory:{h:'¿De qué trata este tema?', intro:'La intersección (∩) de dos conjuntos son los elementos que están en AMBOS a la vez.', formulas:['A ∩ B'], text:''},
+  example:{ q:'A={2,4,6,8}, B={1,2,3,4,5}. Encuentra A ∩ B.',
+    steps:['Revisa cada elemento de A: 2→¿está en B? sí. 4→sí. 6→no. 8→no.'], result:'A ∩ B = {2, 4}' },
+  qs:[
+    {q:'X={2,−5,6,−7,8}, A={−1,−2,−3,1,2,3}. Calcula X ∩ A.', a:'{2}', accept:['{2}']},
+    {q:'B={−7,−5,−3,−1}, A={−1,−2,−3,1,2,3}. Calcula B ∩ A.', a:'{−1,−3}', accept:['{-1,-3}','{-3,-1}']},
+    {q:'X={2,−5,6,−7,8}, Y={1,2,3,4,5,6}. Calcula X ∩ Y.', a:'{2,6}', accept:['{2,6}','{6,2}']},
+    {q:'Y={1,2,3,4,5,6}, A={−1,−2,−3,1,2,3}. Calcula Y ∩ A.', a:'{1,2,3}', accept:['{1,2,3}']},
+    {q:'B={−7,−5,−3,−1}, X={2,−5,6,−7,8}. Calcula B ∩ X.', a:'{−5,−7}', accept:['{-5,-7}','{-7,-5}']},
+  ]
+},
+{
+  id:'union-interseccion', cat:'conjuntos', title:'Unión e intersección combinadas', desc:'Operaciones agrupadas con paréntesis.',
+  theory:{h:'¿De qué trata este tema?', intro:'Igual que con números, los conjuntos se pueden agrupar con paréntesis. Primero resuelve dentro del paréntesis, luego el resto.', formulas:['B ∪ (A ∩ C)'], text:''},
+  example:{ q:'A={0,1,2,3,4,5,6,7,8,9}, B={1,3,5,7,9}, C={2,4,6,8}. Encuentra B ∪ (A ∩ C).',
+    steps:['Primero resuelve el paréntesis: A ∩ C = {2,4,6,8} (ya que C está contenido en A).','Une ese resultado con B: {1,3,5,7,9} ∪ {2,4,6,8}.'],
+    result:'{1,2,3,4,5,6,7,8,9}' },
+  qs:[
+    {q:'Con los mismos conjuntos, ¿qué representa (A ∩ C) dentro del paréntesis?', a:'Los elementos que están tanto en A como en C.', qType:'open'},
+  ]
+},
+{
+  id:'venn', cat:'conjuntos', title:'Diagramas de Venn', desc:'Unión, intersección, diferencia y complemento juntos.',
+  theory:{h:'¿De qué trata este tema?', intro:'Con diagramas de Venn (círculos que se traslapan) puedes visualizar todas las operaciones entre conjuntos.',
+    formulas:[], text:'A ∪ B = unión · A ∩ B = intersección · A \\ B = diferencia · Aᶜ = complemento'},
+  example:{ q:'U = {1..10}, A={1,2,3,4,5,6,7}, B={4,5,6,7,8,9,10}. Encuentra A \\ B.',
+    steps:['A \\ B son los elementos de A que NO están en B.','Revisa cada elemento de A: 1,2,3 no están en B; 4,5,6,7 sí están en B.'],
+    result:'A \\ B = {1, 2, 3}' },
+  qs:[
+    {q:'U={−5..15}, A={1,2,3,4,5,6,7}, C={−5,−4,−3,−2,−1}. Calcula A ∪ C.', a:'{−5,−4,−3,−2,−1,1,2,3,4,5,6,7}', accept:['{-5,-4,-3,-2,-1,1,2,3,4,5,6,7}']},
+    {q:'B={4,5,6,7,8,9,10,11,12,13,14,15}, D={−5,−3,−1,1,3,5,7,9,11,13,15}. Calcula B \\ D.', a:'{4,6,8,10,12,14}', accept:['{4,6,8,10,12,14}']},
+    {q:'C={−5,−4,−3,−2,−1}, D={−5,−3,−1,1,3,5,7,9,11,13,15}. Calcula (C ∩ D)ᶜ.', a:'U menos {−5,−3,−1}', qType:'open'},
+  ]
+},
+
+// ---------------- ÁLGEBRA ----------------
+{
+  id:'sucesiones', cat:'algebra', title:'Sucesiones', desc:'Sucesiones aritméticas, geométricas y patrones.',
+  theory:{h:'¿De qué trata este tema?',
+    intro:'En una sucesión aritmética cada término se obtiene sumando siempre la misma cantidad (d). En una geométrica, se multiplica siempre por la misma razón (r).',
+    formulas:['xₙ = a + d(n−1)','xₙ = a·r^(n−1)'], text:''},
+  example:{ q:'Encuentra el término 15 de: 5, 9, 13, 17…',
+    steps:['a₁=5, d=4.','x₁₅ = 5 + (15−1)(4) = 5 + 56.'], result:'x₁₅ = 61' },
+  qs:[
+    {q:'Encuentra el término 20 en: 1, 6, 11, 16…', a:'96', accept:['96']},
+    {q:'Encuentra el término 6 en: 3, 7, 11, 15…', a:'23', accept:['23']},
+    {q:'Encuentra el término 12 en: −4, 0, 4, 8…', a:'40', accept:['40']},
+    {q:'Encuentra el término 8 en: −20, −15, −10, −5…', a:'15', accept:['15']},
+    {q:'Completa: 2, 4, __, 8', a:'6', accept:['6']},
+    {q:'Completa: 1, __, 9, 27 (geométrica)', a:'3', accept:['3']},
+    {q:'Completa: 4, 9, 16, __ (cuadrados)', a:'25', accept:['25']},
+    {q:'Completa: 8, 27, 64, 125, __ (cubos)', a:'216', accept:['216']},
+    {q:'Completa: 0, 1, 1, 2, 3, 5, __ (Fibonacci)', a:'8', accept:['8']},
+    {q:'Completa: 500, 100, 20, __', a:'4', accept:['4']},
+  ]
+},
+{
+  id:'notacion-cientifica', cat:'algebra', title:'Notación científica', desc:'Escribir y desarrollar números con potencias de 10.',
+  theory:{h:'¿De qué trata este tema?',
+    intro:'Un número en notación científica se escribe como un número entre 1 y 10 multiplicado por una potencia de 10. Los exponentes positivos mueven el punto decimal a la derecha; los negativos, a la izquierda.',
+    formulas:['n × 10ᵏ'], text:''},
+  example:{ q:'Desarrolla: 4.96 × 10⁸',
+    steps:['El exponente es 8 (positivo), así que mueves el punto 8 lugares a la derecha.','4.96 → 496000000.'],
+    result:'496,000,000' },
+  qs:[
+    {q:'Desarrolla: 7.265 × 10⁹', a:'7,265,000,000', accept:['7265000000','7,265,000,000']},
+    {q:'Desarrolla: 0.089 × 10⁵', a:'8,900', accept:['8900','8,900']},
+    {q:'Desarrolla: 1.938 × 10²', a:'193.8', accept:['193.8']},
+    {q:'Desarrolla: 6.335 × 10⁻⁵', a:'0.00006335', accept:['0.00006335']},
+    {q:'¿Qué número cumple: ____ × 10⁴ = 63,000?', a:'6.3', accept:['6.3']},
+    {q:'¿Qué número cumple: ____ × 10⁻² = 0.72?', a:'72', accept:['72']},
+  ]
+},
+{
+  id:'exponentes', cat:'algebra', title:'Leyes de los exponentes', desc:'Multiplicación, división y potencias de potencias.',
+  theory:{h:'¿De qué trata este tema?', intro:'Al multiplicar potencias de la misma base, sumas los exponentes; al dividir, los restas; potencia de potencia, los multiplicas.',
+    formulas:['xᵃ·xᵇ = xᵃ⁺ᵇ','xᵃ÷xᵇ = xᵃ⁻ᵇ','(xᵃ)ᵇ = xᵃᵇ'], text:''},
+  example:{ q:'Simplifica: (3x²y⁴)(2x⁵y)',
+    steps:['Multiplica coeficientes: 3×2=6.','Suma exponentes de x: x²·x⁵=x⁷.','Suma exponentes de y: y⁴·y¹=y⁵.'], result:'6x⁷y⁵' },
+  qs:[
+    {q:'Simplifica (2x⁵y²)(3y³)', a:'6x⁵y⁵', accept:['6x^5y^5']},
+    {q:'Simplifica (12y⁵z³) ÷ (4y²z⁴)', a:'3y³/z', accept:['3y^3/z']},
+    {q:'Simplifica (3a⁶b⁵)(5a²bc³)', a:'15a⁸b⁶c³', accept:['15a^8b^6c^3']},
+    {q:'Simplifica (30x⁶y⁴z²) ÷ (5x²y²z⁵)', a:'6x⁴y²/z³', accept:['6x^4y^2/z^3']},
+    {q:'Simplifica (10x³y)(2xy⁶) ÷ (4x²y³)', a:'5x²y⁴', accept:['5x^2y^4']},
+  ]
+},
+{
+  id:'polinomios', cat:'algebra', title:'Multiplicación de polinomios', desc:'Monomio por monomio, por binomio, y binomio por binomio.',
+  theory:{h:'¿De qué trata este tema?', intro:'Cada término del primer polinomio se multiplica por cada término del segundo, y al final se suman los términos semejantes.',
+    formulas:['(2xy)(4y) = 8xy²'], text:'primeros · exteriores · interiores · últimos'},
+  example:{ q:'Multiplica: (x + 3)(x + 5)',
+    steps:['Primeros: x·x=x².','Exteriores: x·5=5x.','Interiores: 3·x=3x.','Últimos: 3·5=15.','Suma semejantes: 5x+3x=8x.'],
+    result:'x² + 8x + 15' },
+  qs:[
+    {q:'Multiplica: (2xy)(4y)', a:'8xy²', accept:['8xy^2']},
+    {q:'Multiplica: 2x(x + 3xy)', a:'2x² + 6x²y', accept:['2x^2+6x^2y']},
+    {q:'Multiplica: (x² − x)(3y)', a:'3x²y − 3xy', accept:['3x^2y-3xy']},
+    {q:'Multiplica: (3x² + 2x − 8)(x + 5)', a:'3x³ + 17x² + 2x − 40', accept:['3x^3+17x^2+2x-40']},
+  ]
+},
+{
+  id:'notables', cat:'algebra', title:'Productos notables', desc:'Binomio al cuadrado, conjugados y binomio al cubo.',
+  theory:{h:'¿De qué trata este tema?', intro:'Multiplicaciones de binomios tan comunes que ya tienen un resultado "de memoria".',
+    formulas:['(a+b)² = a²+2ab+b²','(a+b)(a−b) = a²−b²','(a+b)³ = a³+3a²b+3ab²+b³'], text:''},
+  example:{ q:'Desarrolla (x + 4)²',
+    steps:['(a+b)²=a²+2ab+b², con a=x, b=4.','a²=x². 2ab=2(x)(4)=8x. b²=16.'], result:'x² + 8x + 16' },
+  qs:[
+    {q:'Desarrolla (x + 2)³', a:'x³ + 6x² + 12x + 8', accept:['x^3+6x^2+12x+8']},
+    {q:'Desarrolla (3x − 2)³', a:'27x³ − 54x² + 36x − 8', accept:['27x^3-54x^2+36x-8']},
+    {q:'Desarrolla (2x + 5)³', a:'8x³ + 60x² + 150x + 125', accept:['8x^3+60x^2+150x+125']},
+  ]
+},
+{
+  id:'factor-comun', cat:'algebra', title:'Factor común', desc:'El primer paso siempre en cualquier factorización.',
+  theory:{h:'¿De qué trata este tema?', intro:'Se extrae el factor que se repite en todos los términos de la expresión. Es siempre el primer paso a intentar en cualquier factorización.',
+    formulas:['ab + ac = a(b + c)'], text:''},
+  example:{ q:'Factoriza: 10a² + 15a',
+    steps:['Busca el número más grande que divide a 10 y 15: el 5.','Busca la variable en común: la a.','Factor común: 5a.'], result:'5a(2a + 3)' },
+  qs:[
+    {q:'Factoriza: 5y² + 15y', a:'5y(y + 3)', accept:['5y(y+3)']},
+    {q:'Factoriza: ab − a²', a:'a(b − a)', accept:['a(b-a)']},
+    {q:'Factoriza: m² + m', a:'m(m + 1)', accept:['m(m+1)']},
+    {q:'Factoriza: 2a²b + 6ab²', a:'2ab(a + 3b)', accept:['2ab(a+3b)']},
+  ]
+},
+{
+  id:'dif-cuadrados', cat:'algebra', title:'Diferencia de cuadrados', desc:'a² − b² = (a+b)(a−b)', 
+  theory:{h:'¿De qué trata este tema?', intro:'Cuando tienes una resta de dos términos que son cuadrados perfectos, se factoriza como el producto de la suma por la diferencia de sus raíces.',
+    formulas:['a² − b² = (a+b)(a−b)'], text:''},
+  example:{ q:'Factoriza: 16m² − 9n²',
+    steps:['Saca raíz cuadrada de cada término: √(16m²)=4m, √(9n²)=3n.','Multiplica suma por diferencia.'], result:'(4m + 3n)(4m − 3n)' },
+  qs:[
+    {q:'Resuelve: x² − 4 = 0', a:'x = 2, x = −2', accept:['x=2,x=-2','2,-2','-2,2']},
+    {q:'Resuelve: w² − 100 = 0', a:'w = 10, w = −10', accept:['w=10,w=-10','10,-10','-10,10']},
+    {q:'Resuelve: 3x² − 192 = 0', a:'x = 8, x = −8', accept:['x=8,x=-8','8,-8','-8,8']},
+    {q:'Resuelve: 25z² − 36 = 0', a:'z = 6/5, z = −6/5', accept:['z=6/5,z=-6/5','6/5,-6/5','-6/5,6/5','1.2,-1.2','-1.2,1.2']},
+  ]
+},
+{
+  id:'trinomio-cuadrado-perfecto', cat:'algebra', title:'Trinomio cuadrado perfecto', desc:'a² ± 2ab + b² = (a±b)²',
+  theory:{h:'¿De qué trata este tema?', intro:'Es el resultado de elevar un binomio al cuadrado. Se reconoce porque el primer y último término son cuadrados perfectos, y el término de en medio es el doble producto de sus raíces.',
+    formulas:['a² ± 2ab + b² = (a ± b)²'], text:''},
+  example:{ q:'Factoriza: x² + 10x + 25',
+    steps:['¿x² es cuadrado perfecto? sí, raíz x. ¿25 es cuadrado perfecto? sí, raíz 5.','¿10x es el doble producto? 2(x)(5)=10x, sí coincide.'],
+    result:'(x + 5)²' },
+  qs:[
+    {q:'Factoriza: x² − 2x + 1', a:'(x − 1)²', accept:['(x-1)^2']},
+    {q:'Factoriza: x² − 6x + 9', a:'(x − 3)²', accept:['(x-3)^2']},
+    {q:'Factoriza: x² − 20x + 100', a:'(x − 10)²', accept:['(x-10)^2']},
+    {q:'Factoriza: x² + 14x + 49', a:'(x + 7)²', accept:['(x+7)^2']},
+    {q:'Factoriza: 9x² + 30x + 25', a:'(3x + 5)²', accept:['(3x+5)^2']},
+    {q:'Factoriza: x⁶ + 10x³ + 25', a:'(x³ + 5)²', accept:['(x^3+5)^2']},
+  ]
+},
+{
+  id:'trinomio-bxc', cat:'algebra', title:'Trinomio x² + bx + c', desc:'Buscar dos números que sumen b y multipliquen c.',
+  theory:{h:'¿De qué trata este tema?', intro:'Se descompone en dos binomios cuyo primer término es la raíz cuadrada de x², y cuyos segundos términos son dos números que sumados dan "b" y multiplicados dan "c".',
+    formulas:['x² + bx + c = (x + m)(x + n)'], text:''},
+  example:{ q:'Factoriza: x² + 7x + 12',
+    steps:['Busca dos números que multiplicados den 12 y sumados den 7.','3 × 4 = 12, y 3 + 4 = 7. ¡Coinciden!'], result:'(x + 3)(x + 4)' },
+  qs:[
+    {q:'Factoriza: x² + 8x + 15', a:'(x + 3)(x + 5)', accept:['(x+3)(x+5)','(x+5)(x+3)']},
+    {q:'Factoriza: x² − 9x + 20', a:'(x − 4)(x − 5)', accept:['(x-4)(x-5)','(x-5)(x-4)']},
+    {q:'Factoriza: x² + 2x − 15', a:'(x + 5)(x − 3)', accept:['(x+5)(x-3)','(x-3)(x+5)']},
+  ]
+},
+{
+  id:'trinomio-axc', cat:'algebra', title:'Trinomio ax² + bx + c', desc:'Cuando el primer término tiene coeficiente distinto de 1.',
+  theory:{h:'¿De qué trata este tema?', intro:'El primer término de cada binomio es la raíz cuadrada del primer término del trinomio. El signo del primer binomio es el mismo que el de "bx"; si los signos de "bx" y "c" son iguales, buscas dos números cuya suma sea b; si son diferentes, cuya diferencia sea b — en ambos casos, cuyo producto sea c.',
+    formulas:['ax² + bx + c'], text:''},
+  example:{ q:'Factoriza: 2x² + 3x − 2',
+    steps:['Raíz de 2x²... como no es exacta, se prueban combinaciones: (2x−1)(x+2).','Verifica: 2x·x+2x·2−1·x−1·2 = 2x²+4x−x−2 = 2x²+3x−2. ✓'],
+    result:'(2x − 1)(x + 2)' },
+  qs:[
+    {q:'Factoriza: 2x² + 3x − 2', a:'(2x − 1)(x + 2)', accept:['(2x-1)(x+2)','(x+2)(2x-1)']},
+    {q:'Factoriza: 3a² − 5a − 2', a:'(3a + 1)(a − 2)', accept:['(3a+1)(a-2)','(a-2)(3a+1)']},
+    {q:'Factoriza: 6y² + 7y + 2', a:'(3y + 2)(2y + 1)', accept:['(3y+2)(2y+1)','(2y+1)(3y+2)']},
+  ]
+},
+{
+  id:'formula-general', cat:'algebra', title:'Fórmula general (cuadrática)', desc:'Para cualquier ax² + bx + c = 0.',
+  theory:{h:'¿De qué trata este tema?', intro:'Cuando un trinomio no se puede factorizar fácilmente por los otros métodos, la fórmula general siempre funciona: calcula las dos raíces que hacen la ecuación igual a cero.',
+    formulas:['x = (−b ± √(b² − 4ac)) / 2a'], text:''},
+  example:{ q:'Resuelve: −3x² + 5x − 2 = 0',
+    steps:['a=−3, b=5, c=−2.','x = (−5 ± √(25−4(−3)(−2))) / (2(−3)) = (−5 ± √1) / (−6).','x₁ = (−5+1)/(−6) = 2/3.  x₂ = (−5−1)/(−6) = 1.'],
+    result:'x₁ = 2/3,  x₂ = 1' },
+  qs:[
+    {q:'Resuelve con fórmula general: x² − 5x + 6 = 0', a:'x = 2, x = 3', accept:['x=2,x=3','2,3','3,2']},
+    {q:'Resuelve con fórmula general: 2x² − 3x − 2 = 0', a:'x = 2, x = −1/2', accept:['x=2,x=-1/2','2,-0.5','-0.5,2']},
+  ]
+},
+{
+  id:'factorizacion-combinada', cat:'algebra', title:'Factorización combinada', desc:'Aplicar dos o más casos en el mismo polinomio.',
+  theory:{h:'¿De qué trata este tema?', intro:'Se aplican dos o más casos de factorización en el mismo polinomio. Primero busca siempre factor común, luego identifica el patrón que queda.', formulas:[], text:''},
+  example:{ q:'Factoriza por completo: 3x² − 27',
+    steps:['Factor común: el 3 divide a ambos términos → 3(x²−9).','Lo que queda es diferencia de cuadrados: x²−9=(x+3)(x−3).'], result:'3(x + 3)(x − 3)' },
+  qs:[
+    {q:'Factoriza por completo: 2x² + 16x + 30', a:'2(x + 3)(x + 5)', accept:['2(x+3)(x+5)']},
+    {q:'Factoriza por completo: 5x² − 70x + 245', a:'5(x − 7)²', accept:['5(x-7)^2']},
+    {q:'Factoriza por completo: −x³ + 17x² − 70x', a:'−x(x − 7)(x − 10)', accept:['-x(x-7)(x-10)']},
+    {q:'Factoriza por completo: 2x⁴ − 512', a:'2(x−4)(x+4)(x²+16)', accept:['2(x-4)(x+4)(x^2+16)']},
+    {q:'Factoriza por completo: 25x⁴ − 20x³ + 4x²', a:'x²(5x − 2)²', accept:['x^2(5x-2)^2']},
+    {q:'Factoriza por completo: 12x³ + 12x² + 3x', a:'3x(2x + 1)²', accept:['3x(2x+1)^2']},
+    {q:'Factoriza por completo: 12c² − 75', a:'3(2c − 5)(2c + 5)', accept:['3(2c-5)(2c+5)','3(2c+5)(2c-5)']},
+    {q:'Factoriza por completo: 6x² − 600', a:'6(x − 10)(x + 10)', accept:['6(x-10)(x+10)','6(x+10)(x-10)']},
+    {q:'Factoriza por completo: −5t² − 20t − 20', a:'−5(t + 2)²', accept:['-5(t+2)^2']},
+    {q:'Factoriza por completo: 6x² + 18x − 24', a:'6(x + 4)(x − 1)', accept:['6(x+4)(x-1)']},
+    {q:'Factoriza por completo: −n² + 10n − 21', a:'−(n − 3)(n − 7)', accept:['-(n-3)(n-7)']},
+    {q:'Factoriza por completo: 2a² − 14a − 16', a:'2(a − 8)(a + 1)', accept:['2(a-8)(a+1)']},
+  ]
+},
+{
+  id:'fracciones-algebraicas', cat:'algebra', title:'Simplificación de fracciones algebraicas', desc:'Factoriza numerador y denominador, y cancela.',
+  theory:{h:'¿De qué trata este tema?', intro:'Una fracción algebraica es el cociente de dos polinomios. Para simplificarla, factoriza numerador y denominador por completo, y cancela los factores comunes.',
+    formulas:['(x+2)²/[(x+2)(x−2)] = (x+2)/(x−2)'], text:''},
+  example:{ q:'Simplifica: (x² − 5x + 6) / (x² − 7x + 12)',
+    steps:['Factoriza el numerador: x²−5x+6 = (x−2)(x−3).','Factoriza el denominador: x²−7x+12 = (x−3)(x−4).','Cancela el factor común (x−3).'],
+    result:'(x − 2) / (x − 4)' },
+  qs:[
+    {q:'Simplifica: (x² − 3x) / (x² + 3x)', a:'(x − 3) / (x + 3)', accept:['(x-3)/(x+3)']},
+    {q:'Simplifica: (x² − 2x − 3) / (x² − x − 2)', a:'(x − 3) / (x − 2)', accept:['(x-3)/(x-2)']},
+  ]
+},
+{
+  id:'pendiente', cat:'algebra', title:'Pendiente y rectas', desc:'Qué tan inclinada está una recta.',
+  theory:{h:'¿De qué trata este tema?', intro:'La pendiente mide la inclinación de una recta: cuánto "sube o baja" por cada unidad que avanza en x.',
+    formulas:['m = (y₂ − y₁) / (x₂ − x₁)'], text:'Positiva: sube · Negativa: baja · Cero: horizontal · Indefinida: vertical'},
+  example:{ q:'Encuentra la pendiente de la recta que pasa por A(2,1) y B(4,7).',
+    steps:['m = (y₂−y₁)/(x₂−x₁) = (7−1)/(4−2).'], result:'m = 3' },
+  qs:[
+    {q:'Encuentra la pendiente entre los puntos (1,5) y (3,9).', a:'m = 2', accept:['2','m=2']},
+    {q:'¿Qué tipo de pendiente tiene una recta vertical?', a:'Indefinida (no existe, por división entre cero).', qType:'open'},
+  ]
+},
+{
+  id:'funciones-cuadraticas', cat:'algebra', title:'Funciones cuadráticas', desc:'Tabulación y gráfica de y = ax² + bx + c.',
+  theory:{h:'¿De qué trata este tema?', intro:'Para graficar una función cuadrática, eliges al menos 5 valores de x, calculas la y correspondiente (tabulación), y ubicas los puntos en el plano — la gráfica resultante es una parábola.',
+    formulas:['y = ax² + bx + c'], text:''},
+  example:{ q:'Tabula y = x² − x − 2 para x = −1, 0, 1',
+    steps:['x=−1: y=(−1)²−(−1)−2 = 1+1−2 = 0.','x=0: y=0−0−2 = −2.','x=1: y=1−1−2 = −2.'],
+    result:'Puntos: (−1,0), (0,−2), (1,−2)' },
+  qs:[
+    {q:'Para y = x² − 1, ¿cuál es el valor de y cuando x = 3?', a:'8', accept:['8']},
+    {q:'Para y = −x² − 2, ¿cuál es el valor de y cuando x = 0?', a:'−2', accept:['-2']},
+  ]
+},
+{
+  id:'sistemas', cat:'algebra', title:'Sistemas de ecuaciones 2×2', desc:'Sustitución, igualación, suma-resta, gráfico y determinantes.',
+  theory:{h:'¿De qué trata este tema?', intro:'Un sistema 2×2 tiene dos incógnitas y dos ecuaciones que deben cumplirse a la vez. Hay varios caminos: sustituir, igualar, sumar/restar, graficar, o usar determinantes — todos llegan al mismo resultado.',
+    formulas:['ΔS = a₁b₂ − a₂b₁'], text:'Solución única = rectas que se cruzan · infinitas = coincidentes · sin solución = paralelas'},
+  example:{ q:'Resuelve por suma y resta: 3x − 4y = −6,  2x + 4y = 16',
+    steps:['Los términos "−4y" y "+4y" son opuestos: súmalas directamente.','(3x−4y)+(2x+4y) = −6+16 → 5x=10 → x=2.','Sustituye en la 2ª ecuación: 2(2)+4y=16 → y=3.'],
+    result:'x = 2, y = 3' },
+  qs:[
+    {q:'Resuelve por sustitución: 2x+5y=21,  x+y=3', a:'x = −2, y = 5', accept:['x=-2,y=5','-2,5']},
+    {q:'Resuelve por sustitución: 7x+2y=3,  x−3y=30', a:'x = 3, y = −9', accept:['x=3,y=-9','3,-9']},
+    {q:'Resuelve por igualación: 2x+5y=−1,  3x−2y=27', a:'x = 7, y = −3', accept:['x=7,y=-3','7,-3']},
+    {q:'Resuelve por igualación: 4x−3y=−18,  6x+7y=−4', a:'x = −3, y = 2', accept:['x=-3,y=2','-3,2']},
+    {q:'Usando determinantes: 5x−2y=−2,  −3x+7y=−22', a:'x = −2, y = −4', steps:'ΔS=29, ΔX=−58, ΔY=−116', accept:['x=-2,y=-4','-2,-4']},
+  ]
+},
+
+// ---------------- GEOMETRÍA ----------------
+{
+  id:'pitagoras', cat:'geometria', title:'Teorema de Pitágoras', desc:'c² = a² + b², con demostración geométrica.',
+  theory:{h:'¿De qué trata este tema?', intro:'En todo triángulo rectángulo, el cuadrado de la hipotenusa es igual a la suma de los cuadrados de los catetos. Se puede demostrar geométricamente construyendo cuadrados sobre cada lado del triángulo: el área del cuadrado grande (sobre la hipotenusa) es igual a la suma de las áreas de los dos cuadrados menores (sobre los catetos).',
+    formulas:['c² = a² + b²'], text:''},
+  example:{ q:'Triángulo rectángulo con catetos de 9 cm y 12 cm. ¿Cuánto mide la hipotenusa?',
+    steps:['c² = 9² + 12² = 81 + 144 = 225.','c = √225.'], result:'c = 15 cm' },
+  qs:[
+    {q:'Triángulo rectángulo con catetos de 6 cm y 8 cm. ¿Cuánto mide la hipotenusa?', a:'10 cm', accept:['10','10cm']},
+    {q:'Triángulo con a=10, b=20. ¿Cuánto mide la hipotenusa c?', a:'≈ 22.36', accept:['22.36','22.4']},
+    {q:'Dos puntos separados 560 km (horizontal) y 130 km (vertical). ¿Distancia directa?', a:'≈ 574.8 km', qType:'open'},
+  ]
+},
+{
+  id:'tales', cat:'geometria', title:'Teorema de Tales', desc:'Proporcionalidad entre rectas paralelas cortadas por secantes.',
+  theory:{h:'¿De qué trata este tema?', intro:'El Teorema de Tales demuestra la relación de proporcionalidad entre los segmentos que delimitan rectas secantes sobre rectas paralelas.',
+    formulas:['AB/A′B′ = BC/B′C′ = AC/A′C′'], text:''},
+  example:{ q:'Rectas a y b paralelas. OA=2cm, AB=3cm, O′A′=3cm. Encuentra A′B′.',
+    steps:['Ordena la proporción: OA/O′A′ = AB/A′B′.','Sustituye: 2/3 = 3/x.','Despeja: x = (3×3)/2.'],
+    result:'x = 4.5 cm' },
+  qs:[
+    {q:'Si el factor de proporcionalidad entre dos triángulos es 0.6, y un lado del triángulo pequeño mide 3cm, ¿cuánto mide su correspondiente en el grande?', a:'5 cm', steps:'3/0.6=5', accept:['5','5cm']},
+  ]
+},
+{
+  id:'trigonometria', cat:'geometria', title:'Triángulos rectángulos (trigonometría)', desc:'Seno, coseno y tangente para encontrar lados y ángulos.',
+  theory:{h:'¿De qué trata este tema?', intro:'Dado un triángulo rectángulo con algunos datos conocidos, puedes encontrar el resto: primero aplica Pitágoras si faltan lados, luego plantea la razón trigonométrica adecuada para los ángulos.',
+    formulas:['sen θ = op/hip','cos θ = ady/hip','tan θ = op/ady'], text:''},
+  example:{ q:'Triángulo con hipotenusa=10 y ángulo B=50°. Encuentra los catetos.',
+    steps:['Cateto opuesto: b = 10 × sen(50°).','Cateto adyacente: a = 10 × cos(50°).'], result:'b ≈ 7.66,  a ≈ 6.42' },
+  qs:[
+    {q:'Un avión despega a 37° y alcanza 1080 m de altura. ¿Cuántos metros ha volado (hipotenusa)?', a:'≈ 1,794 m', qType:'open'},
+  ]
+},
+{
+  id:'semejanza-congruencia', cat:'geometria', title:'Triángulos semejantes y congruencia', desc:'Misma forma (semejantes) o idénticos movidos (congruentes).',
+  theory:{h:'¿De qué trata este tema?', intro:'Dos triángulos son semejantes si sus ángulos son iguales y sus lados proporcionales (criterios AA, LAL, LLL). Dos figuras son congruentes si una se puede transformar en la otra usando rotación, reflexión o traslación — sin cambiar su forma ni tamaño.',
+    formulas:[], text:'Rotación: gira sobre un punto · Reflexión: se voltea como espejo · Traslación: se desliza sin girar'},
+  example:{ q:'¿Cuáles son los tres criterios de semejanza de triángulos?',
+    steps:['AA: dos ángulos iguales.','LAL: un ángulo igual entre dos lados proporcionales.','LLL: los tres lados proporcionales.'],
+    result:'AA, LAL, LLL' },
+  qs:[
+    {q:'¿Qué transformación desliza una figura sin girarla ni voltearla?', a:'Traslación', accept:['traslacion','traslación']},
+    {q:'¿Qué transformación voltea una figura como en un espejo?', a:'Reflexión', accept:['reflexion','reflexión']},
+  ]
+},
+{
+  id:'unidades', cat:'geometria', title:'Conversión de unidades', desc:'Lineales, de superficie, de volumen y su relación con litros.',
+  theory:{h:'¿De qué trata este tema?', intro:'En unidades lineales cada escalón es ×10. En superficie, ×100 (2 dimensiones). En volumen, ×1,000 (3 dimensiones). El truco más útil: 1 dm³ = 1 litro exacto.',
+    formulas:['1 m³ = 1,000 L','1 dm³ = 1 L','1 cm³ = 1 mL'], text:''},
+  example:{ q:'Convierte 2.5 m³ a litros', steps:['1 m³ = 1,000 L.','Multiplica: 2.5 × 1,000.'], result:'2,500 L' },
+  qs:[
+    {q:'Convierte 3.5 km a metros', a:'3,500 m', accept:['3500','3500m','3,500']},
+    {q:'Convierte 250 cm a metros', a:'2.5 m', accept:['2.5','2.5m']},
+    {q:'Convierte 0.75 m a milímetros', a:'750 mm', accept:['750','750mm']},
+    {q:'Convierte 2 m² a centímetros cuadrados', a:'20,000 cm²', accept:['20000','20,000']},
+    {q:'Convierte 4 m³ a centímetros cúbicos', a:'4,000,000 cm³', accept:['4000000','4,000,000']},
+    {q:'Convierte 5 dm³ a litros', a:'5 L', accept:['5','5l','5L']},
+    {q:'Convierte 350 cm³ a mililitros', a:'350 mL', accept:['350','350ml']},
+  ]
+},
+
+// ---------------- APLICACIONES ----------------
+{
+  id:'interes-simple', cat:'aplicaciones', title:'Interés simple', desc:'I = C · i · t — capital, tasa y tiempo.',
+  theory:{h:'¿De qué trata este tema?', intro:'El interés simple calcula cuánto se gana o paga por un préstamo o ahorro. El interés se calcula siempre sobre el capital original — no se reinvierte.',
+    formulas:['I = C · i · t'], text:'C=capital · i=tasa anual (decimal) · t=tiempo en años'},
+  example:{ q:'¿Cuánto interés genera un capital de $80,000 al 5% anual durante 2 años?',
+    steps:['I = C×i×t.','I = 80000 × 0.05 × 2.'], result:'I = $8,000' },
+  qs:[
+    {q:'Julio pidió $35,000 por 3 años al 7.5% anual. ¿Interés?', a:'$7,875', accept:['7875','$7875','7,875','$7,875']},
+    {q:'Daniel pidió $200,000 por 6 meses al 12% anual. ¿Interés?', a:'$12,000', accept:['12000','$12000','12,000','$12,000']},
+    {q:'Jonathan ahorró $50,000 por 3 años y ganó $13,500 de interés. ¿Qué tasa le dieron?', a:'9% anual', accept:['9%','9','0.09']},
+    {q:'Samuel pidió $45,000 por 2 años y pagó $6,300 de interés. ¿Tasa?', a:'7% anual', accept:['7%','7','0.07']},
+    {q:'Sandra pidió $70,000 al 3% anual y pagó $8,400 de interés total. ¿Cuántos años?', a:'4 años', accept:['4','4años','4 años']},
+  ]
+},
+{
+  id:'interes-compuesto', cat:'aplicaciones', title:'Interés compuesto', desc:'El interés se reinvierte en cada periodo.',
+  theory:{h:'¿De qué trata este tema?', intro:'A diferencia del simple, en el interés compuesto el interés de cada periodo se suma al capital antes de calcular el siguiente — por eso crece más rápido.',
+    formulas:['Mf = Mi (1 + r)ⁿ'], text:'Mi=capital inicial · r=tasa por periodo · n=número de periodos'},
+  example:{ q:'Se depositan $1,000 al 10% anual compuesto durante 2 años. ¿Monto final?',
+    steps:['Año 1: 1000×1.10 = 1,100.','Año 2: 1100×1.10 = 1,210.'], result:'Mf = $1,210' },
+  qs:[
+    {q:'Si Mi=$1,000, r=0.05 y n=3, ¿cuál es Mf?', a:'≈ $1,157.63', steps:'Mf=1000×(1.05)³', accept:['1157.63','1157.6','1157.625']},
+    {q:'¿Qué significa que la tasa sea "capitalizable mensualmente"?', a:'Que el interés se calcula y se suma al capital cada mes, usando la tasa anual dividida entre 12.', qType:'open'},
+  ]
+},
+{
+  id:'regla-de-tres', cat:'aplicaciones', title:'Regla de tres compuesta', desc:'Directa, inversa y mixta — con tres o más magnitudes.',
+  theory:{h:'¿De qué trata este tema?', intro:'Se usa cuando se relacionan tres o más magnitudes: directa (a más de una, más de la otra), inversa (a más de una, menos de la otra), o mixta (combina ambas).',
+    formulas:[], text:''},
+  example:{ q:'5 obreros a 6h diarias construyen un muro en 2 días. ¿Cuánto tardan 4 obreros a 7h diarias?',
+    steps:['A menos obreros, más días (inversa). A más horas, menos días (inversa).','Se arma la proporción con las dos relaciones inversas: (4/5)·(7/6) = 2/x.'],
+    result:'x ≈ 2.14 días' },
+  qs:[
+    {q:'Dos ruedas con correa: radios 25cm y 75cm. Si la primera da 300 vueltas, ¿cuántas da la segunda?', a:'100 vueltas', accept:['100','100vueltas']},
+    {q:'6 personas en un hotel 12 días cuestan 792€. ¿Cuánto para 15 personas durante 8 días?', a:'1,320 €', accept:['1320','1,320','1320€']},
+    {q:'11 obreros labran 220×48m en 6 días. ¿Cuántos obreros para 300×56m en 5 días?', a:'21 obreros', accept:['21']},
+    {q:'6 grifos llenan 400 m³ en 10 horas. ¿Cuánto tardan 4 grifos en llenar 2 depósitos de 500 m³?', a:'37.5 horas', accept:['37.5','37.5horas']},
+    {q:'4 agricultores recolectan 10,000 kg en 9 días. ¿Cuántos kg recolectarán 6 agricultores en 15 días?', a:'25,000 kg', accept:['25000','25,000']},
+    {q:'5 trabajadores tardan 16 días a 6h diarias. ¿Cuántos trabajadores para 10 días a 8h diarias?', a:'6 trabajadores', accept:['6']},
+  ]
+},
+{
+  id:'porcentajes', cat:'aplicaciones', title:'Porcentajes', desc:'Descuentos, aumentos, IVA y ganancias sobre precios.',
+  theory:{h:'¿De qué trata este tema?', intro:'Un descuento o aumento del p% se calcula multiplicando el precio original por (1 ± p/100). Para saber qué porcentaje representa una parte de un total: (parte/total)×100.',
+    formulas:['Precio final = Precio × (1 ± p/100)'], text:''},
+  example:{ q:'Un pantalón sin IVA cuesta $625. Con IVA del 16%, ¿cuánto se paga?',
+    steps:['El IVA es un aumento del 16%.','625 × (1 + 0.16) = 625 × 1.16.'], result:'$725' },
+  qs:[
+    {q:'De 800 alumnos, 600 fueron de viaje. ¿Qué porcentaje?', a:'75%', accept:['75%','75','0.75']},
+    {q:'Moto de $50,000 cuesta ahora $2,500 más. ¿Porcentaje de aumento?', a:'5%', accept:['5%','5','0.05']},
+    {q:'Vehículo de $88,000 con descuento del 7.5%. ¿Cuánto se paga?', a:'$81,400', accept:['81400','81,400','$81,400']},
+    {q:'Monitor de $450 con descuento del 8%. ¿Cuánto se paga?', a:'$414', accept:['414','$414']},
+    {q:'Artículo comprado en $800, se vende con ganancia del 15%. ¿Precio de venta?', a:'$920', accept:['920','$920']},
+    {q:'Objeto comprado en $150, se vende perdiendo 20% sobre el precio de compra. ¿Precio de venta?', a:'$120', accept:['120','$120']},
+    {q:'Zapatos de $360 con descuento del 10%. ¿Cuánto se paga?', a:'$324', accept:['324','$324']},
+    {q:'Libro de $150 ahora cuesta $165. ¿Qué porcentaje más caro es?', a:'10%', accept:['10%','10','0.1']},
+    {q:'Bosque con 65% de pinos, de 12,000 árboles. ¿Cuántos pinos?', a:'7,800 pinos', accept:['7800','7,800']},
+    {q:'Salario de $80,000/mes, IPC sube 3.5%. ¿Cuánto debe ganar este año?', a:'$82,800', accept:['82800','82,800','$82,800']},
+    {q:'Camisa de $380 con rebaja del 15%. ¿Cuánto se paga?', a:'$323', accept:['323','$323']},
+  ]
+},
+
+// ---------------- ESTADÍSTICA Y PROBABILIDAD ----------------
+{
+  id:'probabilidad-teorica-frecuencial', cat:'probabilidad', title:'Probabilidad teórica y frecuencial', desc:'Lo esperado en teoría vs. lo que pasa en la práctica.',
+  theory:{h:'¿De qué trata este tema?', intro:'La probabilidad teórica es lo que esperamos que pase en un mundo perfecto. La frecuencial es lo que realmente sucede al repetir un experimento.',
+    formulas:['P(A) = casos favorables / casos totales'], text:''},
+  example:{ q:'Lanzas una moneda 60 veces y obtienes 25 soles. ¿Frecuencial vs teórica?',
+    steps:['Frecuencial: 25/60 ≈ 41.7%.','Teórica: 50%.','Diferencia: 50%−41.7% = 8.3 puntos.'], result:'Difieren en 8.3 puntos porcentuales' },
+  qs:[
+    {q:'Cristina encesta 42 de 50 tiros. ¿Probabilidad de que falle?', a:'16%', accept:['16%','16','0.16']},
+  ]
+},
+{
+  id:'eventos-independientes', cat:'probabilidad', title:'Eventos independientes', desc:'La regla del producto: P(A y B) = P(A)·P(B).',
+  theory:{h:'¿De qué trata este tema?', intro:'Dos sucesos son independientes si la probabilidad de uno no depende de si el otro ocurre.', formulas:['P(A y B) = P(A) · P(B)'], text:''},
+  example:{ q:'Se lanza una moneda 3 veces. ¿Probabilidad de sacar 3 águilas?',
+    steps:['Cada lanzamiento es independiente: P(águila)=1/2.','P(3 águilas) = 1/2 × 1/2 × 1/2.'], result:'1/8 = 12.5%' },
+  qs:[
+    {q:'Urna con 3 fichas amarillas y 6 azules. Sacas 2 con reposición. ¿Ambas amarillas?', a:'1/9 ≈ 11.1%', accept:['1/9','11.1%','0.111']},
+  ]
+},
+{
+  id:'eventos-excluyentes', cat:'probabilidad', title:'Eventos mutuamente excluyentes', desc:'La regla de la suma: P(A ó B) = P(A)+P(B) (menos la intersección si se traslapan).',
+  theory:{h:'¿De qué trata este tema?', intro:'Si dos eventos son mutuamente excluyentes (no pueden ocurrir juntos), su probabilidad combinada es la suma. Si pueden ocurrir juntos, se resta la parte que comparten para no contarla dos veces.',
+    formulas:['P(A∪B) = P(A) + P(B) − P(A∩B)'], text:''},
+  example:{ q:'Se lanza un dado normal. ¿Probabilidad de par o 5?',
+    steps:['P(par)={2,4,6}=3/6.','P(5)=1/6.','Par y 5 no se traslapan, así que se suman directo.'], result:'4/6 = 2/3 ≈ 66.7%' },
+  qs:[
+    {q:'De 52 cartas, ¿probabilidad de sacar un 8 o un trébol?', a:'4/13 ≈ 30.8%', accept:['4/13','30.8%','0.308']},
+    {q:'Número entre 1-30, ¿probabilidad de primo o múltiplo de 5?', a:'50%', accept:['50%','1/2','0.5']},
+    {q:'Ruleta de 36 sectores (1-12 rojo). ¿Probabilidad de número impar o rojo?', a:'≈ 66.7%', accept:['2/3','66.7%','0.667']},
+  ]
+},
+{
+  id:'media-ponderada', cat:'probabilidad', title:'Media ponderada', desc:'Cuando los datos tienen distinto peso o frecuencia.',
+  theory:{h:'¿De qué trata este tema?', intro:'Cuando los datos no tienen el mismo peso, multiplicas cada valor por su peso, sumas todo, y divides entre la suma de los pesos.',
+    formulas:['Media = Σ(valor×peso) / Σ(peso)'], text:''},
+  example:{ q:'Andrea trabajó: 2 semanas×1 día, 14 semanas×2 días, 8 semanas×5 días, 32 semanas×7 días. ¿Promedio de días?',
+    steps:['Numerador: 2×1+14×2+8×5+32×7 = 2+28+40+224 = 294.','Denominador (semanas totales): 2+14+8+32 = 56.'],
+    result:'294/56 = 5.25 días' },
+  qs:[]
+},
+{
+  id:'medidas-dispersion', cat:'probabilidad', title:'Medidas de dispersión', desc:'Rango, varianza y desviación estándar.',
+  theory:{h:'¿De qué trata este tema?', intro:'Indican qué tan alejados están los valores del centro de la distribución. El rango es la diferencia entre el mayor y el menor dato. La varianza promedia el cuadrado de las diferencias respecto a la media; la desviación estándar es su raíz cuadrada.',
+    formulas:['σ² = Σ(x−media)² / n','σ = √σ²'], text:''},
+  example:{ q:'Con diferencias 206, 76, −224, 36, −94 respecto a la media, encuentra la varianza y desviación estándar.',
+    steps:['σ² = (206²+76²+(−224)²+36²+(−94)²) / 5.','Suma de cuadrados = 108,520.','108520/5 = 21,704.'],
+    result:'σ² = 21,704   σ = √21,704 ≈ 147' },
+  qs:[]
+},
+];
+
+// ======================= RENDER =======================
+const browserEl = document.getElementById('browser');
+const panelsEl = document.getElementById('panels');
+const searchInput = document.getElementById('searchInput');
+const searchClear = document.getElementById('searchClear');
+
 let solved = new Set();
 let totalQ = 0;
+TOPICS.forEach(t => totalQ += t.qs.length);
+document.getElementById('totalTopics').textContent = TOPICS.length;
+document.getElementById('totalQ').textContent = totalQ;
 
-DATA.forEach((unit, ui) => {
-  totalQ += unit.qs.length;
+function normalizeSearch(s){
+  return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+}
 
-  // tab button
-  const btn = document.createElement('button');
-  btn.className = 'tab-btn' + (ui===0 ? ' active':'');
-  btn.innerHTML = `${unit.title}<span class="n">${unit.qs.length}</span>`;
-  btn.onclick = () => selectUnit(ui);
-  tabsEl.appendChild(btn);
+// Build category blocks with pills
+CATEGORIES.forEach(cat => {
+  const topicsInCat = TOPICS.filter(t => t.cat === cat.id);
+  if(!topicsInCat.length) return;
+  const block = document.createElement('div');
+  block.className = 'category-block';
+  block.dataset.cat = cat.id;
+  block.innerHTML = `<span class="category-label">${cat.label}</span><div class="pill-row"></div>`;
+  const row = block.querySelector('.pill-row');
+  topicsInCat.forEach(t => {
+    const btn = document.createElement('button');
+    btn.className = 'topic-pill';
+    btn.dataset.topic = t.id;
+    btn.dataset.search = normalizeSearch(t.title + ' ' + cat.label + ' ' + t.desc);
+    btn.innerHTML = `${t.title}${t.qs.length ? `<span class="n">${t.qs.length}</span>` : ''}`;
+    btn.onclick = () => selectTopic(t.id);
+    row.appendChild(btn);
+  });
+  browserEl.appendChild(block);
+});
 
-  // unit section
-  const sec = document.createElement('section');
-  sec.className = 'unit' + (ui===0 ? ' active':'');
-  sec.id = 'unit-'+unit.id;
+const noResults = document.createElement('div');
+noResults.className = 'no-results';
+noResults.textContent = 'No encontré temas con ese nombre. Intenta con otra palabra.';
+noResults.style.display = 'none';
+browserEl.appendChild(noResults);
+
+// Build topic panels (hidden by default)
+TOPICS.forEach(t => {
+  const cat = CATEGORIES.find(c => c.id === t.cat);
+  const panel = document.createElement('section');
+  panel.className = 'topic-panel';
+  panel.id = 'panel-' + t.id;
 
   let theoryHtml = '';
-  if(unit.theory){
-    theoryHtml = `<div class="theory-box"><h3>${unit.theory.h}</h3>
-      ${unit.theory.intro ? `<p class="intro">${unit.theory.intro}</p>` : ''}
-      ${unit.theory.formulas.map(f=>`<span class="formula">${f}</span>`).join('')}
-      ${unit.theory.text ? `<p>${unit.theory.text}</p>`:''}
+  if(t.theory){
+    theoryHtml = `<div class="theory-box"><h3>${t.theory.h}</h3>
+      ${t.theory.intro ? `<p class="intro">${t.theory.intro}</p>` : ''}
+      ${t.theory.formulas.map(f=>`<span class="formula">${f}</span>`).join('')}
+      ${t.theory.text ? `<p>${t.theory.text}</p>`:''}
     </div>`;
   }
-
   let exampleHtml = '';
-  if(unit.example){
+  if(t.example){
     exampleHtml = `<div class="example-box">
       <span class="tag">Ejemplo resuelto</span>
-      <div class="ex-q">${unit.example.q}</div>
-      ${unit.example.steps.map((s,i)=>`<div class="ex-step"><span class="bullet">${i+1}</span><span>${s}</span></div>`).join('')}
-      <div class="ex-result">→ ${unit.example.result}</div>
+      <div class="ex-q">${t.example.q}</div>
+      ${t.example.steps.map((s,i)=>`<div class="ex-step"><span class="bullet">${i+1}</span><span>${s}</span></div>`).join('')}
+      <div class="ex-result">→ ${t.example.result}</div>
     </div>`;
   }
 
-  sec.innerHTML = `
-    <div class="unit-head">
-      <span class="unit-num">${String(ui+1).padStart(2,'0')}</span>
-      <span class="unit-title">${unit.title}</span>
+  panel.innerHTML = `
+    <button class="back-link" data-action="back">← Volver a todos los temas</button>
+    <div class="topic-head">
+      <span class="topic-cat">${cat ? cat.label : ''}</span>
+      <span class="topic-title">${t.title}</span>
     </div>
-    <p class="unit-desc">${unit.desc}</p>
+    <p class="topic-desc">${t.desc}</p>
     ${theoryHtml}
     ${exampleHtml}
     <div class="qlist"></div>
   `;
 
-  const qlist = sec.querySelector('.qlist');
-  unit.qs.forEach((item, qi) => {
-    const cardId = `${unit.id}-${qi}`;
+  const qlist = panel.querySelector('.qlist');
+  t.qs.forEach((item, qi) => {
+    const cardId = `${t.id}-${qi}`;
     const card = document.createElement('div');
     card.className = 'card';
-    card.id = 'card-'+cardId;
-
+    card.id = 'card-' + cardId;
     const isOpen = item.qType === 'open';
     const answerRow = isOpen
-      ? `<div class="answer-row">
-           <button class="reveal-btn" data-card="${cardId}" data-mode="reveal">Ver respuesta</button>
-         </div>`
+      ? `<div class="answer-row"><button class="reveal-btn" data-card="${cardId}" data-mode="reveal">Ver respuesta</button></div>`
       : `<div class="answer-row">
            <input type="text" class="answer-input" id="input-${cardId}" placeholder="Escribe tu respuesta…" autocomplete="off">
            <button class="check-btn" data-card="${cardId}" data-mode="check">Comprobar</button>
            <span class="feedback" id="feedback-${cardId}"></span>
            <button class="reveal-btn" data-card="${cardId}" data-mode="reveal">Ver solución</button>
          </div>`;
-
     card.innerHTML = `
       <div class="qhead">
         <span class="qnum">${String(qi+1).padStart(2,'0')}</span>
@@ -746,52 +764,33 @@ DATA.forEach((unit, ui) => {
       </div>
       ${answerRow}
       <div class="answer" id="answer-${cardId}">
-        <div class="answer-inner">
-          ${item.a}
-          ${item.steps ? `<span class="steps">${item.steps}</span>` : ''}
-        </div>
+        <div class="answer-inner">${item.a}${item.steps ? `<span class="steps">${item.steps}</span>` : ''}</div>
       </div>
     `;
     card.dataset.accept = item.accept ? JSON.stringify(item.accept) : '[]';
     qlist.appendChild(card);
   });
 
-  unitsEl.appendChild(sec);
+  panelsEl.appendChild(panel);
 });
 
-document.getElementById('totalQ').textContent = totalQ;
-document.getElementById('totalUnits').textContent = DATA.length;
-
-function selectUnit(idx){
-  document.querySelectorAll('.tab-btn').forEach((b,i)=>b.classList.toggle('active', i===idx));
-  document.querySelectorAll('.unit').forEach((u,i)=>u.classList.toggle('active', i===idx));
+function selectTopic(id){
+  document.querySelectorAll('.topic-panel').forEach(p => p.classList.toggle('active', p.id === 'panel-'+id));
+  document.querySelectorAll('.topic-pill').forEach(b => b.classList.toggle('active', b.dataset.topic === id));
+  browserEl.style.display = 'none';
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+function backToList(){
+  document.querySelectorAll('.topic-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.topic-pill').forEach(b => b.classList.remove('active'));
+  browserEl.style.display = '';
   window.scrollTo({top:0, behavior:'smooth'});
 }
 
-function normalize(s){
-  return String(s).toLowerCase()
-    .replace(/\s+/g,'')
-    .replace(/±/g,'+-')
-    .replace(/−/g,'-')
-    .replace(/[²]/g,'^2').replace(/[³]/g,'^3').replace(/⁴/g,'^4').replace(/⁵/g,'^5').replace(/⁶/g,'^6')
-    .replace(/·/g,'').replace(/×/g,'')
-    .replace(/,/g,'')
-    .replace(/€/g,'')
-    .replace(/\$/g,'')
-    .replace(/años?/g,'')
-    .replace(/vueltas?/g,'')
-    .replace(/horas?/g,'')
-    .replace(/cm|km|m³|m2|m³/g,'');
-}
+panelsEl.addEventListener('click', (e) => {
+  const backBtn = e.target.closest('[data-action="back"]');
+  if(backBtn){ backToList(); return; }
 
-function markSolved(id){
-  if(solved.has(id)) return;
-  solved.add(id);
-  document.getElementById('card-'+id).classList.add('solved');
-  updateProgress();
-}
-
-unitsEl.addEventListener('click', (e) => {
   const btn = e.target.closest('button[data-card]');
   if(!btn) return;
   const id = btn.dataset.card;
@@ -802,26 +801,19 @@ unitsEl.addEventListener('click', (e) => {
     const input = document.getElementById('input-'+id);
     const feedback = document.getElementById('feedback-'+id);
     const accept = JSON.parse(card.dataset.accept || '[]');
-    const userVal = normalize(input.value);
-    const okList = accept.map(normalize);
+    const userVal = normalizeAnswer(input.value);
+    const okList = accept.map(normalizeAnswer);
     const correct = userVal.length > 0 && okList.includes(userVal);
-
     input.classList.remove('correct','wrong');
     feedback.classList.remove('show','ok','no');
-
     if(correct){
-      input.classList.add('correct');
-      feedback.classList.add('show','ok');
-      feedback.textContent = '✓ ¡Correcto!';
+      input.classList.add('correct'); feedback.classList.add('show','ok'); feedback.textContent = '✓ ¡Correcto!';
       markSolved(id);
     } else if(userVal.length > 0){
-      input.classList.add('wrong');
-      feedback.classList.add('show','no');
-      feedback.textContent = '✗ Intenta de nuevo';
+      input.classList.add('wrong'); feedback.classList.add('show','no'); feedback.textContent = '✗ Intenta de nuevo';
     }
     return;
   }
-
   if(mode === 'reveal'){
     const ans = document.getElementById('answer-'+id);
     const isOpen = ans.classList.toggle('open');
@@ -831,22 +823,50 @@ unitsEl.addEventListener('click', (e) => {
   }
 });
 
-unitsEl.addEventListener('keydown', (e) => {
+panelsEl.addEventListener('keydown', (e) => {
   if(e.key === 'Enter' && e.target.classList.contains('answer-input')){
     const id = e.target.id.replace('input-','');
-    const checkBtn = unitsEl.querySelector(`button[data-card="${id}"][data-mode="check"]`);
+    const checkBtn = panelsEl.querySelector(`button[data-card="${id}"][data-mode="check"]`);
     if(checkBtn) checkBtn.click();
   }
 });
 
-function updateProgress(){
-  document.getElementById('solvedCount').textContent = solved.size;
-  const pct = totalQ ? Math.round((solved.size/totalQ)*100) : 0;
-  document.getElementById('ringPct').textContent = pct+'%';
-  const circumference = 2*Math.PI*30;
-  const offset = circumference - (pct/100)*circumference;
-  document.getElementById('ringFg').style.strokeDashoffset = offset;
+function normalizeAnswer(s){
+  return String(s).toLowerCase()
+    .replace(/\s+/g,'')
+    .replace(/±/g,'+-').replace(/−/g,'-')
+    .replace(/[²]/g,'^2').replace(/[³]/g,'^3').replace(/⁴/g,'^4').replace(/⁵/g,'^5').replace(/⁶/g,'^6')
+    .replace(/·/g,'').replace(/×/g,'')
+    .replace(/,/g,'').replace(/€/g,'').replace(/\$/g,'')
+    .replace(/años?/g,'').replace(/vueltas?/g,'').replace(/horas?/g,'')
+    .replace(/cm|km|mm|m2|m3|m³|m²/g,'');
 }
+
+function markSolved(id){
+  if(solved.has(id)) return;
+  solved.add(id);
+  document.getElementById('card-'+id).classList.add('solved');
+  document.getElementById('solvedCount').textContent = solved.size;
+}
+
+// Search
+function applySearch(){
+  const q = normalizeSearch(searchInput.value.trim());
+  searchClear.classList.toggle('show', q.length > 0);
+  let anyVisible = false;
+  document.querySelectorAll('.category-block').forEach(block => {
+    let blockHasVisible = false;
+    block.querySelectorAll('.topic-pill').forEach(pill => {
+      const match = !q || pill.dataset.search.includes(q);
+      pill.style.display = match ? '' : 'none';
+      if(match){ blockHasVisible = true; anyVisible = true; }
+    });
+    block.style.display = blockHasVisible ? '' : 'none';
+  });
+  noResults.style.display = anyVisible ? 'none' : 'block';
+}
+searchInput.addEventListener('input', applySearch);
+searchClear.addEventListener('click', () => { searchInput.value=''; applySearch(); searchInput.focus(); });
 </script>
 </body>
 </html>
