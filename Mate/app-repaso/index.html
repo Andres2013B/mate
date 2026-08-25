@@ -37,7 +37,6 @@
   h1.title em{font-style:italic;font-weight:500;color:var(--violet-500);}
   .subtitle{max-width:600px;color:var(--ink-soft);font-size:15.5px;line-height:1.55;margin:0 0 24px;}
 
-  /* search */
   .search-wrap{position:relative;max-width:480px;}
   .search-input{
     width:100%;font-family:'Space Grotesk',sans-serif;font-size:15px;
@@ -45,14 +44,10 @@
     background:#fff;color:var(--ink);outline:none;transition:border-color .15s ease;
   }
   .search-input:focus{border-color:var(--violet-500);}
-  .search-icon{
-    position:absolute;left:14px;top:50%;transform:translateY(-50%);
-    width:16px;height:16px;color:var(--ink-soft);pointer-events:none;
-  }
+  .search-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);width:16px;height:16px;color:var(--ink-soft);pointer-events:none;}
   .search-clear{
     position:absolute;right:10px;top:50%;transform:translateY(-50%);
-    background:none;border:none;color:var(--ink-soft);cursor:pointer;font-size:18px;
-    display:none;padding:4px;line-height:1;
+    background:none;border:none;color:var(--ink-soft);cursor:pointer;font-size:18px;display:none;padding:4px;line-height:1;
   }
   .search-clear.show{display:block;}
 
@@ -61,7 +56,6 @@
   .stat .num{font-size:22px;font-weight:600;color:var(--violet-700);display:block;}
   .stat .lbl{font-size:11px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.06em;}
 
-  /* category + topic pills */
   nav.browser{padding:8px 24px 0;max-width:1040px;margin:0 auto;}
   .category-block{margin-bottom:18px;}
   .category-label{
@@ -72,8 +66,7 @@
   .topic-pill{
     font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:13.5px;
     border:1.5px solid var(--line);background:#fff;color:var(--ink-soft);
-    padding:9px 15px;border-radius:999px;cursor:pointer;transition:all .15s ease;
-    white-space:nowrap;
+    padding:9px 15px;border-radius:999px;cursor:pointer;transition:all .15s ease;white-space:nowrap;
   }
   .topic-pill .n{font-family:'JetBrains Mono',monospace;font-size:10.5px;opacity:.6;margin-left:5px;}
   .topic-pill:hover{border-color:var(--violet-500);color:var(--violet-700);}
@@ -100,7 +93,7 @@
 
   .theory-box{background:var(--violet-900);color:#F3ECFB;border-radius:var(--radius);padding:24px 26px;margin-bottom:18px;}
   .theory-box h3{font-family:'Fraunces',serif;font-size:18px;margin:0 0 10px;color:#fff;font-weight:700;}
-  .theory-box .intro{font-size:14px;line-height:1.62;color:#D9C9EE;margin:0 0 12px;}
+  .theory-box .intro{font-size:14px;line-height:1.65;color:#D9C9EE;margin:0 0 12px;}
   .theory-box .formula{
     font-family:'JetBrains Mono',monospace;font-size:14.5px;background:rgba(255,255,255,.08);
     padding:9px 13px;border-radius:8px;display:inline-block;margin:5px 7px 5px 0;color:var(--gold);
@@ -197,7 +190,6 @@
 <footer>Hecho a partir de tus apuntes de Google Classroom · <span>ánimo con el repaso ✦</span></footer>
 
 <script>
-// ======================= DATOS =======================
 const CATEGORIES = [
   { id:'conjuntos', label:'Conjuntos' },
   { id:'algebra', label:'Álgebra' },
@@ -211,7 +203,7 @@ const TOPICS = [
 {
   id:'universo', cat:'conjuntos', title:'Universo y complemento', desc:'Conjunto universo, subconjuntos y complemento.',
   theory:{h:'¿De qué trata este tema?',
-    intro:'El conjunto Universo (U) reúne todos los elementos posibles de un contexto, y cualquier otro conjunto vive dentro de él. El complemento de A (se escribe A′) son los elementos de U que NO están en A.',
+    intro:"El conjunto Universo (U) reúne todos los elementos posibles dentro de un contexto determinado; es tu punto de partida. Cualquier otro conjunto que definas (A, B, C…) vive como subconjunto dentro de ese universo. El complemento de A (se escribe A′) son todos los elementos que están en el universo pero NO están en A — es como preguntar '¿qué falta?'. Dibujarlo ayuda: un rectángulo grande es el universo, un círculo dentro es A, y el complemento es todo lo que queda fuera del círculo pero dentro del rectángulo.",
     formulas:['A′ = U − A'], text:''},
   example:{ q:'U = {1,2,3,4,5,6,7,8,9,10}, A = {2,4,6,8}. Encuentra A′.',
     steps:['Toma todos los elementos del universo.','Quita los que ya están en A (2,4,6,8).'],
@@ -222,7 +214,9 @@ const TOPICS = [
 },
 {
   id:'interseccion', cat:'conjuntos', title:'Intersección de conjuntos', desc:'Elementos que comparten dos conjuntos.',
-  theory:{h:'¿De qué trata este tema?', intro:'La intersección (∩) de dos conjuntos son los elementos que están en AMBOS a la vez.', formulas:['A ∩ B'], text:''},
+  theory:{h:'¿De qué trata este tema?',
+    intro:"La intersección (∩) de dos conjuntos son los elementos que aparecen en AMBOS conjuntos a la vez, no basta con que estén en uno solo. Si dibujas dos círculos que se traslapan, la intersección es justo la zona donde se sobreponen. Para encontrarla a mano, revisa elemento por elemento de un conjunto y pregúntate si también aparece en el otro; si no comparten ningún elemento, su intersección es el conjunto vacío (∅).",
+    formulas:['A ∩ B'], text:''},
   example:{ q:'A={2,4,6,8}, B={1,2,3,4,5}. Encuentra A ∩ B.',
     steps:['Revisa cada elemento de A: 2→¿está en B? sí. 4→sí. 6→no. 8→no.'], result:'A ∩ B = {2, 4}' },
   qs:[
@@ -235,9 +229,11 @@ const TOPICS = [
 },
 {
   id:'union-interseccion', cat:'conjuntos', title:'Unión e intersección combinadas', desc:'Operaciones agrupadas con paréntesis.',
-  theory:{h:'¿De qué trata este tema?', intro:'Igual que con números, los conjuntos se pueden agrupar con paréntesis. Primero resuelve dentro del paréntesis, luego el resto.', formulas:['B ∪ (A ∩ C)'], text:''},
+  theory:{h:'¿De qué trata este tema?',
+    intro:"Cuando una operación combina unión e intersección con paréntesis, sigue el mismo orden que en aritmética: resuelve primero lo que está DENTRO del paréntesis, y usa ese resultado para la operación externa. El orden sí importa — B∪(A∩C) no es lo mismo que (B∪A)∩C. Ve resolviendo por partes, un paso a la vez, y anota cada conjunto intermedio antes de seguir para no perderte.",
+    formulas:['B ∪ (A ∩ C)'], text:''},
   example:{ q:'A={0,1,2,3,4,5,6,7,8,9}, B={1,3,5,7,9}, C={2,4,6,8}. Encuentra B ∪ (A ∩ C).',
-    steps:['Primero resuelve el paréntesis: A ∩ C = {2,4,6,8} (ya que C está contenido en A).','Une ese resultado con B: {1,3,5,7,9} ∪ {2,4,6,8}.'],
+    steps:['Primero resuelve el paréntesis: A ∩ C = {2,4,6,8} (C está contenido en A).','Une ese resultado con B: {1,3,5,7,9} ∪ {2,4,6,8}.'],
     result:'{1,2,3,4,5,6,7,8,9}' },
   qs:[
     {q:'Con los mismos conjuntos, ¿qué representa (A ∩ C) dentro del paréntesis?', a:'Los elementos que están tanto en A como en C.', qType:'open'},
@@ -245,7 +241,8 @@ const TOPICS = [
 },
 {
   id:'venn', cat:'conjuntos', title:'Diagramas de Venn', desc:'Unión, intersección, diferencia y complemento juntos.',
-  theory:{h:'¿De qué trata este tema?', intro:'Con diagramas de Venn (círculos que se traslapan) puedes visualizar todas las operaciones entre conjuntos.',
+  theory:{h:'¿De qué trata este tema?',
+    intro:"Un diagrama de Venn representa conjuntos como círculos superpuestos dentro de un rectángulo (el universo), y cada operación tiene su propia forma visual: la unión es todo lo cubierto por ambos círculos, la intersección es solo donde se traslapan, la diferencia (A\\B) es la parte de A que no toca a B, y el complemento es todo lo que queda fuera del círculo. Dibujar el diagrama antes de calcular te ayuda a no perder elementos ni contarlos de más.",
     formulas:[], text:'A ∪ B = unión · A ∩ B = intersección · A \\ B = diferencia · Aᶜ = complemento'},
   example:{ q:'U = {1..10}, A={1,2,3,4,5,6,7}, B={4,5,6,7,8,9,10}. Encuentra A \\ B.',
     steps:['A \\ B son los elementos de A que NO están en B.','Revisa cada elemento de A: 1,2,3 no están en B; 4,5,6,7 sí están en B.'],
@@ -261,7 +258,7 @@ const TOPICS = [
 {
   id:'sucesiones', cat:'algebra', title:'Sucesiones', desc:'Sucesiones aritméticas, geométricas y patrones.',
   theory:{h:'¿De qué trata este tema?',
-    intro:'En una sucesión aritmética cada término se obtiene sumando siempre la misma cantidad (d). En una geométrica, se multiplica siempre por la misma razón (r).',
+    intro:"Una sucesión es una lista ordenada de números que sigue un patrón. En una sucesión ARITMÉTICA, cada término se obtiene SUMANDO siempre la misma cantidad (la diferencia, d) al anterior. En una GEOMÉTRICA, cada término se obtiene MULTIPLICANDO siempre por la misma razón (r). También hay patrones especiales que no son ni aritméticos ni geométricos, como los cuadrados, los cubos, o Fibonacci (cada término es la suma de los dos anteriores) — para identificar cuál es, calcula las diferencias o razones entre términos consecutivos y busca qué se mantiene constante.",
     formulas:['xₙ = a + d(n−1)','xₙ = a·r^(n−1)'], text:''},
   example:{ q:'Encuentra el término 15 de: 5, 9, 13, 17…',
     steps:['a₁=5, d=4.','x₁₅ = 5 + (15−1)(4) = 5 + 56.'], result:'x₁₅ = 61' },
@@ -281,7 +278,7 @@ const TOPICS = [
 {
   id:'notacion-cientifica', cat:'algebra', title:'Notación científica', desc:'Escribir y desarrollar números con potencias de 10.',
   theory:{h:'¿De qué trata este tema?',
-    intro:'Un número en notación científica se escribe como un número entre 1 y 10 multiplicado por una potencia de 10. Los exponentes positivos mueven el punto decimal a la derecha; los negativos, a la izquierda.',
+    intro:"La notación científica es una forma compacta de escribir números muy grandes o muy pequeños: un número entre 1 y 10 multiplicado por una potencia de 10. El exponente te dice cuántos lugares mover el punto decimal — si es positivo, el número es grande y mueves el punto a la derecha; si es negativo, el número es pequeño (menor que 1) y mueves el punto a la izquierda. Se usa mucho en ciencias para expresar distancias astronómicas, medidas microscópicas o cualquier cantidad con muchos ceros sin tener que escribirlos todos.",
     formulas:['n × 10ᵏ'], text:''},
   example:{ q:'Desarrolla: 4.96 × 10⁸',
     steps:['El exponente es 8 (positivo), así que mueves el punto 8 lugares a la derecha.','4.96 → 496000000.'],
@@ -297,7 +294,8 @@ const TOPICS = [
 },
 {
   id:'exponentes', cat:'algebra', title:'Leyes de los exponentes', desc:'Multiplicación, división y potencias de potencias.',
-  theory:{h:'¿De qué trata este tema?', intro:'Al multiplicar potencias de la misma base, sumas los exponentes; al dividir, los restas; potencia de potencia, los multiplicas.',
+  theory:{h:'¿De qué trata este tema?',
+    intro:"Las leyes de los exponentes son atajos para simplificar expresiones con potencias sin escribir cada multiplicación por separado. La regla clave: al multiplicar potencias de la MISMA base, sumas los exponentes; al dividir, los restas; y una potencia elevada a otra potencia, los multiplicas. Estas reglas solo aplican entre términos con la misma base — no puedes combinar x³ con y² directamente.",
     formulas:['xᵃ·xᵇ = xᵃ⁺ᵇ','xᵃ÷xᵇ = xᵃ⁻ᵇ','(xᵃ)ᵇ = xᵃᵇ'], text:''},
   example:{ q:'Simplifica: (3x²y⁴)(2x⁵y)',
     steps:['Multiplica coeficientes: 3×2=6.','Suma exponentes de x: x²·x⁵=x⁷.','Suma exponentes de y: y⁴·y¹=y⁵.'], result:'6x⁷y⁵' },
@@ -311,8 +309,9 @@ const TOPICS = [
 },
 {
   id:'polinomios', cat:'algebra', title:'Multiplicación de polinomios', desc:'Monomio por monomio, por binomio, y binomio por binomio.',
-  theory:{h:'¿De qué trata este tema?', intro:'Cada término del primer polinomio se multiplica por cada término del segundo, y al final se suman los términos semejantes.',
-    formulas:['(2xy)(4y) = 8xy²'], text:'primeros · exteriores · interiores · últimos'},
+  theory:{h:'¿De qué trata este tema?',
+    intro:"Multiplicar polinomios significa que cada término del primer polinomio se multiplica por cada término del segundo, sin excepción, y al final se suman (o restan) los términos semejantes para simplificar. Con un monomio (un solo término) es más simple: multiplicas los coeficientes numéricos y sumas los exponentes de cada variable. Con binomio por binomio, usa el orden 'primeros, exteriores, interiores, últimos' para no olvidar ningún par de términos.",
+    formulas:['(2xy)(4y) = 8xy²'], text:''},
   example:{ q:'Multiplica: (x + 3)(x + 5)',
     steps:['Primeros: x·x=x².','Exteriores: x·5=5x.','Interiores: 3·x=3x.','Últimos: 3·5=15.','Suma semejantes: 5x+3x=8x.'],
     result:'x² + 8x + 15' },
@@ -325,7 +324,8 @@ const TOPICS = [
 },
 {
   id:'notables', cat:'algebra', title:'Productos notables', desc:'Binomio al cuadrado, conjugados y binomio al cubo.',
-  theory:{h:'¿De qué trata este tema?', intro:'Multiplicaciones de binomios tan comunes que ya tienen un resultado "de memoria".',
+  theory:{h:'¿De qué trata este tema?',
+    intro:"Los productos notables son multiplicaciones de binomios tan comunes que ya tienen un resultado memorizable, sin necesidad de multiplicar término por término cada vez. Reconocer el patrón te ahorra pasos: ¿es un binomio al cuadrado (mismo binomio dos veces)? ¿son conjugados (mismos términos, signo opuesto en medio)? ¿es un binomio al cubo? Una vez identificado el patrón, aplicas la fórmula directo sin multiplicar todo.",
     formulas:['(a+b)² = a²+2ab+b²','(a+b)(a−b) = a²−b²','(a+b)³ = a³+3a²b+3ab²+b³'], text:''},
   example:{ q:'Desarrolla (x + 4)²',
     steps:['(a+b)²=a²+2ab+b², con a=x, b=4.','a²=x². 2ab=2(x)(4)=8x. b²=16.'], result:'x² + 8x + 16' },
@@ -337,7 +337,8 @@ const TOPICS = [
 },
 {
   id:'factor-comun', cat:'algebra', title:'Factor común', desc:'El primer paso siempre en cualquier factorización.',
-  theory:{h:'¿De qué trata este tema?', intro:'Se extrae el factor que se repite en todos los términos de la expresión. Es siempre el primer paso a intentar en cualquier factorización.',
+  theory:{h:'¿De qué trata este tema?',
+    intro:"Factorizar es el proceso inverso a multiplicar: partes de una expresión ya expandida y la reescribes como un producto de factores más simples. El factor común es siempre el PRIMER paso a intentar en cualquier factorización: buscas el número y/o variable más grande que se repite en todos los términos, y lo 'sacas' fuera de un paréntesis. Si te saltas este paso, tu factorización queda incompleta aunque el resto esté bien hecho.",
     formulas:['ab + ac = a(b + c)'], text:''},
   example:{ q:'Factoriza: 10a² + 15a',
     steps:['Busca el número más grande que divide a 10 y 15: el 5.','Busca la variable en común: la a.','Factor común: 5a.'], result:'5a(2a + 3)' },
@@ -349,8 +350,9 @@ const TOPICS = [
   ]
 },
 {
-  id:'dif-cuadrados', cat:'algebra', title:'Diferencia de cuadrados', desc:'a² − b² = (a+b)(a−b)', 
-  theory:{h:'¿De qué trata este tema?', intro:'Cuando tienes una resta de dos términos que son cuadrados perfectos, se factoriza como el producto de la suma por la diferencia de sus raíces.',
+  id:'dif-cuadrados', cat:'algebra', title:'Diferencia de cuadrados', desc:'a² − b² = (a+b)(a−b)',
+  theory:{h:'¿De qué trata este tema?',
+    intro:"La diferencia de cuadrados ocurre cuando tienes una resta de dos términos que son cuadrados perfectos (como x² y 9, o 16m² y 25n²). Se factoriza como el producto de la suma de sus raíces por la diferencia de sus raíces. Es de los patrones más fáciles de reconocer: no hay término de en medio, solo dos cuadrados separados por un signo menos.",
     formulas:['a² − b² = (a+b)(a−b)'], text:''},
   example:{ q:'Factoriza: 16m² − 9n²',
     steps:['Saca raíz cuadrada de cada término: √(16m²)=4m, √(9n²)=3n.','Multiplica suma por diferencia.'], result:'(4m + 3n)(4m − 3n)' },
@@ -363,7 +365,8 @@ const TOPICS = [
 },
 {
   id:'trinomio-cuadrado-perfecto', cat:'algebra', title:'Trinomio cuadrado perfecto', desc:'a² ± 2ab + b² = (a±b)²',
-  theory:{h:'¿De qué trata este tema?', intro:'Es el resultado de elevar un binomio al cuadrado. Se reconoce porque el primer y último término son cuadrados perfectos, y el término de en medio es el doble producto de sus raíces.',
+  theory:{h:'¿De qué trata este tema?',
+    intro:"Un trinomio cuadrado perfecto es el resultado de elevar un binomio al cuadrado. Lo reconoces porque el primer y el último término son cuadrados perfectos, y el término de en medio es exactamente el doble producto de sus raíces cuadradas. Si el término de en medio no coincide con ese doble producto, entonces NO es un trinomio cuadrado perfecto y necesitas otro método.",
     formulas:['a² ± 2ab + b² = (a ± b)²'], text:''},
   example:{ q:'Factoriza: x² + 10x + 25',
     steps:['¿x² es cuadrado perfecto? sí, raíz x. ¿25 es cuadrado perfecto? sí, raíz 5.','¿10x es el doble producto? 2(x)(5)=10x, sí coincide.'],
@@ -379,7 +382,8 @@ const TOPICS = [
 },
 {
   id:'trinomio-bxc', cat:'algebra', title:'Trinomio x² + bx + c', desc:'Buscar dos números que sumen b y multipliquen c.',
-  theory:{h:'¿De qué trata este tema?', intro:'Se descompone en dos binomios cuyo primer término es la raíz cuadrada de x², y cuyos segundos términos son dos números que sumados dan "b" y multiplicados dan "c".',
+  theory:{h:'¿De qué trata este tema?',
+    intro:"Cuando el trinomio tiene la forma x² + bx + c (coeficiente 1 en el primer término), se descompone en dos binomios cuyo primer término siempre es x. Para los segundos términos, buscas dos números que multiplicados den 'c' y sumados den 'b'. El signo de esos números depende de b y c: si c es positivo, ambos números comparten el signo de b; si c es negativo, tienen signos distintos.",
     formulas:['x² + bx + c = (x + m)(x + n)'], text:''},
   example:{ q:'Factoriza: x² + 7x + 12',
     steps:['Busca dos números que multiplicados den 12 y sumados den 7.','3 × 4 = 12, y 3 + 4 = 7. ¡Coinciden!'], result:'(x + 3)(x + 4)' },
@@ -391,7 +395,8 @@ const TOPICS = [
 },
 {
   id:'trinomio-axc', cat:'algebra', title:'Trinomio ax² + bx + c', desc:'Cuando el primer término tiene coeficiente distinto de 1.',
-  theory:{h:'¿De qué trata este tema?', intro:'El primer término de cada binomio es la raíz cuadrada del primer término del trinomio. El signo del primer binomio es el mismo que el de "bx"; si los signos de "bx" y "c" son iguales, buscas dos números cuya suma sea b; si son diferentes, cuya diferencia sea b — en ambos casos, cuyo producto sea c.',
+  theory:{h:'¿De qué trata este tema?',
+    intro:"Cuando el coeficiente del primer término no es 1 (ax² + bx + c), el proceso lleva más pasos porque hay que probar combinaciones. Una estrategia útil: multiplica a×c, busca dos números que multiplicados den ese resultado y sumados den b, y reescribe el trinomio en 4 términos para factorizar por agrupación. También puedes ir probando combinaciones de factores de 'a' y 'c' hasta que el término de en medio coincida.",
     formulas:['ax² + bx + c'], text:''},
   example:{ q:'Factoriza: 2x² + 3x − 2',
     steps:['Raíz de 2x²... como no es exacta, se prueban combinaciones: (2x−1)(x+2).','Verifica: 2x·x+2x·2−1·x−1·2 = 2x²+4x−x−2 = 2x²+3x−2. ✓'],
@@ -404,7 +409,8 @@ const TOPICS = [
 },
 {
   id:'formula-general', cat:'algebra', title:'Fórmula general (cuadrática)', desc:'Para cualquier ax² + bx + c = 0.',
-  theory:{h:'¿De qué trata este tema?', intro:'Cuando un trinomio no se puede factorizar fácilmente por los otros métodos, la fórmula general siempre funciona: calcula las dos raíces que hacen la ecuación igual a cero.',
+  theory:{h:'¿De qué trata este tema?',
+    intro:"Cuando un trinomio cuadrático no se factoriza fácilmente por los otros métodos (o simplemente quieres un camino que SIEMPRE funcione), la fórmula general es tu mejor opción. Sustituyes los valores de a, b y c de ax²+bx+c=0, y obtienes las dos raíces (soluciones) de la ecuación. El símbolo '±' significa que obtienes dos respuestas: una sumando la raíz cuadrada, y otra restándola.",
     formulas:['x = (−b ± √(b² − 4ac)) / 2a'], text:''},
   example:{ q:'Resuelve: −3x² + 5x − 2 = 0',
     steps:['a=−3, b=5, c=−2.','x = (−5 ± √(25−4(−3)(−2))) / (2(−3)) = (−5 ± √1) / (−6).','x₁ = (−5+1)/(−6) = 2/3.  x₂ = (−5−1)/(−6) = 1.'],
@@ -416,7 +422,9 @@ const TOPICS = [
 },
 {
   id:'factorizacion-combinada', cat:'algebra', title:'Factorización combinada', desc:'Aplicar dos o más casos en el mismo polinomio.',
-  theory:{h:'¿De qué trata este tema?', intro:'Se aplican dos o más casos de factorización en el mismo polinomio. Primero busca siempre factor común, luego identifica el patrón que queda.', formulas:[], text:''},
+  theory:{h:'¿De qué trata este tema?',
+    intro:"Muchos polinomios requieren aplicar DOS O MÁS casos de factorización en la misma expresión, uno después del otro. La estrategia siempre es la misma: primero busca si hay factor común a todos los términos (sácalo), y luego mira qué patrón queda en el paréntesis restante — puede ser diferencia de cuadrados, trinomio cuadrado perfecto, o un trinomio general. Ve paso a paso y no te detengas hasta que ya no se pueda factorizar más.",
+    formulas:[], text:''},
   example:{ q:'Factoriza por completo: 3x² − 27',
     steps:['Factor común: el 3 divide a ambos términos → 3(x²−9).','Lo que queda es diferencia de cuadrados: x²−9=(x+3)(x−3).'], result:'3(x + 3)(x − 3)' },
   qs:[
@@ -436,7 +444,8 @@ const TOPICS = [
 },
 {
   id:'fracciones-algebraicas', cat:'algebra', title:'Simplificación de fracciones algebraicas', desc:'Factoriza numerador y denominador, y cancela.',
-  theory:{h:'¿De qué trata este tema?', intro:'Una fracción algebraica es el cociente de dos polinomios. Para simplificarla, factoriza numerador y denominador por completo, y cancela los factores comunes.',
+  theory:{h:'¿De qué trata este tema?',
+    intro:"Una fracción algebraica es igual que una fracción numérica, pero con polinomios en el numerador y denominador. Para simplificarla, factorizas completamente numerador y denominador, y cancelas los factores que se repitan en ambos — igual que simplificarías 6/8 cancelando el factor 2. El resultado ya no se puede simplificar más cuando no quedan factores comunes.",
     formulas:['(x+2)²/[(x+2)(x−2)] = (x+2)/(x−2)'], text:''},
   example:{ q:'Simplifica: (x² − 5x + 6) / (x² − 7x + 12)',
     steps:['Factoriza el numerador: x²−5x+6 = (x−2)(x−3).','Factoriza el denominador: x²−7x+12 = (x−3)(x−4).','Cancela el factor común (x−3).'],
@@ -448,8 +457,9 @@ const TOPICS = [
 },
 {
   id:'pendiente', cat:'algebra', title:'Pendiente y rectas', desc:'Qué tan inclinada está una recta.',
-  theory:{h:'¿De qué trata este tema?', intro:'La pendiente mide la inclinación de una recta: cuánto "sube o baja" por cada unidad que avanza en x.',
-    formulas:['m = (y₂ − y₁) / (x₂ − x₁)'], text:'Positiva: sube · Negativa: baja · Cero: horizontal · Indefinida: vertical'},
+  theory:{h:'¿De qué trata este tema?',
+    intro:"La pendiente mide qué tan inclinada está una recta: cuánto sube o baja por cada unidad que avanza hacia la derecha en el eje x. Se calcula con la diferencia de las 'y' entre la diferencia de las 'x' de dos puntos sobre la recta. El signo y tamaño te dicen mucho de un vistazo: positiva y grande es una subida empinada, negativa es una bajada, cero es horizontal, e indefinida (división entre cero) es una línea vertical.",
+    formulas:['m = (y₂ − y₁) / (x₂ − x₁)'], text:''},
   example:{ q:'Encuentra la pendiente de la recta que pasa por A(2,1) y B(4,7).',
     steps:['m = (y₂−y₁)/(x₂−x₁) = (7−1)/(4−2).'], result:'m = 3' },
   qs:[
@@ -459,7 +469,8 @@ const TOPICS = [
 },
 {
   id:'funciones-cuadraticas', cat:'algebra', title:'Funciones cuadráticas', desc:'Tabulación y gráfica de y = ax² + bx + c.',
-  theory:{h:'¿De qué trata este tema?', intro:'Para graficar una función cuadrática, eliges al menos 5 valores de x, calculas la y correspondiente (tabulación), y ubicas los puntos en el plano — la gráfica resultante es una parábola.',
+  theory:{h:'¿De qué trata este tema?',
+    intro:"Una función cuadrática tiene la forma y=ax²+bx+c, y su gráfica siempre es una parábola (una curva en forma de U, hacia arriba o hacia abajo). Para graficarla sin calculadora, eliges varios valores de x (al menos 5), sustituyes cada uno en la ecuación para encontrar su y correspondiente, y marcas esos puntos (x,y) en el plano — entre más puntos tabules, más precisa se ve la curva.",
     formulas:['y = ax² + bx + c'], text:''},
   example:{ q:'Tabula y = x² − x − 2 para x = −1, 0, 1',
     steps:['x=−1: y=(−1)²−(−1)−2 = 1+1−2 = 0.','x=0: y=0−0−2 = −2.','x=1: y=1−1−2 = −2.'],
@@ -471,7 +482,8 @@ const TOPICS = [
 },
 {
   id:'sistemas', cat:'algebra', title:'Sistemas de ecuaciones 2×2', desc:'Sustitución, igualación, suma-resta, gráfico y determinantes.',
-  theory:{h:'¿De qué trata este tema?', intro:'Un sistema 2×2 tiene dos incógnitas y dos ecuaciones que deben cumplirse a la vez. Hay varios caminos: sustituir, igualar, sumar/restar, graficar, o usar determinantes — todos llegan al mismo resultado.',
+  theory:{h:'¿De qué trata este tema?',
+    intro:"Un sistema de ecuaciones 2×2 tiene dos incógnitas (x, y) y dos ecuaciones que deben cumplirse SIMULTÁNEAMENTE. Hay varios caminos válidos: sustitución (despejas una variable y la metes en la otra ecuación), igualación (despejas la misma variable en ambas y las igualas), suma y resta (sumas o restas para eliminar una variable), método gráfico (dibujas ambas rectas y ves dónde se cruzan), o determinantes (regla de Cramer). Todos, bien aplicados, dan la misma solución — usa el que te resulte más cómodo según cómo estén escritas las ecuaciones.",
     formulas:['ΔS = a₁b₂ − a₂b₁'], text:'Solución única = rectas que se cruzan · infinitas = coincidentes · sin solución = paralelas'},
   example:{ q:'Resuelve por suma y resta: 3x − 4y = −6,  2x + 4y = 16',
     steps:['Los términos "−4y" y "+4y" son opuestos: súmalas directamente.','(3x−4y)+(2x+4y) = −6+16 → 5x=10 → x=2.','Sustituye en la 2ª ecuación: 2(2)+4y=16 → y=3.'],
@@ -488,9 +500,10 @@ const TOPICS = [
 // ---------------- GEOMETRÍA ----------------
 {
   id:'pitagoras', cat:'geometria', title:'Teorema de Pitágoras', desc:'c² = a² + b², con demostración geométrica.',
-  theory:{h:'¿De qué trata este tema?', intro:'En todo triángulo rectángulo, el cuadrado de la hipotenusa es igual a la suma de los cuadrados de los catetos. Se puede demostrar geométricamente construyendo cuadrados sobre cada lado del triángulo: el área del cuadrado grande (sobre la hipotenusa) es igual a la suma de las áreas de los dos cuadrados menores (sobre los catetos).',
+  theory:{h:'¿De qué trata este tema?',
+    intro:"En todo triángulo RECTÁNGULO (con un ángulo de 90°), el cuadrado de la hipotenusa (el lado más largo, opuesto al ángulo recto) es igual a la suma de los cuadrados de los otros dos lados, los catetos. Puedes demostrarlo geométricamente construyendo un cuadrado sobre cada lado del triángulo: el área del cuadrado grande (sobre la hipotenusa) siempre es igual a la suma de las áreas de los dos cuadrados pequeños (sobre los catetos). Este teorema solo aplica a triángulos rectángulos, y es la base de la trigonometría.",
     formulas:['c² = a² + b²'], text:''},
-  example:{ q:'Triángulo rectángulo con catetos de 9 cm y 12 cm. ¿Cuánto mide la hipotenusa?',
+  example:{ q:'Triángulo rectángulo tiene catetos de 9 cm y 12 cm. ¿Cuánto mide la hipotenusa?',
     steps:['c² = 9² + 12² = 81 + 144 = 225.','c = √225.'], result:'c = 15 cm' },
   qs:[
     {q:'Triángulo rectángulo con catetos de 6 cm y 8 cm. ¿Cuánto mide la hipotenusa?', a:'10 cm', accept:['10','10cm']},
@@ -500,7 +513,8 @@ const TOPICS = [
 },
 {
   id:'tales', cat:'geometria', title:'Teorema de Tales', desc:'Proporcionalidad entre rectas paralelas cortadas por secantes.',
-  theory:{h:'¿De qué trata este tema?', intro:'El Teorema de Tales demuestra la relación de proporcionalidad entre los segmentos que delimitan rectas secantes sobre rectas paralelas.',
+  theory:{h:'¿De qué trata este tema?',
+    intro:"El Teorema de Tales relaciona los segmentos que se forman cuando dos o más rectas paralelas son cortadas por rectas secantes que las cruzan. La idea central es la proporcionalidad: los segmentos correspondientes entre las paralelas guardan siempre la misma razón. Es muy útil para encontrar distancias que no puedes medir directamente, como la altura de un edificio usando su sombra y la sombra de un objeto de altura conocida.",
     formulas:['AB/A′B′ = BC/B′C′ = AC/A′C′'], text:''},
   example:{ q:'Rectas a y b paralelas. OA=2cm, AB=3cm, O′A′=3cm. Encuentra A′B′.',
     steps:['Ordena la proporción: OA/O′A′ = AB/A′B′.','Sustituye: 2/3 = 3/x.','Despeja: x = (3×3)/2.'],
@@ -511,7 +525,8 @@ const TOPICS = [
 },
 {
   id:'trigonometria', cat:'geometria', title:'Triángulos rectángulos (trigonometría)', desc:'Seno, coseno y tangente para encontrar lados y ángulos.',
-  theory:{h:'¿De qué trata este tema?', intro:'Dado un triángulo rectángulo con algunos datos conocidos, puedes encontrar el resto: primero aplica Pitágoras si faltan lados, luego plantea la razón trigonométrica adecuada para los ángulos.',
+  theory:{h:'¿De qué trata este tema?',
+    intro:"Dado un triángulo rectángulo con algunos datos conocidos (uno o dos lados, o un lado y un ángulo), puedes encontrar TODO lo demás usando seno, coseno y tangente. La estrategia siempre es: primero, si faltan lados, usa el Teorema de Pitágoras; después, plantea la razón trigonométrica adecuada según qué lados y ángulos conoces, y despeja lo que falta.",
     formulas:['sen θ = op/hip','cos θ = ady/hip','tan θ = op/ady'], text:''},
   example:{ q:'Triángulo con hipotenusa=10 y ángulo B=50°. Encuentra los catetos.',
     steps:['Cateto opuesto: b = 10 × sen(50°).','Cateto adyacente: a = 10 × cos(50°).'], result:'b ≈ 7.66,  a ≈ 6.42' },
@@ -521,7 +536,8 @@ const TOPICS = [
 },
 {
   id:'semejanza-congruencia', cat:'geometria', title:'Triángulos semejantes y congruencia', desc:'Misma forma (semejantes) o idénticos movidos (congruentes).',
-  theory:{h:'¿De qué trata este tema?', intro:'Dos triángulos son semejantes si sus ángulos son iguales y sus lados proporcionales (criterios AA, LAL, LLL). Dos figuras son congruentes si una se puede transformar en la otra usando rotación, reflexión o traslación — sin cambiar su forma ni tamaño.',
+  theory:{h:'¿De qué trata este tema?',
+    intro:"Dos figuras son SEMEJANTES si tienen la misma forma pero distinto tamaño: sus ángulos son iguales y sus lados son proporcionales (hay tres criterios para comprobarlo: AA, LAL y LLL). Dos figuras son CONGRUENTES si son literalmente idénticas, aunque estén en distinta posición — pasas de una a otra con rotación (girar sobre un punto), reflexión (voltear como espejo) o traslación (deslizar sin girar). Ninguna de estas transformaciones cambia el tamaño ni la forma de la figura.",
     formulas:[], text:'Rotación: gira sobre un punto · Reflexión: se voltea como espejo · Traslación: se desliza sin girar'},
   example:{ q:'¿Cuáles son los tres criterios de semejanza de triángulos?',
     steps:['AA: dos ángulos iguales.','LAL: un ángulo igual entre dos lados proporcionales.','LLL: los tres lados proporcionales.'],
@@ -533,7 +549,8 @@ const TOPICS = [
 },
 {
   id:'unidades', cat:'geometria', title:'Conversión de unidades', desc:'Lineales, de superficie, de volumen y su relación con litros.',
-  theory:{h:'¿De qué trata este tema?', intro:'En unidades lineales cada escalón es ×10. En superficie, ×100 (2 dimensiones). En volumen, ×1,000 (3 dimensiones). El truco más útil: 1 dm³ = 1 litro exacto.',
+  theory:{h:'¿De qué trata este tema?',
+    intro:"Convertir unidades es básicamente 'mover el punto decimal' el número correcto de posiciones, según qué tan lejos estés en la escala. En unidades LINEALES (metros, centímetros…) cada escalón vale ×10. En SUPERFICIE (metros cuadrados…) cada escalón vale ×100, porque son 2 dimensiones. En VOLUMEN (metros cúbicos…) cada escalón vale ×1,000, porque son 3 dimensiones. El dato más útil de memorizar: 1 decímetro cúbico (dm³) es EXACTAMENTE 1 litro.",
     formulas:['1 m³ = 1,000 L','1 dm³ = 1 L','1 cm³ = 1 mL'], text:''},
   example:{ q:'Convierte 2.5 m³ a litros', steps:['1 m³ = 1,000 L.','Multiplica: 2.5 × 1,000.'], result:'2,500 L' },
   qs:[
@@ -550,7 +567,8 @@ const TOPICS = [
 // ---------------- APLICACIONES ----------------
 {
   id:'interes-simple', cat:'aplicaciones', title:'Interés simple', desc:'I = C · i · t — capital, tasa y tiempo.',
-  theory:{h:'¿De qué trata este tema?', intro:'El interés simple calcula cuánto se gana o paga por un préstamo o ahorro. El interés se calcula siempre sobre el capital original — no se reinvierte.',
+  theory:{h:'¿De qué trata este tema?',
+    intro:"El interés simple calcula cuánto se gana (si ahorras) o se paga (si pides prestado) por usar dinero durante un tiempo determinado. La clave: el interés se calcula SIEMPRE sobre el capital original, no se reinvierte ni se acumula sobre sí mismo, así que crece de forma constante con el tiempo. La fórmula usa cuatro variables — capital, tasa, tiempo e interés — si conoces tres, siempre puedes despejar la cuarta.",
     formulas:['I = C · i · t'], text:'C=capital · i=tasa anual (decimal) · t=tiempo en años'},
   example:{ q:'¿Cuánto interés genera un capital de $80,000 al 5% anual durante 2 años?',
     steps:['I = C×i×t.','I = 80000 × 0.05 × 2.'], result:'I = $8,000' },
@@ -564,7 +582,8 @@ const TOPICS = [
 },
 {
   id:'interes-compuesto', cat:'aplicaciones', title:'Interés compuesto', desc:'El interés se reinvierte en cada periodo.',
-  theory:{h:'¿De qué trata este tema?', intro:'A diferencia del simple, en el interés compuesto el interés de cada periodo se suma al capital antes de calcular el siguiente — por eso crece más rápido.',
+  theory:{h:'¿De qué trata este tema?',
+    intro:"A diferencia del interés simple, en el interés compuesto el interés generado en cada periodo se SUMA al capital antes de calcular el interés del siguiente periodo, por eso el dinero 'crece más rápido' con el tiempo — estás ganando interés sobre el interés anterior. Esto se representa con una potencia en la fórmula, porque el capital se multiplica repetidamente por (1+tasa) tantas veces como periodos hayan pasado.",
     formulas:['Mf = Mi (1 + r)ⁿ'], text:'Mi=capital inicial · r=tasa por periodo · n=número de periodos'},
   example:{ q:'Se depositan $1,000 al 10% anual compuesto durante 2 años. ¿Monto final?',
     steps:['Año 1: 1000×1.10 = 1,100.','Año 2: 1100×1.10 = 1,210.'], result:'Mf = $1,210' },
@@ -575,7 +594,8 @@ const TOPICS = [
 },
 {
   id:'regla-de-tres', cat:'aplicaciones', title:'Regla de tres compuesta', desc:'Directa, inversa y mixta — con tres o más magnitudes.',
-  theory:{h:'¿De qué trata este tema?', intro:'Se usa cuando se relacionan tres o más magnitudes: directa (a más de una, más de la otra), inversa (a más de una, menos de la otra), o mixta (combina ambas).',
+  theory:{h:'¿De qué trata este tema?',
+    intro:"La regla de tres compuesta se usa cuando un problema relaciona TRES O MÁS magnitudes a la vez (por ejemplo: personas, días y trabajo realizado). Puede ser directa (si una magnitud sube, la otra también sube), inversa (si una sube, la otra baja), o mixta (combina ambas relaciones en el mismo problema). El truco para no confundirte: para cada par de magnitudes, pregúntate '¿si esta sube, la otra sube o baja?' antes de armar la proporción.",
     formulas:[], text:''},
   example:{ q:'5 obreros a 6h diarias construyen un muro en 2 días. ¿Cuánto tardan 4 obreros a 7h diarias?',
     steps:['A menos obreros, más días (inversa). A más horas, menos días (inversa).','Se arma la proporción con las dos relaciones inversas: (4/5)·(7/6) = 2/x.'],
@@ -591,7 +611,8 @@ const TOPICS = [
 },
 {
   id:'porcentajes', cat:'aplicaciones', title:'Porcentajes', desc:'Descuentos, aumentos, IVA y ganancias sobre precios.',
-  theory:{h:'¿De qué trata este tema?', intro:'Un descuento o aumento del p% se calcula multiplicando el precio original por (1 ± p/100). Para saber qué porcentaje representa una parte de un total: (parte/total)×100.',
+  theory:{h:'¿De qué trata este tema?',
+    intro:"Los problemas de porcentaje son parte esencial de la vida diaria: descuentos, aumentos de precio, impuestos (IVA), ganancias o pérdidas en ventas. La fórmula es siempre la misma: multiplicas el precio original por (1 más o menos el porcentaje como decimal) — sumas si es aumento, ganancia o impuesto; restas si es descuento o pérdida. Para saber qué porcentaje representa una cantidad de un total, divides la parte entre el total y multiplicas por 100.",
     formulas:['Precio final = Precio × (1 ± p/100)'], text:''},
   example:{ q:'Un pantalón sin IVA cuesta $625. Con IVA del 16%, ¿cuánto se paga?',
     steps:['El IVA es un aumento del 16%.','625 × (1 + 0.16) = 625 × 1.16.'], result:'$725' },
@@ -613,7 +634,8 @@ const TOPICS = [
 // ---------------- ESTADÍSTICA Y PROBABILIDAD ----------------
 {
   id:'probabilidad-teorica-frecuencial', cat:'probabilidad', title:'Probabilidad teórica y frecuencial', desc:'Lo esperado en teoría vs. lo que pasa en la práctica.',
-  theory:{h:'¿De qué trata este tema?', intro:'La probabilidad teórica es lo que esperamos que pase en un mundo perfecto. La frecuencial es lo que realmente sucede al repetir un experimento.',
+  theory:{h:'¿De qué trata este tema?',
+    intro:"Existen dos formas de pensar en probabilidad. La TEÓRICA se calcula con lógica pura, contando cuántos resultados favorables hay entre el total de resultados posibles — es lo que 'debería' pasar en un mundo perfecto. La FRECUENCIAL se obtiene REPITIENDO un experimento real y contando cuántas veces ocurrió lo que te interesa — es lo que realmente pasó en la práctica. Casi nunca coinciden exactamente, pero entre más veces repites el experimento, la frecuencial se acerca más a la teórica.",
     formulas:['P(A) = casos favorables / casos totales'], text:''},
   example:{ q:'Lanzas una moneda 60 veces y obtienes 25 soles. ¿Frecuencial vs teórica?',
     steps:['Frecuencial: 25/60 ≈ 41.7%.','Teórica: 50%.','Diferencia: 50%−41.7% = 8.3 puntos.'], result:'Difieren en 8.3 puntos porcentuales' },
@@ -623,7 +645,9 @@ const TOPICS = [
 },
 {
   id:'eventos-independientes', cat:'probabilidad', title:'Eventos independientes', desc:'La regla del producto: P(A y B) = P(A)·P(B).',
-  theory:{h:'¿De qué trata este tema?', intro:'Dos sucesos son independientes si la probabilidad de uno no depende de si el otro ocurre.', formulas:['P(A y B) = P(A) · P(B)'], text:''},
+  theory:{h:'¿De qué trata este tema?',
+    intro:"Dos eventos son independientes cuando lo que pasa en uno NO afecta la probabilidad del otro — por ejemplo, el resultado de un lanzamiento de moneda no influye en el siguiente. Para calcular la probabilidad de que ocurran varios eventos independientes A LA VEZ, simplemente multiplicas sus probabilidades individuales. Esto suele dar números pequeños, porque entre más eventos tienen que cumplirse juntos, menos probable es que pase.",
+    formulas:['P(A y B) = P(A) · P(B)'], text:''},
   example:{ q:'Se lanza una moneda 3 veces. ¿Probabilidad de sacar 3 águilas?',
     steps:['Cada lanzamiento es independiente: P(águila)=1/2.','P(3 águilas) = 1/2 × 1/2 × 1/2.'], result:'1/8 = 12.5%' },
   qs:[
@@ -632,7 +656,8 @@ const TOPICS = [
 },
 {
   id:'eventos-excluyentes', cat:'probabilidad', title:'Eventos mutuamente excluyentes', desc:'La regla de la suma: P(A ó B) = P(A)+P(B) (menos la intersección si se traslapan).',
-  theory:{h:'¿De qué trata este tema?', intro:'Si dos eventos son mutuamente excluyentes (no pueden ocurrir juntos), su probabilidad combinada es la suma. Si pueden ocurrir juntos, se resta la parte que comparten para no contarla dos veces.',
+  theory:{h:'¿De qué trata este tema?',
+    intro:"Dos eventos son mutuamente excluyentes cuando NO pueden ocurrir al mismo tiempo: si pasa uno, el otro queda descartado (como sacar un 2 O un 5 en un solo lanzamiento de dado). En estos casos, la probabilidad de que ocurra uno U OTRO es la suma de sus probabilidades individuales. Pero si los eventos SÍ pueden traslaparse (ocurrir juntos), hay que restar la probabilidad de esa intersección para no contarla dos veces.",
     formulas:['P(A∪B) = P(A) + P(B) − P(A∩B)'], text:''},
   example:{ q:'Se lanza un dado normal. ¿Probabilidad de par o 5?',
     steps:['P(par)={2,4,6}=3/6.','P(5)=1/6.','Par y 5 no se traslapan, así que se suman directo.'], result:'4/6 = 2/3 ≈ 66.7%' },
@@ -644,7 +669,8 @@ const TOPICS = [
 },
 {
   id:'media-ponderada', cat:'probabilidad', title:'Media ponderada', desc:'Cuando los datos tienen distinto peso o frecuencia.',
-  theory:{h:'¿De qué trata este tema?', intro:'Cuando los datos no tienen el mismo peso, multiplicas cada valor por su peso, sumas todo, y divides entre la suma de los pesos.',
+  theory:{h:'¿De qué trata este tema?',
+    intro:"La media ponderada se usa cuando no todos los datos 'pesan' lo mismo — algunos valores son más frecuentes o más importantes que otros. En vez de sumar todos los valores y dividir entre cuántos son (promedio simple), multiplicas cada valor por su peso (frecuencia), sumas todos esos productos, y divides entre la suma total de los pesos.",
     formulas:['Media = Σ(valor×peso) / Σ(peso)'], text:''},
   example:{ q:'Andrea trabajó: 2 semanas×1 día, 14 semanas×2 días, 8 semanas×5 días, 32 semanas×7 días. ¿Promedio de días?',
     steps:['Numerador: 2×1+14×2+8×5+32×7 = 2+28+40+224 = 294.','Denominador (semanas totales): 2+14+8+32 = 56.'],
@@ -653,7 +679,8 @@ const TOPICS = [
 },
 {
   id:'medidas-dispersion', cat:'probabilidad', title:'Medidas de dispersión', desc:'Rango, varianza y desviación estándar.',
-  theory:{h:'¿De qué trata este tema?', intro:'Indican qué tan alejados están los valores del centro de la distribución. El rango es la diferencia entre el mayor y el menor dato. La varianza promedia el cuadrado de las diferencias respecto a la media; la desviación estándar es su raíz cuadrada.',
+  theory:{h:'¿De qué trata este tema?',
+    intro:"Las medidas de dispersión te dicen qué tan 'esparcidos' o 'juntos' están los datos respecto al centro de la distribución (la media). El RANGO es la más simple: la diferencia entre el dato mayor y el menor. La VARIANZA es más precisa: promedia el cuadrado de las diferencias de cada dato respecto a la media (se eleva al cuadrado para que los negativos no se cancelen con los positivos). La DESVIACIÓN ESTÁNDAR es la raíz cuadrada de la varianza, y es la más usada porque regresa a las unidades originales de los datos.",
     formulas:['σ² = Σ(x−media)² / n','σ = √σ²'], text:''},
   example:{ q:'Con diferencias 206, 76, −224, 36, −94 respecto a la media, encuentra la varianza y desviación estándar.',
     steps:['σ² = (206²+76²+(−224)²+36²+(−94)²) / 5.','Suma de cuadrados = 108,520.','108520/5 = 21,704.'],
@@ -678,7 +705,6 @@ function normalizeSearch(s){
   return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
 }
 
-// Build category blocks with pills
 CATEGORIES.forEach(cat => {
   const topicsInCat = TOPICS.filter(t => t.cat === cat.id);
   if(!topicsInCat.length) return;
@@ -705,7 +731,6 @@ noResults.textContent = 'No encontré temas con ese nombre. Intenta con otra pal
 noResults.style.display = 'none';
 browserEl.appendChild(noResults);
 
-// Build topic panels (hidden by default)
 TOPICS.forEach(t => {
   const cat = CATEGORIES.find(c => c.id === t.cat);
   const panel = document.createElement('section');
@@ -849,7 +874,6 @@ function markSolved(id){
   document.getElementById('solvedCount').textContent = solved.size;
 }
 
-// Search
 function applySearch(){
   const q = normalizeSearch(searchInput.value.trim());
   searchClear.classList.toggle('show', q.length > 0);
