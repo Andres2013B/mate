@@ -208,12 +208,13 @@
     background:var(--violet-900);
     color:#F3ECFB;
     border-radius:var(--radius);
-    padding:24px 26px;
-    margin-bottom:28px;
+    padding:26px 28px;
+    margin-bottom:20px;
   }
   .theory-box h3{
-    font-family:'Fraunces',serif;font-size:17px;margin:0 0 10px;color:#fff;font-weight:700;
+    font-family:'Fraunces',serif;font-size:19px;margin:0 0 12px;color:#fff;font-weight:700;
   }
+  .theory-box .intro{font-size:14.5px;line-height:1.65;color:#D9C9EE;margin:0 0 14px;}
   .theory-box .formula{
     font-family:'JetBrains Mono',monospace;
     font-size:15px;
@@ -223,6 +224,66 @@
     color:var(--gold);
   }
   .theory-box p{font-size:14px;line-height:1.6;color:#D9C9EE;margin:8px 0 0;}
+
+  .example-box{
+    background:#fff;
+    border:1.5px dashed var(--gold);
+    border-radius:var(--radius);
+    padding:22px 24px;
+    margin-bottom:28px;
+    position:relative;
+  }
+  .example-box .tag{
+    font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--gold);font-weight:600;
+    display:inline-block;margin-bottom:10px;
+    background:#FBF3E2;padding:4px 10px;border-radius:6px;
+  }
+  .example-box .ex-q{font-size:15.5px;font-weight:600;color:var(--violet-900);margin-bottom:12px;line-height:1.5;}
+  .example-box .ex-step{
+    display:flex;gap:10px;font-size:14px;line-height:1.6;color:var(--ink-soft);margin-bottom:8px;
+    padding-left:2px;
+  }
+  .example-box .ex-step .bullet{
+    flex:none;width:20px;height:20px;border-radius:50%;background:var(--violet-050);
+    color:var(--violet-700);font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;
+    display:flex;align-items:center;justify-content:center;margin-top:1px;
+  }
+  .example-box .ex-result{
+    font-family:'JetBrains Mono',monospace;font-size:15px;color:var(--green);font-weight:600;
+    margin-top:12px;padding-top:12px;border-top:1px dashed var(--line);
+  }
+
+  .answer-row{
+    display:flex;gap:10px;margin-top:16px;flex-wrap:wrap;align-items:center;
+  }
+  .answer-input{
+    flex:1;min-width:160px;
+    font-family:'Space Grotesk',sans-serif;font-size:14.5px;
+    border:1.5px solid var(--line);border-radius:8px;
+    padding:10px 14px;
+    background:var(--violet-050);
+    color:var(--ink);
+    outline:none;
+    transition:border-color .15s ease;
+  }
+  .answer-input:focus{border-color:var(--violet-500);}
+  .answer-input.correct{border-color:var(--green);background:#EFF8F1;}
+  .answer-input.wrong{border-color:var(--red);background:#FBEEEC;}
+  .check-btn{
+    font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:13.5px;
+    background:var(--violet-700);color:#fff;border:none;
+    padding:10px 18px;border-radius:8px;cursor:pointer;flex:none;
+    transition:background .15s ease;
+  }
+  .check-btn:hover{background:var(--violet-900);}
+  .feedback{
+    font-family:'Space Grotesk',sans-serif;font-size:13.5px;font-weight:600;
+    display:none;align-items:center;gap:6px;flex:none;
+  }
+  .feedback.show{display:flex;}
+  .feedback.ok{color:var(--green);}
+  .feedback.no{color:var(--red);}
 
   .unit{display:none;}
   .unit.active{display:block; animation:fade .35s ease;}
@@ -270,125 +331,215 @@
 const DATA = [
   {
     id:'conjuntos', title:'Conjuntos', desc:'Conjunto universo, complemento y operaciones con diagramas de Venn.',
-    theory:{h:'Fórmulas clave', formulas:['A′ = U − A'], text:'A ∪ B = unión · A ∩ B = intersección · A \\ B = diferencia · Aᶜ = complemento'},
+    theory:{h:'¿De qué trata este tema?',
+      intro:'Un conjunto es simplemente una colección de elementos. El conjunto Universo (U) reúne TODOS los elementos posibles de un contexto, y cualquier otro conjunto (A, B, C…) vive dentro de él. Con diagramas de Venn (círculos que se traslapan) podemos combinar conjuntos: juntarlos (unión), quedarnos solo con lo que comparten (intersección), quitar elementos (diferencia) o quedarnos con "todo lo que no es" un conjunto (complemento).',
+      formulas:['A′ = U − A'], text:'A ∪ B = unión · A ∩ B = intersección · A \\ B = diferencia · Aᶜ = complemento'},
+    example:{
+      q:'U = {1,2,3,4,5,6,7,8,9,10}, A = {2,4,6,8}, B = {1,2,3,4,5}. Encuentra A ∩ B.',
+      steps:[
+        'La intersección (∩) pide los elementos que están en A y en B al mismo tiempo.',
+        'Revisa elemento por elemento de A: 2 → ¿está en B? sí. 4 → ¿está en B? sí. 6 → ¿está en B? no. 8 → ¿está en B? no.',
+        'Los que cumplen en ambos conjuntos son 2 y 4.'
+      ],
+      result:'A ∩ B = {2, 4}'
+    },
     qs:[
-      {q:'U = {−5..15}, A={1,2,3,4,5,6,7}, C={−5,−4,−3,−2,−1}. Calcula A ∪ C.', a:'{−5,−4,−3,−2,−1,1,2,3,4,5,6,7}', steps:'Junta todos los elementos de A y de C, sin repetir.'},
-      {q:'B={4,5,6,7,8,9,10,11,12,13,14,15}, D={−5,−3,−1,1,3,5,7,9,11,13,15}. Calcula B \\ D.', a:'{4,6,8,10,12,14}', steps:'Quita de B los elementos que también están en D.'},
-      {q:'A={1,2,3,4,5,6,7}, U={−5..15}. Calcula Aᶜ.', a:'{−5,−4,−3,−2,−1,0,8,9,10,11,12,13,14,15}', steps:'Todo lo que está en U pero no en A.'},
-      {q:'C={−5,−4,−3,−2,−1}, A={1,2,3,4,5,6,7}. Calcula C \\ A.', a:'{−5,−4,−3,−2,−1}', steps:'C y A no comparten elementos, así que C \\ A = C completo.'},
-      {q:'C={−5,−4,−3,−2,−1}, D={−5,−3,−1,1,3,5,7,9,11,13,15}. Calcula (C ∩ D)ᶜ.', a:'U menos {−5,−3,−1}', steps:'Primero C∩D = {−5,−3,−1}. Su complemento es todo el universo excepto esos tres.'},
+      {q:'U = {−5..15}, A={1,2,3,4,5,6,7}, C={−5,−4,−3,−2,−1}. Calcula A ∪ C.', a:'{−5,−4,−3,−2,−1,1,2,3,4,5,6,7}', steps:'Junta todos los elementos de A y de C, sin repetir.', accept:['{-5,-4,-3,-2,-1,1,2,3,4,5,6,7}']},
+      {q:'B={4,5,6,7,8,9,10,11,12,13,14,15}, D={−5,−3,−1,1,3,5,7,9,11,13,15}. Calcula B \\ D.', a:'{4,6,8,10,12,14}', steps:'Quita de B los elementos que también están en D.', accept:['{4,6,8,10,12,14}']},
+      {q:'A={1,2,3,4,5,6,7}, U={−5..15}. Calcula Aᶜ.', a:'{−5,−4,−3,−2,−1,0,8,9,10,11,12,13,14,15}', steps:'Todo lo que está en U pero no en A.', accept:['{-5,-4,-3,-2,-1,0,8,9,10,11,12,13,14,15}']},
+      {q:'C={−5,−4,−3,−2,−1}, A={1,2,3,4,5,6,7}. Calcula C \\ A.', a:'{−5,−4,−3,−2,−1}', steps:'C y A no comparten elementos, así que C \\ A = C completo.', accept:['{-5,-4,-3,-2,-1}']},
+      {q:'C={−5,−4,−3,−2,−1}, D={−5,−3,−1,1,3,5,7,9,11,13,15}. Calcula (C ∩ D)ᶜ.', a:'U menos {−5,−3,−1}', steps:'Primero C∩D = {−5,−3,−1}. Su complemento es todo el universo excepto esos tres.', qType:'open'},
     ]
   },
   {
     id:'sucesiones', title:'Sucesiones', desc:'Sucesiones aritméticas, geométricas y patrones numéricos.',
-    theory:{h:'Sucesión aritmética', formulas:['aₙ = a₁ + (n − 1)d'], text:'d = diferencia constante entre términos consecutivos.'},
+    theory:{h:'¿De qué trata este tema?',
+      intro:'Una sucesión es una lista ordenada de números que sigue un patrón. En una sucesión aritmética, cada término se obtiene sumando siempre la misma cantidad (d) al anterior. En una sucesión geométrica, cada término se obtiene multiplicando siempre por la misma razón (r). También existen patrones especiales, como los cuadrados, los cubos o la sucesión de Fibonacci.',
+      formulas:['aₙ = a₁ + (n − 1)d'], text:'d = diferencia constante entre términos consecutivos.'},
+    example:{
+      q:'Encuentra el término 15 de la sucesión aritmética: 5, 9, 13, 17…',
+      steps:[
+        'Identifica el primer término: a₁ = 5.',
+        'Encuentra la diferencia constante: d = 9 − 5 = 4.',
+        'Aplica la fórmula: aₙ = a₁ + (n−1)d, con n = 15.',
+        'a₁₅ = 5 + (15−1)(4) = 5 + 56 = 61.'
+      ],
+      result:'a₁₅ = 61'
+    },
     qs:[
-      {q:'Encuentra el término 20 en: 1, 6, 11, 16…', a:'96', steps:'a1=1, d=5 → a20 = 1 + 19(5) = 96'},
-      {q:'Encuentra el término 6 en: 3, 7, 11, 15…', a:'23', steps:'a1=3, d=4 → a6 = 3 + 5(4) = 23'},
-      {q:'Encuentra el término 12 en: −4, 0, 4, 8…', a:'40', steps:'a1=−4, d=4 → a12 = −4 + 11(4) = 40'},
-      {q:'Encuentra el término 8 en: −20, −15, −10, −5…', a:'15', steps:'a1=−20, d=5 → a8 = −20 + 7(5) = 15'},
-      {q:'Encuentra el término 4 en: 100, 200, 300…', a:'400', steps:'a1=100, d=100 → a4 = 100 + 3(100) = 400'},
-      {q:'Encuentra el término 9 en: −19, −17, −15…', a:'−3', steps:'a1=−19, d=2 → a9 = −19 + 8(2) = −3'},
-      {q:'Completa: 2, 4, __, 8', a:'6', steps:'Progresión aritmética simple, d = 2.'},
-      {q:'Completa: 1, 5, __, 13', a:'9', steps:'d = 4.'},
-      {q:'Completa: 3, 6, __, 12', a:'9', steps:'d = 3.'},
-      {q:'Completa: 1, __, 9, 27', a:'3', steps:'Sucesión geométrica, razón 3.'},
-      {q:'Completa: 4, __, 16, 32', a:'8', steps:'Sucesión geométrica, razón 2.'},
-      {q:'Completa: 4, 9, 16, __', a:'25', steps:'Cuadrados: 2², 3², 4², 5².'},
-      {q:'Completa: 8, 27, 64, 125, __', a:'216', steps:'Cubos: 2³,3³,4³,5³,6³.'},
-      {q:'Completa: 0, 1, 1, 2, 3, 5, __', a:'8', steps:'Sucesión de Fibonacci: cada término es la suma de los dos anteriores.'},
-      {q:'Completa: 500, 100, 20, __', a:'4', steps:'Cada término se divide entre 5.'},
-      {q:'Completa: 81, 27, 9, __', a:'3', steps:'Cada término se divide entre 3.'},
+      {q:'Encuentra el término 20 en: 1, 6, 11, 16…', a:'96', steps:'a1=1, d=5 → a20 = 1 + 19(5) = 96', accept:['96']},
+      {q:'Encuentra el término 6 en: 3, 7, 11, 15…', a:'23', steps:'a1=3, d=4 → a6 = 3 + 5(4) = 23', accept:['23']},
+      {q:'Encuentra el término 12 en: −4, 0, 4, 8…', a:'40', steps:'a1=−4, d=4 → a12 = −4 + 11(4) = 40', accept:['40']},
+      {q:'Encuentra el término 8 en: −20, −15, −10, −5…', a:'15', steps:'a1=−20, d=5 → a8 = −20 + 7(5) = 15', accept:['15']},
+      {q:'Encuentra el término 4 en: 100, 200, 300…', a:'400', steps:'a1=100, d=100 → a4 = 100 + 3(100) = 400', accept:['400']},
+      {q:'Encuentra el término 9 en: −19, −17, −15…', a:'−3', steps:'a1=−19, d=2 → a9 = −19 + 8(2) = −3', accept:['-3']},
+      {q:'Completa: 2, 4, __, 8', a:'6', steps:'Progresión aritmética simple, d = 2.', accept:['6']},
+      {q:'Completa: 1, 5, __, 13', a:'9', steps:'d = 4.', accept:['9']},
+      {q:'Completa: 3, 6, __, 12', a:'9', steps:'d = 3.', accept:['9']},
+      {q:'Completa: 1, __, 9, 27', a:'3', steps:'Sucesión geométrica, razón 3.', accept:['3']},
+      {q:'Completa: 4, __, 16, 32', a:'8', steps:'Sucesión geométrica, razón 2.', accept:['8']},
+      {q:'Completa: 4, 9, 16, __', a:'25', steps:'Cuadrados: 2², 3², 4², 5².', accept:['25']},
+      {q:'Completa: 8, 27, 64, 125, __', a:'216', steps:'Cubos: 2³,3³,4³,5³,6³.', accept:['216']},
+      {q:'Completa: 0, 1, 1, 2, 3, 5, __', a:'8', steps:'Sucesión de Fibonacci: cada término es la suma de los dos anteriores.', accept:['8']},
+      {q:'Completa: 500, 100, 20, __', a:'4', steps:'Cada término se divide entre 5.', accept:['4']},
+      {q:'Completa: 81, 27, 9, __', a:'3', steps:'Cada término se divide entre 3.', accept:['3']},
     ]
   },
   {
     id:'exponentes', title:'Exponentes', desc:'Leyes de los exponentes: multiplicación, división y potencias.',
-    theory:{h:'Leyes principales', formulas:['xᵃ·xᵇ = xᵃ⁺ᵇ','xᵃ÷xᵇ = xᵃ⁻ᵇ','(xᵃ)ᵇ = xᵃᵇ'], text:''},
+    theory:{h:'¿De qué trata este tema?',
+      intro:'Las leyes de los exponentes son atajos para simplificar expresiones con potencias sin tener que escribir cada multiplicación. Lo esencial: cuando multiplicas potencias de la misma base, sumas los exponentes; cuando divides, los restas; y cuando tienes una potencia elevada a otra potencia, los multiplicas.',
+      formulas:['xᵃ·xᵇ = xᵃ⁺ᵇ','xᵃ÷xᵇ = xᵃ⁻ᵇ','(xᵃ)ᵇ = xᵃᵇ'], text:''},
+    example:{
+      q:'Simplifica: (3x²y⁴)(2x⁵y)',
+      steps:[
+        'Multiplica los coeficientes numéricos: 3 × 2 = 6.',
+        'Suma los exponentes de la misma base x: x² · x⁵ = x²⁺⁵ = x⁷.',
+        'Suma los exponentes de la misma base y: y⁴ · y¹ = y⁴⁺¹ = y⁵.'
+      ],
+      result:'6x⁷y⁵'
+    },
     qs:[
-      {q:'Simplifica (2x⁵y²)(3y³)', a:'6x⁵y⁵'},
-      {q:'Simplifica (12y⁵z³) ÷ (4y²z⁴)', a:'3y³/z'},
-      {q:'Simplifica (3a⁶b⁵)(5a²bc³)', a:'15a⁸b⁶c³'},
-      {q:'Simplifica (30x⁶y⁴z²) ÷ (5x²y²z⁵)', a:'6x⁴y²/z³'},
-      {q:'Simplifica (10x³y)(2xy⁶) ÷ (4x²y³)', a:'5x²y⁴'},
-      {q:'Simplifica (10x³y) ÷ (2xy⁶) · (4x²y³)', a:'20x⁴/y²'},
+      {q:'Simplifica (2x⁵y²)(3y³)', a:'6x⁵y⁵', accept:['6x^5y^5']},
+      {q:'Simplifica (12y⁵z³) ÷ (4y²z⁴)', a:'3y³/z', accept:['3y^3/z']},
+      {q:'Simplifica (3a⁶b⁵)(5a²bc³)', a:'15a⁸b⁶c³', accept:['15a^8b^6c^3']},
+      {q:'Simplifica (30x⁶y⁴z²) ÷ (5x²y²z⁵)', a:'6x⁴y²/z³', accept:['6x^4y^2/z^3']},
+      {q:'Simplifica (10x³y)(2xy⁶) ÷ (4x²y³)', a:'5x²y⁴', accept:['5x^2y^4']},
+      {q:'Simplifica (10x³y) ÷ (2xy⁶) · (4x²y³)', a:'20x⁴/y²', accept:['20x^4/y^2']},
     ]
   },
   {
     id:'notables', title:'Productos notables', desc:'Binomio al cuadrado, binomios conjugados y binomio al cubo.',
-    theory:{h:'Fórmulas', formulas:['(a+b)² = a²+2ab+b²','(a+b)(a−b) = a²−b²','(a+b)³ = a³+3a²b+3ab²+b³'], text:''},
+    theory:{h:'¿De qué trata este tema?',
+      intro:'Los productos notables son multiplicaciones de binomios tan comunes que ya tienen un resultado "de memoria", sin necesidad de multiplicar término por término cada vez. Reconocer el patrón (¿es un cuadrado? ¿son conjugados? ¿es un cubo?) te ahorra muchísimos pasos.',
+      formulas:['(a+b)² = a²+2ab+b²','(a+b)(a−b) = a²−b²','(a+b)³ = a³+3a²b+3ab²+b³'], text:''},
+    example:{
+      q:'Desarrolla (x + 4)²',
+      steps:[
+        'Identifica el patrón: (a+b)² = a² + 2ab + b², con a = x y b = 4.',
+        'Calcula a²: x² = x².',
+        'Calcula 2ab: 2(x)(4) = 8x.',
+        'Calcula b²: 4² = 16.'
+      ],
+      result:'x² + 8x + 16'
+    },
     qs:[
-      {q:'Desarrolla (x + 2)³', a:'x³ + 6x² + 12x + 8'},
-      {q:'Desarrolla (3x − 2)³', a:'27x³ − 54x² + 36x − 8'},
-      {q:'Desarrolla (2x + 5)³', a:'8x³ + 60x² + 150x + 125'},
+      {q:'Desarrolla (x + 2)³', a:'x³ + 6x² + 12x + 8', accept:['x^3+6x^2+12x+8']},
+      {q:'Desarrolla (3x − 2)³', a:'27x³ − 54x² + 36x − 8', accept:['27x^3-54x^2+36x-8']},
+      {q:'Desarrolla (2x + 5)³', a:'8x³ + 60x² + 150x + 125', accept:['8x^3+60x^2+150x+125']},
     ]
   },
   {
     id:'factorizacion', title:'Factorización', desc:'Factor común, diferencia de cuadrados, trinomio cuadrado perfecto y factorización combinada.',
-    theory:{h:'Casos comunes', formulas:['a²−b² = (a+b)(a−b)','a²±2ab+b² = (a±b)²'], text:'Siempre busca primero el factor común antes de aplicar otro caso.'},
+    theory:{h:'¿De qué trata este tema?',
+      intro:'Factorizar es el proceso inverso a multiplicar: partes de un polinomio "expandido" y lo escribes como un producto de factores más simples. La estrategia siempre es la misma: primero busca si hay un factor común a todos los términos, y luego identifica qué patrón queda (diferencia de cuadrados, trinomio cuadrado perfecto, o un trinomio general que se factoriza buscando dos números).',
+      formulas:['a²−b² = (a+b)(a−b)','a²±2ab+b² = (a±b)²'], text:'Siempre busca primero el factor común antes de aplicar otro caso.'},
+    example:{
+      q:'Factoriza por completo: 3x² − 27',
+      steps:[
+        'Busca primero el factor común: el 3 divide a ambos términos → 3(x² − 9).',
+        'Observa lo que queda dentro del paréntesis: x² − 9 es una diferencia de cuadrados (x² y 3²).',
+        'Aplica a² − b² = (a+b)(a−b), con a = x y b = 3.'
+      ],
+      result:'3(x + 3)(x − 3)'
+    },
     qs:[
-      {q:'Factoriza: x² − 2x + 1', a:'(x − 1)²'},
-      {q:'Factoriza: x² − 6x + 9', a:'(x − 3)²'},
-      {q:'Factoriza: x² − 20x + 100', a:'(x − 10)²'},
-      {q:'Factoriza: x² + 10x + 25', a:'(x + 5)²'},
-      {q:'Factoriza: x² + 14x + 49', a:'(x + 7)²'},
-      {q:'Factoriza: 9x² + 30x + 25', a:'(3x + 5)²'},
-      {q:'Factoriza: x⁶ + 10x³ + 25', a:'(x³ + 5)²'},
-      {q:'Factoriza: 4x² + 4xa³ + a⁶', a:'(2x + a³)²'},
-      {q:'Resuelve: x² − 4 = 0', a:'x = 2, x = −2', steps:'Diferencia de cuadrados: (x−2)(x+2)=0'},
-      {q:'Resuelve: w² − 100 = 0', a:'w = 10, w = −10'},
-      {q:'Resuelve: 3x² − 192 = 0', a:'x = 8, x = −8', steps:'x² = 64'},
-      {q:'Resuelve: 4y² − 12 = 0', a:'y = ±√3'},
-      {q:'Resuelve: 25z² − 36 = 0', a:'z = 6/5, z = −6/5'},
-      {q:'Factoriza por completo: 2x² + 16x + 30', a:'2(x + 3)(x + 5)'},
-      {q:'Factoriza por completo: 5x² − 70x + 245', a:'5(x − 7)²'},
-      {q:'Factoriza por completo: −x³ + 17x² − 70x', a:'−x(x − 7)(x − 10)'},
-      {q:'Factoriza por completo: 2x⁴ − 512', a:'2(x−4)(x+4)(x²+16)'},
-      {q:'Factoriza por completo: 25x⁴ − 20x³ + 4x²', a:'x²(5x − 2)²'},
-      {q:'Factoriza por completo: 12x³ + 12x² + 3x', a:'3x(2x + 1)²'},
-      {q:'Factoriza por completo: 12c² − 75', a:'3(2c − 5)(2c + 5)'},
-      {q:'Factoriza por completo: 6x² − 600', a:'6(x − 10)(x + 10)'},
-      {q:'Factoriza por completo: −5t² − 20t − 20', a:'−5(t + 2)²'},
-      {q:'Factoriza por completo: 6x² + 18x − 24', a:'6(x + 4)(x − 1)'},
-      {q:'Factoriza por completo: −n² + 10n − 21', a:'−(n − 3)(n − 7)'},
-      {q:'Factoriza por completo: 2a² − 14a − 16', a:'2(a − 8)(a + 1)'},
+      {q:'Factoriza: x² − 2x + 1', a:'(x − 1)²', accept:['(x-1)^2']},
+      {q:'Factoriza: x² − 6x + 9', a:'(x − 3)²', accept:['(x-3)^2']},
+      {q:'Factoriza: x² − 20x + 100', a:'(x − 10)²', accept:['(x-10)^2']},
+      {q:'Factoriza: x² + 10x + 25', a:'(x + 5)²', accept:['(x+5)^2']},
+      {q:'Factoriza: x² + 14x + 49', a:'(x + 7)²', accept:['(x+7)^2']},
+      {q:'Factoriza: 9x² + 30x + 25', a:'(3x + 5)²', accept:['(3x+5)^2']},
+      {q:'Factoriza: x⁶ + 10x³ + 25', a:'(x³ + 5)²', accept:['(x^3+5)^2']},
+      {q:'Factoriza: 4x² + 4xa³ + a⁶', a:'(2x + a³)²', accept:['(2x+a^3)^2']},
+      {q:'Resuelve: x² − 4 = 0', a:'x = 2, x = −2', steps:'Diferencia de cuadrados: (x−2)(x+2)=0', accept:['x=2,x=-2','2,-2','-2,2']},
+      {q:'Resuelve: w² − 100 = 0', a:'w = 10, w = −10', accept:['w=10,w=-10','10,-10','-10,10']},
+      {q:'Resuelve: 3x² − 192 = 0', a:'x = 8, x = −8', steps:'x² = 64', accept:['x=8,x=-8','8,-8','-8,8']},
+      {q:'Resuelve: 4y² − 12 = 0', a:'y = ±√3', qType:'open'},
+      {q:'Resuelve: 25z² − 36 = 0', a:'z = 6/5, z = −6/5', accept:['z=6/5,z=-6/5','6/5,-6/5','-6/5,6/5','1.2,-1.2','-1.2,1.2']},
+      {q:'Factoriza por completo: 2x² + 16x + 30', a:'2(x + 3)(x + 5)', accept:['2(x+3)(x+5)']},
+      {q:'Factoriza por completo: 5x² − 70x + 245', a:'5(x − 7)²', accept:['5(x-7)^2']},
+      {q:'Factoriza por completo: −x³ + 17x² − 70x', a:'−x(x − 7)(x − 10)', accept:['-x(x-7)(x-10)']},
+      {q:'Factoriza por completo: 2x⁴ − 512', a:'2(x−4)(x+4)(x²+16)', accept:['2(x-4)(x+4)(x^2+16)']},
+      {q:'Factoriza por completo: 25x⁴ − 20x³ + 4x²', a:'x²(5x − 2)²', accept:['x^2(5x-2)^2']},
+      {q:'Factoriza por completo: 12x³ + 12x² + 3x', a:'3x(2x + 1)²', accept:['3x(2x+1)^2']},
+      {q:'Factoriza por completo: 12c² − 75', a:'3(2c − 5)(2c + 5)', accept:['3(2c-5)(2c+5)','3(2c+5)(2c-5)']},
+      {q:'Factoriza por completo: 6x² − 600', a:'6(x − 10)(x + 10)', accept:['6(x-10)(x+10)','6(x+10)(x-10)']},
+      {q:'Factoriza por completo: −5t² − 20t − 20', a:'−5(t + 2)²', accept:['-5(t+2)^2']},
+      {q:'Factoriza por completo: 6x² + 18x − 24', a:'6(x + 4)(x − 1)', accept:['6(x+4)(x-1)']},
+      {q:'Factoriza por completo: −n² + 10n − 21', a:'−(n − 3)(n − 7)', accept:['-(n-3)(n-7)']},
+      {q:'Factoriza por completo: 2a² − 14a − 16', a:'2(a − 8)(a + 1)', accept:['2(a-8)(a+1)']},
     ]
   },
   {
     id:'geometria', title:'Geometría', desc:'Teorema de Pitágoras, triángulos rectángulos, semejanza y transformaciones.',
-    theory:{h:'Teorema de Pitágoras', formulas:['c² = a² + b²'], text:'Rotación: la figura gira sobre un eje. Traslación: la figura se desliza sin girar.'},
+    theory:{h:'¿De qué trata este tema?',
+      intro:'En todo triángulo rectángulo, los tres lados están relacionados por el Teorema de Pitágoras: el cuadrado de la hipotenusa (el lado más largo, opuesto al ángulo recto) es igual a la suma de los cuadrados de los otros dos lados (catetos). Este mismo triángulo también sirve para calcular ángulos usando razones trigonométricas. Además, en geometría se estudian transformaciones (rotación, traslación) y la semejanza entre figuras.',
+      formulas:['c² = a² + b²'], text:'Rotación: la figura gira sobre un eje. Traslación: la figura se desliza sin girar.'},
+    example:{
+      q:'Un triángulo rectángulo tiene catetos de 9 cm y 12 cm. ¿Cuánto mide la hipotenusa?',
+      steps:[
+        'Identifica los catetos: a = 9, b = 12.',
+        'Aplica el teorema: c² = a² + b² = 9² + 12² = 81 + 144 = 225.',
+        'Saca raíz cuadrada: c = √225.'
+      ],
+      result:'c = 15 cm'
+    },
     qs:[
-      {q:'Triángulo rectángulo con catetos de 6 cm y 8 cm. ¿Cuánto mide la hipotenusa?', a:'10 cm', steps:'c = √(6²+8²) = √100 = 10'},
-      {q:'Dos puntos están separados 560 km (horizontal) y 130 km (vertical). ¿Cuál es la distancia directa entre ellos?', a:'≈ 574.8 km', steps:'d = √(560² + 130²) = √(313 600 + 16 900) = √330 500 ≈ 574.9 km'},
-      {q:'Triángulo con a=10, b=20. ¿Cuánto mide la hipotenusa c?', a:'≈ 22.36', steps:'c = √(10²+20²) = √500 ≈ 22.36'},
-      {q:'¿Qué distingue a la rotación de la traslación en un cuerpo rígido?', a:'La rotación gira los puntos alrededor de un eje fijo; la traslación desplaza la figura una distancia y dirección, sin girar.'},
-      {q:'¿Cuáles son los tres criterios de semejanza de triángulos?', a:'AA (ángulo-ángulo), LAL (lado-ángulo-lado) y LLL (lado-lado-lado).'},
+      {q:'Triángulo rectángulo con catetos de 6 cm y 8 cm. ¿Cuánto mide la hipotenusa?', a:'10 cm', steps:'c = √(6²+8²) = √100 = 10', accept:['10','10cm']},
+      {q:'Dos puntos están separados 560 km (horizontal) y 130 km (vertical). ¿Cuál es la distancia directa entre ellos?', a:'≈ 574.8 km', steps:'d = √(560² + 130²) = √(313 600 + 16 900) = √330 500 ≈ 574.9 km', qType:'open'},
+      {q:'Triángulo con a=10, b=20. ¿Cuánto mide la hipotenusa c?', a:'≈ 22.36', steps:'c = √(10²+20²) = √500 ≈ 22.36', accept:['22.36','22.4']},
+      {q:'¿Qué distingue a la rotación de la traslación en un cuerpo rígido?', a:'La rotación gira los puntos alrededor de un eje fijo; la traslación desplaza la figura una distancia y dirección, sin girar.', qType:'open'},
+      {q:'¿Cuáles son los tres criterios de semejanza de triángulos?', a:'AA (ángulo-ángulo), LAL (lado-ángulo-lado) y LLL (lado-lado-lado).', qType:'open'},
     ]
   },
   {
     id:'aplicaciones', title:'Aplicaciones', desc:'Interés simple y regla de tres compuesta.',
-    theory:{h:'Interés simple', formulas:['I = C · i · t'], text:'C = capital, i = tasa anual, t = tiempo en años.'},
+    theory:{h:'¿De qué trata este tema?',
+      intro:'Estos son problemas de la vida real que se resuelven con álgebra básica. El interés simple calcula cuánto se gana o se paga por un préstamo o ahorro, según el capital, la tasa y el tiempo. La regla de tres compuesta se usa cuando hay tres o más cantidades relacionadas (por ejemplo personas, días y trabajo), algunas de forma directa y otras de forma inversa.',
+      formulas:['I = C · i · t'], text:'C = capital, i = tasa anual, t = tiempo en años.'},
+    example:{
+      q:'¿Cuánto interés genera un capital de $80,000 a una tasa del 5% anual durante 2 años?',
+      steps:[
+        'Identifica los datos: C = 80,000, i = 0.05, t = 2.',
+        'Aplica la fórmula: I = C × i × t.',
+        'Sustituye: I = 80000 × 0.05 × 2 = 8,000.'
+      ],
+      result:'I = $8,000'
+    },
     qs:[
-      {q:'Julio pidió prestado $35,000 por 3 años al 7.5% anual. ¿Cuánto interés pagará?', a:'$7,875', steps:'I = 35000 × 0.075 × 3'},
-      {q:'Daniel pidió $200,000 por 6 meses al 12% anual. ¿Cuánto interés pagará?', a:'$12,000', steps:'I = 200000 × 0.12 × 0.5 (t en años)'},
-      {q:'Jonathan ahorró $50,000 por 3 años y ganó $13,500 de interés. ¿Qué tasa le dieron?', a:'9% anual', steps:'i = I/(C·t) = 13500/150000'},
-      {q:'Samuel pidió $45,000 por 2 años y pagó $6,300 de interés. ¿Cuál fue la tasa?', a:'7% anual'},
-      {q:'Sandra pidió $70,000 al 3% anual y pagó $8,400 de interés total. ¿Cuántos años duró?', a:'4 años', steps:'t = I/(C·i) = 8400/2100'},
-      {q:'Dos ruedas unidas por correa: radios 25 cm y 75 cm. Si la primera da 300 vueltas, ¿cuántas da la segunda?', a:'100 vueltas', steps:'25 × 300 = 75 × n → n = 100 (relación inversa)'},
-      {q:'6 personas viven 12 días en un hotel por 792 €. ¿Cuánto costará para 15 personas durante 8 días?', a:'1,320 €', steps:'costo por persona-día = 792/(6×12)=11 € → 15×8×11'},
-      {q:'11 obreros labran 220×48 m en 6 días. ¿Cuántos obreros para 300×56 m en 5 días?', a:'21 obreros'},
-      {q:'6 grifos llenan un depósito de 400 m³ en 10 horas. ¿Cuánto tardan 4 grifos en llenar 2 depósitos de 500 m³?', a:'37.5 horas'},
+      {q:'Julio pidió prestado $35,000 por 3 años al 7.5% anual. ¿Cuánto interés pagará?', a:'$7,875', steps:'I = 35000 × 0.075 × 3', accept:['7875','$7875','7,875','$7,875']},
+      {q:'Daniel pidió $200,000 por 6 meses al 12% anual. ¿Cuánto interés pagará?', a:'$12,000', steps:'I = 200000 × 0.12 × 0.5 (t en años)', accept:['12000','$12000','12,000','$12,000']},
+      {q:'Jonathan ahorró $50,000 por 3 años y ganó $13,500 de interés. ¿Qué tasa le dieron?', a:'9% anual', steps:'i = I/(C·t) = 13500/150000', accept:['9%','9','0.09']},
+      {q:'Samuel pidió $45,000 por 2 años y pagó $6,300 de interés. ¿Cuál fue la tasa?', a:'7% anual', accept:['7%','7','0.07']},
+      {q:'Sandra pidió $70,000 al 3% anual y pagó $8,400 de interés total. ¿Cuántos años duró?', a:'4 años', steps:'t = I/(C·i) = 8400/2100', accept:['4','4años','4 años']},
+      {q:'Dos ruedas unidas por correa: radios 25 cm y 75 cm. Si la primera da 300 vueltas, ¿cuántas da la segunda?', a:'100 vueltas', steps:'25 × 300 = 75 × n → n = 100 (relación inversa)', accept:['100','100vueltas']},
+      {q:'6 personas viven 12 días en un hotel por 792 €. ¿Cuánto costará para 15 personas durante 8 días?', a:'1,320 €', steps:'costo por persona-día = 792/(6×12)=11 € → 15×8×11', accept:['1320','1,320','1320€']},
+      {q:'11 obreros labran 220×48 m en 6 días. ¿Cuántos obreros para 300×56 m en 5 días?', a:'21 obreros', accept:['21']},
+      {q:'6 grifos llenan un depósito de 400 m³ en 10 horas. ¿Cuánto tardan 4 grifos en llenar 2 depósitos de 500 m³?', a:'37.5 horas', accept:['37.5','37.5horas']},
     ]
   },
   {
     id:'probabilidad', title:'Probabilidad y estadística', desc:'Probabilidad frecuencial, eventos combinados y medidas de dispersión.',
-    theory:{h:'Probabilidad', formulas:['P(A) = casos favorables / casos totales'], text:'Varianza: σ² = Σ(x−media)²/n · Desviación estándar: σ = √σ²'},
+    theory:{h:'¿De qué trata este tema?',
+      intro:'La probabilidad mide qué tan posible es que ocurra un evento, en una escala de 0 (imposible) a 1 (seguro). La probabilidad teórica se calcula con lógica (casos favorables entre casos totales); la frecuencial se obtiene repitiendo un experimento y observando qué tan seguido ocurre algo. Cuando dos eventos pueden ocurrir juntos, hay que restar esa parte compartida para no contarla dos veces. En estadística, la varianza y la desviación estándar miden qué tan dispersos están los datos respecto al promedio.',
+      formulas:['P(A) = casos favorables / casos totales'], text:'Varianza: σ² = Σ(x−media)²/n · Desviación estándar: σ = √σ²'},
+    example:{
+      q:'Se lanza un dado normal de 6 caras. ¿Cuál es la probabilidad de obtener un número par o un 5?',
+      steps:[
+        'Casos favorables a "par": {2,4,6} → 3 de 6.',
+        'Casos favorables a "5": {5} → 1 de 6.',
+        'Como par y 5 no se traslapan (5 no es par), simplemente se suman: 3/6 + 1/6.'
+      ],
+      result:'P = 4/6 = 2/3 ≈ 66.7%'
+    },
     qs:[
-      {q:'Lanzas una moneda 60 veces y obtienes 25 soles. ¿Cuál es la probabilidad frecuencial y en cuánto difiere de la teórica?', a:'Frecuencial ≈ 41.7% (25/60); teórica = 50%; difieren en 8.3 puntos.'},
-      {q:'Cristina encesta 42 de 50 tiros. ¿Cuál es la probabilidad experimental de que falle?', a:'16% (8/50)'},
-      {q:'De una baraja de 52 cartas, ¿cuál es la probabilidad de sacar un 8 o un trébol?', a:'4/13 ≈ 30.8%', steps:'P(8)+P(trébol)−P(8 de trébol) = 4/52+13/52−1/52 = 16/52'},
-      {q:'Se elige un número entero entre 1 y 30. ¿Probabilidad de que sea primo o múltiplo de 5?', a:'50% (15/30)', steps:'10 primos + 6 múltiplos de 5 − 1 en común (el 5) = 15'},
-      {q:'Ruleta de 36 sectores (1-12 rojo, 13-24 azul, 25-36 negro). ¿Probabilidad de número impar o rojo?', a:'≈ 66.7% (2/3)', steps:'P(impar)+P(rojo)−P(impar y rojo) = 1/2+1/3−1/6'},
-      {q:'¿Qué mide la desviación estándar y cómo se obtiene a partir de la varianza?', a:'Mide qué tan dispersos están los datos respecto a la media; se obtiene sacando la raíz cuadrada de la varianza.'},
+      {q:'Lanzas una moneda 60 veces y obtienes 25 soles. ¿Cuál es la probabilidad frecuencial y en cuánto difiere de la teórica?', a:'Frecuencial ≈ 41.7% (25/60); teórica = 50%; difieren en 8.3 puntos.', qType:'open'},
+      {q:'Cristina encesta 42 de 50 tiros. ¿Cuál es la probabilidad experimental de que falle?', a:'16% (8/50)', accept:['16%','16','0.16']},
+      {q:'De una baraja de 52 cartas, ¿cuál es la probabilidad de sacar un 8 o un trébol?', a:'4/13 ≈ 30.8%', steps:'P(8)+P(trébol)−P(8 de trébol) = 4/52+13/52−1/52 = 16/52', accept:['4/13','30.8%','0.308']},
+      {q:'Se elige un número entero entre 1 y 30. ¿Probabilidad de que sea primo o múltiplo de 5?', a:'50% (15/30)', steps:'10 primos + 6 múltiplos de 5 − 1 en común (el 5) = 15', accept:['50%','1/2','0.5']},
+      {q:'Ruleta de 36 sectores (1-12 rojo, 13-24 azul, 25-36 negro). ¿Probabilidad de número impar o rojo?', a:'≈ 66.7% (2/3)', steps:'P(impar)+P(rojo)−P(impar y rojo) = 1/2+1/3−1/6', accept:['2/3','66.7%','0.667']},
+      {q:'¿Qué mide la desviación estándar y cómo se obtiene a partir de la varianza?', a:'Mide qué tan dispersos están los datos respecto a la media; se obtiene sacando la raíz cuadrada de la varianza.', qType:'open'},
     ]
   },
 ];
@@ -416,8 +567,19 @@ DATA.forEach((unit, ui) => {
   let theoryHtml = '';
   if(unit.theory){
     theoryHtml = `<div class="theory-box"><h3>${unit.theory.h}</h3>
+      ${unit.theory.intro ? `<p class="intro">${unit.theory.intro}</p>` : ''}
       ${unit.theory.formulas.map(f=>`<span class="formula">${f}</span>`).join('')}
       ${unit.theory.text ? `<p>${unit.theory.text}</p>`:''}
+    </div>`;
+  }
+
+  let exampleHtml = '';
+  if(unit.example){
+    exampleHtml = `<div class="example-box">
+      <span class="tag">Ejemplo resuelto</span>
+      <div class="ex-q">${unit.example.q}</div>
+      ${unit.example.steps.map((s,i)=>`<div class="ex-step"><span class="bullet">${i+1}</span><span>${s}</span></div>`).join('')}
+      <div class="ex-result">→ ${unit.example.result}</div>
     </div>`;
   }
 
@@ -428,6 +590,7 @@ DATA.forEach((unit, ui) => {
     </div>
     <p class="unit-desc">${unit.desc}</p>
     ${theoryHtml}
+    ${exampleHtml}
     <div class="qlist"></div>
   `;
 
@@ -437,12 +600,25 @@ DATA.forEach((unit, ui) => {
     const card = document.createElement('div');
     card.className = 'card';
     card.id = 'card-'+cardId;
+
+    const isOpen = item.qType === 'open';
+    const answerRow = isOpen
+      ? `<div class="answer-row">
+           <button class="reveal-btn" data-card="${cardId}" data-mode="reveal">Ver respuesta</button>
+         </div>`
+      : `<div class="answer-row">
+           <input type="text" class="answer-input" id="input-${cardId}" placeholder="Escribe tu respuesta…" autocomplete="off">
+           <button class="check-btn" data-card="${cardId}" data-mode="check">Comprobar</button>
+           <span class="feedback" id="feedback-${cardId}"></span>
+           <button class="reveal-btn" data-card="${cardId}" data-mode="reveal">Ver solución</button>
+         </div>`;
+
     card.innerHTML = `
       <div class="qhead">
         <span class="qnum">${String(qi+1).padStart(2,'0')}</span>
         <div class="qtext">${item.q}</div>
-        <button class="reveal-btn" data-card="${cardId}">Ver respuesta</button>
       </div>
+      ${answerRow}
       <div class="answer" id="answer-${cardId}">
         <div class="answer-inner">
           ${item.a}
@@ -450,6 +626,7 @@ DATA.forEach((unit, ui) => {
         </div>
       </div>
     `;
+    card.dataset.accept = item.accept ? JSON.stringify(item.accept) : '[]';
     qlist.appendChild(card);
   });
 
@@ -465,20 +642,75 @@ function selectUnit(idx){
   window.scrollTo({top:0, behavior:'smooth'});
 }
 
+function normalize(s){
+  return String(s).toLowerCase()
+    .replace(/\s+/g,'')
+    .replace(/±/g,'+-')
+    .replace(/−/g,'-')
+    .replace(/[²]/g,'^2').replace(/[³]/g,'^3').replace(/⁴/g,'^4').replace(/⁵/g,'^5').replace(/⁶/g,'^6')
+    .replace(/·/g,'').replace(/×/g,'')
+    .replace(/,/g,'')
+    .replace(/€/g,'')
+    .replace(/\$/g,'')
+    .replace(/años?/g,'')
+    .replace(/vueltas?/g,'')
+    .replace(/horas?/g,'')
+    .replace(/cm|km|m³|m2|m³/g,'');
+}
+
+function markSolved(id){
+  if(solved.has(id)) return;
+  solved.add(id);
+  document.getElementById('card-'+id).classList.add('solved');
+  updateProgress();
+}
+
 unitsEl.addEventListener('click', (e) => {
-  const btn = e.target.closest('.reveal-btn');
+  const btn = e.target.closest('button[data-card]');
   if(!btn) return;
   const id = btn.dataset.card;
-  const ans = document.getElementById('answer-'+id);
+  const mode = btn.dataset.mode;
   const card = document.getElementById('card-'+id);
-  const isOpen = ans.classList.toggle('open');
-  btn.classList.toggle('shown', isOpen);
-  btn.textContent = isOpen ? 'Ocultar' : 'Ver respuesta';
-  if(isOpen){
-    solved.add(id);
-    card.classList.add('solved');
+
+  if(mode === 'check'){
+    const input = document.getElementById('input-'+id);
+    const feedback = document.getElementById('feedback-'+id);
+    const accept = JSON.parse(card.dataset.accept || '[]');
+    const userVal = normalize(input.value);
+    const okList = accept.map(normalize);
+    const correct = userVal.length > 0 && okList.includes(userVal);
+
+    input.classList.remove('correct','wrong');
+    feedback.classList.remove('show','ok','no');
+
+    if(correct){
+      input.classList.add('correct');
+      feedback.classList.add('show','ok');
+      feedback.textContent = '✓ ¡Correcto!';
+      markSolved(id);
+    } else if(userVal.length > 0){
+      input.classList.add('wrong');
+      feedback.classList.add('show','no');
+      feedback.textContent = '✗ Intenta de nuevo';
+    }
+    return;
   }
-  updateProgress();
+
+  if(mode === 'reveal'){
+    const ans = document.getElementById('answer-'+id);
+    const isOpen = ans.classList.toggle('open');
+    btn.classList.toggle('shown', isOpen);
+    btn.textContent = isOpen ? 'Ocultar' : (card.querySelector('.answer-input') ? 'Ver solución' : 'Ver respuesta');
+    if(isOpen) markSolved(id);
+  }
+});
+
+unitsEl.addEventListener('keydown', (e) => {
+  if(e.key === 'Enter' && e.target.classList.contains('answer-input')){
+    const id = e.target.id.replace('input-','');
+    const checkBtn = unitsEl.querySelector(`button[data-card="${id}"][data-mode="check"]`);
+    if(checkBtn) checkBtn.click();
+  }
 });
 
 function updateProgress(){
