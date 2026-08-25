@@ -349,6 +349,11 @@ const DATA = [
       {q:'A={1,2,3,4,5,6,7}, U={−5..15}. Calcula Aᶜ.', a:'{−5,−4,−3,−2,−1,0,8,9,10,11,12,13,14,15}', steps:'Todo lo que está en U pero no en A.', accept:['{-5,-4,-3,-2,-1,0,8,9,10,11,12,13,14,15}']},
       {q:'C={−5,−4,−3,−2,−1}, A={1,2,3,4,5,6,7}. Calcula C \\ A.', a:'{−5,−4,−3,−2,−1}', steps:'C y A no comparten elementos, así que C \\ A = C completo.', accept:['{-5,-4,-3,-2,-1}']},
       {q:'C={−5,−4,−3,−2,−1}, D={−5,−3,−1,1,3,5,7,9,11,13,15}. Calcula (C ∩ D)ᶜ.', a:'U menos {−5,−3,−1}', steps:'Primero C∩D = {−5,−3,−1}. Su complemento es todo el universo excepto esos tres.', qType:'open'},
+      {q:'X={2,−5,6,−7,8}, A={−1,−2,−3,1,2,3}. Calcula X ∩ A.', a:'{2}', accept:['{2}']},
+      {q:'B={−7,−5,−3,−1}, A={−1,−2,−3,1,2,3}. Calcula B ∩ A.', a:'{−1,−3}', accept:['{-1,-3}','{-3,-1}']},
+      {q:'X={2,−5,6,−7,8}, Y={1,2,3,4,5,6}. Calcula X ∩ Y.', a:'{2,6}', accept:['{2,6}','{6,2}']},
+      {q:'Y={1,2,3,4,5,6}, A={−1,−2,−3,1,2,3}. Calcula Y ∩ A.', a:'{1,2,3}', accept:['{1,2,3}']},
+      {q:'A={0,1,2,3,4,5,6,7,8,9}, B={1,3,5,7,9}, C={2,4,6,8}. Calcula B ∪ (A ∩ C).', a:'{1,2,3,4,5,6,7,8,9}', qType:'open'},
     ]
   },
   {
@@ -406,6 +411,29 @@ const DATA = [
       {q:'Simplifica (30x⁶y⁴z²) ÷ (5x²y²z⁵)', a:'6x⁴y²/z³', accept:['6x^4y^2/z^3']},
       {q:'Simplifica (10x³y)(2xy⁶) ÷ (4x²y³)', a:'5x²y⁴', accept:['5x^2y^4']},
       {q:'Simplifica (10x³y) ÷ (2xy⁶) · (4x²y³)', a:'20x⁴/y²', accept:['20x^4/y^2']},
+    ]
+  },
+  {
+    id:'polinomios', title:'Multiplicación de polinomios', desc:'Monomio por monomio, monomio por binomio y binomio por binomio.',
+    theory:{h:'¿De qué trata este tema?',
+      intro:'Para multiplicar polinomios, cada término del primero se multiplica por cada término del segundo, y al final se suman los términos semejantes. Con un término solo (monomio) es más simple: multiplicas constantes y sumas exponentes de la misma variable.',
+      formulas:['(2xy)(4y) = 8xy²'], text:'monomio×monomio · monomio×binomio · binomio×binomio (primeros, exteriores, interiores, últimos)'},
+    example:{
+      q:'Multiplica: (x + 3)(x + 5)',
+      steps:[
+        'Primeros: x · x = x².',
+        'Exteriores: x · 5 = 5x.',
+        'Interiores: 3 · x = 3x.',
+        'Últimos: 3 · 5 = 15.',
+        'Suma los términos semejantes: 5x + 3x = 8x.'
+      ],
+      result:'x² + 8x + 15'
+    },
+    qs:[
+      {q:'Multiplica: (2xy)(4y)', a:'8xy²', accept:['8xy^2']},
+      {q:'Multiplica: 2x(x + 3xy)', a:'2x² + 6x²y', accept:['2x^2+6x^2y']},
+      {q:'Multiplica: (x² − x)(3y)', a:'3x²y − 3xy', accept:['3x^2y-3xy']},
+      {q:'Multiplica: (3x² + 2x − 8)(x + 5)', a:'3x³ + 17x² + 2x − 40', accept:['3x^3+17x^2+2x-40']},
     ]
   },
   {
@@ -472,10 +500,32 @@ const DATA = [
     ]
   },
   {
-    id:'geometria', title:'Geometría', desc:'Teorema de Pitágoras, triángulos rectángulos, semejanza y transformaciones.',
+    id:'sistemas', title:'Sistemas de ecuaciones', desc:'Sustitución, igualación, suma y resta, método gráfico y determinantes.',
     theory:{h:'¿De qué trata este tema?',
-      intro:'En todo triángulo rectángulo, los tres lados están relacionados por el Teorema de Pitágoras: el cuadrado de la hipotenusa (el lado más largo, opuesto al ángulo recto) es igual a la suma de los cuadrados de los otros dos lados (catetos). Este mismo triángulo también sirve para calcular ángulos usando razones trigonométricas. Además, en geometría se estudian transformaciones (rotación, traslación) y la semejanza entre figuras.',
-      formulas:['c² = a² + b²'], text:'Rotación: la figura gira sobre un eje. Traslación: la figura se desliza sin girar.'},
+      intro:'Un sistema de ecuaciones 2×2 tiene dos incógnitas (x, y) y dos ecuaciones que deben cumplirse a la vez. Hay varios caminos para encontrar la solución: despejar y sustituir, igualar dos despejes, sumar/restar para eliminar una variable, graficar las dos rectas, o usar determinantes (regla de Cramer). Todos llegan al mismo resultado — usa el que te resulte más cómodo según el sistema.',
+      formulas:['ΔS = a₁b₂ − a₂b₁'], text:'Método gráfico: solución única = rectas que se cruzan · infinitas = rectas coincidentes · sin solución = rectas paralelas.'},
+    example:{
+      q:'Resuelve por suma y resta: 3x − 4y = −6,  2x + 4y = 16',
+      steps:[
+        'Como el término "−4y" y "+4y" ya son opuestos, súmalas directamente: (3x−4y) + (2x+4y) = −6+16.',
+        'Esto da 5x = 10, entonces x = 2.',
+        'Sustituye x=2 en la segunda ecuación: 2(2)+4y=16 → 4+4y=16 → 4y=12 → y=3.'
+      ],
+      result:'x = 2, y = 3'
+    },
+    qs:[
+      {q:'Resuelve por sustitución: 2x+5y=21,  x+y=3', a:'x = −2, y = 5', accept:['x=-2,y=5','-2,5']},
+      {q:'Resuelve por sustitución: 7x+2y=3,  x−3y=30', a:'x = 3, y = −9', accept:['x=3,y=-9','3,-9']},
+      {q:'Resuelve por igualación: 2x+5y=−1,  3x−2y=27', a:'x = 7, y = −3', accept:['x=7,y=-3','7,-3']},
+      {q:'Resuelve por igualación: 4x−3y=−18,  6x+7y=−4', a:'x = −3, y = 2', accept:['x=-3,y=2','-3,2']},
+      {q:'Usando determinantes: 5x−2y=−2,  −3x+7y=−22', a:'x = −2, y = −4', steps:'ΔS=29, ΔX=−58, ΔY=−116', accept:['x=-2,y=-4','-2,-4']},
+    ]
+  },
+  {
+    id:'geometria', title:'Geometría', desc:'Pitágoras, Tales, triángulos, congruencia, transformaciones y conversión de unidades.',
+    theory:{h:'¿De qué trata este tema?',
+      intro:'En todo triángulo rectángulo, los tres lados están relacionados por el Teorema de Pitágoras: el cuadrado de la hipotenusa (el lado más largo, opuesto al ángulo recto) es igual a la suma de los cuadrados de los otros dos lados (catetos). El Teorema de Tales usa esa misma idea de proporción para relacionar segmentos entre rectas paralelas. Y las figuras pueden ser congruentes (idénticas, movidas con rotación, reflexión o traslación) o semejantes (misma forma, distinto tamaño, con lados proporcionales).',
+      formulas:['c² = a² + b²'], text:'Rotación: gira sobre un eje · Reflexión: se voltea como espejo · Traslación: se desliza sin girar.'},
     example:{
       q:'Un triángulo rectángulo tiene catetos de 9 cm y 12 cm. ¿Cuánto mide la hipotenusa?',
       steps:[
@@ -489,8 +539,33 @@ const DATA = [
       {q:'Triángulo rectángulo con catetos de 6 cm y 8 cm. ¿Cuánto mide la hipotenusa?', a:'10 cm', steps:'c = √(6²+8²) = √100 = 10', accept:['10','10cm']},
       {q:'Dos puntos están separados 560 km (horizontal) y 130 km (vertical). ¿Cuál es la distancia directa entre ellos?', a:'≈ 574.8 km', steps:'d = √(560² + 130²) = √(313 600 + 16 900) = √330 500 ≈ 574.9 km', qType:'open'},
       {q:'Triángulo con a=10, b=20. ¿Cuánto mide la hipotenusa c?', a:'≈ 22.36', steps:'c = √(10²+20²) = √500 ≈ 22.36', accept:['22.36','22.4']},
-      {q:'¿Qué distingue a la rotación de la traslación en un cuerpo rígido?', a:'La rotación gira los puntos alrededor de un eje fijo; la traslación desplaza la figura una distancia y dirección, sin girar.', qType:'open'},
+      {q:'Rectas a y b paralelas (Tales). OA=2cm, AB=3cm, O′A′=3cm. ¿Cuánto mide A′B′?', a:'4.5 cm', steps:'OA/O′A′ = AB/A′B′ → 2/3 = 3/x → x=4.5', accept:['4.5','4.5cm']},
+      {q:'¿Qué distingue a la rotación, la reflexión y la traslación?', a:'Rotación: gira alrededor de un punto. Reflexión: se voltea como en un espejo. Traslación: se desliza sin girar ni voltear.', qType:'open'},
       {q:'¿Cuáles son los tres criterios de semejanza de triángulos?', a:'AA (ángulo-ángulo), LAL (lado-ángulo-lado) y LLL (lado-lado-lado).', qType:'open'},
+    ]
+  },
+  {
+    id:'unidades', title:'Conversión de unidades', desc:'Unidades lineales, de superficie, de volumen y su relación con litros.',
+    theory:{h:'¿De qué trata este tema?',
+      intro:'Convertir unidades es "mover el punto decimal" el número correcto de posiciones. En unidades lineales (m, cm, km…) cada escalón es ×10. En superficie (m², cm²…) cada escalón es ×100, porque son 2 dimensiones. En volumen (m³, cm³…) cada escalón es ×1,000, porque son 3 dimensiones. El truco más útil: 1 dm³ = 1 litro exacto.',
+      formulas:['1 m³ = 1,000 L','1 dm³ = 1 L','1 cm³ = 1 mL'], text:'Hacia la derecha en la escala: multiplicas. Hacia la izquierda: divides.'},
+    example:{
+      q:'Convierte 2.5 m³ a litros',
+      steps:[
+        'Recuerda la equivalencia clave: 1 m³ = 1,000 L.',
+        'Multiplica: 2.5 × 1,000.'
+      ],
+      result:'2,500 L'
+    },
+    qs:[
+      {q:'Convierte 3.5 km a metros', a:'3,500 m', accept:['3500','3500m','3,500']},
+      {q:'Convierte 250 cm a metros', a:'2.5 m', accept:['2.5','2.5m']},
+      {q:'Convierte 0.75 m a milímetros', a:'750 mm', accept:['750','750mm']},
+      {q:'Convierte 1,500 mm a centímetros', a:'150 cm', accept:['150','150cm']},
+      {q:'Convierte 2 m² a centímetros cuadrados', a:'20,000 cm²', accept:['20000','20,000']},
+      {q:'Convierte 4 m³ a centímetros cúbicos', a:'4,000,000 cm³', accept:['4000000','4,000,000']},
+      {q:'Convierte 5 dm³ a litros', a:'5 L', accept:['5','5l','5L']},
+      {q:'Convierte 350 cm³ a mililitros', a:'350 mL', accept:['350','350ml']},
     ]
   },
   {
@@ -517,6 +592,57 @@ const DATA = [
       {q:'6 personas viven 12 días en un hotel por 792 €. ¿Cuánto costará para 15 personas durante 8 días?', a:'1,320 €', steps:'costo por persona-día = 792/(6×12)=11 € → 15×8×11', accept:['1320','1,320','1320€']},
       {q:'11 obreros labran 220×48 m en 6 días. ¿Cuántos obreros para 300×56 m en 5 días?', a:'21 obreros', accept:['21']},
       {q:'6 grifos llenan un depósito de 400 m³ en 10 horas. ¿Cuánto tardan 4 grifos en llenar 2 depósitos de 500 m³?', a:'37.5 horas', accept:['37.5','37.5horas']},
+      {q:'4 agricultores recolectan 10,000 kg de cerezas en 9 días. ¿Cuántos kg recolectarán 6 agricultores en 15 días?', a:'25,000 kg', accept:['25000','25,000']},
+      {q:'5 trabajadores tardan 16 días en construir una caseta a 6 horas diarias. ¿Cuántos trabajadores para hacerlo en 10 días a 8 horas diarias?', a:'6 trabajadores', accept:['6']},
+      {q:'8 obreros en 9 días a 6 horas/día hacen un muro de 30m. ¿Cuántos días necesitan 10 obreros a 8 horas/día para los 50m que faltan?', a:'9 días', accept:['9','9dias','9 días']},
+    ]
+  },
+  {
+    id:'interescompuesto', title:'Interés compuesto', desc:'A diferencia del simple, el interés se reinvierte en cada periodo.',
+    theory:{h:'¿De qué trata este tema?',
+      intro:'En el interés compuesto, el interés de cada periodo se suma al capital ANTES de calcular el interés del siguiente periodo — por eso "crece más rápido" que el interés simple. La fórmula usa una potencia porque el capital se multiplica una y otra vez por (1+tasa).',
+      formulas:['Mf = Mi (1 + r)ⁿ'], text:'Mi = capital inicial · r = tasa por periodo (decimal) · n = número de periodos.'},
+    example:{
+      q:'Se depositan $1,000 al 10% anual compuesto durante 2 años. ¿Monto final?',
+      steps:[
+        'Año 1: interés = 1000×0.10 = 100 → nuevo capital = 1,100.',
+        'Año 2: interés = 1100×0.10 = 110 → nuevo capital = 1,210.',
+        'O directo con la fórmula: Mf = 1000×(1.10)² = 1000×1.21.'
+      ],
+      result:'Mf = $1,210'
+    },
+    qs:[
+      {q:'Dalia depositó $2,000 al 9% capitalizable mensualmente (r=0.0075). ¿Cuánto tenía al final de un año (12 meses)?', a:'≈ $2,187.61', qType:'open'},
+      {q:'¿Qué significa que la tasa sea "capitalizable mensualmente"?', a:'Que el interés se calcula y se suma al capital cada mes (no solo una vez al año), usando la tasa anual dividida entre 12.', qType:'open'},
+      {q:'Si Mi=1,000, r=0.05 y n=3, ¿cuál es Mf?', a:'≈ $1,157.63', steps:'Mf = 1000×(1.05)³ = 1000×1.157625', accept:['1157.63','1157.6','1157.625']},
+    ]
+  },
+  {
+    id:'porcentajes', title:'Porcentajes', desc:'Descuentos, aumentos, IVA y ganancias sobre precios.',
+    theory:{h:'¿De qué trata este tema?',
+      intro:'Un descuento o aumento del p% sobre un precio se calcula multiplicando el precio original por (1 ± p/100). Para saber qué porcentaje representa una parte de un total, divides la parte entre el total y multiplicas por 100.',
+      formulas:['Precio final = Precio original × (1 ± p/100)'], text:'Descuento: resta. Aumento, ganancia o IVA: suma.'},
+    example:{
+      q:'Un pantalón sin IVA cuesta $625. Si el IVA es del 16%, ¿cuánto se paga?',
+      steps:[
+        'El IVA es un aumento del 16% sobre el precio.',
+        'Precio final = 625 × (1 + 0.16) = 625 × 1.16.'
+      ],
+      result:'$725'
+    },
+    qs:[
+      {q:'De 800 alumnos, 600 fueron de viaje. ¿Qué porcentaje fue de viaje?', a:'75%', accept:['75%','75','0.75']},
+      {q:'Una moto de $50,000 cuesta ahora $2,500 más. ¿Cuál es el porcentaje de aumento?', a:'5%', accept:['5%','5','0.05']},
+      {q:'Vehículo de $88,000 con descuento del 7.5%. ¿Cuánto hay que pagar?', a:'$81,400', accept:['81400','81,400','$81,400']},
+      {q:'Monitor de $450 con descuento del 8%. ¿Cuánto se paga?', a:'$414', accept:['414','$414']},
+      {q:'Artículo comprado en $800, se vende con ganancia del 15%. ¿Precio de venta?', a:'$920', accept:['920','$920']},
+      {q:'Compra de 180€, para ganar 10% al vender, ¿qué precio marcar?', a:'198€', accept:['198','198€']},
+      {q:'Objeto comprado en $150, se vende perdiendo 20% sobre el precio de compra. ¿Precio de venta?', a:'$120', accept:['120','$120']},
+      {q:'Zapatos de $360 con descuento del 10%. ¿Cuánto se paga?', a:'$324', accept:['324','$324']},
+      {q:'Libro de $150 ahora cuesta $165. ¿Qué porcentaje más caro es?', a:'10%', accept:['10%','10','0.1']},
+      {q:'Bosque con 65% de pinos, de 12,000 árboles totales. ¿Cuántos pinos hay?', a:'7,800 pinos', accept:['7800','7,800']},
+      {q:'Salario de $80,000/mes, el IPC sube 3.5%. ¿Cuánto debe ganar este año?', a:'$82,800', accept:['82800','82,800','$82,800']},
+      {q:'Camisa de $380 con rebaja del 15%. ¿Cuánto se paga?', a:'$323', accept:['323','$323']},
     ]
   },
   {
