@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Repaso de Matemáticas 2025-2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --violet-900:#2E1147;
+    --violet-700:#5B2C87;
+    --violet-500:#8B5FBF;
+    --violet-200:#E6D9F5;
+    --violet-050:#F6F0FC;
+    --paper:#FCFAF7;
+    --ink:#241A2E;
+    --ink-soft:#5A5066;
+    --gold:#D9A441;
+    --green:#3E8E5C;
+    --red:#C4493C;
+    --line:#E2D6EE;
+    --radius:14px;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--paper);
+    background-image:
+      radial-gradient(circle at 1px 1px, rgba(91,44,135,0.07) 1px, transparent 0);
+    background-size: 22px 22px;
+    color:var(--ink);
+    font-family:'Space Grotesk', sans-serif;
+    min-height:100vh;
+  }
+  ::selection{background:var(--violet-200);}
+
+  .wrap{max-width:980px;margin:0 auto;padding:0 24px 100px;}
+
+  header.top{
+    padding:56px 24px 40px;
+    max-width:980px;margin:0 auto;
+    position:relative;
+  }
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--violet-700);
+    display:flex;align-items:center;gap:10px;
+    margin-bottom:18px;
+  }
+  .eyebrow::before{
+    content:'';width:26px;height:2px;background:var(--gold);display:inline-block;
+  }
+  h1.title{
+    font-family:'Fraunces',serif;
+    font-weight:700;
+    font-size:clamp(34px,5.4vw,58px);
+    line-height:1.02;
+    margin:0 0 14px;
+    color:var(--violet-900);
+    letter-spacing:-.01em;
+  }
+  h1.title em{
+    font-style:italic;font-weight:500;color:var(--violet-500);
+  }
+  .subtitle{
+    max-width:560px;
+    color:var(--ink-soft);
+    font-size:16px;
+    line-height:1.55;
+  }
+
+  .stats-row{
+    display:flex;gap:28px;margin-top:30px;flex-wrap:wrap;
+  }
+  .stat{
+    font-family:'JetBrains Mono',monospace;
+  }
+  .stat .num{
+    font-size:26px;font-weight:600;color:var(--violet-700);
+    display:block;
+  }
+  .stat .lbl{
+    font-size:11.5px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.06em;
+  }
+
+  /* Progress ring in corner */
+  .ring-wrap{
+    position:absolute; top:56px; right:24px;
+    display:flex;flex-direction:column;align-items:center;gap:6px;
+  }
+  .ring-wrap svg{transform:rotate(-90deg);}
+  .ring-label{
+    font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink-soft);
+    text-align:center;
+  }
+  #ringPct{font-weight:700;color:var(--violet-700);font-size:14px;}
+  @media (max-width:640px){ .ring-wrap{display:none;} }
+
+  nav.tabs{
+    position:sticky; top:0; z-index:20;
+    background:rgba(252,250,247,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+    padding:14px 24px;
+    display:flex;gap:8px;overflow-x:auto;
+    scrollbar-width:none;
+  }
+  nav.tabs::-webkit-scrollbar{display:none;}
+  .tab-btn{
+    font-family:'Space Grotesk',sans-serif;
+    font-weight:600;font-size:14px;
+    white-space:nowrap;
+    border:1px solid var(--line);
+    background:#fff;
+    color:var(--ink-soft);
+    padding:9px 16px;
+    border-radius:999px;
+    cursor:pointer;
+    transition:all .15s ease;
+  }
+  .tab-btn .n{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;
+    opacity:.65;
+    margin-left:6px;
+  }
+  .tab-btn:hover{border-color:var(--violet-500);color:var(--violet-700);}
+  .tab-btn.active{
+    background:var(--violet-700);border-color:var(--violet-700);color:#fff;
+  }
+  .tab-btn.active .n{opacity:.85;}
+
+  main{padding-top:36px;}
+
+  .unit-head{
+    display:flex;align-items:baseline;gap:14px;margin-bottom:6px;
+  }
+  .unit-num{
+    font-family:'JetBrains Mono',monospace;
+    color:var(--gold); font-size:14px; font-weight:600;
+  }
+  .unit-title{
+    font-family:'Fraunces',serif;font-weight:700;font-size:28px;color:var(--violet-900);
+  }
+  .unit-desc{color:var(--ink-soft);font-size:14.5px;margin:0 0 28px;max-width:620px;line-height:1.5;}
+
+  .card{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:22px 24px;
+    margin-bottom:16px;
+    position:relative;
+    transition:border-color .15s ease, box-shadow .15s ease;
+  }
+  .card:hover{border-color:var(--violet-500); box-shadow:0 4px 18px -8px rgba(91,44,135,.25);}
+  .card.solved{border-left:3px solid var(--green);}
+  .qhead{
+    display:flex;justify-content:space-between;align-items:flex-start;gap:16px;
+  }
+  .qnum{
+    font-family:'JetBrains Mono',monospace;color:var(--violet-500);font-size:13px;
+    flex:none;padding-top:2px;
+  }
+  .qtext{
+    font-size:16px;line-height:1.55;flex:1;
+  }
+  .qtext .math{font-family:'JetBrains Mono',monospace;font-size:15px;color:var(--violet-900);}
+
+  .reveal-btn{
+    font-family:'Space Grotesk',sans-serif;
+    font-weight:600;font-size:13px;
+    background:var(--violet-050);
+    border:1px solid var(--violet-200);
+    color:var(--violet-700);
+    padding:8px 14px;border-radius:8px;cursor:pointer;
+    flex:none;
+    transition:background .15s ease;
+  }
+  .reveal-btn:hover{background:var(--violet-200);}
+  .reveal-btn.shown{background:var(--green);border-color:var(--green);color:#fff;}
+
+  .answer{
+    max-height:0;overflow:hidden;
+    transition:max-height .25s ease, margin-top .25s ease, opacity .2s ease;
+    opacity:0;
+  }
+  .answer.open{
+    max-height:400px;margin-top:14px;opacity:1;
+  }
+  .answer-inner{
+    border-top:1px dashed var(--line);
+    padding-top:12px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:14.5px;
+    color:var(--violet-900);
+    background:var(--violet-050);
+    margin:0 -24px -22px;
+    padding:12px 24px 18px;
+    border-bottom-left-radius:var(--radius);
+    border-bottom-right-radius:var(--radius);
+  }
+  .answer-inner .steps{color:var(--ink-soft);font-family:'Space Grotesk',sans-serif;font-size:13.5px;margin-top:4px;display:block;}
+
+  .theory-box{
+    background:var(--violet-900);
+    color:#F3ECFB;
+    border-radius:var(--radius);
+    padding:24px 26px;
+    margin-bottom:28px;
+  }
+  .theory-box h3{
+    font-family:'Fraunces',serif;font-size:17px;margin:0 0 10px;color:#fff;font-weight:700;
+  }
+  .theory-box .formula{
+    font-family:'JetBrains Mono',monospace;
+    font-size:15px;
+    background:rgba(255,255,255,.08);
+    padding:10px 14px;border-radius:8px;
+    display:inline-block;margin:6px 8px 6px 0;
+    color:var(--gold);
+  }
+  .theory-box p{font-size:14px;line-height:1.6;color:#D9C9EE;margin:8px 0 0;}
+
+  .unit{display:none;}
+  .unit.active{display:block; animation:fade .35s ease;}
+  @keyframes fade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+
+  footer{
+    text-align:center;padding:50px 24px 30px;color:var(--ink-soft);font-size:13px;
+    font-family:'JetBrains Mono',monospace;
+  }
+  footer span{color:var(--gold);}
+
+  @media (prefers-reduced-motion: reduce){
+    *{transition:none !important;animation:none !important;}
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="eyebrow">Guía interactiva · Matemáticas 2025-2026</div>
+  <h1 class="title">Repasa cada tema,<br><em>un problema a la vez.</em></h1>
+  <p class="subtitle">Preguntas reales tomadas de tu clase, organizadas por unidad. Intenta resolver antes de revelar la respuesta — así se queda de verdad.</p>
+  <div class="stats-row">
+    <div class="stat"><span class="num" id="totalQ">0</span><span class="lbl">Ejercicios</span></div>
+    <div class="stat"><span class="num" id="totalUnits">0</span><span class="lbl">Unidades</span></div>
+    <div class="stat"><span class="num" id="solvedCount">0</span><span class="lbl">Resueltos</span></div>
+  </div>
+  <div class="ring-wrap">
+    <svg width="72" height="72" viewBox="0 0 72 72">
+      <circle cx="36" cy="36" r="30" fill="none" stroke="#E6D9F5" stroke-width="7"/>
+      <circle id="ringFg" cx="36" cy="36" r="30" fill="none" stroke="#5B2C87" stroke-width="7"
+        stroke-linecap="round" stroke-dasharray="188.5" stroke-dashoffset="188.5"/>
+    </svg>
+    <div class="ring-label"><span id="ringPct">0%</span><br>completado</div>
+  </div>
+</header>
+
+<nav class="tabs" id="tabs"></nav>
+
+<main class="wrap"><div id="units"></div></main>
+
+<footer>Hecho a partir de tus apuntes de Google Classroom · <span>ánimo con el repaso ✦</span></footer>
+
+<script>
+const DATA = [
+  {
+    id:'conjuntos', title:'Conjuntos', desc:'Conjunto universo, complemento y operaciones con diagramas de Venn.',
+    theory:{h:'Fórmulas clave', formulas:['A′ = U − A'], text:'A ∪ B = unión · A ∩ B = intersección · A \\ B = diferencia · Aᶜ = complemento'},
+    qs:[
+      {q:'U = {−5..15}, A={1,2,3,4,5,6,7}, C={−5,−4,−3,−2,−1}. Calcula A ∪ C.', a:'{−5,−4,−3,−2,−1,1,2,3,4,5,6,7}', steps:'Junta todos los elementos de A y de C, sin repetir.'},
+      {q:'B={4,5,6,7,8,9,10,11,12,13,14,15}, D={−5,−3,−1,1,3,5,7,9,11,13,15}. Calcula B \\ D.', a:'{4,6,8,10,12,14}', steps:'Quita de B los elementos que también están en D.'},
+      {q:'A={1,2,3,4,5,6,7}, U={−5..15}. Calcula Aᶜ.', a:'{−5,−4,−3,−2,−1,0,8,9,10,11,12,13,14,15}', steps:'Todo lo que está en U pero no en A.'},
+      {q:'C={−5,−4,−3,−2,−1}, A={1,2,3,4,5,6,7}. Calcula C \\ A.', a:'{−5,−4,−3,−2,−1}', steps:'C y A no comparten elementos, así que C \\ A = C completo.'},
+      {q:'C={−5,−4,−3,−2,−1}, D={−5,−3,−1,1,3,5,7,9,11,13,15}. Calcula (C ∩ D)ᶜ.', a:'U menos {−5,−3,−1}', steps:'Primero C∩D = {−5,−3,−1}. Su complemento es todo el universo excepto esos tres.'},
+    ]
+  },
+  {
+    id:'sucesiones', title:'Sucesiones', desc:'Sucesiones aritméticas, geométricas y patrones numéricos.',
+    theory:{h:'Sucesión aritmética', formulas:['aₙ = a₁ + (n − 1)d'], text:'d = diferencia constante entre términos consecutivos.'},
+    qs:[
+      {q:'Encuentra el término 20 en: 1, 6, 11, 16…', a:'96', steps:'a1=1, d=5 → a20 = 1 + 19(5) = 96'},
+      {q:'Encuentra el término 6 en: 3, 7, 11, 15…', a:'23', steps:'a1=3, d=4 → a6 = 3 + 5(4) = 23'},
+      {q:'Encuentra el término 12 en: −4, 0, 4, 8…', a:'40', steps:'a1=−4, d=4 → a12 = −4 + 11(4) = 40'},
+      {q:'Encuentra el término 8 en: −20, −15, −10, −5…', a:'15', steps:'a1=−20, d=5 → a8 = −20 + 7(5) = 15'},
+      {q:'Encuentra el término 4 en: 100, 200, 300…', a:'400', steps:'a1=100, d=100 → a4 = 100 + 3(100) = 400'},
+      {q:'Encuentra el término 9 en: −19, −17, −15…', a:'−3', steps:'a1=−19, d=2 → a9 = −19 + 8(2) = −3'},
+      {q:'Completa: 2, 4, __, 8', a:'6', steps:'Progresión aritmética simple, d = 2.'},
+      {q:'Completa: 1, 5, __, 13', a:'9', steps:'d = 4.'},
+      {q:'Completa: 3, 6, __, 12', a:'9', steps:'d = 3.'},
+      {q:'Completa: 1, __, 9, 27', a:'3', steps:'Sucesión geométrica, razón 3.'},
+      {q:'Completa: 4, __, 16, 32', a:'8', steps:'Sucesión geométrica, razón 2.'},
+      {q:'Completa: 4, 9, 16, __', a:'25', steps:'Cuadrados: 2², 3², 4², 5².'},
+      {q:'Completa: 8, 27, 64, 125, __', a:'216', steps:'Cubos: 2³,3³,4³,5³,6³.'},
+      {q:'Completa: 0, 1, 1, 2, 3, 5, __', a:'8', steps:'Sucesión de Fibonacci: cada término es la suma de los dos anteriores.'},
+      {q:'Completa: 500, 100, 20, __', a:'4', steps:'Cada término se divide entre 5.'},
+      {q:'Completa: 81, 27, 9, __', a:'3', steps:'Cada término se divide entre 3.'},
+    ]
+  },
+  {
+    id:'exponentes', title:'Exponentes', desc:'Leyes de los exponentes: multiplicación, división y potencias.',
+    theory:{h:'Leyes principales', formulas:['xᵃ·xᵇ = xᵃ⁺ᵇ','xᵃ÷xᵇ = xᵃ⁻ᵇ','(xᵃ)ᵇ = xᵃᵇ'], text:''},
+    qs:[
+      {q:'Simplifica (2x⁵y²)(3y³)', a:'6x⁵y⁵'},
+      {q:'Simplifica (12y⁵z³) ÷ (4y²z⁴)', a:'3y³/z'},
+      {q:'Simplifica (3a⁶b⁵)(5a²bc³)', a:'15a⁸b⁶c³'},
+      {q:'Simplifica (30x⁶y⁴z²) ÷ (5x²y²z⁵)', a:'6x⁴y²/z³'},
+      {q:'Simplifica (10x³y)(2xy⁶) ÷ (4x²y³)', a:'5x²y⁴'},
+      {q:'Simplifica (10x³y) ÷ (2xy⁶) · (4x²y³)', a:'20x⁴/y²'},
+    ]
+  },
+  {
+    id:'notables', title:'Productos notables', desc:'Binomio al cuadrado, binomios conjugados y binomio al cubo.',
+    theory:{h:'Fórmulas', formulas:['(a+b)² = a²+2ab+b²','(a+b)(a−b) = a²−b²','(a+b)³ = a³+3a²b+3ab²+b³'], text:''},
+    qs:[
+      {q:'Desarrolla (x + 2)³', a:'x³ + 6x² + 12x + 8'},
+      {q:'Desarrolla (3x − 2)³', a:'27x³ − 54x² + 36x − 8'},
+      {q:'Desarrolla (2x + 5)³', a:'8x³ + 60x² + 150x + 125'},
+    ]
+  },
+  {
+    id:'factorizacion', title:'Factorización', desc:'Factor común, diferencia de cuadrados, trinomio cuadrado perfecto y factorización combinada.',
+    theory:{h:'Casos comunes', formulas:['a²−b² = (a+b)(a−b)','a²±2ab+b² = (a±b)²'], text:'Siempre busca primero el factor común antes de aplicar otro caso.'},
+    qs:[
+      {q:'Factoriza: x² − 2x + 1', a:'(x − 1)²'},
+      {q:'Factoriza: x² − 6x + 9', a:'(x − 3)²'},
+      {q:'Factoriza: x² − 20x + 100', a:'(x − 10)²'},
+      {q:'Factoriza: x² + 10x + 25', a:'(x + 5)²'},
+      {q:'Factoriza: x² + 14x + 49', a:'(x + 7)²'},
+      {q:'Factoriza: 9x² + 30x + 25', a:'(3x + 5)²'},
+      {q:'Factoriza: x⁶ + 10x³ + 25', a:'(x³ + 5)²'},
+      {q:'Factoriza: 4x² + 4xa³ + a⁶', a:'(2x + a³)²'},
+      {q:'Resuelve: x² − 4 = 0', a:'x = 2, x = −2', steps:'Diferencia de cuadrados: (x−2)(x+2)=0'},
+      {q:'Resuelve: w² − 100 = 0', a:'w = 10, w = −10'},
+      {q:'Resuelve: 3x² − 192 = 0', a:'x = 8, x = −8', steps:'x² = 64'},
+      {q:'Resuelve: 4y² − 12 = 0', a:'y = ±√3'},
+      {q:'Resuelve: 25z² − 36 = 0', a:'z = 6/5, z = −6/5'},
+      {q:'Factoriza por completo: 2x² + 16x + 30', a:'2(x + 3)(x + 5)'},
+      {q:'Factoriza por completo: 5x² − 70x + 245', a:'5(x − 7)²'},
+      {q:'Factoriza por completo: −x³ + 17x² − 70x', a:'−x(x − 7)(x − 10)'},
+      {q:'Factoriza por completo: 2x⁴ − 512', a:'2(x−4)(x+4)(x²+16)'},
+      {q:'Factoriza por completo: 25x⁴ − 20x³ + 4x²', a:'x²(5x − 2)²'},
+      {q:'Factoriza por completo: 12x³ + 12x² + 3x', a:'3x(2x + 1)²'},
+      {q:'Factoriza por completo: 12c² − 75', a:'3(2c − 5)(2c + 5)'},
+      {q:'Factoriza por completo: 6x² − 600', a:'6(x − 10)(x + 10)'},
+      {q:'Factoriza por completo: −5t² − 20t − 20', a:'−5(t + 2)²'},
+      {q:'Factoriza por completo: 6x² + 18x − 24', a:'6(x + 4)(x − 1)'},
+      {q:'Factoriza por completo: −n² + 10n − 21', a:'−(n − 3)(n − 7)'},
+      {q:'Factoriza por completo: 2a² − 14a − 16', a:'2(a − 8)(a + 1)'},
+    ]
+  },
+  {
+    id:'geometria', title:'Geometría', desc:'Teorema de Pitágoras, triángulos rectángulos, semejanza y transformaciones.',
+    theory:{h:'Teorema de Pitágoras', formulas:['c² = a² + b²'], text:'Rotación: la figura gira sobre un eje. Traslación: la figura se desliza sin girar.'},
+    qs:[
+      {q:'Triángulo rectángulo con catetos de 6 cm y 8 cm. ¿Cuánto mide la hipotenusa?', a:'10 cm', steps:'c = √(6²+8²) = √100 = 10'},
+      {q:'Dos puntos están separados 560 km (horizontal) y 130 km (vertical). ¿Cuál es la distancia directa entre ellos?', a:'≈ 574.8 km', steps:'d = √(560² + 130²) = √(313 600 + 16 900) = √330 500 ≈ 574.9 km'},
+      {q:'Triángulo con a=10, b=20. ¿Cuánto mide la hipotenusa c?', a:'≈ 22.36', steps:'c = √(10²+20²) = √500 ≈ 22.36'},
+      {q:'¿Qué distingue a la rotación de la traslación en un cuerpo rígido?', a:'La rotación gira los puntos alrededor de un eje fijo; la traslación desplaza la figura una distancia y dirección, sin girar.'},
+      {q:'¿Cuáles son los tres criterios de semejanza de triángulos?', a:'AA (ángulo-ángulo), LAL (lado-ángulo-lado) y LLL (lado-lado-lado).'},
+    ]
+  },
+  {
+    id:'aplicaciones', title:'Aplicaciones', desc:'Interés simple y regla de tres compuesta.',
+    theory:{h:'Interés simple', formulas:['I = C · i · t'], text:'C = capital, i = tasa anual, t = tiempo en años.'},
+    qs:[
+      {q:'Julio pidió prestado $35,000 por 3 años al 7.5% anual. ¿Cuánto interés pagará?', a:'$7,875', steps:'I = 35000 × 0.075 × 3'},
+      {q:'Daniel pidió $200,000 por 6 meses al 12% anual. ¿Cuánto interés pagará?', a:'$12,000', steps:'I = 200000 × 0.12 × 0.5 (t en años)'},
+      {q:'Jonathan ahorró $50,000 por 3 años y ganó $13,500 de interés. ¿Qué tasa le dieron?', a:'9% anual', steps:'i = I/(C·t) = 13500/150000'},
+      {q:'Samuel pidió $45,000 por 2 años y pagó $6,300 de interés. ¿Cuál fue la tasa?', a:'7% anual'},
+      {q:'Sandra pidió $70,000 al 3% anual y pagó $8,400 de interés total. ¿Cuántos años duró?', a:'4 años', steps:'t = I/(C·i) = 8400/2100'},
+      {q:'Dos ruedas unidas por correa: radios 25 cm y 75 cm. Si la primera da 300 vueltas, ¿cuántas da la segunda?', a:'100 vueltas', steps:'25 × 300 = 75 × n → n = 100 (relación inversa)'},
+      {q:'6 personas viven 12 días en un hotel por 792 €. ¿Cuánto costará para 15 personas durante 8 días?', a:'1,320 €', steps:'costo por persona-día = 792/(6×12)=11 € → 15×8×11'},
+      {q:'11 obreros labran 220×48 m en 6 días. ¿Cuántos obreros para 300×56 m en 5 días?', a:'21 obreros'},
+      {q:'6 grifos llenan un depósito de 400 m³ en 10 horas. ¿Cuánto tardan 4 grifos en llenar 2 depósitos de 500 m³?', a:'37.5 horas'},
+    ]
+  },
+  {
+    id:'probabilidad', title:'Probabilidad y estadística', desc:'Probabilidad frecuencial, eventos combinados y medidas de dispersión.',
+    theory:{h:'Probabilidad', formulas:['P(A) = casos favorables / casos totales'], text:'Varianza: σ² = Σ(x−media)²/n · Desviación estándar: σ = √σ²'},
+    qs:[
+      {q:'Lanzas una moneda 60 veces y obtienes 25 soles. ¿Cuál es la probabilidad frecuencial y en cuánto difiere de la teórica?', a:'Frecuencial ≈ 41.7% (25/60); teórica = 50%; difieren en 8.3 puntos.'},
+      {q:'Cristina encesta 42 de 50 tiros. ¿Cuál es la probabilidad experimental de que falle?', a:'16% (8/50)'},
+      {q:'De una baraja de 52 cartas, ¿cuál es la probabilidad de sacar un 8 o un trébol?', a:'4/13 ≈ 30.8%', steps:'P(8)+P(trébol)−P(8 de trébol) = 4/52+13/52−1/52 = 16/52'},
+      {q:'Se elige un número entero entre 1 y 30. ¿Probabilidad de que sea primo o múltiplo de 5?', a:'50% (15/30)', steps:'10 primos + 6 múltiplos de 5 − 1 en común (el 5) = 15'},
+      {q:'Ruleta de 36 sectores (1-12 rojo, 13-24 azul, 25-36 negro). ¿Probabilidad de número impar o rojo?', a:'≈ 66.7% (2/3)', steps:'P(impar)+P(rojo)−P(impar y rojo) = 1/2+1/3−1/6'},
+      {q:'¿Qué mide la desviación estándar y cómo se obtiene a partir de la varianza?', a:'Mide qué tan dispersos están los datos respecto a la media; se obtiene sacando la raíz cuadrada de la varianza.'},
+    ]
+  },
+];
+
+const unitsEl = document.getElementById('units');
+const tabsEl = document.getElementById('tabs');
+let solved = new Set();
+let totalQ = 0;
+
+DATA.forEach((unit, ui) => {
+  totalQ += unit.qs.length;
+
+  // tab button
+  const btn = document.createElement('button');
+  btn.className = 'tab-btn' + (ui===0 ? ' active':'');
+  btn.innerHTML = `${unit.title}<span class="n">${unit.qs.length}</span>`;
+  btn.onclick = () => selectUnit(ui);
+  tabsEl.appendChild(btn);
+
+  // unit section
+  const sec = document.createElement('section');
+  sec.className = 'unit' + (ui===0 ? ' active':'');
+  sec.id = 'unit-'+unit.id;
+
+  let theoryHtml = '';
+  if(unit.theory){
+    theoryHtml = `<div class="theory-box"><h3>${unit.theory.h}</h3>
+      ${unit.theory.formulas.map(f=>`<span class="formula">${f}</span>`).join('')}
+      ${unit.theory.text ? `<p>${unit.theory.text}</p>`:''}
+    </div>`;
+  }
+
+  sec.innerHTML = `
+    <div class="unit-head">
+      <span class="unit-num">${String(ui+1).padStart(2,'0')}</span>
+      <span class="unit-title">${unit.title}</span>
+    </div>
+    <p class="unit-desc">${unit.desc}</p>
+    ${theoryHtml}
+    <div class="qlist"></div>
+  `;
+
+  const qlist = sec.querySelector('.qlist');
+  unit.qs.forEach((item, qi) => {
+    const cardId = `${unit.id}-${qi}`;
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.id = 'card-'+cardId;
+    card.innerHTML = `
+      <div class="qhead">
+        <span class="qnum">${String(qi+1).padStart(2,'0')}</span>
+        <div class="qtext">${item.q}</div>
+        <button class="reveal-btn" data-card="${cardId}">Ver respuesta</button>
+      </div>
+      <div class="answer" id="answer-${cardId}">
+        <div class="answer-inner">
+          ${item.a}
+          ${item.steps ? `<span class="steps">${item.steps}</span>` : ''}
+        </div>
+      </div>
+    `;
+    qlist.appendChild(card);
+  });
+
+  unitsEl.appendChild(sec);
+});
+
+document.getElementById('totalQ').textContent = totalQ;
+document.getElementById('totalUnits').textContent = DATA.length;
+
+function selectUnit(idx){
+  document.querySelectorAll('.tab-btn').forEach((b,i)=>b.classList.toggle('active', i===idx));
+  document.querySelectorAll('.unit').forEach((u,i)=>u.classList.toggle('active', i===idx));
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+unitsEl.addEventListener('click', (e) => {
+  const btn = e.target.closest('.reveal-btn');
+  if(!btn) return;
+  const id = btn.dataset.card;
+  const ans = document.getElementById('answer-'+id);
+  const card = document.getElementById('card-'+id);
+  const isOpen = ans.classList.toggle('open');
+  btn.classList.toggle('shown', isOpen);
+  btn.textContent = isOpen ? 'Ocultar' : 'Ver respuesta';
+  if(isOpen){
+    solved.add(id);
+    card.classList.add('solved');
+  }
+  updateProgress();
+});
+
+function updateProgress(){
+  document.getElementById('solvedCount').textContent = solved.size;
+  const pct = totalQ ? Math.round((solved.size/totalQ)*100) : 0;
+  document.getElementById('ringPct').textContent = pct+'%';
+  const circumference = 2*Math.PI*30;
+  const offset = circumference - (pct/100)*circumference;
+  document.getElementById('ringFg').style.strokeDashoffset = offset;
+}
+</script>
+</body>
+</html>
