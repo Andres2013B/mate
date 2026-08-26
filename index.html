@@ -101,6 +101,8 @@
   .theory-box p{font-size:13.5px;line-height:1.6;color:#D9C9EE;margin:8px 0 0;}
 
   .example-box{background:#fff;border:1.5px dashed var(--gold);border-radius:var(--radius);padding:20px 22px;margin-bottom:26px;}
+  .diagram{margin:8px 0 14px;display:flex;justify-content:center;background:var(--violet-050);border-radius:10px;padding:14px;}
+  .diagram svg{max-width:100%;height:auto;}
   .example-box .tag{
     font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;
     color:var(--gold);font-weight:600;display:inline-block;margin-bottom:9px;background:#FBF3E2;padding:4px 10px;border-radius:6px;
@@ -206,6 +208,7 @@ const TOPICS = [
     intro:"La unión (∪) de dos conjuntos junta TODOS los elementos que aparecen en cualquiera de los dos conjuntos, sin repetir ninguno. Si un número aparece en ambos conjuntos, solo lo escribes una vez en el resultado. Si dibujas dos círculos que se traslapan (diagrama de Venn), la unión es TODO lo que cubren los dos círculos juntos — tanto lo que comparten como lo que no.",
     formulas:['A ∪ B'], text:''},
   example:{ q:'A={1,2,3}, B={3,4,5}. Encuentra A ∪ B.',
+    diagram:'<svg viewBox="0 0 220 140" xmlns="http://www.w3.org/2000/svg"><circle cx="90" cy="70" r="55" fill="#8B5FBF" fill-opacity="0.45" stroke="#5B2C87" stroke-width="2"/><circle cx="140" cy="70" r="55" fill="#D9A441" fill-opacity="0.45" stroke="#D9A441" stroke-width="2"/><text x="55" y="45" font-size="14" fill="#2E1147" font-family="monospace">1,2</text><text x="105" y="75" font-size="14" fill="#2E1147" font-family="monospace">3</text><text x="150" y="45" font-size="14" fill="#2E1147" font-family="monospace">4,5</text><text x="55" y="130" font-size="15" fill="#5B2C87" font-family="monospace">A</text><text x="165" y="130" font-size="15" fill="#D9A441" font-family="monospace">B</text></svg>',
     steps:['Junta todos los elementos de A y de B.','El 3 aparece en ambos, pero solo se escribe una vez.'],
     result:'A ∪ B = {1, 2, 3, 4, 5}' },
   qs:[
@@ -220,6 +223,7 @@ const TOPICS = [
     intro:"La intersección (∩) de dos conjuntos son los elementos que aparecen en AMBOS conjuntos a la vez, no basta con que estén en uno solo. Si dibujas dos círculos que se traslapan, la intersección es justo la zona donde se sobreponen. Para encontrarla a mano, revisa elemento por elemento de un conjunto y pregúntate si también aparece en el otro; si no comparten ningún elemento, su intersección es el conjunto vacío (∅).",
     formulas:['A ∩ B'], text:''},
   example:{ q:'A={2,4,6,8}, B={1,2,3,4,5}. Encuentra A ∩ B.',
+    diagram:'<svg viewBox="0 0 220 140" xmlns="http://www.w3.org/2000/svg"><circle cx="90" cy="70" r="55" fill="#8B5FBF" fill-opacity="0.25" stroke="#5B2C87" stroke-width="2"/><circle cx="140" cy="70" r="55" fill="#D9A441" fill-opacity="0.25" stroke="#D9A441" stroke-width="2"/><path d="M115,20 A55,55 0 0,1 115,120 A55,55 0 0,1 115,20 Z" fill="#5B2C87" fill-opacity="0.55"/><text x="52" y="45" font-size="14" fill="#2E1147" font-family="monospace">6,8</text><text x="103" y="75" font-size="14" fill="#fff" font-family="monospace">2,4</text><text x="150" y="45" font-size="14" fill="#2E1147" font-family="monospace">1,3,5</text><text x="55" y="130" font-size="15" fill="#5B2C87" font-family="monospace">A</text><text x="165" y="130" font-size="15" fill="#D9A441" font-family="monospace">B</text></svg>',
     steps:['Revisa cada elemento de A: 2→¿está en B? sí. 4→sí. 6→no. 8→no.'], result:'A ∩ B = {2, 4}' },
   qs:[
     {q:'Dados X={2,−5,6,−7,8}, Y={1,2,3,4,5,6}, A={−1,−2,−3,1,2,3}, B={−7,−5,−3,−1}. Calcula: a) X ∩ A', a:'{2}', accept:['{2}']},
@@ -323,6 +327,7 @@ const TOPICS = [
     intro:"Un diagrama de Venn representa conjuntos como círculos superpuestos dentro de un rectángulo (el universo). Cada operación tiene su propia 'forma' visual: en la unión coloreas ambos círculos completos; en la intersección, solo la parte donde se traslapan; en la diferencia A\\B, solo la parte de A que no toca a B; y en el complemento, todo lo que queda fuera del círculo pero dentro del rectángulo.",
     formulas:[], text:''},
   example:{ q:'U={1,...,11}, A={1,2,3,4}, B={4,5,6,7}. Dibuja y encuentra A\\B y (A∪B)ᶜ.',
+    diagram:'<svg viewBox="0 0 220 160" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="10" width="200" height="140" fill="none" stroke="#999" stroke-width="1.5"/><text x="192" y="26" font-size="13" fill="#666" font-family="monospace">U</text><circle cx="85" cy="80" r="50" fill="#8B5FBF" fill-opacity="0.4" stroke="#5B2C87" stroke-width="2"/><circle cx="135" cy="80" r="50" fill="none" stroke="#D9A441" stroke-width="2"/><text x="55" y="85" font-size="14" fill="#2E1147" font-family="monospace">1,2,3</text><text x="105" y="60" font-size="13" fill="#2E1147" font-family="monospace">4</text><text x="150" y="85" font-size="13" fill="#2E1147" font-family="monospace">5,6,7</text><text x="185" y="130" font-size="12" fill="#666" font-family="monospace">8,9,10,11</text><text x="55" y="140" font-size="14" fill="#5B2C87" font-family="monospace">A</text><text x="160" y="140" font-size="14" fill="#D9A441" font-family="monospace">B</text></svg>',
     steps:['A\\B: la parte de A que no toca a B → 1,2,3 (el 4 se queda fuera porque también está en B).','A∪B = {1,2,3,4,5,6,7}. Su complemento es todo lo que falta del universo: 8,9,10,11.'],
     result:'A\\B = {1,2,3}     (A∪B)ᶜ = {8,9,10,11}' },
   qs:[
@@ -336,6 +341,7 @@ const TOPICS = [
     intro:"Estos ejercicios te piden calcular el resultado de una operación de conjuntos Y ADEMÁS dibujar el diagrama de Venn correspondiente, sombreando la región correcta. Resuelve primero la operación algebraicamente (con llaves y números), y luego usa ese resultado para saber qué sombrear.",
     formulas:[], text:'A ∪ B = unión · A ∩ B = intersección · A \\ B = diferencia · Aᶜ = complemento'},
   example:{ q:'U={1..10}, A={1,2,3,4,5,6,7}, B={4,5,6,7,8,9,10}. Encuentra A \\ B.',
+    diagram:'<svg viewBox="0 0 220 150" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="10" width="200" height="130" fill="none" stroke="#999" stroke-width="1.5"/><circle cx="85" cy="75" r="48" fill="#8B5FBF" fill-opacity="0.5" stroke="#5B2C87" stroke-width="2"/><circle cx="130" cy="75" r="48" fill="none" stroke="#D9A441" stroke-width="2"/><text x="55" y="80" font-size="14" fill="#2E1147" font-family="monospace">1,2,3</text><text x="100" y="55" font-size="12" fill="#2E1147" font-family="monospace">4,5,6,7</text><text x="145" y="90" font-size="13" fill="#2E1147" font-family="monospace">8,9,10</text><text x="55" y="130" font-size="14" fill="#5B2C87" font-family="monospace">A</text><text x="150" y="130" font-size="14" fill="#D9A441" font-family="monospace">B</text></svg>',
     steps:['A \\ B son los elementos de A que NO están en B.','Revisa cada elemento de A: 1,2,3 no están en B; 4,5,6,7 sí están en B.'],
     result:'A \\ B = {1, 2, 3}' },
   qs:[
@@ -659,6 +665,7 @@ const TOPICS = [
     intro:"La pendiente mide qué tan inclinada está una recta: cuánto sube o baja por cada unidad que avanza hacia la derecha en el eje x. Se calcula con la diferencia de las 'y' entre la diferencia de las 'x' de dos puntos sobre la recta. El signo y tamaño te dicen mucho de un vistazo: positiva y grande es una subida empinada, negativa es una bajada, cero es horizontal, e indefinida (división entre cero) es una línea vertical.",
     formulas:['m = (y₂ − y₁) / (x₂ − x₁)'], text:''},
   example:{ q:'Encuentra la pendiente de la recta que pasa por A(2,1) y B(4,7).',
+    diagram:'<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><line x1="20" y1="180" x2="190" y2="180" stroke="#ccc" stroke-width="1.5"/><line x1="20" y1="10" x2="20" y2="180" stroke="#ccc" stroke-width="1.5"/><line x1="50" y1="150" x2="150" y2="30" stroke="#5B2C87" stroke-width="2.5"/><circle cx="50" cy="150" r="4" fill="#D9A441"/><text x="30" y="168" font-size="12" fill="#2E1147" font-family="monospace">A(2,1)</text><circle cx="150" cy="30" r="4" fill="#D9A441"/><text x="118" y="22" font-size="12" fill="#2E1147" font-family="monospace">B(4,7)</text></svg>',
     steps:['m = (y₂−y₁)/(x₂−x₁) = (7−1)/(4−2).'], result:'m = 3' },
   qs:[
     {q:'Encuentra la pendiente entre los puntos (1,5) y (3,9).', a:'m = 2', accept:['2','m=2']},
@@ -671,6 +678,7 @@ const TOPICS = [
     intro:"Una función cuadrática tiene la forma y=ax²+bx+c, y su gráfica siempre es una parábola (una curva en forma de U, hacia arriba o hacia abajo). Para graficarla sin calculadora, eliges varios valores de x (al menos 5), sustituyes cada uno en la ecuación para encontrar su y correspondiente, y marcas esos puntos (x,y) en el plano — entre más puntos tabules, más precisa se ve la curva.",
     formulas:['y = ax² + bx + c'], text:''},
   example:{ q:'Tabula y = x² − x − 2 para x = −1, 0, 1',
+    diagram:'<svg viewBox="0 0 200 180" xmlns="http://www.w3.org/2000/svg"><line x1="10" y1="90" x2="190" y2="90" stroke="#ccc" stroke-width="1.2"/><line x1="100" y1="10" x2="100" y2="170" stroke="#ccc" stroke-width="1.2"/><path d="M 40 160 Q 100 10 160 160" fill="none" stroke="#5B2C87" stroke-width="2.5"/><circle cx="55" cy="90" r="4" fill="#D9A441"/><text x="35" y="80" font-size="10" fill="#2E1147" font-family="monospace">(-1,0)</text><circle cx="100" cy="110" r="4" fill="#D9A441"/><text x="106" y="125" font-size="10" fill="#2E1147" font-family="monospace">(0,-2)</text><circle cx="145" cy="90" r="4" fill="#D9A441"/><text x="125" y="80" font-size="10" fill="#2E1147" font-family="monospace">(1,-2)</text></svg>',
     steps:['x=−1: y=(−1)²−(−1)−2 = 1+1−2 = 0.','x=0: y=0−0−2 = −2.','x=1: y=1−1−2 = −2.'],
     result:'Puntos: (−1,0), (0,−2), (1,−2)' },
   qs:[
@@ -747,6 +755,7 @@ const TOPICS = [
     intro:"En todo triángulo RECTÁNGULO (con un ángulo de 90°), el cuadrado de la hipotenusa (el lado más largo, opuesto al ángulo recto) es igual a la suma de los cuadrados de los otros dos lados, los catetos. Lo puedes demostrar de forma geométrica: traza un triángulo rectángulo, y sobre cada uno de sus tres lados construye un cuadrado. Si recortas y cuentas los cuadritos, verás que el área del cuadrado grande (sobre la hipotenusa) es exactamente igual a la suma de las áreas de los dos cuadrados pequeños (sobre los catetos).",
     formulas:['c² = a² + b²'], text:''},
   example:{ q:'Triángulo rectángulo con catetos 3 y 4 cm. Construye un cuadrado sobre cada lado. ¿Cuántos cuadritos tiene cada cuadrado, y qué relación hay?',
+    diagram:'<svg viewBox="0 0 240 260" xmlns="http://www.w3.org/2000/svg"><polygon points="10,100 70,100 70,160 10,160" fill="#E6D9F5" stroke="#5B2C87" stroke-width="2"/><text x="40" y="135" font-size="15" fill="#5B2C87" text-anchor="middle" font-family="monospace">a²=9</text><polygon points="70,160 150,160 150,240 70,240" fill="#E6D9F5" stroke="#5B2C87" stroke-width="2"/><text x="110" y="205" font-size="15" fill="#5B2C87" text-anchor="middle" font-family="monospace">b²=16</text><polygon points="70,100 150,160 210,80 130,20" fill="#FBF3E2" stroke="#D9A441" stroke-width="2"/><text x="150" y="95" font-size="15" fill="#D9A441" text-anchor="middle" font-family="monospace">c²=25</text><polygon points="70,100 70,160 150,160" fill="#fff" stroke="#2E1147" stroke-width="2.5"/><text x="55" y="135" font-size="13" fill="#2E1147">B</text><text x="55" y="178" font-size="13" fill="#2E1147">C</text><text x="155" y="178" font-size="13" fill="#2E1147">A</text></svg>',
     steps:['El cuadrado sobre el cateto de 3cm tiene 3×3=9 cuadritos.','El cuadrado sobre el cateto de 4cm tiene 4×4=16 cuadritos.','9+16=25, que es exactamente el número de cuadritos del cuadrado sobre la hipotenusa (5×5).'],
     result:'El cuadrado de la hipotenusa (25) es igual a la suma de los cuadrados de los catetos (9+16)' },
   qs:[
@@ -759,6 +768,7 @@ const TOPICS = [
     intro:"Esta vez, en lugar de partir de los lados del triángulo, partes de las ÁREAS de los cuadrados construidos sobre cada lado, y trabajas al revés: si conoces el área de dos de los tres cuadrados, puedes deducir el área (y por lo tanto el lado) del tercero, usando que el área grande es la suma de las dos pequeñas.",
     formulas:['Área grande = Área pequeña 1 + Área pequeña 2'], text:''},
   example:{ q:'Un cuadrado tiene área 9 cm² y otro (sobre el otro cateto) tiene lado 2.5 cm. ¿Cuál es el área del cuadrado sobre la hipotenusa?',
+    diagram:'<svg viewBox="0 0 220 180" xmlns="http://www.w3.org/2000/svg"><polygon points="60,140 100,140 100,180 60,180" fill="#E6D9F5" stroke="#5B2C87" stroke-width="2"/><text x="80" y="165" font-size="13" fill="#5B2C87" text-anchor="middle" font-family="monospace">A=9</text><polygon points="20,100 60,100 60,140 20,140" fill="#E6D9F5" stroke="#5B2C87" stroke-width="2"/><text x="40" y="125" font-size="11" fill="#5B2C87" text-anchor="middle" font-family="monospace">2.5cm</text><polygon points="60,140 100,140 130,80 90,40" fill="#FBF3E2" stroke="#D9A441" stroke-width="2"/><text x="95" y="95" font-size="13" fill="#D9A441" text-anchor="middle" font-family="monospace">A=?</text><polygon points="20,100 60,100 60,140" fill="#fff" stroke="#2E1147" stroke-width="2"/></svg>',
     steps:['Área del segundo cuadrado: 2.5×2.5 = 6.25 cm².','Suma las dos áreas de los catetos: 9 + 6.25 = 15.25 cm².'],
     result:'El área del cuadrado sobre la hipotenusa es 15.25 cm²' },
   qs:[
@@ -773,10 +783,14 @@ const TOPICS = [
   example:{ q:'Triángulo con a=10, b=20. ¿Cuánto mide la hipotenusa c?',
     steps:['c² = 10² + 20² = 100 + 400 = 500.','c = √500.'], result:'c ≈ 22.36' },
   qs:[
-    {q:'Tres ciudades M, Q, P: de Q a M hay 130 km (vertical), de Q a P hay 560 km (horizontal), formando un ángulo recto en Q. ¿Qué distancia hay de M a P?', a:'≈ 574.9 km', steps:'√(130²+560²)', qType:'open'},
-    {q:'¿Cuánto medirá la diagonal de un cuadrado de 75 cm de lado?', a:'≈ 106.07 cm', steps:'75√2', accept:['106.07','106.1']},
-    {q:'Una escalera de 12.5 m está apoyada a 5.7 m de la pared. ¿Qué altura alcanza en la pared?', a:'≈ 11.13 m', steps:'√(12.5²−5.7²)', accept:['11.13','11.1']},
-    {q:'Encuentra la altura de un triángulo equilátero con lado de 32 cm.', a:'≈ 27.71 cm', steps:'32×(√3/2)', accept:['27.71','27.7']},
+    {q:'Tres ciudades M, Q, P: de Q a M hay 130 km (vertical), de Q a P hay 560 km (horizontal), formando un ángulo recto en Q. ¿Qué distancia hay de M a P?', a:'≈ 574.9 km', steps:'√(130²+560²)', qType:'open',
+     diagram:'<svg viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg"><line x1="30" y1="20" x2="30" y2="130" stroke="#5B2C87" stroke-width="2.5"/><line x1="30" y1="130" x2="180" y2="130" stroke="#5B2C87" stroke-width="2.5"/><line x1="30" y1="20" x2="180" y2="130" stroke="#D9A441" stroke-width="2.5" stroke-dasharray="5,4"/><rect x="30" y="118" width="12" height="12" fill="none" stroke="#5B2C87"/><text x="10" y="18" font-size="13" fill="#2E1147">M</text><text x="14" y="145" font-size="13" fill="#2E1147">Q</text><text x="183" y="135" font-size="13" fill="#2E1147">P</text><text x="8" y="75" font-size="11" fill="#5B2C87" font-family="monospace">130km</text><text x="90" y="148" font-size="11" fill="#5B2C87" font-family="monospace">560km</text></svg>'},
+    {q:'¿Cuánto medirá la diagonal de un cuadrado de 75 cm de lado?', a:'≈ 106.07 cm', steps:'75√2', accept:['106.07','106.1'],
+     diagram:'<svg viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg"><rect x="20" y="20" width="100" height="100" fill="#F6F0FC" stroke="#5B2C87" stroke-width="2"/><line x1="20" y1="20" x2="120" y2="120" stroke="#D9A441" stroke-width="2.5" stroke-dasharray="5,4"/><text x="5" y="15" font-size="12" fill="#2E1147">A</text><text x="123" y="18" font-size="12" fill="#2E1147">B</text><text x="123" y="132" font-size="12" fill="#2E1147">C</text><text x="5" y="132" font-size="12" fill="#2E1147">D</text><text x="55" y="15" font-size="11" fill="#5B2C87" font-family="monospace">75cm</text></svg>'},
+    {q:'Una escalera de 12.5 m está apoyada a 5.7 m de la pared. ¿Qué altura alcanza en la pared?', a:'≈ 11.13 m', steps:'√(12.5²−5.7²)', accept:['11.13','11.1'],
+     diagram:'<svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg"><line x1="30" y1="20" x2="30" y2="140" stroke="#5B2C87" stroke-width="3"/><line x1="30" y1="140" x2="140" y2="140" stroke="#5B2C87" stroke-width="1.5" stroke-dasharray="3,3"/><line x1="30" y1="20" x2="140" y2="140" stroke="#D9A441" stroke-width="3"/><text x="8" y="80" font-size="11" fill="#5B2C87" font-family="monospace">?</text><text x="75" y="155" font-size="11" fill="#5B2C87" font-family="monospace">5.7m</text><text x="90" y="75" font-size="11" fill="#D9A441" font-family="monospace">12.5m</text></svg>'},
+    {q:'Encuentra la altura de un triángulo equilátero con lado de 32 cm.', a:'≈ 27.71 cm', steps:'32×(√3/2)', accept:['27.71','27.7'],
+     diagram:'<svg viewBox="0 0 140 130" xmlns="http://www.w3.org/2000/svg"><polygon points="70,15 15,115 125,115" fill="#F6F0FC" stroke="#5B2C87" stroke-width="2"/><line x1="70" y1="15" x2="70" y2="115" stroke="#D9A441" stroke-width="2" stroke-dasharray="4,3"/><text x="72" y="70" font-size="11" fill="#D9A441" font-family="monospace">h?</text><text x="35" y="70" font-size="11" fill="#5B2C87" font-family="monospace">32cm</text></svg>'},
   ]
 },
 {
@@ -785,10 +799,13 @@ const TOPICS = [
     intro:"El Teorema de Tales relaciona los segmentos que se forman cuando dos o más rectas paralelas son cortadas por rectas secantes que las cruzan. La idea central es la proporcionalidad: los segmentos correspondientes entre las paralelas guardan siempre la misma razón. Es muy útil para encontrar distancias que no puedes medir directamente, como la altura de un edificio usando su sombra y la sombra de un objeto de altura conocida.",
     formulas:['AB/A′B′ = BC/B′C′ = AC/A′C′'], text:''},
   example:{ q:'Rectas a y b paralelas. OA=2cm, AB=3cm, O′A′=3cm. Encuentra A′B′.',
+    diagram:'<svg viewBox="0 0 200 240" xmlns="http://www.w3.org/2000/svg"><line x1="20" y1="130" x2="180" y2="50" stroke="#5B2C87" stroke-width="2"/><line x1="20" y1="130" x2="180" y2="210" stroke="#5B2C87" stroke-width="2"/><line x1="100" y1="90" x2="100" y2="170" stroke="#D9A441" stroke-width="2.5"/><line x1="180" y1="50" x2="180" y2="210" stroke="#D9A441" stroke-width="2.5"/><circle cx="20" cy="130" r="3.5" fill="#2E1147"/><text x="6" y="148" font-size="13" fill="#2E1147">O</text><circle cx="100" cy="90" r="3.5" fill="#2E1147"/><text x="82" y="80" font-size="13" fill="#2E1147">A</text><circle cx="100" cy="170" r="3.5" fill="#2E1147"/><text x="82" y="190" font-size="13" fill="#2E1147">B</text><circle cx="180" cy="50" r="3.5" fill="#2E1147"/><text x="183" y="42" font-size="13" fill="#2E1147">A\'</text><circle cx="180" cy="210" r="3.5" fill="#2E1147"/><text x="183" y="225" font-size="13" fill="#2E1147">B\'</text></svg>',
     steps:['Ordena la proporción: OA/O′A′ = AB/A′B′.','Sustituye: 2/3 = 3/x.','Despeja: x = (3×3)/2.'],
     result:'x = 4.5 cm' },
   qs:[
     {q:'Si el factor de proporcionalidad entre dos triángulos es 0.6, y un lado del triángulo pequeño mide 3cm, ¿cuánto mide su correspondiente en el grande?', a:'5 cm', steps:'3/0.6=5', accept:['5','5cm']},
+    {q:'Una persona de 1.5m está parada a 1.20m de un poste de luz de 3m de altura. Usando el Teorema de Tales con las sombras (donde x es la distancia de la persona al punto donde se juntan las sombras), encuentra x.', a:'x = 1.2 m', steps:'1.5/x = 3/(x+1.20) → 1.5(x+1.20)=3x → 1.8=1.5x → x=1.2',
+     diagram:'<svg viewBox="0 0 320 220" xmlns="http://www.w3.org/2000/svg"><line x1="20" y1="200" x2="300" y2="200" stroke="#999" stroke-width="3"/><line x1="20" y1="200" x2="140" y2="40" stroke="#C4493C" stroke-width="2"/><line x1="20" y1="200" x2="260" y2="20" stroke="#C4493C" stroke-width="2"/><g transform="translate(140,110)"><ellipse cx="0" cy="0" rx="10" ry="30" fill="#5B2C87"/><circle cx="0" cy="-38" r="10" fill="#E6B98C"/></g><text x="118" y="205" font-size="12" fill="#2E1147" font-family="monospace">x</text><text x="185" y="212" font-size="12" fill="#2E1147" font-family="monospace">1,20 m</text><text x="100" y="90" font-size="11" fill="#2E1147" font-family="monospace">1,5 m</text><line x1="255" y1="200" x2="255" y2="25" stroke="#2E1147" stroke-width="4"/><circle cx="255" cy="18" r="7" fill="#D9A441"/><text x="265" y="60" font-size="11" fill="#2E1147" font-family="monospace">3 m</text></svg>'},
   ]
 },
 {
@@ -797,6 +814,7 @@ const TOPICS = [
     intro:"Dado un triángulo rectángulo con algunos datos conocidos (un lado y un ángulo agudo), puedes encontrar TODO lo demás usando seno, coseno y tangente. Primero plantea las tres relaciones trigonométricas del ángulo que conoces, identifica cuál o cuáles son las adecuadas según los datos que tienes, y despeja lo que falta.",
     formulas:['sen θ = op/hip','cos θ = ady/hip','tan θ = op/ady'], text:''},
   example:{ q:'Triángulo con hipotenusa=10 y ángulo B=50°. Encuentra los catetos.',
+    diagram:'<svg viewBox="0 0 180 140" xmlns="http://www.w3.org/2000/svg"><polygon points="20,120 20,30 150,120" fill="#F6F0FC" stroke="#5B2C87" stroke-width="2"/><path d="M 20 100 A 20 20 0 0 0 38 118" fill="none" stroke="#D9A441" stroke-width="1.5"/><text x="40" y="112" font-size="12" fill="#D9A441">50°</text><text x="5" y="18" font-size="12" fill="#2E1147">A</text><text x="5" y="132" font-size="12" fill="#2E1147">C</text><text x="153" y="125" font-size="12" fill="#2E1147">B</text><text x="80" y="65" font-size="11" fill="#5B2C87" font-family="monospace">c=10</text></svg>',
     steps:['Cateto opuesto: b = 10 × sen(50°).','Cateto adyacente: a = 10 × cos(50°).'], result:'b ≈ 7.66,  a ≈ 6.42' },
   qs:[
     {q:'Triángulo con hipotenusa=10 y un ángulo agudo de 40°. ¿Cuánto mide el tercer ángulo (el otro agudo)?', a:'50°', steps:'180−(40+90)=50', accept:['50','50°']},
@@ -808,11 +826,13 @@ const TOPICS = [
     intro:"Estos ejercicios aplican la trigonometría a situaciones más variadas: problemas de la vida real (como el ángulo de despegue de un avión), encontrar ángulos sin usar transportador a partir de los lados, y calcular el área de triángulos usando la altura y el ángulo de la base.",
     formulas:[], text:''},
   example:{ q:'Un avión despega en un ángulo de 37° y alcanza una altura de 1080 m. ¿Cuántos metros ha volado (la hipotenusa de su trayectoria)?',
+    diagram:'<svg viewBox="0 0 200 140" xmlns="http://www.w3.org/2000/svg"><line x1="20" y1="120" x2="180" y2="120" stroke="#ccc" stroke-width="1.5"/><line x1="20" y1="120" x2="90" y2="20" stroke="#D9A441" stroke-width="2.5"/><line x1="90" y1="20" x2="90" y2="120" stroke="#5B2C87" stroke-width="1.5" stroke-dasharray="4,3"/><path d="M 20 108 A 12 12 0 0 1 32 118" fill="none" stroke="#5B2C87" stroke-width="1.5"/><text x="32" y="110" font-size="11" fill="#5B2C87">37°</text><text x="94" y="70" font-size="11" fill="#5B2C87" font-family="monospace">1080m</text></svg>',
     steps:['La altura es el cateto opuesto al ángulo de despegue.','sen(37°) = altura/distancia volada → distancia = altura/sen(37°).','distancia = 1080/sen(37°).'],
     result:'≈ 1,794 m' },
   qs:[
     {q:'Con el mismo avión (despega a 37°, altura 1080m), ¿cuántos metros ha recorrido en tierra (la proyección horizontal)?', a:'≈ 1,433 m', steps:'tan(37°)=altura/distanciaTierra → distanciaTierra=1080/tan(37°)', qType:'open'},
-    {q:'Triángulo isósceles con altura de 7 cm y ángulo de la base de 57°. ¿Cuánto mide su área?', a:'≈ 63 cm²', qType:'open'},
+    {q:'Triángulo isósceles con altura de 7 cm y ángulo de la base de 57°. ¿Cuánto mide su área?', a:'≈ 63 cm²', qType:'open',
+     diagram:'<svg viewBox="0 0 140 110" xmlns="http://www.w3.org/2000/svg"><polygon points="70,10 20,95 120,95" fill="#F6F0FC" stroke="#5B2C87" stroke-width="2"/><line x1="70" y1="10" x2="70" y2="95" stroke="#D9A441" stroke-width="2" stroke-dasharray="4,3"/><text x="74" y="55" font-size="11" fill="#D9A441" font-family="monospace">7cm</text><text x="26" y="92" font-size="11" fill="#5B2C87">57°</text></svg>'},
   ]
 },
 {
@@ -821,6 +841,7 @@ const TOPICS = [
     intro:"Dos triángulos son semejantes si comparten las mismas medidas de ángulos interiores; cuando esto pasa, se cumple una proporcionalidad entre sus lados correspondientes (hay tres criterios para comprobarlo: AA, LAL y LLL). Dos figuras son CONGRUENTES si son literalmente idénticas, aunque estén en distinta posición — pasas de una a otra con rotación (girar sobre un punto), reflexión (voltear como espejo) o traslación (deslizar sin girar). Ninguna de estas transformaciones cambia el tamaño ni la forma de la figura.",
     formulas:['AB/A′B′ = BC/B′C′ = CA/C′A′'], text:'Rotación: gira sobre un punto · Reflexión: se voltea como espejo · Traslación: se desliza sin girar'},
   example:{ q:'Dos triángulos ABC y A′B′C′ son semejantes. Se sabe que CA=6cm, C′A′=4cm, A′B′=5cm. Encuentra AB.',
+    diagram:'<svg viewBox="0 0 260 210" xmlns="http://www.w3.org/2000/svg"><polygon points="20,150 20,90 80,150" fill="#F6F0FC" stroke="#5B2C87" stroke-width="2"/><polygon points="140,190 140,60 250,190" fill="#FBF3E2" stroke="#D9A441" stroke-width="2"/><text x="6" y="125" font-size="13" fill="#2E1147">C</text><text x="8" y="86" font-size="13" fill="#2E1147">A</text><text x="86" y="155" font-size="13" fill="#2E1147">B</text><text x="126" y="150" font-size="13" fill="#2E1147">C\'</text><text x="126" y="56" font-size="13" fill="#2E1147">A\'</text><text x="252" y="195" font-size="13" fill="#2E1147">B\'</text></svg>',
     steps:['Plantea la proporción: AB/A′B′ = CA/C′A′.','Despeja AB: AB = CA×A′B′ / C′A′.','Sustituye: AB = 6×5 / 4.'],
     result:'AB = 7.5 cm' },
   qs:[
@@ -829,6 +850,48 @@ const TOPICS = [
     {q:'Con esa misma razón (4/3), ¿cuánto mide el lado del triángulo grande correspondiente al "5"?', a:'≈ 6.67', steps:'5×(4/3)', accept:['6.67','6.7']},
     {q:'¿Qué transformación desliza una figura sin girarla ni voltearla?', a:'Traslación', accept:['traslacion','traslación']},
     {q:'¿Qué transformación voltea una figura como en un espejo?', a:'Reflexión', accept:['reflexion','reflexión']},
+  ]
+},
+{
+  id:'rotacion-traslacion', cat:'geometria', title:'Rotación y traslación', desc:'Cómo se mueve una figura rígida sin cambiar su forma.',
+  theory:{h:'¿De qué trata este tema?',
+    intro:"En un cuerpo rígido (una figura) se distinguen dos tipos de movimiento: la traslación y la rotación. Ninguno de los dos altera la forma ni el tamaño de la figura, solo cambia su posición. Un cuerpo ROTA cuando todos sus puntos giran alrededor de un mismo punto fijo, llamado eje de rotación, un cierto número de grados. Un cuerpo se TRASLADA cuando se desliza una distancia y dirección determinadas (por ejemplo '3 cm hacia la derecha'), sin girar.",
+    formulas:[], text:'En general, el movimiento de un cuerpo puede ser una combinación de ambos.'},
+  example:{ q:'Rota el pentágono ABCDE 35° alrededor del punto A.',
+    diagram:'<svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg"><polygon points="30,180 30,110 70,60 110,110 110,180" fill="#F6F0FC" stroke="#5B2C87" stroke-width="2"/><text x="12" y="185" font-size="12" fill="#2E1147">A</text><text x="12" y="112" font-size="12" fill="#2E1147">E</text><text x="60" y="50" font-size="12" fill="#2E1147">D</text><text x="115" y="112" font-size="12" fill="#2E1147">C</text><text x="115" y="185" font-size="12" fill="#2E1147">B</text><polygon points="170,180 240,180 265,120 225,75 185,120" fill="#FBF3E2" stroke="#D9A441" stroke-width="2"/><text x="152" y="185" font-size="12" fill="#2E1147">A\'</text><text x="242" y="185" font-size="12" fill="#2E1147">B\'</text><text x="267" y="122" font-size="12" fill="#2E1147">C\'</text><text x="225" y="65" font-size="12" fill="#2E1147">D\'</text><text x="163" y="122" font-size="12" fill="#2E1147">E\'</text><path d="M 200 180 A 30 30 0 0 1 220 155" fill="none" stroke="#D9A441" stroke-width="1.5"/><text x="205" y="172" font-size="11" fill="#D9A441">35°</text></svg>',
+    steps:['El punto A es el eje de rotación: se queda fijo.','Todos los demás vértices (B,C,D,E) giran 35° alrededor de A, manteniendo la misma distancia a A.','La figura resultante A′B′C′D′E′ tiene exactamente el mismo tamaño y forma, solo rotada.'],
+    result:'El pentágono rotado conserva todas sus medidas — solo cambia su orientación' },
+  qs:[
+    {q:'Traslada un rombo de 4cm de lado, 3cm hacia la derecha. ¿Cambia el tamaño del rombo?', a:'No — la traslación solo cambia la posición, nunca el tamaño ni la forma.', qType:'open'},
+    {q:'Un pentágono de 3cm se traslada 6cm hacia abajo, y un círculo de r=3cm se traslada 2cm hacia la izquierda. ¿Alguna de las tres figuras cambia de tamaño?', a:'No, ninguna — la traslación nunca altera el tamaño de una figura, sin importar la distancia o dirección.', qType:'open'},
+  ]
+},
+{
+  id:'figuras-compuestas', cat:'geometria', title:'Figuras compuestas: áreas sombreadas', desc:'Calcula el área combinando figuras simples (círculos, cuadrados, sectores).',
+  theory:{h:'¿De qué trata este tema?',
+    intro:"Una figura compuesta se forma combinando dos o más figuras simples (círculos, cuadrados, triángulos). Para encontrar el área sombreada, identifica qué figuras simples la componen, calcula el área de cada una por separado, y súmalas o réstalas según si la región sombreada es una unión o lo que sobra después de recortar.",
+    formulas:['A_circulo = πr²','A_cuadrado = lado²'], text:''},
+  example:{ q:'Un cuadrado de 10 cm de lado tiene un cuarto de círculo (radio 10cm) recortado de una esquina. ¿Cuál es el área de la parte sombreada (lo que queda)?',
+    diagram:'<svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="10" width="140" height="140" fill="#F6F0FC" stroke="#5B2C87" stroke-width="2"/><path d="M10,10 A140,140 0 0,1 150,150 L10,150 Z" fill="#fff" stroke="#D9A441" stroke-width="2"/><text x="100" y="130" font-size="13" fill="#5B2C87" font-family="monospace">sombreado</text></svg>',
+    steps:['Área del cuadrado completo: 10×10 = 100 cm².','Área del cuarto de círculo recortado: (¼)×π×10² = (¼)×314.16 ≈ 78.54 cm².','Resta: área sombreada = área cuadrado − área cuarto de círculo.'],
+    result:'100 − 78.54 ≈ 21.46 cm²' },
+  qs:[
+    {q:'Un cuadrado de 5m de lado tiene 4 pétalos formados por cuartos de círculo de radio 2.5m en su interior (patrón de flor). ¿Cómo se plantea el área sombreada de los pétalos?', a:'Área = 2×(área de un círculo de r=2.5) − área del cuadrado, aprovechando que los 4 cuartos de círculo equivalen a 2 círculos completos', qType:'open'},
+    {q:'Un cuadrado de 6m de lado contiene una figura de "hoja" formada por dos arcos de radio 6m. ¿Cuál es el área de la hoja?', a:'≈ 20.55 m²', steps:'2×(¼πr²) − lado² = 2×28.27−36', qType:'open'},
+  ]
+},
+{
+  id:'areas-incognitas', cat:'geometria', title:'Áreas con incógnitas', desc:'Plantea la fórmula de área usando una expresión algebraica como medida.',
+  theory:{h:'¿De qué trata este tema?',
+    intro:"En estos problemas, la medida de un lado o diámetro no es un número, sino una expresión algebraica (como 4x−1). El procedimiento es el mismo que siempre para calcular área — solo que ahora sustituyes la expresión algebraica en la fórmula y simplificas usando productos notables.",
+    formulas:['A_círculo = πr²','A_cuadrado = lado²'], text:''},
+  example:{ q:'Un cuadrado tiene lado (5x−2). Encuentra su área en términos de x.',
+    diagram:'<svg viewBox="0 0 160 130" xmlns="http://www.w3.org/2000/svg"><rect x="20" y="15" width="100" height="100" fill="#F6F0FC" stroke="#5B2C87" stroke-width="2"/><text x="45" y="70" font-size="15" fill="#5B2C87" font-family="monospace">A=?</text><text x="35" y="128" font-size="13" fill="#2E1147" font-family="monospace">5x − 2</text></svg>',
+    steps:['A = lado² = (5x−2)².','Desarrolla el binomio al cuadrado: (5x)²−2(5x)(2)+2².','25x² − 20x + 4.'],
+    result:'A = 25x² − 20x + 4' },
+  qs:[
+    {q:'Un círculo tiene diámetro (4x−1). ¿Cuál es la expresión para el radio?', a:'(4x−1)/2', qType:'open'},
+    {q:'Un octágono tiene un lado (x+3) y otra medida relacionada 3x. Si el área se plantea como A=lado×medida, ¿cuál es la expresión del área?', a:'A = (x+3)(3x) = 3x² + 9x', accept:['3x^2+9x']},
   ]
 },
 {
@@ -855,6 +918,7 @@ const TOPICS = [
     intro:"El interés simple calcula cuánto se gana (si ahorras) o se paga (si pides prestado) por usar dinero durante un tiempo determinado. La clave: el interés se calcula SIEMPRE sobre el capital original, no se reinvierte ni se acumula sobre sí mismo, así que crece de forma constante con el tiempo. La fórmula usa cuatro variables — capital, tasa, tiempo e interés — si conoces tres, siempre puedes despejar la cuarta.",
     formulas:['I = C · i · t'], text:'C=capital · i=tasa anual (decimal) · t=tiempo en años'},
   example:{ q:'¿Cuánto interés genera un capital de $80,000 al 5% anual durante 2 años?',
+    diagram:'<svg viewBox="0 0 140 100" xmlns="http://www.w3.org/2000/svg"><ellipse cx="45" cy="80" rx="30" ry="8" fill="#D9A441" stroke="#2E1147" stroke-width="1.5"/><ellipse cx="45" cy="68" rx="30" ry="8" fill="#E8BC5C" stroke="#2E1147" stroke-width="1.5"/><ellipse cx="45" cy="56" rx="30" ry="8" fill="#D9A441" stroke="#2E1147" stroke-width="1.5"/><ellipse cx="45" cy="44" rx="30" ry="8" fill="#E8BC5C" stroke="#2E1147" stroke-width="1.5"/><ellipse cx="45" cy="34" rx="30" ry="10" fill="#D9A441" stroke="#2E1147" stroke-width="1.5"/><circle cx="105" cy="55" r="30" fill="#C4493C"/><text x="105" y="66" font-size="30" text-anchor="middle" fill="#fff" font-family="monospace">%</text></svg>',
     steps:['I = C×i×t.','I = 80000 × 0.05 × 2.'], result:'I = $8,000' },
   qs:[
     {q:'Julio pidió $35,000 por 3 años al 7.5% anual. ¿Interés?', a:'$7,875', accept:['7875','$7875','7,875','$7,875']},
@@ -940,6 +1004,7 @@ const TOPICS = [
     intro:"Existen dos formas de pensar en probabilidad. La TEÓRICA se calcula con lógica pura, contando cuántos resultados favorables hay entre el total de resultados posibles — es lo que 'debería' pasar en un mundo perfecto. La FRECUENCIAL se obtiene REPITIENDO un experimento real y contando cuántas veces ocurrió lo que te interesa — es lo que realmente pasó en la práctica. Casi nunca coinciden exactamente, pero entre más veces repites el experimento, la frecuencial se acerca más a la teórica.",
     formulas:['P(A) = casos favorables / casos totales'], text:''},
   example:{ q:'Lanzas una moneda 60 veces y obtienes 25 soles. ¿Frecuencial vs teórica?',
+    diagram:'<svg viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg"><circle cx="60" cy="50" r="35" fill="#D9A441" stroke="#2E1147" stroke-width="2.5"/><text x="60" y="56" font-size="14" fill="#2E1147" text-anchor="middle" font-family="monospace">águila</text><circle cx="150" cy="50" r="35" fill="#8B5FBF" fill-opacity="0.5" stroke="#2E1147" stroke-width="2.5"/><text x="150" y="56" font-size="16" fill="#2E1147" text-anchor="middle" font-family="monospace">sol</text></svg>',
     steps:['Frecuencial: 25/60 ≈ 41.7%.','Teórica: 50%.','Diferencia: 50%−41.7% = 8.3 puntos.'], result:'Difieren en 8.3 puntos porcentuales' },
   qs:[
     {q:'Cristina encesta 42 de 50 tiros. ¿Probabilidad de que falle?', a:'16%', accept:['16%','16','0.16']},
@@ -951,9 +1016,13 @@ const TOPICS = [
     intro:"Dos eventos son independientes cuando lo que pasa en uno NO afecta la probabilidad del otro — por ejemplo, el resultado de un lanzamiento de moneda no influye en el siguiente. Para calcular la probabilidad de que ocurran varios eventos independientes A LA VEZ, simplemente multiplicas sus probabilidades individuales. Esto suele dar números pequeños, porque entre más eventos tienen que cumplirse juntos, menos probable es que pase.",
     formulas:['P(A y B) = P(A) · P(B)'], text:''},
   example:{ q:'Se lanza una moneda 3 veces. ¿Probabilidad de sacar 3 águilas?',
+    diagram:'<svg viewBox="0 0 220 90" xmlns="http://www.w3.org/2000/svg"><circle cx="45" cy="45" r="30" fill="#D9A441" stroke="#2E1147" stroke-width="2"/><text x="45" y="52" font-size="13" text-anchor="middle" fill="#2E1147" font-family="monospace">A</text><circle cx="110" cy="45" r="30" fill="#D9A441" stroke="#2E1147" stroke-width="2"/><text x="110" y="52" font-size="13" text-anchor="middle" fill="#2E1147" font-family="monospace">A</text><circle cx="175" cy="45" r="30" fill="#D9A441" stroke="#2E1147" stroke-width="2"/><text x="175" y="52" font-size="13" text-anchor="middle" fill="#2E1147" font-family="monospace">A</text></svg>',
     steps:['Cada lanzamiento es independiente: P(águila)=1/2.','P(3 águilas) = 1/2 × 1/2 × 1/2.'], result:'1/8 = 12.5%' },
   qs:[
     {q:'Urna con 3 fichas amarillas y 6 azules. Sacas 2 con reposición. ¿Ambas amarillas?', a:'1/9 ≈ 11.1%', accept:['1/9','11.1%','0.111']},
+    {q:'Se lanza un dado dos veces. ¿Probabilidad de que en el primero salga 3 y en el segundo un número impar?', a:'1/12 ≈ 8.3%', steps:'P(3)=1/6, P(impar)=3/6=1/2 → 1/6×1/2', accept:['1/12','8.3%','0.083'],
+     diagram:'<svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg"><path d="M100,60 L60,15 A55,55 0 0,1 155,15 Z" fill="#C4493C"/><path d="M100,60 L155,15 A55,55 0 0,1 155,105 Z" fill="#3E8E5C"/><path d="M100,60 L155,105 A55,55 0 0,1 45,105 Z" fill="#8B5FBF"/><path d="M100,60 L45,105 A55,55 0 0,1 45,15 Z" fill="#D9A441"/><path d="M100,60 L45,15 A55,55 0 0,1 60,15 Z" fill="#C4493C"/><circle cx="100" cy="60" r="6" fill="#2E1147"/><line x1="100" y1="60" x2="65" y2="90" stroke="#2E1147" stroke-width="4"/></svg>'},
+    {q:'Un estudiante responde al azar 5 preguntas de verdadero y falso. ¿Probabilidad de que acierte todas?', a:'1/32 ≈ 3.1%', steps:'P(acertar 1)=1/2, 5 preguntas → (1/2)⁵', accept:['1/32','3.1%','0.031']},
   ]
 },
 {
@@ -962,6 +1031,7 @@ const TOPICS = [
     intro:"Los eventos complementarios son dos resultados de un evento que son los ÚNICOS dos resultados posibles — como lanzar una moneda y que salga cara o cruz. Ojo: esto NO es lo mismo que 'mutuamente excluyentes'. Por ejemplo, lanzar un dado y que salga 1 ó 2 son mutuamente excluyentes (no pueden pasar juntos), pero NO son complementarios, porque hay otros resultados posibles (3, 4, 5, 6). En cambio, sacar un 1 o sacar cualquier cosa distinta de 1 SÍ son complementarios.",
     formulas:['P(A) + P(A′) = 1'], text:'Todos los eventos complementarios son mutuamente excluyentes, pero no al revés.'},
   example:{ q:'¿Lanzar un dado y que salga 1 ó 2 son eventos complementarios?',
+    diagram:'<svg viewBox="0 0 260 100" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="10" width="80" height="80" rx="10" fill="#FBF3E2" stroke="#D9A441" stroke-width="3"/><circle cx="50" cy="50" r="7" fill="#2E1147"/><text x="50" y="97" font-size="11" text-anchor="middle" fill="#2E1147" font-family="monospace">sale 1 ó 2</text><rect x="160" y="10" width="80" height="80" rx="10" fill="#F6F0FC" stroke="#5B2C87" stroke-width="3"/><circle cx="180" cy="30" r="5" fill="#2E1147"/><circle cx="220" cy="30" r="5" fill="#2E1147"/><circle cx="180" cy="70" r="5" fill="#2E1147"/><circle cx="220" cy="70" r="5" fill="#2E1147"/><circle cx="200" cy="50" r="5" fill="#2E1147"/><text x="200" y="97" font-size="11" text-anchor="middle" fill="#2E1147" font-family="monospace">sale 3,4,5,6</text></svg>',
     steps:['Son mutuamente excluyentes (no pueden pasar los dos a la vez).','Pero NO son complementarios, porque quedan otros resultados posibles: 3, 4, 5 y 6 — no son los ÚNICOS dos resultados.'],
     result:'No — son mutuamente excluyentes, pero no complementarios' },
   qs:[
@@ -976,10 +1046,22 @@ const TOPICS = [
   example:{ q:'Se lanza un dado normal. ¿Probabilidad de par o 5?',
     steps:['P(par)={2,4,6}=3/6.','P(5)=1/6.','Par y 5 no se traslapan, así que se suman directo.'], result:'4/6 = 2/3 ≈ 66.7%' },
   qs:[
-    {q:'De 52 cartas, ¿probabilidad de sacar un 8 o un trébol?', a:'4/13 ≈ 30.8%', accept:['4/13','30.8%','0.308']},
+    {q:'De 52 cartas, ¿probabilidad de sacar un 8 o un trébol?', a:'4/13 ≈ 30.8%', accept:['4/13','30.8%','0.308'],
+     diagram:'<svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="10" width="60" height="90" rx="6" fill="#fff" stroke="#2E1147" stroke-width="2"/><text x="40" y="45" font-size="20" text-anchor="middle" fill="#2E1147" font-family="monospace">8</text><text x="40" y="75" font-size="18" text-anchor="middle" fill="#2E1147">♣</text><rect x="80" y="10" width="60" height="90" rx="6" fill="#fff" stroke="#2E1147" stroke-width="2"/><text x="110" y="45" font-size="20" text-anchor="middle" fill="#D9A441" font-family="monospace">K</text><text x="110" y="75" font-size="18" text-anchor="middle" fill="#D9A441">♥</text><rect x="150" y="10" width="60" height="90" rx="6" fill="#fff" stroke="#2E1147" stroke-width="2"/><text x="180" y="45" font-size="20" text-anchor="middle" fill="#2E1147" font-family="monospace">3</text><text x="180" y="75" font-size="18" text-anchor="middle" fill="#2E1147">♠</text></svg>'},
     {q:'Número entre 1-30, ¿probabilidad de primo o múltiplo de 5?', a:'50%', accept:['50%','1/2','0.5']},
-    {q:'Ruleta de 36 sectores (1-12 rojo). ¿Probabilidad de número impar o rojo?', a:'≈ 66.7%', accept:['2/3','66.7%','0.667']},
+    {q:'Ruleta de 36 sectores (1-12 rojo, 13-24 azul, 25-36 negro). ¿Probabilidad de número impar o rojo?', a:'≈ 66.7%', accept:['2/3','66.7%','0.667'],
+     diagram:'<svg viewBox="0 0 160 140" xmlns="http://www.w3.org/2000/svg"><circle cx="80" cy="65" r="55" fill="none" stroke="#2E1147" stroke-width="3"/><path d="M80,65 L80,10 A55,55 0 0,1 127.6,37.5 Z" fill="#C4493C"/><path d="M80,65 L127.6,37.5 A55,55 0 0,1 127.6,92.5 Z" fill="#5B2C87"/><path d="M80,65 L127.6,92.5 A55,55 0 0,1 80,120 Z" fill="#2E1147"/><path d="M80,65 L80,120 A55,55 0 0,1 32.4,92.5 Z" fill="#C4493C"/><path d="M80,65 L32.4,92.5 A55,55 0 0,1 32.4,37.5 Z" fill="#5B2C87"/><path d="M80,65 L32.4,37.5 A55,55 0 0,1 80,10 Z" fill="#2E1147"/><circle cx="80" cy="65" r="6" fill="#D9A441"/></svg>'},
     {q:'En una clase de 50 alumnos: 10 prefieren solo Álgebra, 15 solo Geometría, 20 ambas, 5 ninguna. ¿Probabilidad de que un alumno al azar prefiera Álgebra o Geometría (o ambas)?', a:'9/10 = 90%', steps:'P(A)=30/50, P(G)=35/50, P(A∩G)=20/50 → 30/50+35/50−20/50', accept:['9/10','90%','0.9']},
+    {q:'Se elige un entero del 1 al 19. ¿Probabilidad de que sea múltiplo de 3 ó de 5?', a:'8/19 ≈ 42.1%', steps:'múltiplos de 3: 6; de 5: 3; en común (15): 1 → 6/19+3/19−1/19', qType:'open',
+     diagram:'<svg viewBox="0 0 160 100" xmlns="http://www.w3.org/2000/svg"><g font-family="monospace" font-weight="bold"><text x="15" y="30" font-size="22" fill="#5B2C87" transform="rotate(-8,15,30)">3</text><text x="45" y="20" font-size="26" fill="#D9A441" transform="rotate(10,45,20)">4</text><text x="80" y="35" font-size="20" fill="#8B5FBF" transform="rotate(-12,80,35)">7</text><text x="110" y="18" font-size="24" fill="#C4493C" transform="rotate(8,110,18)">0</text><text x="135" y="40" font-size="22" fill="#3E8E5C" transform="rotate(-6,135,40)">2</text><text x="20" y="75" font-size="24" fill="#C4493C" transform="rotate(6,20,75)">1</text><text x="55" y="85" font-size="20" fill="#5B2C87" transform="rotate(-10,55,85)">9</text><text x="90" y="80" font-size="26" fill="#D9A441" transform="rotate(12,90,80)">5</text><text x="125" y="70" font-size="22" fill="#8B5FBF" transform="rotate(-8,125,70)">8</text></g></svg>'},
+    {q:'Se escoge un número del 1 al 50. ¿Probabilidad de que sea múltiplo de 3 Y menor que 20?', a:'12%', steps:'múltiplos de 3 menores que 20: 3,6,9,12,15,18 (6 de 50)', qType:'open'},
+    {q:'Se lanza un dado normal. ¿Probabilidad de que salga par o menor que 5?', a:'5/6 ≈ 83.3%', steps:'P(par)=3/6, P(<5)=4/6, P(par y <5)=2/6 → 3/6+4/6−2/6', qType:'open'},
+    {q:'Tómbola con 36 bolitas numeradas del 1 al 36. ¿Probabilidad de que salga par o menor que 10?', a:'≈ 61.1%', steps:'P(par)=18/36, P(<10)=9/36, P(par y <10)=4/36 → 18/36+9/36−4/36', qType:'open'},
+    {q:'Bolsa con pelotas numeradas del 1 al 10. ¿Probabilidad de impar o múltiplo de 5?', a:'60%', steps:'impares: 5, múltiplos de 5: 2, en común (el 5): 1 → 5/10+2/10−1/10', accept:['60%','3/5','0.6']},
+    {q:'Bolsa con 10 pelotas numeradas del 0 al 9. ¿Probabilidad de par o divisor de 9?', a:'80%', steps:'pares: 0,2,4,6,8 (5); divisores de 9: 1,3,9 (3); no se traslapan → 5/10+3/10',
+     diagram:'<svg viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg"><polygon points="100,20 60,55 40,100 60,140 140,140 160,100 140,55" fill="none"/><circle cx="100" cy="70" r="18" fill="#D9A441"/><text x="100" y="76" font-size="16" text-anchor="middle" fill="#2E1147" font-family="monospace">7</text><circle cx="75" cy="95" r="18" fill="#fff" stroke="#2E1147" stroke-width="1.5"/><text x="75" y="101" font-size="16" text-anchor="middle" fill="#2E1147" font-family="monospace">9</text><circle cx="125" cy="95" r="18" fill="#C4493C"/><text x="125" y="101" font-size="16" text-anchor="middle" fill="#fff" font-family="monospace">10</text><circle cx="70" cy="130" r="18" fill="#5B2C87"/><text x="70" y="136" font-size="16" text-anchor="middle" fill="#fff" font-family="monospace">4</text><circle cx="100" cy="125" r="18" fill="#3E8E5C"/><text x="100" y="131" font-size="16" text-anchor="middle" fill="#fff" font-family="monospace">2</text><circle cx="130" cy="130" r="18" fill="#8B5FBF"/><text x="130" y="136" font-size="16" text-anchor="middle" fill="#fff" font-family="monospace">6</text><circle cx="55" cy="150" r="18" fill="#2E1147"/><text x="55" y="156" font-size="16" text-anchor="middle" fill="#fff" font-family="monospace">8</text><circle cx="90" cy="150" r="18" fill="#C4493C"/><text x="90" y="156" font-size="16" text-anchor="middle" fill="#fff" font-family="monospace">1</text><circle cx="125" cy="150" r="18" fill="#fff" stroke="#2E1147" stroke-width="1.5"/><text x="125" y="156" font-size="16" text-anchor="middle" fill="#2E1147" font-family="monospace">3</text></svg>'},
+    {q:'¿Cuál es la probabilidad de obtener un total de 7 u 11 al lanzar un par de dados?', a:'2/9 ≈ 22.2%', steps:'P(7)=6/36, P(11)=2/36, no se traslapan → 8/36', accept:['2/9','22.2%','0.222'],
+     diagram:'<svg viewBox="0 0 180 100" xmlns="http://www.w3.org/2000/svg"><rect x="20" y="20" width="70" height="70" rx="10" fill="#3E8E5C" stroke="#2E1147" stroke-width="2"/><circle cx="40" cy="40" r="5" fill="#fff"/><circle cx="70" cy="40" r="5" fill="#fff"/><circle cx="40" cy="70" r="5" fill="#fff"/><circle cx="70" cy="70" r="5" fill="#fff"/><circle cx="55" cy="55" r="5" fill="#fff"/><rect x="95" y="35" width="65" height="65" rx="10" fill="#8B5FBF" stroke="#2E1147" stroke-width="2"/><circle cx="127" cy="67" r="5" fill="#fff"/></svg>'},
   ]
 },
 {
@@ -997,9 +1079,10 @@ const TOPICS = [
   theory:{h:'¿De qué trata este tema?',
     intro:"Las medidas de dispersión te dicen qué tan 'esparcidos' o 'juntos' están los datos respecto al centro de la distribución (la media). El RANGO es la más simple: la diferencia entre el dato mayor y el menor. La VARIANZA es más precisa: promedia el cuadrado de las diferencias de cada dato respecto a la media (se eleva al cuadrado para que los negativos no se cancelen con los positivos). La DESVIACIÓN ESTÁNDAR es la raíz cuadrada de la varianza, y es la más usada porque regresa a las unidades originales de los datos.",
     formulas:['σ² = Σ(x−media)² / n','σ = √σ²'], text:''},
-  example:{ q:'Con diferencias 206, 76, −224, 36, −94 respecto a la media, encuentra la varianza y desviación estándar.',
-    steps:['σ² = (206²+76²+(−224)²+36²+(−94)²) / 5.','Suma de cuadrados = 108,520.','108520/5 = 21,704.'],
-    result:'σ² = 21,704   σ = √21,704 ≈ 147' },
+  example:{ q:'5 perros miden 600, 470, 170, 430 y 300 mm de altura. Encuentra la media, la varianza y la desviación estándar.',
+    diagram:'<svg viewBox="0 0 300 230" xmlns="http://www.w3.org/2000/svg"><line x1="30" y1="20" x2="30" y2="200" stroke="#999" stroke-width="1.5"/><line x1="30" y1="200" x2="280" y2="200" stroke="#999" stroke-width="1.5"/><text x="4" y="24" font-size="10" fill="#666" font-family="monospace">600</text><text x="4" y="114" font-size="10" fill="#666" font-family="monospace">300</text><text x="14" y="204" font-size="10" fill="#666" font-family="monospace">0</text><rect x="30" y="37.7" width="250" height="88.2" fill="#D9A441" fill-opacity="0.2"/><line x1="30" y1="81.8" x2="280" y2="81.8" stroke="#D9A441" stroke-width="2" stroke-dasharray="5,3"/><text x="200" y="78" font-size="10" fill="#D9A441" font-family="monospace">media=394</text><g transform="translate(70,20)"><ellipse rx="9" ry="6" fill="#5B2C87"/><polygon points="-6,-5 -3,-13 0,-5" fill="#5B2C87"/><polygon points="0,-5 3,-13 6,-5" fill="#5B2C87"/></g><text x="58" y="15" font-size="9" fill="#2E1147" font-family="monospace">600</text><g transform="translate(120,59)"><ellipse rx="9" ry="6" fill="#5B2C87"/><polygon points="-6,-5 -3,-13 0,-5" fill="#5B2C87"/><polygon points="0,-5 3,-13 6,-5" fill="#5B2C87"/></g><text x="108" y="52" font-size="9" fill="#2E1147" font-family="monospace">470</text><g transform="translate(170,149)"><ellipse rx="9" ry="6" fill="#5B2C87"/><polygon points="-6,-5 -3,-13 0,-5" fill="#5B2C87"/><polygon points="0,-5 3,-13 6,-5" fill="#5B2C87"/></g><text x="158" y="144" font-size="9" fill="#2E1147" font-family="monospace">170</text><g transform="translate(220,71)"><ellipse rx="9" ry="6" fill="#5B2C87"/><polygon points="-6,-5 -3,-13 0,-5" fill="#5B2C87"/><polygon points="0,-5 3,-13 6,-5" fill="#5B2C87"/></g><text x="208" y="64" font-size="9" fill="#2E1147" font-family="monospace">430</text><g transform="translate(260,110)"><ellipse rx="9" ry="6" fill="#5B2C87"/><polygon points="-6,-5 -3,-13 0,-5" fill="#5B2C87"/><polygon points="0,-5 3,-13 6,-5" fill="#5B2C87"/></g><text x="248" y="103" font-size="9" fill="#2E1147" font-family="monospace">300</text></svg>',
+    steps:['Media = (600+470+170+430+300)/5 = 1970/5 = 394 mm.','Diferencias respecto a la media: 206, 76, −224, 36, −94.','σ² = (206²+76²+(−224)²+36²+(−94)²) / 5 = 108,520/5 = 21,704.'],
+    result:'Media = 394mm   σ² = 21,704   σ = √21,704 ≈ 147mm' },
   qs:[]
 },
 ];
@@ -1065,6 +1148,7 @@ TOPICS.forEach(t => {
     exampleHtml = `<div class="example-box">
       <span class="tag">Ejemplo resuelto</span>
       <div class="ex-q">${t.example.q}</div>
+      ${t.example.diagram ? `<div class="diagram">${t.example.diagram}</div>` : ''}
       ${t.example.steps.map((s,i)=>`<div class="ex-step"><span class="bullet">${i+1}</span><span>${s}</span></div>`).join('')}
       <div class="ex-result">→ ${t.example.result}</div>
     </div>`;
@@ -1102,6 +1186,7 @@ TOPICS.forEach(t => {
         <span class="qnum">${String(qi+1).padStart(2,'0')}</span>
         <div class="qtext">${item.q}</div>
       </div>
+      ${item.diagram ? `<div class="diagram">${item.diagram}</div>` : ''}
       ${answerRow}
       <div class="answer" id="answer-${cardId}">
         <div class="answer-inner">${item.a}${item.steps ? `<span class="steps">${item.steps}</span>` : ''}</div>
