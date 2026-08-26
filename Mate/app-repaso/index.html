@@ -201,6 +201,20 @@ const CATEGORIES = [
 const TOPICS = [
 // ---------------- CONJUNTOS ----------------
 {
+  id:'union', cat:'conjuntos', title:'Unión de conjuntos', desc:'A ∪ B · Juntar todos los elementos de dos conjuntos.',
+  theory:{h:'¿De qué trata este tema?',
+    intro:"La unión (∪) de dos conjuntos junta TODOS los elementos que aparecen en cualquiera de los dos conjuntos, sin repetir ninguno. Si un número aparece en ambos conjuntos, solo lo escribes una vez en el resultado. Si dibujas dos círculos que se traslapan (diagrama de Venn), la unión es TODO lo que cubren los dos círculos juntos — tanto lo que comparten como lo que no.",
+    formulas:['A ∪ B'], text:''},
+  example:{ q:'A={1,2,3}, B={3,4,5}. Encuentra A ∪ B.',
+    steps:['Junta todos los elementos de A y de B.','El 3 aparece en ambos, pero solo se escribe una vez.'],
+    result:'A ∪ B = {1, 2, 3, 4, 5}' },
+  qs:[
+    {q:'A={2,4,6}, B={1,3,5}. Encuentra A ∪ B.', a:'{1,2,3,4,5,6}', accept:['{1,2,3,4,5,6}']},
+    {q:'X={2,−5,6,−7,8}, A={−1,−2,−3,1,2,3}. Encuentra X ∪ A.', a:'{−7,−5,−3,−2,−1,1,2,3,6,8}', qType:'open'},
+    {q:'Si A tiene 5 elementos y B tiene 3 elementos, y no comparten ninguno, ¿cuántos elementos tiene A ∪ B?', a:'8', accept:['8']},
+  ]
+},
+{
   id:'interseccion', cat:'conjuntos', title:'Intersección de conjuntos', desc:'a.1.14.9 · Elementos que comparten dos conjuntos.',
   theory:{h:'¿De qué trata este tema?',
     intro:"La intersección (∩) de dos conjuntos son los elementos que aparecen en AMBOS conjuntos a la vez, no basta con que estén en uno solo. Si dibujas dos círculos que se traslapan, la intersección es justo la zona donde se sobreponen. Para encontrarla a mano, revisa elemento por elemento de un conjunto y pregúntate si también aparece en el otro; si no comparten ningún elemento, su intersección es el conjunto vacío (∅).",
@@ -422,29 +436,68 @@ const TOPICS = [
   ]
 },
 {
-  id:'polinomios', cat:'algebra', title:'Multiplicación de polinomios', desc:'Monomio por monomio, por binomio, y binomio por binomio.',
+  id:'raiz-cuadrada-cubica', cat:'algebra', title:'Raíz cuadrada y cúbica', desc:'Simplificar radicales factorizando cuadrados y cubos perfectos.',
   theory:{h:'¿De qué trata este tema?',
-    intro:"Multiplicar polinomios significa que cada término del primer polinomio se multiplica por cada término del segundo, sin excepción, y al final se suman (o restan) los términos semejantes para simplificar. Con un monomio (un solo término) es más simple: multiplicas los coeficientes numéricos y sumas los exponentes de cada variable. Con binomio por binomio, usa el orden 'primeros, exteriores, interiores, últimos' para no olvidar ningún par de términos.",
-    formulas:['(2xy)(4y) = 8xy²'], text:''},
+    intro:"La raíz cuadrada de un número pregunta '¿qué número multiplicado por sí mismo da esto?'; la raíz cúbica pregunta lo mismo pero con tres factores iguales. Cuando el número de adentro no es un cuadrado (o cubo) perfecto, se puede simplificar buscando el factor más grande que SÍ sea un cuadrado (o cubo) perfecto escondido adentro, y sacándolo de la raíz.",
+    formulas:['√(a·b) = √a · √b','∛(a·b) = ∛a · ∛b'], text:'Cuadrados perfectos: 4,9,16,25,36,49,64,81,100… · Cubos perfectos: 8,27,64,125,216…'},
+  example:{ q:'Simplifica: √72',
+    steps:['Busca el cuadrado perfecto más grande que divide a 72: el 36 (72=36×2).','√72 = √36 × √2 = 6√2.'],
+    result:'6√2' },
+  qs:[
+    {q:'Simplifica: √48', a:'4√3', steps:'48=16×3', accept:['4√3','4sqrt3','4radical3']},
+    {q:'Simplifica: √98', a:'7√2', steps:'98=49×2', accept:['7√2','7sqrt2']},
+    {q:'Simplifica: ∛16', a:'2∛2', steps:'16=8×2', accept:['2∛2','2cbrt2']},
+    {q:'Simplifica: ∛54', a:'3∛2', steps:'54=27×2', accept:['3∛2','3cbrt2']},
+    {q:'Simplifica: ∛250', a:'5∛2', steps:'250=125×2', accept:['5∛2','5cbrt2']},
+    {q:'¿Cuánto es √121?', a:'11 (es un cuadrado perfecto exacto)', accept:['11']},
+    {q:'¿Cuánto es ∛125?', a:'5 (es un cubo perfecto exacto)', accept:['5']},
+  ]
+},
+{
+  id:'monomios-binomios-polinomios', cat:'algebra', title:'Monomios, binomios y polinomios', desc:'Los 4 tipos de multiplicación según cuántos términos tenga cada factor.',
+  theory:{h:'¿De qué trata este tema?',
+    intro:"Un monomio tiene 1 término, un binomio tiene 2, y un polinomio en general tiene varios. Multiplicarlos depende de cuántos términos tenga cada uno: monomio×monomio es lo más simple (multiplicas coeficientes y sumas exponentes); monomio×binomio reparte el monomio a cada término; binomio×monomio es igual pero al revés; y binomio×binomio multiplica cada uno de los dos términos del primero por cada uno de los dos del segundo.",
+    formulas:['(2xy)(4y) = 8xy²'], text:'1 término × 1 término · 1 término × 2 términos · 2 términos × 1 término · 2 términos × 2 términos'},
+  example:{ q:'Multiplica: 2x(x + 3xy)  (monomio por binomio)',
+    steps:['Reparte el 2x a cada término de adentro.','2x·x = 2x². 2x·3xy = 6x²y.'], result:'2x² + 6x²y' },
+  qs:[
+    {q:'Multiplica (monomio×monomio): (2xy)(4y)', a:'8xy²', accept:['8xy^2']},
+    {q:'Multiplica (binomio×monomio): (x² − x)(3y)', a:'3x²y − 3xy', accept:['3x^2y-3xy']},
+  ]
+},
+{
+  id:'multiplicacion-polinomios', cat:'algebra', title:'Multiplicación de polinomios', desc:'Binomio por binomio y polinomios más grandes.',
+  theory:{h:'¿De qué trata este tema?',
+    intro:"Para multiplicar dos binomios, usa el orden 'primeros, exteriores, interiores, últimos' para no olvidar ningún par de términos. Para polinomios más grandes (como un trinomio por un binomio), el principio es el mismo: cada término del primero se multiplica por CADA término del segundo, sin excepción, y al final se suman los términos semejantes para simplificar.",
+    formulas:[], text:''},
   example:{ q:'Multiplica: (x + 3)(x + 5)',
     steps:['Primeros: x·x=x².','Exteriores: x·5=5x.','Interiores: 3·x=3x.','Últimos: 3·5=15.','Suma semejantes: 5x+3x=8x.'],
     result:'x² + 8x + 15' },
   qs:[
-    {q:'Multiplica: (2xy)(4y)', a:'8xy²', accept:['8xy^2']},
-    {q:'Multiplica: 2x(x + 3xy)', a:'2x² + 6x²y', accept:['2x^2+6x^2y']},
-    {q:'Multiplica: (x² − x)(3y)', a:'3x²y − 3xy', accept:['3x^2y-3xy']},
     {q:'Multiplica: (3x² + 2x − 8)(x + 5)', a:'3x³ + 17x² + 2x − 40', accept:['3x^3+17x^2+2x-40']},
+    {q:'Multiplica: (5x³ − 2x + 9)(2x³ − x² + 1)', a:'10x⁶ − 5x⁵ − 4x⁴ + 25x³ − 9x² − 2x + 9', qType:'open'},
   ]
 },
 {
-  id:'notables', cat:'algebra', title:'Productos notables', desc:'Binomio al cuadrado, conjugados y binomio al cubo.',
+  id:'binomio-cuadrado', cat:'algebra', title:'Binomio al cuadrado', desc:'(a+b)² = a²+2ab+b² — el trinomio cuadrado perfecto.',
   theory:{h:'¿De qué trata este tema?',
-    intro:"Los productos notables son multiplicaciones de binomios tan comunes que ya tienen un resultado memorizable, sin necesidad de multiplicar término por término cada vez. Reconocer el patrón te ahorra pasos: ¿es un binomio al cuadrado (mismo binomio dos veces)? ¿son conjugados (mismos términos, signo opuesto en medio)? ¿es un binomio al cubo? Una vez identificado el patrón, aplicas la fórmula directo sin multiplicar todo.",
-    formulas:['(a+b)² = a²+2ab+b²','(a+b)(a−b) = a²−b²','(a+b)³ = a³+3a²b+3ab²+b³'], text:''},
+    intro:"Elevar un binomio al cuadrado significa multiplicarlo por sí mismo. En vez de hacer la multiplicación completa cada vez, existe un atajo memorizable: el cuadrado del primer término, más el doble producto de ambos términos, más el cuadrado del segundo término. El resultado de esta operación se llama 'trinomio cuadrado perfecto'.",
+    formulas:['(a+b)² = a²+2ab+b²','(a−b)² = a²−2ab+b²'], text:''},
   example:{ q:'Desarrolla (x + 4)²',
     steps:['(a+b)²=a²+2ab+b², con a=x, b=4.','a²=x². 2ab=2(x)(4)=8x. b²=16.'], result:'x² + 8x + 16' },
   qs:[
-    {q:'Desarrolla (x + 2)³', a:'x³ + 6x² + 12x + 8', accept:['x^3+6x^2+12x+8']},
+    {q:'Desarrolla (x + 5)²', a:'x² + 10x + 25', accept:['x^2+10x+25']},
+    {q:'Desarrolla (2x − 3)²', a:'4x² − 12x + 9', accept:['4x^2-12x+9']},
+  ]
+},
+{
+  id:'binomio-cubo', cat:'algebra', title:'Binomio al cubo', desc:'(a+b)³ = a³+3a²b+3ab²+b³',
+  theory:{h:'¿De qué trata este tema?',
+    intro:"Elevar un binomio al cubo también tiene un atajo memorizable, con cuatro términos: el cubo del primero, más tres veces el cuadrado del primero por el segundo, más tres veces el primero por el cuadrado del segundo, más el cubo del segundo. Si el binomio tiene un signo menos en medio, los términos van alternando signo (+,−,+,−).",
+    formulas:['(a+b)³ = a³+3a²b+3ab²+b³'], text:''},
+  example:{ q:'Desarrolla (x + 2)³',
+    steps:['a=x, b=2.','a³=x³. 3a²b=3(x²)(2)=6x². 3ab²=3(x)(4)=12x. b³=8.'], result:'x³ + 6x² + 12x + 8' },
+  qs:[
     {q:'Desarrolla (3x − 2)³', a:'27x³ − 54x² + 36x − 8', accept:['27x^3-54x^2+36x-8']},
     {q:'Desarrolla (2x + 5)³', a:'8x³ + 60x² + 150x + 125', accept:['8x^3+60x^2+150x+125']},
   ]
@@ -467,6 +520,19 @@ const TOPICS = [
     {q:'Factoriza: 8x² − 6x − 2', a:'2(4x + 1)(x − 1)', accept:['2(4x+1)(x-1)']},
     {q:'Factoriza: a² + a⁴ − a⁶', a:'a²(1 + a² − a⁴)', qType:'open'},
     {q:'Factoriza: 3x²y² + 15xy² − 25xy', a:'xy(3xy + 15y − 25)', qType:'open'},
+  ]
+},
+{
+  id:'factor-comun-agrupacion', cat:'algebra', title:'Factor común por agrupación', desc:'Cuando el factor común es un binomio completo, no solo un término.',
+  theory:{h:'¿De qué trata este tema?',
+    intro:"A veces el factor que se repite no es un simple número o variable, sino un BINOMIO completo que aparece en más de un término de la expresión. Se aplica el mismo principio del factor común: identificas el binomio que se repite, y lo 'sacas' fuera de un paréntesis, dejando el resto como el otro factor.",
+    formulas:['a(x+1) − b(x+1) = (x+1)(a−b)'], text:''},
+  example:{ q:'Factoriza: x(y+2) + 3(y+2)',
+    steps:['El binomio (y+2) se repite en ambos términos.','Sácalo como factor común: (y+2) multiplicado por lo que queda de cada término (x y 3).'],
+    result:'(y+2)(x+3)' },
+  qs:[
+    {q:'Factoriza: a(x+1) − b(x+1)', a:'(x+1)(a−b)', accept:['(x+1)(a-b)']},
+    {q:'Factoriza: 5(m−3) + n(m−3)', a:'(m−3)(5+n)', accept:['(m-3)(5+n)']},
   ]
 },
 {
@@ -613,33 +679,100 @@ const TOPICS = [
   ]
 },
 {
-  id:'sistemas', cat:'algebra', title:'Sistemas de ecuaciones 2×2', desc:'Sustitución, igualación, suma-resta, gráfico y determinantes.',
+  id:'sistemas-intro', cat:'algebra', title:'Introducción a sistemas de ecuaciones', desc:'Qué es un sistema y qué significa su solución.',
   theory:{h:'¿De qué trata este tema?',
-    intro:"Un sistema de ecuaciones 2×2 tiene dos incógnitas (x, y) y dos ecuaciones que deben cumplirse SIMULTÁNEAMENTE. Hay varios caminos válidos: sustitución (despejas una variable y la metes en la otra ecuación), igualación (despejas la misma variable en ambas y las igualas), suma y resta (sumas o restas para eliminar una variable), método gráfico (dibujas ambas rectas y ves dónde se cruzan), o determinantes (regla de Cramer). Todos, bien aplicados, dan la misma solución — usa el que te resulte más cómodo según cómo estén escritas las ecuaciones.",
-    formulas:['ΔS = a₁b₂ − a₂b₁'], text:'Solución única = rectas que se cruzan · infinitas = coincidentes · sin solución = paralelas'},
+    intro:"Un sistema de ecuaciones 2×2 son dos ecuaciones con las mismas dos incógnitas (x, y), que deben cumplirse AL MISMO TIEMPO. La solución del sistema es el par de valores (x, y) que hace que AMBAS ecuaciones sean verdaderas a la vez — no basta con que funcione en una sola. Gráficamente, cada ecuación es una recta, y la solución es el punto exacto donde esas rectas se cruzan.",
+    formulas:['{ a₁x + b₁y = c₁ ,  a₂x + b₂y = c₂ }'], text:'Un sistema puede tener una solución única, infinitas soluciones, o ninguna solución.'},
+  example:{ q:'¿El par (2,3) es solución del sistema x+y=5, 2x−y=1?',
+    steps:['Prueba en la primera ecuación: 2+3=5 ✓ se cumple.','Prueba en la segunda ecuación: 2(2)−3=4−3=1 ✓ también se cumple.'],
+    result:'Sí, (2,3) es solución porque cumple ambas ecuaciones a la vez' },
+  qs:[
+    {q:'¿El par (1,4) es solución del sistema x+y=5, x−y=−3?', a:'Sí — cumple ambas: 1+4=5 y 1−4=−3', qType:'open'},
+    {q:'Si graficas las dos ecuaciones de un sistema y las rectas resultan paralelas, ¿cuántas soluciones tiene el sistema?', a:'Ninguna (las rectas nunca se cruzan)', qType:'open'},
+  ]
+},
+{
+  id:'sistemas-sustitucion', cat:'algebra', title:'Sistemas de ecuaciones: Método de Sustitución', desc:'Despeja una variable y sustitúyela en la otra ecuación.',
+  theory:{h:'¿De qué trata este tema?',
+    intro:"En el método de sustitución, despejas una de las variables en UNA de las ecuaciones (la que te resulte más fácil), y sustituyes esa expresión en la OTRA ecuación. Esto te deja una sola ecuación con una sola incógnita, que puedes resolver directamente. Una vez que tienes esa primera variable, la sustituyes de regreso para encontrar la segunda.",
+    formulas:[], text:''},
+  example:{ q:'Resuelve por sustitución: x + y = 3,  2x + 5y = 21',
+    steps:['Despeja x en la primera ecuación (la más simple): x = 3 − y.','Sustituye esa expresión en la segunda ecuación: 2(3−y) + 5y = 21.','Resuelve: 6 − 2y + 5y = 21 → 3y = 15 → y = 5.','Sustituye y=5 de regreso: x = 3 − 5 = −2.'],
+    result:'x = −2,  y = 5' },
+  qs:[
+    {q:'Resuelve por sustitución: 7x+2y=3,  x−3y=30', a:'x = 3, y = −9', accept:['x=3,y=-9','3,-9']},
+  ]
+},
+{
+  id:'sistemas-igualacion', cat:'algebra', title:'Sistemas de ecuaciones: Método de Igualación', desc:'Despeja la misma variable en ambas ecuaciones e iguálalas.',
+  theory:{h:'¿De qué trata este tema?',
+    intro:"En el método de igualación, despejas LA MISMA variable en las DOS ecuaciones por separado. Como ambas expresiones son iguales a esa misma variable, puedes igualarlas entre sí — esto elimina la variable y te deja una ecuación con una sola incógnita.",
+    formulas:[], text:''},
+  example:{ q:'Resuelve por igualación: 2x+5y=−1,  3x−2y=27',
+    steps:['Despeja x en ambas: de la 1ª, x=(−1−5y)/2. De la 2ª, x=(27+2y)/3.','Iguala las dos expresiones: (−1−5y)/2 = (27+2y)/3.','Resuelve: 3(−1−5y) = 2(27+2y) → −3−15y = 54+4y → −19y=57 → y=−3.','Sustituye: x=(27+2(−3))/3 = 21/3 = 7.'],
+    result:'x = 7,  y = −3' },
+  qs:[
+    {q:'Resuelve por igualación: 4x−3y=−18,  6x+7y=−4', a:'x = −3, y = 2', accept:['x=-3,y=2','-3,2']},
+  ]
+},
+{
+  id:'sistemas-suma-resta', cat:'algebra', title:'Sistemas de ecuaciones: Método de suma o resta', desc:'Suma o resta las ecuaciones para eliminar una variable.',
+  theory:{h:'¿De qué trata este tema?',
+    intro:"En el método de suma y resta (también llamado eliminación o reducción), preparas las ecuaciones multiplicándolas por los números que convenga, para que una variable tenga coeficientes opuestos (o iguales). Al sumar (o restar) las dos ecuaciones, esa variable se cancela, dejándote una sola ecuación con una sola incógnita.",
+    formulas:[], text:''},
   example:{ q:'Resuelve por suma y resta: 3x − 4y = −6,  2x + 4y = 16',
-    steps:['Los términos "−4y" y "+4y" son opuestos: súmalas directamente.','(3x−4y)+(2x+4y) = −6+16 → 5x=10 → x=2.','Sustituye en la 2ª ecuación: 2(2)+4y=16 → y=3.'],
+    steps:['Los términos "−4y" y "+4y" ya son opuestos: súmalas directamente.','(3x−4y)+(2x+4y) = −6+16 → 5x=10 → x=2.','Sustituye en la 2ª ecuación: 2(2)+4y=16 → y=3.'],
     result:'x = 2, y = 3' },
   qs:[
-    {q:'Resuelve por sustitución: 2x+5y=21,  x+y=3', a:'x = −2, y = 5', accept:['x=-2,y=5','-2,5']},
-    {q:'Resuelve por sustitución: 7x+2y=3,  x−3y=30', a:'x = 3, y = −9', accept:['x=3,y=-9','3,-9']},
-    {q:'Resuelve por igualación: 2x+5y=−1,  3x−2y=27', a:'x = 7, y = −3', accept:['x=7,y=-3','7,-3']},
-    {q:'Resuelve por igualación: 4x−3y=−18,  6x+7y=−4', a:'x = −3, y = 2', accept:['x=-3,y=2','-3,2']},
-    {q:'Usando determinantes: 5x−2y=−2,  −3x+7y=−22', a:'x = −2, y = −4', steps:'ΔS=29, ΔX=−58, ΔY=−116', accept:['x=-2,y=-4','-2,-4']},
+    {q:'Resuelve por sustitución o suma-resta: 2x+5y=21,  x+y=3', a:'x = −2, y = 5', accept:['x=-2,y=5','-2,5']},
+  ]
+},
+{
+  id:'sistemas-cramer', cat:'algebra', title:'Sistemas de ecuaciones: Método de Cramer o determinantes', desc:'Usa determinantes para despejar x y y directamente.',
+  theory:{h:'¿De qué trata este tema?',
+    intro:"El método de Cramer usa determinantes (un cálculo con los coeficientes del sistema) para encontrar x y y directamente, sin tener que despejar ni sustituir. Primero calculas el determinante del sistema (ΔS) con los coeficientes de x y y. Luego calculas ΔX (reemplazando la columna de x por los resultados) y ΔY (reemplazando la columna de y). Finalmente, x=ΔX/ΔS y y=ΔY/ΔS.",
+    formulas:['ΔS = a₁b₂ − a₂b₁','X = ΔX/ΔS      Y = ΔY/ΔS'], text:''},
+  example:{ q:'Usando determinantes: 5x−2y=−2,  −3x+7y=−22',
+    steps:['ΔS = (5)(7)−(−2)(−3) = 35−6 = 29.','ΔX = (−2)(7)−(−2)(−22) = −14−44 = −58 → x = −58/29 = −2.','ΔY = (5)(−22)−(−2)(−3) = −110−6 = −116 → y = −116/29 = −4.'],
+    result:'x = −2,  y = −4' },
+  qs:[
+    {q:'Sistema: 5X−2Y=−2, −3X+7Y=−22. ¿Cuál es ΔS (determinante del sistema)?', a:'29', steps:'(5)(7)−(−2)(−3)', accept:['29']},
   ]
 },
 
 // ---------------- GEOMETRÍA ----------------
 {
-  id:'pitagoras', cat:'geometria', title:'Teorema de Pitágoras', desc:'c² = a² + b², con demostración geométrica.',
+  id:'pitagoras-demostracion', cat:'geometria', title:'Teorema de Pitágoras: demostración geométrica', desc:'Construyendo cuadrados sobre cada lado del triángulo.',
   theory:{h:'¿De qué trata este tema?',
-    intro:"En todo triángulo RECTÁNGULO (con un ángulo de 90°), el cuadrado de la hipotenusa (el lado más largo, opuesto al ángulo recto) es igual a la suma de los cuadrados de los otros dos lados, los catetos. Puedes demostrarlo geométricamente construyendo un cuadrado sobre cada lado del triángulo: el área del cuadrado grande (sobre la hipotenusa) siempre es igual a la suma de las áreas de los dos cuadrados pequeños (sobre los catetos). Este teorema solo aplica a triángulos rectángulos, y es la base de la trigonometría.",
+    intro:"En todo triángulo RECTÁNGULO (con un ángulo de 90°), el cuadrado de la hipotenusa (el lado más largo, opuesto al ángulo recto) es igual a la suma de los cuadrados de los otros dos lados, los catetos. Lo puedes demostrar de forma geométrica: traza un triángulo rectángulo, y sobre cada uno de sus tres lados construye un cuadrado. Si recortas y cuentas los cuadritos, verás que el área del cuadrado grande (sobre la hipotenusa) es exactamente igual a la suma de las áreas de los dos cuadrados pequeños (sobre los catetos).",
     formulas:['c² = a² + b²'], text:''},
-  example:{ q:'Triángulo rectángulo tiene catetos de 9 cm y 12 cm. ¿Cuánto mide la hipotenusa?',
-    steps:['c² = 9² + 12² = 81 + 144 = 225.','c = √225.'], result:'c = 15 cm' },
+  example:{ q:'Triángulo rectángulo con catetos 3 y 4 cm. Construye un cuadrado sobre cada lado. ¿Cuántos cuadritos tiene cada cuadrado, y qué relación hay?',
+    steps:['El cuadrado sobre el cateto de 3cm tiene 3×3=9 cuadritos.','El cuadrado sobre el cateto de 4cm tiene 4×4=16 cuadritos.','9+16=25, que es exactamente el número de cuadritos del cuadrado sobre la hipotenusa (5×5).'],
+    result:'El cuadrado de la hipotenusa (25) es igual a la suma de los cuadrados de los catetos (9+16)' },
   qs:[
     {q:'Triángulo rectángulo con catetos de 6 cm y 8 cm. ¿Cuánto mide la hipotenusa?', a:'10 cm', accept:['10','10cm']},
-    {q:'Triángulo con a=10, b=20. ¿Cuánto mide la hipotenusa c?', a:'≈ 22.36', accept:['22.36','22.4']},
+  ]
+},
+{
+  id:'pitagoras-demostracion-2', cat:'geometria', title:'Teorema de Pitágoras: demostración geométrica 2', desc:'Deduce las medidas faltantes a partir de áreas de cuadrados.',
+  theory:{h:'¿De qué trata este tema?',
+    intro:"Esta vez, en lugar de partir de los lados del triángulo, partes de las ÁREAS de los cuadrados construidos sobre cada lado, y trabajas al revés: si conoces el área de dos de los tres cuadrados, puedes deducir el área (y por lo tanto el lado) del tercero, usando que el área grande es la suma de las dos pequeñas.",
+    formulas:['Área grande = Área pequeña 1 + Área pequeña 2'], text:''},
+  example:{ q:'Un cuadrado tiene área 9 cm² y otro (sobre el otro cateto) tiene lado 2.5 cm. ¿Cuál es el área del cuadrado sobre la hipotenusa?',
+    steps:['Área del segundo cuadrado: 2.5×2.5 = 6.25 cm².','Suma las dos áreas de los catetos: 9 + 6.25 = 15.25 cm².'],
+    result:'El área del cuadrado sobre la hipotenusa es 15.25 cm²' },
+  qs:[
+    {q:'Un cuadrado (sobre un cateto) tiene área 16 cm², y el cuadrado sobre la hipotenusa tiene área 25 cm². ¿Cuál es el lado del cuadrado que falta?', a:'3 cm', steps:'25−16=9, √9=3', accept:['3','3cm']},
+  ]
+},
+{
+  id:'pitagoras-aplicaciones', cat:'geometria', title:'Teorema de Pitágoras: aplicaciones', desc:'Problemas de la vida real que se resuelven con c²=a²+b².',
+  theory:{h:'¿De qué trata este tema?',
+    intro:"El Teorema de Pitágoras no solo sirve para triángulos dibujados — se usa para resolver problemas reales donde hay una distancia 'directa' (en diagonal) que no puedes medir fácilmente, pero sí conoces las dos distancias perpendiculares que la forman: alturas de escaleras, diagonales de cuadrados o rectángulos, distancias entre puntos en un mapa, etc.",
+    formulas:['c² = a² + b²        c = √(a² + b²)'], text:''},
+  example:{ q:'Triángulo con a=10, b=20. ¿Cuánto mide la hipotenusa c?',
+    steps:['c² = 10² + 20² = 100 + 400 = 500.','c = √500.'], result:'c ≈ 22.36' },
+  qs:[
     {q:'Tres ciudades M, Q, P: de Q a M hay 130 km (vertical), de Q a P hay 560 km (horizontal), formando un ángulo recto en Q. ¿Qué distancia hay de M a P?', a:'≈ 574.9 km', steps:'√(130²+560²)', qType:'open'},
     {q:'¿Cuánto medirá la diagonal de un cuadrado de 75 cm de lado?', a:'≈ 106.07 cm', steps:'75√2', accept:['106.07','106.1']},
     {q:'Una escalera de 12.5 m está apoyada a 5.7 m de la pared. ¿Qué altura alcanza en la pared?', a:'≈ 11.13 m', steps:'√(12.5²−5.7²)', accept:['11.13','11.1']},
@@ -659,14 +792,27 @@ const TOPICS = [
   ]
 },
 {
-  id:'trigonometria', cat:'geometria', title:'Triángulos rectángulos (trigonometría)', desc:'Seno, coseno y tangente para encontrar lados y ángulos.',
+  id:'trigonometria', cat:'geometria', title:'Resolución de triángulos rectángulos', desc:'Seno, coseno y tangente para encontrar lados y ángulos.',
   theory:{h:'¿De qué trata este tema?',
-    intro:"Dado un triángulo rectángulo con algunos datos conocidos (uno o dos lados, o un lado y un ángulo), puedes encontrar TODO lo demás usando seno, coseno y tangente. La estrategia siempre es: primero, si faltan lados, usa el Teorema de Pitágoras; después, plantea la razón trigonométrica adecuada según qué lados y ángulos conoces, y despeja lo que falta.",
+    intro:"Dado un triángulo rectángulo con algunos datos conocidos (un lado y un ángulo agudo), puedes encontrar TODO lo demás usando seno, coseno y tangente. Primero plantea las tres relaciones trigonométricas del ángulo que conoces, identifica cuál o cuáles son las adecuadas según los datos que tienes, y despeja lo que falta.",
     formulas:['sen θ = op/hip','cos θ = ady/hip','tan θ = op/ady'], text:''},
   example:{ q:'Triángulo con hipotenusa=10 y ángulo B=50°. Encuentra los catetos.',
     steps:['Cateto opuesto: b = 10 × sen(50°).','Cateto adyacente: a = 10 × cos(50°).'], result:'b ≈ 7.66,  a ≈ 6.42' },
   qs:[
-    {q:'Un avión despega a 37° y alcanza 1080 m de altura. ¿Cuántos metros ha volado (hipotenusa)?', a:'≈ 1,794 m', qType:'open'},
+    {q:'Triángulo con hipotenusa=10 y un ángulo agudo de 40°. ¿Cuánto mide el tercer ángulo (el otro agudo)?', a:'50°', steps:'180−(40+90)=50', accept:['50','50°']},
+  ]
+},
+{
+  id:'trigonometria-2', cat:'geometria', title:'Resolución de triángulos rectángulos 2', desc:'Más ejercicios: aplicaciones y área de triángulos.',
+  theory:{h:'¿De qué trata este tema?',
+    intro:"Estos ejercicios aplican la trigonometría a situaciones más variadas: problemas de la vida real (como el ángulo de despegue de un avión), encontrar ángulos sin usar transportador a partir de los lados, y calcular el área de triángulos usando la altura y el ángulo de la base.",
+    formulas:[], text:''},
+  example:{ q:'Un avión despega en un ángulo de 37° y alcanza una altura de 1080 m. ¿Cuántos metros ha volado (la hipotenusa de su trayectoria)?',
+    steps:['La altura es el cateto opuesto al ángulo de despegue.','sen(37°) = altura/distancia volada → distancia = altura/sen(37°).','distancia = 1080/sen(37°).'],
+    result:'≈ 1,794 m' },
+  qs:[
+    {q:'Con el mismo avión (despega a 37°, altura 1080m), ¿cuántos metros ha recorrido en tierra (la proyección horizontal)?', a:'≈ 1,433 m', steps:'tan(37°)=altura/distanciaTierra → distanciaTierra=1080/tan(37°)', qType:'open'},
+    {q:'Triángulo isósceles con altura de 7 cm y ángulo de la base de 57°. ¿Cuánto mide su área?', a:'≈ 63 cm²', qType:'open'},
   ]
 },
 {
@@ -752,28 +898,38 @@ const TOPICS = [
   ]
 },
 {
-  id:'porcentajes', cat:'aplicaciones', title:'Porcentajes', desc:'Descuentos, aumentos, IVA y ganancias sobre precios.',
+  id:'porcentajes', cat:'aplicaciones', title:'Problemas con porcentajes', desc:'Descuentos, aumentos y ganancias sobre precios.',
   theory:{h:'¿De qué trata este tema?',
-    intro:"Los problemas de porcentaje son parte esencial de la vida diaria: descuentos, aumentos de precio, impuestos (IVA), ganancias o pérdidas en ventas. La fórmula es siempre la misma: multiplicas el precio original por (1 más o menos el porcentaje como decimal) — sumas si es aumento, ganancia o impuesto; restas si es descuento o pérdida. Para saber qué porcentaje representa una cantidad de un total, divides la parte entre el total y multiplicas por 100.",
+    intro:"Los problemas de porcentaje son parte esencial de la vida diaria: descuentos, aumentos de precio, ganancias o pérdidas en ventas. La fórmula es siempre la misma: multiplicas el precio original por (1 más o menos el porcentaje como decimal) — sumas si es aumento o ganancia; restas si es descuento o pérdida. Para saber qué porcentaje representa una cantidad de un total, divides la parte entre el total y multiplicas por 100.",
     formulas:['Precio final = Precio × (1 ± p/100)'], text:''},
-  example:{ q:'Un pantalón sin IVA cuesta $625. Con IVA del 16%, ¿cuánto se paga?',
-    steps:['El IVA es un aumento del 16%.','625 × (1 + 0.16) = 625 × 1.16.'], result:'$725' },
+  example:{ q:'Un artículo comprado en $800 se vende con una ganancia del 15%. ¿Cuál es el precio de venta?',
+    steps:['La ganancia es un aumento del 15% sobre el precio de compra.','800 × (1 + 0.15) = 800 × 1.15.'], result:'$920' },
   qs:[
     {q:'De 800 alumnos, 600 fueron de viaje. ¿Qué porcentaje?', a:'75%', accept:['75%','75','0.75']},
     {q:'Moto de $50,000 cuesta ahora $2,500 más. ¿Porcentaje de aumento?', a:'5%', accept:['5%','5','0.05']},
     {q:'Vehículo de $88,000 con descuento del 7.5%. ¿Cuánto se paga?', a:'$81,400', accept:['81400','81,400','$81,400']},
     {q:'Monitor de $450 con descuento del 8%. ¿Cuánto se paga?', a:'$414', accept:['414','$414']},
-    {q:'Artículo comprado en $800, se vende con ganancia del 15%. ¿Precio de venta?', a:'$920', accept:['920','$920']},
     {q:'Objeto comprado en $150, se vende perdiendo 20% sobre el precio de compra. ¿Precio de venta?', a:'$120', accept:['120','$120']},
+    {q:'Compra de $280, para perder el 12% sobre el precio de venta, ¿qué precio de venta poner?', a:'$250', steps:'280 = venta×1.12', accept:['250','$250']},
+    {q:'Compra de 180€, para ganar 10% al vender, ¿qué precio marcar?', a:'198€', accept:['198','198€']},
+  ]
+},
+{
+  id:'porcentajes-2', cat:'aplicaciones', title:'Problemas con porcentajes 2', desc:'Más descuentos, aumentos e IVA.',
+  theory:{h:'¿De qué trata este tema?',
+    intro:"Segunda tanda de problemas de porcentaje, con más ejemplos de descuentos, aumentos por inflación (IPC) e IVA. El procedimiento es el mismo que en la primera parte: multiplicas el precio por (1 ± porcentaje/100), o divides la parte entre el total para encontrar qué porcentaje representa.",
+    formulas:['Precio final = Precio × (1 ± p/100)'], text:''},
+  example:{ q:'Un pantalón sin IVA cuesta $625. Con IVA del 16%, ¿cuánto se paga?',
+    steps:['El IVA es un aumento del 16%.','625 × (1 + 0.16) = 625 × 1.16.'], result:'$725' },
+  qs:[
     {q:'Zapatos de $360 con descuento del 10%. ¿Cuánto se paga?', a:'$324', accept:['324','$324']},
     {q:'Libro de $150 ahora cuesta $165. ¿Qué porcentaje más caro es?', a:'10%', accept:['10%','10','0.1']},
     {q:'Bosque con 65% de pinos, de 12,000 árboles. ¿Cuántos pinos?', a:'7,800 pinos', accept:['7800','7,800']},
-    {q:'Salario de $80,000/mes, IPC sube 3.5%. ¿Cuánto debe ganar este año?', a:'$82,800', accept:['82800','82,800','$82,800']},
-    {q:'Camisa de $380 con rebaja del 15%. ¿Cuánto se paga?', a:'$323', accept:['323','$323']},
-    {q:'Compra de $280, para perder el 12% sobre el precio de venta, ¿qué precio de venta poner?', a:'$250', steps:'280 = venta×1.12', accept:['250','$250']},
     {q:'Pantalón sin IVA de $625, IVA del 16%. ¿Cuánto se paga?', a:'$725', accept:['725','$725']},
+    {q:'Salario de $80,000/mes, IPC sube 3.5%. ¿Cuánto debe ganar este año?', a:'$82,800', accept:['82800','82,800','$82,800']},
     {q:'Pan de $25 sin IVA (4%). ¿Cuánto se paga con IVA?', a:'$26', accept:['26','$26']},
     {q:'Persona que ganaba $44,800/mes, IPC sube 3%. ¿Cuánto debe ganar este año?', a:'$46,144', accept:['46144','46,144','$46,144']},
+    {q:'Camisa de $380 con rebaja del 15%. ¿Cuánto se paga?', a:'$323', accept:['323','$323']},
   ]
 },
 
@@ -1023,7 +1179,8 @@ function normalizeAnswer(s){
     .replace(/·/g,'').replace(/×/g,'')
     .replace(/,/g,'').replace(/€/g,'').replace(/\$/g,'')
     .replace(/años?/g,'').replace(/vueltas?/g,'').replace(/horas?/g,'')
-    .replace(/cm|km|mm|m2|m3|m³|m²/g,'');
+    .replace(/cm|km|mm|m2|m3|m³|m²/g,'')
+    .replace(/[{}]/g,'');
 }
 
 function markSolved(id){
