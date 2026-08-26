@@ -407,6 +407,12 @@ const TOPICS = [
     {q:'III. Calcula el primer término de una sucesión aritmética de 10 términos, si el último es 34 y la diferencia es 3.', a:'a₁ = 7', steps:'34 = a₁ + 3(10−1) → 34 = a₁ + 27', accept:['7']},
     {q:'En una sucesión aritmética a₁₂=−7 y d=−2. Encuentra a₁.', a:'a₁ = 15', steps:'−7 = a₁ + (−2)(11) → −7 = a₁ − 22', accept:['15']},
     {q:'En una sucesión aritmética a₂₀=−33 y a₁₂=−28. Encuentra a₁ y d.', a:'d = −5/8, calcula a₁ con ese valor', qType:'open'},
+    {q:'Con a₁=28, d=10, encuentra la fórmula general.', a:'xₙ = 10n + 18', qType:'open'},
+    {q:'Con a₁=35, d=4, encuentra la fórmula general.', a:'xₙ = 4n + 31', qType:'open'},
+    {q:'¿Cuál es la diferencia de la sucesión aritmética: 35, 32, 29, 26…?', a:'d = −3', accept:['-3','d=-3']},
+    {q:'¿Cuál es la diferencia de la sucesión aritmética: −3, −23, −43, −63…?', a:'d = −20', accept:['-20','d=-20']},
+    {q:'Con aₙ = −11 + 7n, encuentra a₁₄.', a:'87', steps:'-11+7(14)', accept:['87']},
+    {q:'Con aₙ = 65 − 100n, encuentra a₃.', a:'−235', steps:'65-100(3)', accept:['-235']},
   ]
 },
 {
@@ -509,6 +515,32 @@ const TOPICS = [
   ]
 },
 {
+  id:'binomios-termino-comun', cat:'algebra', title:'Binomios con término común', desc:'(x+a)(x+b) = x² + (a+b)x + ab',
+  theory:{h:'¿De qué trata este tema?',
+    intro:"Cuando dos binomios comparten el mismo primer término (por ejemplo, ambos empiezan con 'x' o con '2x'), hay un atajo: el resultado es ese término común al cuadrado, más la suma de los otros dos términos por el término común, más el producto de esos dos términos. Es básicamente el mismo patrón que 'primeros, exteriores, interiores, últimos', pero reconocerlo te ahorra pasos.",
+    formulas:['(x+a)(x+b) = x² + (a+b)x + ab'], text:''},
+  example:{ q:'Desarrolla (2x + 4)(2x − 5)',
+    steps:['El término común es 2x.','(2x)² = 4x².','Suma de los otros términos por el común: (4−5)(2x) = −2x.','Producto de los otros términos: (4)(−5) = −20.'],
+    result:'4x² − 2x − 20' },
+  qs:[
+    {q:'Desarrolla (6b − 5)(6b + 3)', a:'36b² − 12b − 15', accept:['36b^2-12b-15']},
+    {q:'Desarrolla (4y + 1)(4y + 8)', a:'16y² + 36y + 8', accept:['16y^2+36y+8']},
+    {q:'Desarrolla (3x² − 5)(3x² − 7)', a:'9x⁴ − 36x² + 35', accept:['9x^4-36x^2+35']},
+  ]
+},
+{
+  id:'introduccion-factorizacion', cat:'algebra', title:'Introducción a factorización', desc:'¿Qué son los factores y qué significa factorizar?',
+  theory:{h:'¿De qué trata este tema?',
+    intro:"Los números tienen factores: por ejemplo, en 2×3=6, el 2 y el 3 son factores de 6. Una expresión algebraica también tiene factores: en (x+3)(x+1)=x²+4x+3, los factores son (x+3) y (x+1). Factorizar es el proceso de encontrar esos factores — es decir, encontrar qué hay que multiplicar para obtener una expresión dada. Es literalmente lo opuesto a multiplicar (expandir).",
+    formulas:['(x+3)(x+1) = x² + 4x + 3'], text:'Factorizar = encontrar los factores que, multiplicados, dan la expresión original.'},
+  example:{ q:'¿Cuáles son los factores en 2 × 3 = 6? ¿Y en (x+3)(x+1) = x²+4x+3?',
+    steps:['En 2×3=6, los factores son 2 y 3 — son los números que se multiplican para dar 6.','En (x+3)(x+1)=x²+4x+3, los factores son los binomios (x+3) y (x+1).'],
+    result:'Factorizar x²+4x+3 significa encontrar que es igual a (x+3)(x+1)' },
+  qs:[
+    {q:'¿Qué es la factorización?', a:'El proceso de encontrar los factores de una expresión — es decir, encontrar qué hay que multiplicar para obtenerla.', qType:'open'},
+  ]
+},
+{
   id:'factor-comun', cat:'algebra', title:'Factor común', desc:'El primer paso siempre en cualquier factorización.',
   theory:{h:'¿De qué trata este tema?',
     intro:"Factorizar es el proceso inverso a multiplicar: partes de una expresión ya expandida y la reescribes como un producto de factores más simples. El factor común es siempre el PRIMER paso a intentar en cualquier factorización: buscas el número y/o variable más grande que se repite en todos los términos, y lo 'sacas' fuera de un paréntesis. Si te saltas este paso, tu factorización queda incompleta aunque el resto esté bien hecho.",
@@ -526,6 +558,8 @@ const TOPICS = [
     {q:'Factoriza: 8x² − 6x − 2', a:'2(4x + 1)(x − 1)', accept:['2(4x+1)(x-1)']},
     {q:'Factoriza: a² + a⁴ − a⁶', a:'a²(1 + a² − a⁴)', qType:'open'},
     {q:'Factoriza: 3x²y² + 15xy² − 25xy', a:'xy(3xy + 15y − 25)', qType:'open'},
+    {q:'Factoriza: 8a − 4b + 16c + 12d', a:'4(2a − b + 4c + 3d)', accept:['4(2a-b+4c+3d)']},
+    {q:'Factoriza: 9x²ab − 3xa²b³ + x²az', a:'xa(9xb − 3ab² + xz)', qType:'open'},
   ]
 },
 {
@@ -621,6 +655,20 @@ const TOPICS = [
   ]
 },
 {
+  id:'diagrama-factorizacion', cat:'algebra', title:'Diagrama para elegir el método de factorización', desc:'Un mapa mental para decidir qué caso aplicar según el polinomio.',
+  theory:{h:'¿De qué trata este tema?',
+    intro:"Con tantos casos de factorización, puede ser difícil saber cuál usar. Este diagrama te ayuda a decidir: primero SIEMPRE revisa si hay factor común. Si no lo hay (o ya lo sacaste), cuenta cuántos términos quedan: 2 términos (binomio) → probablemente diferencia de cuadrados; 3 términos (trinomio) → puede ser cuadrado perfecto, o de la forma x²+bx+c, o ax²+bx+c; 4 o más términos → factor común por agrupación (asociación).",
+    formulas:[], text:''},
+  example:{ q:'¿Qué camino sigues para decidir cómo factorizar un polinomio?',
+    diagram:'<svg viewBox="0 0 380 260" xmlns="http://www.w3.org/2000/svg" font-family="monospace"><rect x="10" y="105" width="70" height="34" rx="6" fill="#5B2C87"/><text x="45" y="126" font-size="11" fill="#fff" text-anchor="middle">Factorizar</text><line x1="80" y1="122" x2="110" y2="70" stroke="#999" stroke-width="1.5"/><line x1="80" y1="122" x2="110" y2="160" stroke="#999" stroke-width="1.5"/><rect x="110" y="52" width="80" height="34" rx="6" fill="#8B5FBF"/><text x="150" y="73" font-size="10" fill="#fff" text-anchor="middle">Factor común</text><rect x="110" y="142" width="80" height="34" rx="6" fill="#8B5FBF"/><text x="150" y="159" font-size="9.5" fill="#fff" text-anchor="middle">No es factor</text><text x="150" y="171" font-size="9.5" fill="#fff" text-anchor="middle">común</text><line x1="190" y1="159" x2="220" y2="110" stroke="#999" stroke-width="1.5"/><line x1="190" y1="159" x2="220" y2="159" stroke="#999" stroke-width="1.5"/><line x1="190" y1="159" x2="220" y2="210" stroke="#999" stroke-width="1.5"/><rect x="220" y="92" width="70" height="30" rx="6" fill="#D9A441"/><text x="255" y="111" font-size="10" fill="#2E1147" text-anchor="middle">Binomio</text><rect x="220" y="144" width="70" height="30" rx="6" fill="#D9A441"/><text x="255" y="163" font-size="10" fill="#2E1147" text-anchor="middle">Trinomio</text><rect x="220" y="196" width="70" height="34" rx="6" fill="#D9A441"/><text x="255" y="213" font-size="8.5" fill="#2E1147" text-anchor="middle">Polinomio de</text><text x="255" y="224" font-size="8.5" fill="#2E1147" text-anchor="middle">4 o más</text><line x1="290" y1="107" x2="310" y2="107" stroke="#999" stroke-width="1.5"/><rect x="300" y="90" width="78" height="30" rx="6" fill="#3E8E5C"/><text x="339" y="109" font-size="8" fill="#fff" text-anchor="middle">Diferencia de</text><text x="339" y="118" font-size="7" fill="#fff" text-anchor="middle" dy="0"> </text><line x1="290" y1="159" x2="305" y2="145" stroke="#999" stroke-width="1.5"/><line x1="290" y1="159" x2="305" y2="175" stroke="#999" stroke-width="1.5"/></svg>',
+    steps:['1) ¿Hay factor común entre todos los términos? Sácalo primero.','2) Cuenta los términos que quedan: ¿2 (binomio), 3 (trinomio), o 4+?','3) Si es binomio → diferencia de cuadrados. Si es trinomio → cuadrado perfecto, o busca dos números (x²+bx+c), o usa fórmula general (ax²+bx+c). Si son 4+ términos → factor común por agrupación.'],
+    result:'Sigue el árbol de decisión paso a paso, de izquierda a derecha' },
+  qs:[
+    {q:'Un polinomio tiene 4 términos y no tiene factor común evidente entre todos. ¿Qué caso de factorización deberías probar?', a:'Factor común por agrupación (asociación)', qType:'open'},
+    {q:'Después de sacar el factor común, quedan solo 2 términos que son cuadrados perfectos separados por un signo menos. ¿Qué caso aplicas?', a:'Diferencia de cuadrados', qType:'open'},
+  ]
+},
+{
   id:'factorizacion-combinada', cat:'algebra', title:'Factorización combinada', desc:'Aplicar dos o más casos en el mismo polinomio.',
   theory:{h:'¿De qué trata este tema?',
     intro:"Muchos polinomios requieren aplicar DOS O MÁS casos de factorización en la misma expresión, uno después del otro. La estrategia siempre es la misma: primero busca si hay factor común a todos los términos (sácalo), y luego mira qué patrón queda en el paréntesis restante — puede ser diferencia de cuadrados, trinomio cuadrado perfecto, o un trinomio general. Ve paso a paso y no te detengas hasta que ya no se pueda factorizar más.",
@@ -691,10 +739,12 @@ const TOPICS = [
   theory:{h:'¿De qué trata este tema?',
     intro:"Un sistema de ecuaciones 2×2 son dos ecuaciones con las mismas dos incógnitas (x, y), que deben cumplirse AL MISMO TIEMPO. La solución del sistema es el par de valores (x, y) que hace que AMBAS ecuaciones sean verdaderas a la vez — no basta con que funcione en una sola. Gráficamente, cada ecuación es una recta, y la solución es el punto exacto donde esas rectas se cruzan.",
     formulas:['{ a₁x + b₁y = c₁ ,  a₂x + b₂y = c₂ }'], text:'Un sistema puede tener una solución única, infinitas soluciones, o ninguna solución.'},
-  example:{ q:'¿El par (2,3) es solución del sistema x+y=5, 2x−y=1?',
-    steps:['Prueba en la primera ecuación: 2+3=5 ✓ se cumple.','Prueba en la segunda ecuación: 2(2)−3=4−3=1 ✓ también se cumple.'],
-    result:'Sí, (2,3) es solución porque cumple ambas ecuaciones a la vez' },
+  example:{ q:'Tú puedes correr 0.2 km cada minuto. Un caballo puede correr 0.5 km cada minuto, pero tarda 6 minutos en ensillarlo. ¿Qué tan lejos puedes llegar antes de que el caballo te alcance?',
+    diagram:'<svg viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg"><line x1="30" y1="140" x2="190" y2="140" stroke="#999" stroke-width="1.5"/><line x1="30" y1="140" x2="30" y2="15" stroke="#999" stroke-width="1.5"/><text x="185" y="155" font-size="10" fill="#666" font-family="monospace">t</text><text x="15" y="18" font-size="10" fill="#666" font-family="monospace">d</text><line x1="30" y1="140" x2="180" y2="80" stroke="#5B2C87" stroke-width="2.5"/><text x="150" y="95" font-size="10" fill="#5B2C87" font-family="monospace">tú</text><line x1="85" y1="140" x2="180" y2="80" stroke="#D9A441" stroke-width="2.5"/><text x="150" y="70" font-size="10" fill="#D9A441" font-family="monospace">caballo</text><circle cx="180" cy="80" r="4" fill="#2E1147"/><text x="150" y="55" font-size="10" fill="#2E1147" font-family="monospace">¡te alcanza!</text></svg>',
+    steps:['Plantea dos ecuaciones: tú → d=0.2t; el caballo → d=0.5(t−6) (empieza 6 min tarde).','Iguala (ambas dan la misma distancia d cuando se encuentran): 0.2t = 0.5(t−6).','Resuelve: 0.2t = 0.5t−3 → −0.3t=−3 → t=10 minutos.','Sustituye: d = 0.2(10) = 2 km.'],
+    result:'Te alcanza a los 10 minutos, cuando ambos han recorrido 2 km' },
   qs:[
+    {q:'¿El par (2,3) es solución del sistema x+y=5, 2x−y=1?', a:'Sí — cumple ambas: 2+3=5 y 2(2)−3=1', qType:'open'},
     {q:'¿El par (1,4) es solución del sistema x+y=5, x−y=−3?', a:'Sí — cumple ambas: 1+4=5 y 1−4=−3', qType:'open'},
     {q:'Si graficas las dos ecuaciones de un sistema y las rectas resultan paralelas, ¿cuántas soluciones tiene el sistema?', a:'Ninguna (las rectas nunca se cruzan)', qType:'open'},
   ]
@@ -745,6 +795,10 @@ const TOPICS = [
     result:'x = −2,  y = −4' },
   qs:[
     {q:'Sistema: 5X−2Y=−2, −3X+7Y=−22. ¿Cuál es ΔS (determinante del sistema)?', a:'29', steps:'(5)(7)−(−2)(−3)', accept:['29']},
+    {q:'Resuelve con determinantes: 5x+6y=−10, 2x+3y=−1', a:'x = −8, y = 5', accept:['x=-8,y=5','-8,5']},
+    {q:'Resuelve con determinantes: 2x+3y=13, 4x+y=11', a:'x = 2, y = 3', accept:['x=2,y=3','2,3']},
+    {q:'Resuelve con determinantes: x+y=10, x−y=2', a:'x = 6, y = 4', accept:['x=6,y=4','6,4']},
+    {q:'Resuelve con determinantes: 2x+y=6, x−2y=8', a:'x = 4, y = −2', accept:['x=4,y=-2','4,-2']},
   ]
 },
 
@@ -818,6 +872,9 @@ const TOPICS = [
     steps:['Cateto opuesto: b = 10 × sen(50°).','Cateto adyacente: a = 10 × cos(50°).'], result:'b ≈ 7.66,  a ≈ 6.42' },
   qs:[
     {q:'Triángulo con hipotenusa=10 y un ángulo agudo de 40°. ¿Cuánto mide el tercer ángulo (el otro agudo)?', a:'50°', steps:'180−(40+90)=50', accept:['50','50°']},
+    {q:'Triángulo rectángulo con ángulo recto en C, catetos a=1 y b=2. ¿Cuánto mide la hipotenusa c?', a:'≈ 2.24', steps:'c=√(1²+2²)=√5', accept:['2.24','2.236','√5']},
+    {q:'Triángulo rectángulo con ángulo recto en C, ángulo B=26°, cateto a=5 (adyacente a B). ¿Cuánto mide el cateto b?', a:'≈ 2.44', steps:'b = a×tan(26°)', accept:['2.44','2.4']},
+    {q:'Triángulo rectángulo con ángulo recto en C, cateto a=6, hipotenusa c=15. ¿Cuánto mide el ángulo A?', a:'≈ 23.6°', steps:'sen A = a/c = 6/15 → A=arcsen(0.4)', accept:['23.6','23.58','23.6°']},
   ]
 },
 {
@@ -864,6 +921,7 @@ const TOPICS = [
   qs:[
     {q:'Traslada un rombo de 4cm de lado, 3cm hacia la derecha. ¿Cambia el tamaño del rombo?', a:'No — la traslación solo cambia la posición, nunca el tamaño ni la forma.', qType:'open'},
     {q:'Un pentágono de 3cm se traslada 6cm hacia abajo, y un círculo de r=3cm se traslada 2cm hacia la izquierda. ¿Alguna de las tres figuras cambia de tamaño?', a:'No, ninguna — la traslación nunca altera el tamaño de una figura, sin importar la distancia o dirección.', qType:'open'},
+    {q:'Un rectángulo de 7cm×4cm gira 60° en sentido de las manecillas del reloj, sobre uno de sus vértices. ¿Qué mide el rectángulo girado?', a:'Sigue midiendo 7cm×4cm — la rotación no cambia el tamaño, solo la orientación.', qType:'open'},
   ]
 },
 {
@@ -892,6 +950,7 @@ const TOPICS = [
   qs:[
     {q:'Un círculo tiene diámetro (4x−1). ¿Cuál es la expresión para el radio?', a:'(4x−1)/2', qType:'open'},
     {q:'Un octágono tiene un lado (x+3) y otra medida relacionada 3x. Si el área se plantea como A=lado×medida, ¿cuál es la expresión del área?', a:'A = (x+3)(3x) = 3x² + 9x', accept:['3x^2+9x']},
+    {q:'Un triángulo tiene base (2x+1) y altura (3x−2). Encuentra su área en términos de x.', a:'A = (6x²−x−2)/2', steps:'A=(base×altura)/2 = (2x+1)(3x−2)/2 = (6x²−4x+3x−2)/2', qType:'open'},
   ]
 },
 {
@@ -926,6 +985,13 @@ const TOPICS = [
     {q:'Jonathan ahorró $50,000 por 3 años y ganó $13,500 de interés. ¿Qué tasa le dieron?', a:'9% anual', accept:['9%','9','0.09']},
     {q:'Samuel pidió $45,000 por 2 años y pagó $6,300 de interés. ¿Tasa?', a:'7% anual', accept:['7%','7','0.07']},
     {q:'Sandra pidió $70,000 al 3% anual y pagó $8,400 de interés total. ¿Cuántos años?', a:'4 años', accept:['4','4años','4 años']},
+    {q:'Sara pidió $580,000 al 7.5% anual. Después de varios años había pagado $130,500 de intereses. ¿Cuántos años duró el préstamo?', a:'3 años', steps:'t=I/(C·i)=130500/(580000×0.075)', accept:['3','3años','3 años']},
+    {q:'Capital de $16,000 invertido 6 años al 10% anual. ¿Interés?', a:'$9,600', accept:['9600','$9600','9,600','$9,600']},
+    {q:'$17,000 durante 60 días a una tasa anual del 12%. ¿Interés?', a:'≈ $335.34', steps:'I=17000×0.12×(60/365)', accept:['335.34','335.3']},
+    {q:'Un banco pagó $970 de interés en un año a una cuenta con tasa del 2%. ¿Cuál fue el saldo (capital)?', a:'$48,500', steps:'C=I/(i×t)=970/0.02', accept:['48500','$48500','48,500']},
+    {q:'Por un préstamo de $20,000 se pagan $22,400 al cabo de un año. ¿Cuál es la tasa cobrada?', a:'12%', steps:'interés=22400−20000=2400; tasa=2400/20000', accept:['12%','12','0.12']},
+    {q:'$300,000 al 8% generaron $12,000 de interés. ¿Cuánto tiempo estuvo invertido?', a:'0.5 años (6 meses)', steps:'t=12000/(300000×0.08)', accept:['0.5','6meses','0.5años']},
+    {q:'Jenny pidió prestado $40,000 por 5 años al 6% anual. ¿Interés?', a:'$12,000', accept:['12000','$12000','12,000','$12,000']},
   ]
 },
 {
@@ -938,6 +1004,20 @@ const TOPICS = [
   qs:[
     {q:'Si Mi=$1,000, r=0.05 y n=3, ¿cuál es Mf?', a:'≈ $1,157.63', steps:'Mf=1000×(1.05)³', accept:['1157.63','1157.6','1157.625']},
     {q:'¿Qué significa que la tasa sea "capitalizable mensualmente"?', a:'Que el interés se calcula y se suma al capital cada mes, usando la tasa anual dividida entre 12.', qType:'open'},
+  ]
+},
+{
+  id:'regla-de-tres-inversa', cat:'aplicaciones', title:'Regla de tres inversa (simple)', desc:'Cuando una magnitud sube, la otra baja en la misma proporción.',
+  theory:{h:'¿De qué trata este tema?',
+    intro:"Dos magnitudes son inversamente proporcionales cuando el valor de una disminuye en la misma proporción que el otro aumenta. Por ejemplo, la luz y la distancia: entre más te alejas de una fuente de luz, menos brillante se ve. O la velocidad y el tiempo: entre más rápido vas, menos tiempo tardas en llegar. Cuando un problema tiene solo DOS magnitudes (a diferencia de la regla de tres compuesta, que tiene tres o más) y son inversamente proporcionales, usas una regla de tres simple inversa.",
+    formulas:['A₁/A₂ = C/x   →   x = (A₁ · C) / A₂'], text:''},
+  example:{ q:'4 personas pintan una cerca en 3 horas. ¿Cuánto tardarán 6 personas? (inversamente proporcional: más personas, menos horas)',
+    diagram:'<svg viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="10" width="20" height="70" fill="#C4493C"/><rect x="32" y="10" width="20" height="70" fill="#3E8E5C"/><rect x="54" y="10" width="20" height="70" fill="#D9A441"/><rect x="76" y="10" width="20" height="70" fill="#5B2C87"/><rect x="98" y="10" width="20" height="70" fill="#C4493C"/><rect x="120" y="10" width="20" height="70" fill="#8B5FBF"/><rect x="142" y="10" width="20" height="70" fill="#3E8E5C"/><rect x="164" y="10" width="20" height="70" fill="#D9A441"/></svg>',
+    steps:['A₁=4 personas, A₂=6 personas, C=3 horas.','Como es inversa: x = (A₁ × C) / A₂.','x = (4 × 3) / 6 = 12/6.'],
+    result:'x = 2 horas' },
+  qs:[
+    {q:'Un auto a 80 km/h tarda 3 horas en llegar a su destino. ¿Cuánto tardaría a 120 km/h?', a:'2 horas', steps:'x=(80×3)/120', accept:['2','2horas']},
+    {q:'8 grifos llenan una alberca en 6 horas. ¿Cuánto tardarían 12 grifos?', a:'4 horas', steps:'x=(8×6)/12', accept:['4','4horas']},
   ]
 },
 {
@@ -1023,6 +1103,8 @@ const TOPICS = [
     {q:'Se lanza un dado dos veces. ¿Probabilidad de que en el primero salga 3 y en el segundo un número impar?', a:'1/12 ≈ 8.3%', steps:'P(3)=1/6, P(impar)=3/6=1/2 → 1/6×1/2', accept:['1/12','8.3%','0.083'],
      diagram:'<svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg"><path d="M100,60 L60,15 A55,55 0 0,1 155,15 Z" fill="#C4493C"/><path d="M100,60 L155,15 A55,55 0 0,1 155,105 Z" fill="#3E8E5C"/><path d="M100,60 L155,105 A55,55 0 0,1 45,105 Z" fill="#8B5FBF"/><path d="M100,60 L45,105 A55,55 0 0,1 45,15 Z" fill="#D9A441"/><path d="M100,60 L45,15 A55,55 0 0,1 60,15 Z" fill="#C4493C"/><circle cx="100" cy="60" r="6" fill="#2E1147"/><line x1="100" y1="60" x2="65" y2="90" stroke="#2E1147" stroke-width="4"/></svg>'},
     {q:'Un estudiante responde al azar 5 preguntas de verdadero y falso. ¿Probabilidad de que acierte todas?', a:'1/32 ≈ 3.1%', steps:'P(acertar 1)=1/2, 5 preguntas → (1/2)⁵', accept:['1/32','3.1%','0.031']},
+    {q:'Se responden al azar 4 preguntas con 5 opciones cada una. ¿Probabilidad de acertar todas?', a:'1/625', steps:'(1/5)⁴', accept:['1/625','0.0016']},
+    {q:'La probabilidad de tener hijo o hija es ½. Al tener 3 hijos, ¿probabilidad de que exactamente 2 sean varones?', a:'3/8', steps:'3 casos favorables (HHM,HMH,MHH), cada uno con probabilidad 1/8 → 3×(1/8)', accept:['3/8','0.375']},
   ]
 },
 {
@@ -1072,7 +1154,28 @@ const TOPICS = [
   example:{ q:'Andrea trabajó: 2 semanas×1 día, 14 semanas×2 días, 8 semanas×5 días, 32 semanas×7 días. ¿Promedio de días?',
     steps:['Numerador: 2×1+14×2+8×5+32×7 = 2+28+40+224 = 294.','Denominador (semanas totales): 2+14+8+32 = 56.'],
     result:'294/56 = 5.25 días' },
-  qs:[]
+  qs:[
+    {q:'Los números 1, 2, 3 y 4 tienen los pesos 0.1, 0.2, 0.3 y 0.4 respectivamente. ¿Cuál es su media ponderada?', a:'3.0', steps:'1(0.1)+2(0.2)+3(0.3)+4(0.4)', accept:['3','3.0']},
+    {q:'Los números 40, 45, 80, 75 y 10 tienen los pesos 1, 2, 3, 4 y 5 respectivamente. ¿Cuál es su media ponderada?', a:'48', steps:'(40·1+45·2+80·3+75·4+10·5)/15', accept:['48']},
+    {q:'En clase de Alberto: tareas 30%, parciales 20%, final 50%. Sacó 8.5 en tareas, 7.2 en parciales y 6.1 en el final. ¿Cuál es su calificación final?', a:'7.04', steps:'0.3(8.5)+0.2(7.2)+0.5(6.1)', accept:['7.04']},
+    {q:'Un tenista metió su primer servicio el 80% en sus primeros 10 partidos, y el 50% en los siguientes 5. ¿Qué porcentaje de éxito tuvo en toda la temporada?', a:'70%', steps:'(10·0.8+5·0.5)/15', accept:['70%','70','0.7']},
+    {q:'En una clase de 30 estudiantes, 26 sacaron en promedio 6.5 en geografía y los demás (4) sacaron en promedio 7.7. ¿Cuál es la media de la clase completa?', a:'≈ 6.66', steps:'(26·6.5+4·7.7)/30', accept:['6.66','6.7']},
+    {q:'En gimnasia, el puntaje total pondera ejecución 80% y dificultad 20%. Graciela sacó 9.8 en ejecución y 9.5 de puntaje total. ¿Qué calificación tuvo en dificultad?', a:'8.3', steps:'9.5=0.8(9.8)+0.2d → despeja d', accept:['8.3']},
+  ]
+},
+{
+  id:'histogramas', cat:'probabilidad', title:'Histogramas', desc:'Gráficas de barras sin espacios para datos continuos.',
+  theory:{h:'¿De qué trata este tema?',
+    intro:"Un histograma es una gráfica que usa columnas verticales para mostrar frecuencias (cuántas veces ocurre cada resultado). La diferencia clave con una gráfica de barras normal: en el histograma NO debe haber espacios entre las barras, porque los datos son continuos (como peso, altura, o tiempo). En cambio, cuando los datos están en categorías (como nacionalidad o película favorita), sí se dejan espacios y se usa una gráfica de barras normal.",
+    formulas:[], text:'Histograma = datos continuos, sin espacios · Gráfica de barras = categorías, con espacios'},
+  example:{ q:'Cada mes, Eli registró cuánto peso ganó su cachorro: 0.5, 0.5, 0.3, −0.2, 1.6, 0, 0.1, 0.1, 0.6, 0.4 kg. Agrupa en intervalos de 0.5 y haz el histograma.',
+    diagram:'<svg viewBox="0 0 220 150" xmlns="http://www.w3.org/2000/svg"><line x1="30" y1="125" x2="200" y2="125" stroke="#999" stroke-width="1.5"/><line x1="30" y1="125" x2="30" y2="15" stroke="#999" stroke-width="1.5"/><rect x="30" y="105" width="34" height="20" fill="#5B2C87" stroke="#fff" stroke-width="1"/><rect x="64" y="25" width="34" height="100" fill="#5B2C87" stroke="#fff" stroke-width="1"/><rect x="98" y="65" width="34" height="60" fill="#5B2C87" stroke="#fff" stroke-width="1"/><rect x="132" y="125" width="34" height="0" fill="#5B2C87" stroke="#fff" stroke-width="1"/><rect x="166" y="105" width="34" height="20" fill="#5B2C87" stroke="#fff" stroke-width="1"/><text x="30" y="138" font-size="9" fill="#666" font-family="monospace">-0.5</text><text x="64" y="138" font-size="9" fill="#666" font-family="monospace">0</text><text x="98" y="138" font-size="9" fill="#666" font-family="monospace">0.5</text><text x="132" y="138" font-size="9" fill="#666" font-family="monospace">1</text><text x="166" y="138" font-size="9" fill="#666" font-family="monospace">1.5</text><text x="200" y="138" font-size="9" fill="#666" font-family="monospace">2</text></svg>',
+    steps:['Ordena los datos de menor a mayor: −0.2, 0, 0.1, 0.1, 0.3, 0.4, 0.5, 0.5, 0.6, 1.6.','Agrupa en intervalos de 0.5: de −0.5 a 0 (1 dato), de 0 a 0.5 (5 datos), de 0.5 a 1 (3 datos), de 1 a 1.5 (0 datos), de 1.5 a 2 (1 dato).','Dibuja una barra por intervalo, sin espacios entre ellas — aunque un intervalo tenga 0 datos, se deja el espacio en el eje.'],
+    result:'El histograma muestra que la mayoría de los meses el cachorro ganó entre 0 y 0.5 kg' },
+  qs:[
+    {q:'¿Por qué un histograma NO debe tener espacios entre las barras?', a:'Porque representa datos continuos (como peso o tiempo), donde los intervalos son consecutivos sin huecos entre categorías.', qType:'open'},
+    {q:'¿Cuándo se usa una gráfica de barras normal en vez de un histograma?', a:'Cuando los datos están en categorías (como nacionalidad o película favorita), no en un rango continuo.', qType:'open'},
+  ]
 },
 {
   id:'medidas-dispersion', cat:'probabilidad', title:'Medidas de dispersión', desc:'Rango, varianza y desviación estándar.',
@@ -1083,7 +1186,10 @@ const TOPICS = [
     diagram:'<svg viewBox="0 0 300 230" xmlns="http://www.w3.org/2000/svg"><line x1="30" y1="20" x2="30" y2="200" stroke="#999" stroke-width="1.5"/><line x1="30" y1="200" x2="280" y2="200" stroke="#999" stroke-width="1.5"/><text x="4" y="24" font-size="10" fill="#666" font-family="monospace">600</text><text x="4" y="114" font-size="10" fill="#666" font-family="monospace">300</text><text x="14" y="204" font-size="10" fill="#666" font-family="monospace">0</text><rect x="30" y="37.7" width="250" height="88.2" fill="#D9A441" fill-opacity="0.2"/><line x1="30" y1="81.8" x2="280" y2="81.8" stroke="#D9A441" stroke-width="2" stroke-dasharray="5,3"/><text x="200" y="78" font-size="10" fill="#D9A441" font-family="monospace">media=394</text><g transform="translate(70,20)"><ellipse rx="9" ry="6" fill="#5B2C87"/><polygon points="-6,-5 -3,-13 0,-5" fill="#5B2C87"/><polygon points="0,-5 3,-13 6,-5" fill="#5B2C87"/></g><text x="58" y="15" font-size="9" fill="#2E1147" font-family="monospace">600</text><g transform="translate(120,59)"><ellipse rx="9" ry="6" fill="#5B2C87"/><polygon points="-6,-5 -3,-13 0,-5" fill="#5B2C87"/><polygon points="0,-5 3,-13 6,-5" fill="#5B2C87"/></g><text x="108" y="52" font-size="9" fill="#2E1147" font-family="monospace">470</text><g transform="translate(170,149)"><ellipse rx="9" ry="6" fill="#5B2C87"/><polygon points="-6,-5 -3,-13 0,-5" fill="#5B2C87"/><polygon points="0,-5 3,-13 6,-5" fill="#5B2C87"/></g><text x="158" y="144" font-size="9" fill="#2E1147" font-family="monospace">170</text><g transform="translate(220,71)"><ellipse rx="9" ry="6" fill="#5B2C87"/><polygon points="-6,-5 -3,-13 0,-5" fill="#5B2C87"/><polygon points="0,-5 3,-13 6,-5" fill="#5B2C87"/></g><text x="208" y="64" font-size="9" fill="#2E1147" font-family="monospace">430</text><g transform="translate(260,110)"><ellipse rx="9" ry="6" fill="#5B2C87"/><polygon points="-6,-5 -3,-13 0,-5" fill="#5B2C87"/><polygon points="0,-5 3,-13 6,-5" fill="#5B2C87"/></g><text x="248" y="103" font-size="9" fill="#2E1147" font-family="monospace">300</text></svg>',
     steps:['Media = (600+470+170+430+300)/5 = 1970/5 = 394 mm.','Diferencias respecto a la media: 206, 76, −224, 36, −94.','σ² = (206²+76²+(−224)²+36²+(−94)²) / 5 = 108,520/5 = 21,704.'],
     result:'Media = 394mm   σ² = 21,704   σ = √21,704 ≈ 147mm' },
-  qs:[]
+  qs:[
+    {q:'Calcula la varianza de la distribución: 9, 3, 8, 8, 9, 8, 9, 18', a:'σ² = 15', steps:'Media=9; σ²=[(9-9)²+(3-9)²+(8-9)²+(8-9)²+(9-9)²+(8-9)²+(9-9)²+(18-9)²]/8 = 120/8', accept:['15']},
+    {q:'Halla la desviación media, la varianza y la desviación típica de: 2, 3, 6, 8, 11', a:'Media=6, desv.media=2.8, σ²=10.8, σ≈3.29', steps:'Desviaciones: -4,-3,0,2,5', qType:'open'},
+  ]
 },
 ];
 
