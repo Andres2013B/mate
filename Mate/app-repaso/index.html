@@ -201,78 +201,192 @@ const CATEGORIES = [
 const TOPICS = [
 // ---------------- CONJUNTOS ----------------
 {
-  id:'universo', cat:'conjuntos', title:'Universo y complemento', desc:'Conjunto universo, subconjuntos y complemento.',
-  theory:{h:'¿De qué trata este tema?',
-    intro:"El conjunto Universo (U) reúne todos los elementos posibles dentro de un contexto determinado; es tu punto de partida. Cualquier otro conjunto que definas (A, B, C…) vive como subconjunto dentro de ese universo. El complemento de A (se escribe A′) son todos los elementos que están en el universo pero NO están en A — es como preguntar '¿qué falta?'. Dibujarlo ayuda: un rectángulo grande es el universo, un círculo dentro es A, y el complemento es todo lo que queda fuera del círculo pero dentro del rectángulo.",
-    formulas:['A′ = U − A'], text:''},
-  example:{ q:'U = {1,2,3,4,5,6,7,8,9,10}, A = {2,4,6,8}. Encuentra A′.',
-    steps:['Toma todos los elementos del universo.','Quita los que ya están en A (2,4,6,8).'],
-    result:'A′ = {1,3,5,7,9,10}' },
-  qs:[
-    {q:'U={−5..15}, A={1,2,3,4,5,6,7}. Calcula Aᶜ.', a:'{−5,−4,−3,−2,−1,0,8,9,10,11,12,13,14,15}', qType:'open'},
-  ]
-},
-{
-  id:'interseccion', cat:'conjuntos', title:'Intersección de conjuntos', desc:'Elementos que comparten dos conjuntos.',
+  id:'interseccion', cat:'conjuntos', title:'Intersección de conjuntos', desc:'a.1.14.9 · Elementos que comparten dos conjuntos.',
   theory:{h:'¿De qué trata este tema?',
     intro:"La intersección (∩) de dos conjuntos son los elementos que aparecen en AMBOS conjuntos a la vez, no basta con que estén en uno solo. Si dibujas dos círculos que se traslapan, la intersección es justo la zona donde se sobreponen. Para encontrarla a mano, revisa elemento por elemento de un conjunto y pregúntate si también aparece en el otro; si no comparten ningún elemento, su intersección es el conjunto vacío (∅).",
     formulas:['A ∩ B'], text:''},
   example:{ q:'A={2,4,6,8}, B={1,2,3,4,5}. Encuentra A ∩ B.',
     steps:['Revisa cada elemento de A: 2→¿está en B? sí. 4→sí. 6→no. 8→no.'], result:'A ∩ B = {2, 4}' },
   qs:[
-    {q:'X={2,−5,6,−7,8}, A={−1,−2,−3,1,2,3}. Calcula X ∩ A.', a:'{2}', accept:['{2}']},
-    {q:'B={−7,−5,−3,−1}, A={−1,−2,−3,1,2,3}. Calcula B ∩ A.', a:'{−1,−3}', accept:['{-1,-3}','{-3,-1}']},
-    {q:'X={2,−5,6,−7,8}, Y={1,2,3,4,5,6}. Calcula X ∩ Y.', a:'{2,6}', accept:['{2,6}','{6,2}']},
-    {q:'Y={1,2,3,4,5,6}, A={−1,−2,−3,1,2,3}. Calcula Y ∩ A.', a:'{1,2,3}', accept:['{1,2,3}']},
-    {q:'B={−7,−5,−3,−1}, X={2,−5,6,−7,8}. Calcula B ∩ X.', a:'{−5,−7}', accept:['{-5,-7}','{-7,-5}']},
+    {q:'Dados X={2,−5,6,−7,8}, Y={1,2,3,4,5,6}, A={−1,−2,−3,1,2,3}, B={−7,−5,−3,−1}. Calcula: a) X ∩ A', a:'{2}', accept:['{2}']},
+    {q:'b) B ∩ A', a:'{−1,−3}', accept:['{-1,-3}','{-3,-1}']},
+    {q:'c) X ∩ Y', a:'{2,6}', accept:['{2,6}','{6,2}']},
+    {q:'d) A ∩ B', a:'{−1,−3}', accept:['{-1,-3}','{-3,-1}']},
+    {q:'e) Y ∩ A', a:'{1,2,3}', accept:['{1,2,3}']},
+    {q:'f) B ∩ X', a:'{−5,−7}', accept:['{-5,-7}','{-7,-5}']},
   ]
 },
 {
-  id:'union-interseccion', cat:'conjuntos', title:'Unión e intersección combinadas', desc:'Operaciones agrupadas con paréntesis.',
+  id:'union-interseccion', cat:'conjuntos', title:'Unión e intersección de conjuntos', desc:'a.1.16.1 · Operaciones agrupadas con paréntesis.',
   theory:{h:'¿De qué trata este tema?',
-    intro:"Cuando una operación combina unión e intersección con paréntesis, sigue el mismo orden que en aritmética: resuelve primero lo que está DENTRO del paréntesis, y usa ese resultado para la operación externa. El orden sí importa — B∪(A∩C) no es lo mismo que (B∪A)∩C. Ve resolviendo por partes, un paso a la vez, y anota cada conjunto intermedio antes de seguir para no perderte.",
-    formulas:['B ∪ (A ∩ C)'], text:''},
-  example:{ q:'A={0,1,2,3,4,5,6,7,8,9}, B={1,3,5,7,9}, C={2,4,6,8}. Encuentra B ∪ (A ∩ C).',
-    steps:['Primero resuelve el paréntesis: A ∩ C = {2,4,6,8} (C está contenido en A).','Une ese resultado con B: {1,3,5,7,9} ∪ {2,4,6,8}.'],
-    result:'{1,2,3,4,5,6,7,8,9}' },
+    intro:"Cuando una operación combina unión e intersección, sigue el mismo orden que en aritmética: si hay paréntesis, resuelve primero lo que está DENTRO. Si NO hay paréntesis, resuelves de izquierda a derecha — y aquí hay que tener cuidado, porque el orden sí cambia el resultado: B∪A∩C no es lo mismo que B∪(A∩C). Ve resolviendo por partes, un paso a la vez, y anota cada conjunto intermedio antes de seguir.",
+    formulas:['B ∪ (A ∩ C)'], text:'Ojo: estas operaciones no son asociativas — el orden y los paréntesis importan.'},
+  example:{ q:'A={0,1,2,3,4,5,6,7,8,9}, B={1,3,5,7,9}, C={2,4,6,8}. Encuentra B ∪ (A ∩ C), y compara con B ∪ A ∩ C (sin paréntesis).',
+    steps:['Con paréntesis: primero A∩C = {2,4,6,8} (C está contenido en A). Luego B∪{2,4,6,8} = {1,2,3,4,5,6,7,8,9}.','Sin paréntesis, de izquierda a derecha: primero B∪A = {0,1,2,3,4,5,6,7,8,9}. Luego ese resultado ∩C = {2,4,6,8}.'],
+    result:'B∪(A∩C) = {1,2,3,4,5,6,7,8,9}   ·   B∪A∩C = {2,4,6,8}  (¡son distintos!)' },
   qs:[
-    {q:'Con los mismos conjuntos, ¿qué representa (A ∩ C) dentro del paréntesis?', a:'Los elementos que están tanto en A como en C.', qType:'open'},
+    {q:'Con A={0,2,4,6,8}, B={−1,−2,−3,−4,−5}, C={1,3,5,7,9}, D={1,2,3,5,7,11}: A ∪ B ∪ C =', a:'{−5,−4,−3,−2,−1,0,1,2,3,4,5,6,7,8,9}', qType:'open'},
+    {q:'A ∪ D ∩ B = (sin paréntesis, izquierda a derecha)', a:'∅ (conjunto vacío)', steps:'A∪D={0,1,2,3,4,5,6,7,8,11}; eso ∩B = ∅ porque B es todo negativo', qType:'open'},
+    {q:'A ∩ (D ∪ C) =', a:'{2}', steps:'D∪C={1,2,3,5,7,9,11}; A∩eso={2}', accept:['{2}']},
+    {q:'(B ∩ C) ∩ D =', a:'∅ (conjunto vacío)', qType:'open'},
+    {q:'(B ∩ D) ∪ A =', a:'{0,2,4,6,8}', steps:'B∩D=∅ (no comparten elementos); ∅∪A=A', qType:'open'},
+    {q:'(A ∪ B) ∩ (C ∩ D) =', a:'∅ (conjunto vacío)', qType:'open'},
   ]
 },
 {
-  id:'venn', cat:'conjuntos', title:'Diagramas de Venn', desc:'Unión, intersección, diferencia y complemento juntos.',
+  id:'diferencia-conjuntos', cat:'conjuntos', title:'Diferencia de conjuntos', desc:'a.1.16.2 · A\\B no es lo mismo que B\\A.',
   theory:{h:'¿De qué trata este tema?',
-    intro:"Un diagrama de Venn representa conjuntos como círculos superpuestos dentro de un rectángulo (el universo), y cada operación tiene su propia forma visual: la unión es todo lo cubierto por ambos círculos, la intersección es solo donde se traslapan, la diferencia (A\\B) es la parte de A que no toca a B, y el complemento es todo lo que queda fuera del círculo. Dibujar el diagrama antes de calcular te ayuda a no perder elementos ni contarlos de más.",
+    intro:"La diferencia entre conjuntos (A\\B) se refiere a los elementos que están en el primer conjunto, pero NO en el segundo, y se denota con el símbolo '\\'. Es muy importante notar que la diferencia de conjuntos NO es conmutativa: A\\B casi nunca es igual a B\\A, porque cada uno parte de un conjunto distinto.",
+    formulas:['A \\ B ≠ B \\ A (en general)'], text:''},
+  example:{ q:'A={1,2,3,4,5,6}, B={2,4,6,8}. Encuentra A\\B y B\\A.',
+    steps:['A\\B: números que están en A pero no en B → 1,3,5 sí están solo en A.','B\\A: números que están en B pero no en A → solo el 8 está solo en B.'],
+    result:'A\\B = {1,3,5}     B\\A = {8}' },
+  qs:[
+    {q:'Con A={0,2,4,6,8}, B={−1,−2,−3,−4,−5}, C={1,3,5,7,9}: A \\ B =', a:'{0,2,4,6,8}', steps:'A y B no comparten ningún elemento, así que A\\B = A completo', accept:['{0,2,4,6,8}']},
+    {q:'B \\ A =', a:'{−1,−2,−3,−4,−5}', steps:'Igual que arriba, B\\A = B completo', accept:['{-1,-2,-3,-4,-5}']},
+    {q:'A \\ C =', a:'{0,2,4,6,8}', accept:['{0,2,4,6,8}']},
+    {q:'C \\ B =', a:'{1,3,5,7,9}', accept:['{1,3,5,7,9}']},
+    {q:'C \\ A =', a:'{1,3,5,7,9}', accept:['{1,3,5,7,9}']},
+    {q:'A \\ B \\ C =', a:'{0,2,4,6,8}', qType:'open'},
+  ]
+},
+{
+  id:'conjunto-vacio', cat:'conjuntos', title:'Conjunto vacío', desc:'a.1.16.3 · Cuando dos conjuntos no comparten nada.',
+  theory:{h:'¿De qué trata este tema?',
+    intro:"El conjunto vacío es aquel que no tiene elementos, y se expresa con la letra ø o con dos llaves sin contenido { }. Aparece cuando, por ejemplo, calculas la intersección de dos conjuntos que no tienen ningún número en común, o la diferencia entre dos conjuntos idénticos.",
+    formulas:['A ∩ B = ∅  (si A y B no comparten elementos)'], text:''},
+  example:{ q:'A={1,3,5}, B={2,4,6,8}. Encuentra A ∩ B.',
+    steps:['Revisa si A y B comparten algún número.','1,3,5 no están en B; 2,4,6,8 no están en A — no hay ningún número en común.'],
+    result:'A ∩ B = ∅  (como A y B no coinciden en ningún número, el conjunto intersección es vacío)' },
+  qs:[
+    {q:'Si A={1,3,5} y B={1,3,5} (idénticos), ¿cuánto vale B\\A?', a:'∅ — Como todos los elementos que tiene B los tiene A también, no existe diferencia alguna.', qType:'open'},
+  ]
+},
+{
+  id:'universo', cat:'conjuntos', title:'Conjunto universo y complemento', desc:'a.1.16.4 · El conjunto de referencia y lo que "falta".',
+  theory:{h:'¿De qué trata este tema?',
+    intro:"El conjunto Universo (U) se utiliza como una referencia para limitar el campo de interés — reúne todos los elementos posibles dentro de un contexto determinado. Cualquier otro conjunto (como A) vive como subconjunto dentro de ese universo. El complemento de A (se escribe A′) es todo lo que está en el universo pero NO está contenido en A.",
+    formulas:['A′ = U − A'], text:''},
+  example:{ q:'U son todos los números enteros (Z), y C={−4,2,13}. ¿Qué es C′?',
+    steps:['C′ es todo número entero que NO está en C.','Por ejemplo, −7 y 45 sí pertenecen a los enteros, pero no están en C, así que ambos están en C′.'],
+    result:"C′ = todos los enteros excepto −4, 2 y 13" },
+  qs:[
+    {q:'U={1,2,3,4,5,6,7,8,9,10}, A={2,4,6,8} (A es subconjunto de U, representa los peces payaso y cirujano dentro de "todos los peces"). Encuentra A′.', a:'{1,3,5,7,9,10}', accept:['{1,3,5,7,9,10}']},
+  ]
+},
+{
+  id:'teoria-conjuntos-intermedio', cat:'conjuntos', title:'Teoría de conjuntos: ejercicios intermedios', desc:'a.1.16.5 · Combina unión, intersección, diferencia y complemento.',
+  theory:{h:'¿De qué trata este tema?',
+    intro:"Estos ejercicios combinan TODAS las operaciones de conjuntos que has aprendido (unión, intersección, diferencia y complemento) en una sola expresión. La estrategia es la misma de siempre: resuelve de adentro hacia afuera, un paréntesis a la vez, y anota cada resultado intermedio antes de seguir con la siguiente operación.",
+    formulas:[], text:''},
+  example:{ q:'U={−5..15}, A={1,2,3,4,5,6,7}, B={4,5,6,7,...,15}. Encuentra B ∪ (A\\B).',
+    steps:['Primero resuelve el paréntesis: A\\B = elementos de A que no están en B = {1,2,3}.','Une ese resultado con B: {4,5,...,15} ∪ {1,2,3}.'],
+    result:'{1,2,3,4,5,6,7,8,9,10,11,12,13,14,15}' },
+  qs:[
+    {q:'Con U={−5,...,15}, A={1,2,3,4,5,6,7}, B={4,...,15}, C={−5,−4,−3,−2,−1}, D={−5,−3,−1,1,3,5,7,9,11,13,15}: (A ∩ B)ᶜ =', a:'{−5,−4,−3,−2,−1,0,1,2,3,8,9,10,11,12,13,14,15}', qType:'open'},
+    {q:'C \\ (A ∪ B) =', a:'{−5,−4,−3,−2,−1}', steps:'A∪B cubre del 1 al 15; C no se traslapa con eso, así que C\\(A∪B)=C completo', qType:'open'},
+    {q:'(D ∪ A) \\ D =', a:'{2,4,6}', steps:'Son los elementos de A que D no tenía ya (1,3,5,7 ya estaban en D)', accept:['{2,4,6}']},
+    {q:'(D \\ C) ᶜ =', a:'{−5,−4,−3,−2,−1,0,2,4,6,8,10,12,14}', qType:'open'},
+    {q:'C \\ (C ∩ D) =', a:'{−4,−2}', steps:'C∩D={−5,−3,−1}; C menos esos deja {−4,−2}', accept:['{-4,-2}']},
+  ]
+},
+{
+  id:'clasificacion-numeros', cat:'conjuntos', title:'Clasificación de los números', desc:'a.1.16.6 · Naturales, enteros, racionales, irracionales y reales.',
+  theory:{h:'¿De qué trata este tema?',
+    intro:"La clasificación de los números también se representa con conjuntos, unos dentro de otros. Los naturales (N) son 0,1,2,3... Los enteros (Z) agregan los negativos. Los racionales (Q) son todos los que se pueden escribir como fracción (los decimales también son racionales). Los irracionales (I) tienen decimales infinitos que nunca se repiten, como π o las raíces no exactas. Todos juntos forman los números reales (R).",
+    formulas:['N = {0,1,2,3,4,...}','Z = {...,−2,−1,0,1,2,...}','Q = {fracciones y decimales}','I = {π, √2, √35, ...}'], text:'R = N ∪ Z ∪ Q ∪ I — todos los conjuntos anteriores están dentro de los números reales.'},
+  example:{ q:'¿A qué conjunto pertenece el número 0.555... (decimal periódico)?',
+    steps:['Es un decimal, pero se repite de forma periódica, lo que significa que SÍ se puede escribir como fracción (0.555...=5/9).'], result:'Es un número racional (Q)' },
+  qs:[
+    {q:'¿A qué conjunto pertenece √2?', a:'Irracional (I) — su decimal es infinito y no se repite.', qType:'open'},
+    {q:'¿A qué conjunto pertenece −3/5?', a:'Racional (Q) — se puede escribir como fracción.', qType:'open'},
+    {q:'¿A qué conjunto pertenece el 7 (sin signo, sin fracción)?', a:'Natural (N), y también es entero (Z), racional (Q) y real (R) — está dentro de todos esos conjuntos.', qType:'open'},
+  ]
+},
+{
+  id:'venn-visual', cat:'conjuntos', title:'Diagramas de Venn: unión, intersección, diferencia y complemento', desc:'a.4.14.2 · Cómo se ve cada operación coloreada.',
+  theory:{h:'¿De qué trata este tema?',
+    intro:"Un diagrama de Venn representa conjuntos como círculos superpuestos dentro de un rectángulo (el universo). Cada operación tiene su propia 'forma' visual: en la unión coloreas ambos círculos completos; en la intersección, solo la parte donde se traslapan; en la diferencia A\\B, solo la parte de A que no toca a B; y en el complemento, todo lo que queda fuera del círculo pero dentro del rectángulo.",
+    formulas:[], text:''},
+  example:{ q:'U={1,...,11}, A={1,2,3,4}, B={4,5,6,7}. Dibuja y encuentra A\\B y (A∪B)ᶜ.',
+    steps:['A\\B: la parte de A que no toca a B → 1,2,3 (el 4 se queda fuera porque también está en B).','A∪B = {1,2,3,4,5,6,7}. Su complemento es todo lo que falta del universo: 8,9,10,11.'],
+    result:'A\\B = {1,2,3}     (A∪B)ᶜ = {8,9,10,11}' },
+  qs:[
+    {q:'Con A={1,2,5}, B={3,5,7}: ¿qué números van coloreados en el diagrama de la UNIÓN (A∪B)?', a:'1, 2, 3, 5, 7 (todo lo que está en A o en B)', qType:'open'},
+    {q:'Con los mismos conjuntos, ¿qué número(s) van coloreados en la INTERSECCIÓN (A∩B)?', a:'Solo el 5 (el único que comparten ambos círculos)', accept:['5','{5}']},
+  ]
+},
+{
+  id:'venn-ejercicios', cat:'conjuntos', title:'Diagramas de Venn: ejercicios', desc:'a.4.14.2 (2) · Practica las 4 operaciones combinadas.',
+  theory:{h:'¿De qué trata este tema?',
+    intro:"Estos ejercicios te piden calcular el resultado de una operación de conjuntos Y ADEMÁS dibujar el diagrama de Venn correspondiente, sombreando la región correcta. Resuelve primero la operación algebraicamente (con llaves y números), y luego usa ese resultado para saber qué sombrear.",
     formulas:[], text:'A ∪ B = unión · A ∩ B = intersección · A \\ B = diferencia · Aᶜ = complemento'},
-  example:{ q:'U = {1..10}, A={1,2,3,4,5,6,7}, B={4,5,6,7,8,9,10}. Encuentra A \\ B.',
+  example:{ q:'U={1..10}, A={1,2,3,4,5,6,7}, B={4,5,6,7,8,9,10}. Encuentra A \\ B.',
     steps:['A \\ B son los elementos de A que NO están en B.','Revisa cada elemento de A: 1,2,3 no están en B; 4,5,6,7 sí están en B.'],
     result:'A \\ B = {1, 2, 3}' },
   qs:[
     {q:'U={−5..15}, A={1,2,3,4,5,6,7}, C={−5,−4,−3,−2,−1}. Calcula A ∪ C.', a:'{−5,−4,−3,−2,−1,1,2,3,4,5,6,7}', accept:['{-5,-4,-3,-2,-1,1,2,3,4,5,6,7}']},
     {q:'B={4,5,6,7,8,9,10,11,12,13,14,15}, D={−5,−3,−1,1,3,5,7,9,11,13,15}. Calcula B \\ D.', a:'{4,6,8,10,12,14}', accept:['{4,6,8,10,12,14}']},
+    {q:'A={1,2,3,4,5,6,7}, U={−5..15}. Calcula Aᶜ.', a:'{−5,−4,−3,−2,−1,0,8,9,10,11,12,13,14,15}', qType:'open'},
+    {q:'C={−5,−4,−3,−2,−1}, A={1,2,3,4,5,6,7}. Calcula C \\ A.', a:'{−5,−4,−3,−2,−1}', steps:'C y A no comparten elementos, así que C\\A = C completo', accept:['{-5,-4,-3,-2,-1}']},
     {q:'C={−5,−4,−3,−2,−1}, D={−5,−3,−1,1,3,5,7,9,11,13,15}. Calcula (C ∩ D)ᶜ.', a:'U menos {−5,−3,−1}', qType:'open'},
+    {q:'D={−5,−3,−1,1,3,5,7,9,11,13,15}, A={1,2,3,4,5,6,7}. Calcula D ∪ A.', a:'{−5,−3,−1,1,2,3,4,5,6,7,9,11,13,15}', qType:'open'},
   ]
 },
 
 // ---------------- ÁLGEBRA ----------------
 {
-  id:'sucesiones', cat:'algebra', title:'Sucesiones', desc:'Sucesiones aritméticas, geométricas y patrones.',
+  id:'sucesiones-completar', cat:'algebra', title:'Sucesiones: completa la secuencia', desc:'C.2.5.1 · Encuentra el número que falta y el patrón.',
   theory:{h:'¿De qué trata este tema?',
-    intro:"Una sucesión es una lista ordenada de números que sigue un patrón. En una sucesión ARITMÉTICA, cada término se obtiene SUMANDO siempre la misma cantidad (la diferencia, d) al anterior. En una GEOMÉTRICA, cada término se obtiene MULTIPLICANDO siempre por la misma razón (r). También hay patrones especiales que no son ni aritméticos ni geométricos, como los cuadrados, los cubos, o Fibonacci (cada término es la suma de los dos anteriores) — para identificar cuál es, calcula las diferencias o razones entre términos consecutivos y busca qué se mantiene constante.",
-    formulas:['xₙ = a + d(n−1)','xₙ = a·r^(n−1)'], text:''},
+    intro:"Una sucesión es una lista ordenada de números que sigue un patrón. Para encontrar el número que falta, primero identifica qué tipo de patrón es: ARITMÉTICO (se suma siempre la misma cantidad), GEOMÉTRICO (se multiplica siempre por la misma razón), o un patrón especial (cuadrados, cubos, Fibonacci, o una secuencia que se divide). Calcula las diferencias o razones entre los términos que sí conoces y busca qué se mantiene constante.",
+    formulas:[], text:''},
+  example:{ q:'Encuentra el número que completa: 3, 8, 13, 18, 23, __',
+    steps:['Calcula la diferencia entre términos consecutivos: 8−3=5, 13−8=5, 18−13=5.','La diferencia constante es 5, así que sigue sumando 5.'], result:'23 + 5 = 28' },
+  qs:[
+    {q:'2, 4, __, 8', a:'6', accept:['6']},
+    {q:'1, 5, __, 13', a:'9', accept:['9']},
+    {q:'3, 6, __, 12', a:'9', accept:['9']},
+    {q:'5, __, 15, 20', a:'10', accept:['10']},
+    {q:'1, __, 9, 27', a:'3', steps:'geométrica, razón 3', accept:['3']},
+    {q:'4, __, 16, 32', a:'8', steps:'geométrica, razón 2', accept:['8']},
+    {q:'6, 8, __, 20', a:'14', qType:'open'},
+    {q:'4, 5, __, 10', a:'7', qType:'open'},
+    {q:'4, 9, 16, __', a:'25', steps:'cuadrados: 2²,3²,4²,5²', accept:['25']},
+    {q:'8, 27, 64, 125, __', a:'216', steps:'cubos: 2³,3³,4³,5³,6³', accept:['216']},
+    {q:'0, 1, 1, 2, 3, 5, __', a:'8', steps:'Fibonacci: suma de los dos anteriores', accept:['8']},
+    {q:'30, 28, 26, 24, __', a:'22', accept:['22']},
+    {q:'16, 12, 8, __', a:'4', accept:['4']},
+    {q:'27, 26, 24, 21, __', a:'17', steps:'las diferencias son −1,−2,−3,−4', accept:['17']},
+    {q:'32, 30, 26, 18, __', a:'2', steps:'las diferencias se duplican: −2,−4,−8,−16', accept:['2']},
+    {q:'500, 100, 20, __', a:'4', steps:'se divide entre 5', accept:['4']},
+    {q:'48, 24, 12, __', a:'6', steps:'se divide entre 2', accept:['6']},
+    {q:'81, 27, 9, __', a:'3', steps:'se divide entre 3', accept:['3']},
+    {q:'256, 64, 16, __', a:'4', steps:'se divide entre 4', accept:['4']},
+  ]
+},
+{
+  id:'sucesiones-termino-regla', cat:'algebra', title:'Sucesiones: término n-ésimo y regla general', desc:'C.2.5.3 · Encuentra un término específico, la regla, o el primer término.',
+  theory:{h:'¿De qué trata este tema?',
+    intro:"Aquí no solo completas el siguiente número, sino que encuentras un término muy adelante en la sucesión (como el término 20) usando la fórmula, encuentras la regla general que describe TODA la sucesión, o trabajas al revés: te dan un término avanzado y la diferencia, y encuentras el primer término.",
+    formulas:['xₙ = a + d(n−1)'], text:''},
   example:{ q:'Encuentra el término 15 de: 5, 9, 13, 17…',
     steps:['a₁=5, d=4.','x₁₅ = 5 + (15−1)(4) = 5 + 56.'], result:'x₁₅ = 61' },
   qs:[
-    {q:'Encuentra el término 20 en: 1, 6, 11, 16…', a:'96', accept:['96']},
+    {q:'I. Encuentra el término 20 en: 1, 6, 11, 16…', a:'96', accept:['96']},
     {q:'Encuentra el término 6 en: 3, 7, 11, 15…', a:'23', accept:['23']},
     {q:'Encuentra el término 12 en: −4, 0, 4, 8…', a:'40', accept:['40']},
-    {q:'Encuentra el término 8 en: −20, −15, −10, −5…', a:'15', accept:['15']},
-    {q:'Completa: 2, 4, __, 8', a:'6', accept:['6']},
-    {q:'Completa: 1, __, 9, 27 (geométrica)', a:'3', accept:['3']},
-    {q:'Completa: 4, 9, 16, __ (cuadrados)', a:'25', accept:['25']},
-    {q:'Completa: 8, 27, 64, 125, __ (cubos)', a:'216', accept:['216']},
-    {q:'Completa: 0, 1, 1, 2, 3, 5, __ (Fibonacci)', a:'8', accept:['8']},
-    {q:'Completa: 500, 100, 20, __', a:'4', accept:['4']},
+    {q:'Encuentra el término 10 en: 2, 5, 8, 11…', a:'29', qType:'open'},
+    {q:'II. Determina la regla general de: −3, 0, 3, 6, 9…', a:'xₙ = 3n − 6', qType:'open'},
+    {q:'Determina la regla general de: −30, −20, −10, 0, 10, 20…', a:'xₙ = 10n − 40', qType:'open'},
+    {q:'Determina la regla general de: −8, −4, 0, 4, 8…', a:'xₙ = 4n − 12', qType:'open'},
+    {q:'Determina la regla general de: 5, 8, 11…', a:'xₙ = 3n + 2', qType:'open'},
+    {q:'Determina la regla general de: −1, 1, 3, 5, 7, 9…', a:'xₙ = 2n − 3', qType:'open'},
+    {q:'Determina la regla general de: 3, 6, 9, 12, 15…', a:'xₙ = 3n', qType:'open'},
+    {q:'Determina la regla general de: 5, 6, 7, 8, 9…', a:'xₙ = n + 4', qType:'open'},
+    {q:'Determina la regla general de: −2, 0, 2, 4, 6', a:'xₙ = 2n − 4', qType:'open'},
+    {q:'III. Calcula el primer término de una sucesión aritmética de 10 términos, si el último es 34 y la diferencia es 3.', a:'a₁ = 7', steps:'34 = a₁ + 3(10−1) → 34 = a₁ + 27', accept:['7']},
+    {q:'En una sucesión aritmética a₁₂=−7 y d=−2. Encuentra a₁.', a:'a₁ = 15', steps:'−7 = a₁ + (−2)(11) → −7 = a₁ − 22', accept:['15']},
+    {q:'En una sucesión aritmética a₂₀=−33 y a₁₂=−28. Encuentra a₁ y d.', a:'d = −5/8, calcula a₁ con ese valor', qType:'open'},
   ]
 },
 {
@@ -344,9 +458,15 @@ const TOPICS = [
     steps:['Busca el número más grande que divide a 10 y 15: el 5.','Busca la variable en común: la a.','Factor común: 5a.'], result:'5a(2a + 3)' },
   qs:[
     {q:'Factoriza: 5y² + 15y', a:'5y(y + 3)', accept:['5y(y+3)']},
+    {q:'Factoriza: x⁵ − 81x', a:'x(x−3)(x+3)(x²+9)', qType:'open'},
+    {q:'Factoriza: 5x − 5y', a:'5(x − y)', accept:['5(x-y)']},
     {q:'Factoriza: ab − a²', a:'a(b − a)', accept:['a(b-a)']},
     {q:'Factoriza: m² + m', a:'m(m + 1)', accept:['m(m+1)']},
+    {q:'Factoriza: 10a² + 15a', a:'5a(2a + 3)', accept:['5a(2a+3)']},
     {q:'Factoriza: 2a²b + 6ab²', a:'2ab(a + 3b)', accept:['2ab(a+3b)']},
+    {q:'Factoriza: 8x² − 6x − 2', a:'2(4x + 1)(x − 1)', accept:['2(4x+1)(x-1)']},
+    {q:'Factoriza: a² + a⁴ − a⁶', a:'a²(1 + a² − a⁴)', qType:'open'},
+    {q:'Factoriza: 3x²y² + 15xy² − 25xy', a:'xy(3xy + 15y − 25)', qType:'open'},
   ]
 },
 {
@@ -358,9 +478,13 @@ const TOPICS = [
     steps:['Saca raíz cuadrada de cada término: √(16m²)=4m, √(9n²)=3n.','Multiplica suma por diferencia.'], result:'(4m + 3n)(4m − 3n)' },
   qs:[
     {q:'Resuelve: x² − 4 = 0', a:'x = 2, x = −2', accept:['x=2,x=-2','2,-2','-2,2']},
+    {q:'Resuelve: 1 − x² = 0', a:'x = 1, x = −1', accept:['x=1,x=-1','1,-1','-1,1']},
     {q:'Resuelve: w² − 100 = 0', a:'w = 10, w = −10', accept:['w=10,w=-10','10,-10','-10,10']},
     {q:'Resuelve: 3x² − 192 = 0', a:'x = 8, x = −8', accept:['x=8,x=-8','8,-8','-8,8']},
+    {q:'Resuelve: 4y² − 12 = 0', a:'y = ±√3', qType:'open'},
+    {q:'Resuelve: 16x² − a² = 0', a:'x = ±a/4', qType:'open'},
     {q:'Resuelve: 25z² − 36 = 0', a:'z = 6/5, z = −6/5', accept:['z=6/5,z=-6/5','6/5,-6/5','-6/5,6/5','1.2,-1.2','-1.2,1.2']},
+    {q:'Resuelve: 135 = (2y+3)(2y−3)', a:'y = 6, y = −6', steps:'4y²−9=135 → y²=36', accept:['y=6,y=-6','6,-6','-6,6']},
   ]
 },
 {
@@ -375,9 +499,13 @@ const TOPICS = [
     {q:'Factoriza: x² − 2x + 1', a:'(x − 1)²', accept:['(x-1)^2']},
     {q:'Factoriza: x² − 6x + 9', a:'(x − 3)²', accept:['(x-3)^2']},
     {q:'Factoriza: x² − 20x + 100', a:'(x − 10)²', accept:['(x-10)^2']},
+    {q:'Factoriza: x² + 10x + 25', a:'(x + 5)²', accept:['(x+5)^2']},
     {q:'Factoriza: x² + 14x + 49', a:'(x + 7)²', accept:['(x+7)^2']},
+    {q:'Factoriza: x² + 8/3x + 16/9', a:'(x + 4/3)²', qType:'open'},
+    {q:'Factoriza: x + x² + 1/4', a:'(x + 1/2)²', qType:'open'},
     {q:'Factoriza: 9x² + 30x + 25', a:'(3x + 5)²', accept:['(3x+5)^2']},
     {q:'Factoriza: x⁶ + 10x³ + 25', a:'(x³ + 5)²', accept:['(x^3+5)^2']},
+    {q:'Factoriza: 4x² + 4xa³ + a⁶', a:'(2x + a³)²', accept:['(2x+a^3)^2']},
   ]
 },
 {
@@ -452,7 +580,11 @@ const TOPICS = [
     result:'(x − 2) / (x − 4)' },
   qs:[
     {q:'Simplifica: (x² − 3x) / (x² + 3x)', a:'(x − 3) / (x + 3)', accept:['(x-3)/(x+3)']},
+    {q:'Simplifica: (x² − 3x) / (3 − x)', a:'−x', accept:['-x']},
+    {q:'Simplifica: (x² − 5x + 6) / (x² − 7x + 12)', a:'(x − 2) / (x − 4)', accept:['(x-2)/(x-4)']},
     {q:'Simplifica: (x² − 2x − 3) / (x² − x − 2)', a:'(x − 3) / (x − 2)', accept:['(x-3)/(x-2)']},
+    {q:'Simplifica: (x³ − 19x − 30) / (x³ − 3x² − 10x)', a:'(x + 3) / x', qType:'open'},
+    {q:'Simplifica: (x² + x − 2) / (x³ − x² − x + 1)', a:'(x + 2) / [(x − 1)(x + 1)]', qType:'open'},
   ]
 },
 {
@@ -508,7 +640,10 @@ const TOPICS = [
   qs:[
     {q:'Triángulo rectángulo con catetos de 6 cm y 8 cm. ¿Cuánto mide la hipotenusa?', a:'10 cm', accept:['10','10cm']},
     {q:'Triángulo con a=10, b=20. ¿Cuánto mide la hipotenusa c?', a:'≈ 22.36', accept:['22.36','22.4']},
-    {q:'Dos puntos separados 560 km (horizontal) y 130 km (vertical). ¿Distancia directa?', a:'≈ 574.8 km', qType:'open'},
+    {q:'Tres ciudades M, Q, P: de Q a M hay 130 km (vertical), de Q a P hay 560 km (horizontal), formando un ángulo recto en Q. ¿Qué distancia hay de M a P?', a:'≈ 574.9 km', steps:'√(130²+560²)', qType:'open'},
+    {q:'¿Cuánto medirá la diagonal de un cuadrado de 75 cm de lado?', a:'≈ 106.07 cm', steps:'75√2', accept:['106.07','106.1']},
+    {q:'Una escalera de 12.5 m está apoyada a 5.7 m de la pared. ¿Qué altura alcanza en la pared?', a:'≈ 11.13 m', steps:'√(12.5²−5.7²)', accept:['11.13','11.1']},
+    {q:'Encuentra la altura de un triángulo equilátero con lado de 32 cm.', a:'≈ 27.71 cm', steps:'32×(√3/2)', accept:['27.71','27.7']},
   ]
 },
 {
@@ -537,12 +672,15 @@ const TOPICS = [
 {
   id:'semejanza-congruencia', cat:'geometria', title:'Triángulos semejantes y congruencia', desc:'Misma forma (semejantes) o idénticos movidos (congruentes).',
   theory:{h:'¿De qué trata este tema?',
-    intro:"Dos figuras son SEMEJANTES si tienen la misma forma pero distinto tamaño: sus ángulos son iguales y sus lados son proporcionales (hay tres criterios para comprobarlo: AA, LAL y LLL). Dos figuras son CONGRUENTES si son literalmente idénticas, aunque estén en distinta posición — pasas de una a otra con rotación (girar sobre un punto), reflexión (voltear como espejo) o traslación (deslizar sin girar). Ninguna de estas transformaciones cambia el tamaño ni la forma de la figura.",
-    formulas:[], text:'Rotación: gira sobre un punto · Reflexión: se voltea como espejo · Traslación: se desliza sin girar'},
-  example:{ q:'¿Cuáles son los tres criterios de semejanza de triángulos?',
-    steps:['AA: dos ángulos iguales.','LAL: un ángulo igual entre dos lados proporcionales.','LLL: los tres lados proporcionales.'],
-    result:'AA, LAL, LLL' },
+    intro:"Dos triángulos son semejantes si comparten las mismas medidas de ángulos interiores; cuando esto pasa, se cumple una proporcionalidad entre sus lados correspondientes (hay tres criterios para comprobarlo: AA, LAL y LLL). Dos figuras son CONGRUENTES si son literalmente idénticas, aunque estén en distinta posición — pasas de una a otra con rotación (girar sobre un punto), reflexión (voltear como espejo) o traslación (deslizar sin girar). Ninguna de estas transformaciones cambia el tamaño ni la forma de la figura.",
+    formulas:['AB/A′B′ = BC/B′C′ = CA/C′A′'], text:'Rotación: gira sobre un punto · Reflexión: se voltea como espejo · Traslación: se desliza sin girar'},
+  example:{ q:'Dos triángulos ABC y A′B′C′ son semejantes. Se sabe que CA=6cm, C′A′=4cm, A′B′=5cm. Encuentra AB.',
+    steps:['Plantea la proporción: AB/A′B′ = CA/C′A′.','Despeja AB: AB = CA×A′B′ / C′A′.','Sustituye: AB = 6×5 / 4.'],
+    result:'AB = 7.5 cm' },
   qs:[
+    {q:'¿Cuáles son los tres criterios de semejanza de triángulos?', a:'AA (ángulo-ángulo), LAL (lado-ángulo-lado), LLL (lado-lado-lado)', qType:'open'},
+    {q:'Un triángulo rectángulo 3-4-5 es semejante a otro cuyo cateto correspondiente al "3" mide 4. ¿Cuál es la razón de proporcionalidad?', a:'4/3 ≈ 1.33', accept:['4/3','1.33']},
+    {q:'Con esa misma razón (4/3), ¿cuánto mide el lado del triángulo grande correspondiente al "5"?', a:'≈ 6.67', steps:'5×(4/3)', accept:['6.67','6.7']},
     {q:'¿Qué transformación desliza una figura sin girarla ni voltearla?', a:'Traslación', accept:['traslacion','traslación']},
     {q:'¿Qué transformación voltea una figura como en un espejo?', a:'Reflexión', accept:['reflexion','reflexión']},
   ]
@@ -607,6 +745,10 @@ const TOPICS = [
     {q:'6 grifos llenan 400 m³ en 10 horas. ¿Cuánto tardan 4 grifos en llenar 2 depósitos de 500 m³?', a:'37.5 horas', accept:['37.5','37.5horas']},
     {q:'4 agricultores recolectan 10,000 kg en 9 días. ¿Cuántos kg recolectarán 6 agricultores en 15 días?', a:'25,000 kg', accept:['25000','25,000']},
     {q:'5 trabajadores tardan 16 días a 6h diarias. ¿Cuántos trabajadores para 10 días a 8h diarias?', a:'6 trabajadores', accept:['6']},
+    {q:'En 8 días, 6 máquinas cavan una zanja de 2,100 m. ¿Cuántas máquinas para cavar 525 m más en 3 días?', a:'4 máquinas', accept:['4']},
+    {q:'7 mineros abren una galería de 50 m en 14 días. Si otro grupo tiene 14 mineros, ¿cuántos metros abrirán en 28 días?', a:'200 m', accept:['200','200m']},
+    {q:'Para calentar 2 litros de agua de 0°C a 20°C se necesitan 1,000 calorías. ¿Cuántas calorías para calentar 3 litros de 10°C a 60°C?', a:'3,750 calorías', accept:['3750','3,750']},
+    {q:'Con 12 botes de ½kg de pintura se pintan 90m de verja de 80cm de altura. ¿Cuántos botes de 2kg se necesitan para una verja de 120cm de altura y 200m de longitud?', a:'10 botes', accept:['10']},
   ]
 },
 {
@@ -628,6 +770,10 @@ const TOPICS = [
     {q:'Bosque con 65% de pinos, de 12,000 árboles. ¿Cuántos pinos?', a:'7,800 pinos', accept:['7800','7,800']},
     {q:'Salario de $80,000/mes, IPC sube 3.5%. ¿Cuánto debe ganar este año?', a:'$82,800', accept:['82800','82,800','$82,800']},
     {q:'Camisa de $380 con rebaja del 15%. ¿Cuánto se paga?', a:'$323', accept:['323','$323']},
+    {q:'Compra de $280, para perder el 12% sobre el precio de venta, ¿qué precio de venta poner?', a:'$250', steps:'280 = venta×1.12', accept:['250','$250']},
+    {q:'Pantalón sin IVA de $625, IVA del 16%. ¿Cuánto se paga?', a:'$725', accept:['725','$725']},
+    {q:'Pan de $25 sin IVA (4%). ¿Cuánto se paga con IVA?', a:'$26', accept:['26','$26']},
+    {q:'Persona que ganaba $44,800/mes, IPC sube 3%. ¿Cuánto debe ganar este año?', a:'$46,144', accept:['46144','46,144','$46,144']},
   ]
 },
 
@@ -655,6 +801,18 @@ const TOPICS = [
   ]
 },
 {
+  id:'eventos-complementarios', cat:'probabilidad', title:'Eventos complementarios', desc:'Cuando solo hay dos resultados posibles.',
+  theory:{h:'¿De qué trata este tema?',
+    intro:"Los eventos complementarios son dos resultados de un evento que son los ÚNICOS dos resultados posibles — como lanzar una moneda y que salga cara o cruz. Ojo: esto NO es lo mismo que 'mutuamente excluyentes'. Por ejemplo, lanzar un dado y que salga 1 ó 2 son mutuamente excluyentes (no pueden pasar juntos), pero NO son complementarios, porque hay otros resultados posibles (3, 4, 5, 6). En cambio, sacar un 1 o sacar cualquier cosa distinta de 1 SÍ son complementarios.",
+    formulas:['P(A) + P(A′) = 1'], text:'Todos los eventos complementarios son mutuamente excluyentes, pero no al revés.'},
+  example:{ q:'¿Lanzar un dado y que salga 1 ó 2 son eventos complementarios?',
+    steps:['Son mutuamente excluyentes (no pueden pasar los dos a la vez).','Pero NO son complementarios, porque quedan otros resultados posibles: 3, 4, 5 y 6 — no son los ÚNICOS dos resultados.'],
+    result:'No — son mutuamente excluyentes, pero no complementarios' },
+  qs:[
+    {q:'¿Sacar un 1 en un dado, o sacar cualquier número distinto de 1, son eventos complementarios?', a:'Sí — son los únicos dos resultados posibles.', qType:'open'},
+  ]
+},
+{
   id:'eventos-excluyentes', cat:'probabilidad', title:'Eventos mutuamente excluyentes', desc:'La regla de la suma: P(A ó B) = P(A)+P(B) (menos la intersección si se traslapan).',
   theory:{h:'¿De qué trata este tema?',
     intro:"Dos eventos son mutuamente excluyentes cuando NO pueden ocurrir al mismo tiempo: si pasa uno, el otro queda descartado (como sacar un 2 O un 5 en un solo lanzamiento de dado). En estos casos, la probabilidad de que ocurra uno U OTRO es la suma de sus probabilidades individuales. Pero si los eventos SÍ pueden traslaparse (ocurrir juntos), hay que restar la probabilidad de esa intersección para no contarla dos veces.",
@@ -665,6 +823,7 @@ const TOPICS = [
     {q:'De 52 cartas, ¿probabilidad de sacar un 8 o un trébol?', a:'4/13 ≈ 30.8%', accept:['4/13','30.8%','0.308']},
     {q:'Número entre 1-30, ¿probabilidad de primo o múltiplo de 5?', a:'50%', accept:['50%','1/2','0.5']},
     {q:'Ruleta de 36 sectores (1-12 rojo). ¿Probabilidad de número impar o rojo?', a:'≈ 66.7%', accept:['2/3','66.7%','0.667']},
+    {q:'En una clase de 50 alumnos: 10 prefieren solo Álgebra, 15 solo Geometría, 20 ambas, 5 ninguna. ¿Probabilidad de que un alumno al azar prefiera Álgebra o Geometría (o ambas)?', a:'9/10 = 90%', steps:'P(A)=30/50, P(G)=35/50, P(A∩G)=20/50 → 30/50+35/50−20/50', accept:['9/10','90%','0.9']},
   ]
 },
 {
