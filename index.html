@@ -102,6 +102,29 @@
 
   .example-box{background:#fff;border:1.5px dashed var(--gold);border-radius:var(--radius);padding:20px 22px;margin-bottom:26px;}
   .diagram{margin:8px 0 14px;display:flex;justify-content:center;background:var(--violet-050);border-radius:10px;padding:14px;}
+
+  /* recta numérica interactiva */
+  .numberline-box{background:#fff;border:1.5px solid var(--line);border-radius:var(--radius);padding:20px 22px;margin-bottom:22px;}
+  .numberline-box .tag{
+    font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--violet-700);font-weight:600;display:inline-block;margin-bottom:12px;background:var(--violet-050);padding:4px 10px;border-radius:6px;
+  }
+  .numberline-controls{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:16px;}
+  .numberline-controls input{
+    font-family:'Space Grotesk',sans-serif;font-size:14px;border:1.5px solid var(--line);border-radius:8px;
+    padding:9px 13px;background:var(--violet-050);color:var(--ink);outline:none;width:120px;
+  }
+  .numberline-controls input:focus{border-color:var(--violet-500);}
+  .numberline-controls button{
+    font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:13px;background:var(--violet-700);
+    color:#fff;border:none;padding:9px 16px;border-radius:8px;cursor:pointer;
+  }
+  .numberline-controls button:hover{background:var(--violet-900);}
+  .numberline-readout{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--green);font-weight:600;min-width:70px;}
+  .numberline-svg-wrap{overflow-x:auto;}
+  .numberline-svg-wrap svg{display:block;}
+  .nl-point{cursor:grab;}
+  .nl-point:active{cursor:grabbing;}
   .diagram svg{max-width:100%;height:auto;}
   .example-box .tag{
     font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;
@@ -1367,6 +1390,178 @@ const TOPICS = [
     {q:'Usando el método breve para y = −4 − x, ¿en qué punto corta el eje y (x=0)?', a:'(0, −4)', qType:'open'},
   ]
 },
+{
+  id:'pendiente-ordenada-origen', cat:'algebra', title:'Pendiente y ordenada al origen', desc:'y = mx + b — cómo leer una recta directamente de su ecuación.',
+  theory:{h:'¿De qué trata este tema?',
+    intro:"Toda recta se puede escribir en la forma y = mx + b, llamada forma pendiente-ordenada. Aquí 'm' es la pendiente (qué tan inclinada está la recta), y 'b' es la ordenada al origen — el valor de y donde la recta cruza el eje vertical (cuando x=0). Con solo ver la ecuación, ya sabes cómo se ve la gráfica: empiezas en (0,b), y desde ahí subes o bajas 'm' unidades por cada unidad que avanzas a la derecha.",
+    formulas:['y = mx + b'], text:'m = pendiente · b = ordenada al origen (dónde cruza el eje y)'},
+  example:{ q:'En la ecuación y = 3x + 1, identifica la pendiente y la ordenada al origen, y grafícala.',
+    diagram:'<svg viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg"><line x1="20" y1="130" x2="190" y2="130" stroke="#ccc" stroke-width="1.5"/><line x1="100" y1="10" x2="100" y2="150" stroke="#ccc" stroke-width="1.5"/><line x1="70" y1="150" x2="160" y2="20" stroke="#5B2C87" stroke-width="2.5"/><circle cx="100" cy="112" r="4" fill="#D9A441"/><text x="105" y="108" font-size="11" fill="#2E1147" font-family="monospace">b=1</text></svg>',
+    steps:['La pendiente es m=3 (el número junto a la x).','La ordenada al origen es b=1 (el número solo, sin x) — la recta cruza el eje y en (0,1).','Desde (0,1), como m=3, subes 3 unidades por cada 1 que avanzas a la derecha.'],
+    result:'m = 3,  b = 1  →  la recta pasa por (0,1) y sube empinada' },
+  qs:[
+    {q:'En y = −2x + 5, ¿cuál es la pendiente?', a:'−2', accept:['-2']},
+    {q:'En y = −2x + 5, ¿cuál es la ordenada al origen?', a:'5', accept:['5']},
+    {q:'Si una recta tiene m=4 y b=−3, ¿cuál es su ecuación?', a:'y = 4x − 3', qType:'open'},
+    {q:'¿En qué punto cruza el eje y la recta y = 7x − 6?', a:'(0, −6)', qType:'open'},
+  ]
+},
+{
+  id:'recta-numerica-decimales', cat:'algebra', title:'Representación de decimales en la recta numérica', desc:'Ubica números (enteros, decimales o fracciones) en su posición exacta.',
+  theory:{h:'¿De qué trata este tema?',
+    intro:"La recta numérica es una línea donde cada punto representa un número. Los números enteros marcan posiciones fijas, y los decimales (o fracciones) caen ENTRE dos enteros consecutivos, según qué tan cerca estén de cada uno. Por ejemplo, 2.5 está exactamente a la mitad entre 2 y 3; 2.1 está muy cerca del 2; 2.9 está casi en el 3.",
+    formulas:[], text:'Para ubicar un decimal, identifica entre qué dos enteros cae, y luego estima la distancia proporcional entre ellos.'},
+  numberline:{ min:-10, max:10 },
+  example:{ q:'¿Dónde se ubica 2.5 en la recta numérica?',
+    diagram:'<svg viewBox="0 0 200 70" xmlns="http://www.w3.org/2000/svg"><line x1="20" y1="40" x2="180" y2="40" stroke="#999" stroke-width="2"/><line x1="50" y1="32" x2="50" y2="48" stroke="#5B2C87" stroke-width="2"/><text x="50" y="62" font-size="12" text-anchor="middle" fill="#2E1147" font-family="monospace">2</text><line x1="150" y1="32" x2="150" y2="48" stroke="#5B2C87" stroke-width="2"/><text x="150" y="62" font-size="12" text-anchor="middle" fill="#2E1147" font-family="monospace">3</text><circle cx="100" cy="40" r="6" fill="#D9A441" stroke="#2E1147" stroke-width="2"/><text x="100" y="20" font-size="11" text-anchor="middle" fill="#D9A441" font-family="monospace">2.5</text></svg>',
+    steps:['2.5 está entre el 2 y el 3.','Como la parte decimal es .5 (la mitad), el punto va exactamente a la mitad entre 2 y 3.'],
+    result:'2.5 se ubica justo en medio de 2 y 3' },
+  qs:[
+    {q:'¿Entre qué dos enteros se ubica el número 5.7?', a:'Entre 5 y 6', qType:'open'},
+    {q:'¿El número −3.2 está más cerca de −3 o de −4?', a:'Más cerca de −3', qType:'open'},
+    {q:'¿Dónde se ubica la fracción 3/4 en la recta numérica?', a:'Entre 0 y 1, a tres cuartas partes del camino (0.75)', qType:'open'},
+  ]
+},
+
+// ---------------- GEOMETRÍA: VOLUMEN Y ÁREAS ----------------
+{
+  id:'formulas-perimetros-areas', cat:'geometria', title:'Fórmulas de perímetros y áreas', desc:'Triángulo, cuadrado, rectángulo, círculo, rombo, pentágono, hexágono, trapecio y paralelogramo.',
+  theory:{h:'¿De qué trata este tema?',
+    intro:"Cada figura geométrica tiene su propia fórmula de perímetro (la distancia alrededor de la figura) y área (el espacio que cubre). Memorizar estas fórmulas — o saber dónde consultarlas rápido — es la base para resolver casi cualquier problema de geometría plana.",
+    formulas:['Triángulo: P=L+L+L, A=(b×h)/2','Cuadrado: P=4L, A=L²','Rectángulo: P=2a+2b, A=b×a','Círculo: P=D×π, A=π×r²','Rombo: P=4a, A=(D×d)/2','Pentágono: P=5L, A=(P×a)/2','Hexágono: P=6L, A=(P×a)/2','Trapecio: P=L+L+L+L, A=((B+b)×h)/2','Paralelogramo: P=2a+2b, A=b×h'], text:''},
+  example:{ q:'Un rombo tiene diagonal mayor 11cm y diagonal menor 5.5cm (la mitad de la mayor). ¿Cuál es su área?',
+    steps:['Fórmula del rombo: A = (D×d)/2.','Sustituye: A = (11×5.5)/2.'],
+    result:'A = 30.25 cm²' },
+  qs:[
+    {q:'Un círculo tiene diámetro 10cm. ¿Cuál es su perímetro (circunferencia)? Usa π≈3.1416', a:'≈ 31.42 cm', steps:'P=D×π=10×3.1416', accept:['31.42','31.4']},
+    {q:'Un hexágono regular tiene lado 6cm y apotema 5.2cm. ¿Cuál es su área?', a:'93.6 cm²', steps:'P=6×6=36; A=(36×5.2)/2', accept:['93.6']},
+    {q:'Un trapecio tiene base mayor 10cm, base menor 6cm y altura 4cm. ¿Cuál es su área?', a:'32 cm²', steps:'A=((10+6)×4)/2', accept:['32']},
+  ]
+},
+{
+  id:'problemas-areas-perimetros', cat:'geometria', title:'Problemas con áreas y perímetros', desc:'Aplica las fórmulas a situaciones reales.',
+  theory:{h:'¿De qué trata este tema?',
+    intro:"Estos problemas combinan las fórmulas de área y perímetro con situaciones cotidianas: calcular el costo de un terreno, cuántos árboles caben en un espacio, o el área de figuras a partir de sus diagonales o perímetro.",
+    formulas:[], text:''},
+  example:{ q:'Un campo rectangular tiene 170m de base y 28m de altura. Calcula el área total, y el precio si el metro cuadrado cuesta $15.',
+    steps:['Área = base × altura = 170 × 28.','Precio total = área × precio por m² = 4,760 × 15.'],
+    result:'Área = 4,760 m²,  Precio = $71,400' },
+  qs:[
+    {q:'Calcula el número de árboles que caben en un terreno de 32m de largo y 30m de ancho, si cada árbol necesita 4m².', a:'240 árboles', steps:'área=32×30=960; 960/4', accept:['240']},
+    {q:'Calcula el área de un rombo cuya diagonal mayor mide 11cm y su diagonal menor es la mitad de la mayor.', a:'30.25 cm²', accept:['30.25']},
+  ]
+},
+{
+  id:'pi-perimetro-radio', cat:'geometria', title:'π: razón de perímetro y radio', desc:'De dónde sale el número π — la razón constante entre circunferencia y diámetro.',
+  theory:{h:'¿De qué trata este tema?',
+    intro:"π (pi) es un número especial que nunca cambia — es constante. Sale de una actividad muy simple: si mides la circunferencia (el perímetro) de CUALQUIER círculo y la divides entre su diámetro, siempre obtienes el mismo número: aproximadamente 3.1416. Sin importar si el círculo es pequeño o gigante, esa razón se mantiene constante — por eso π es tan importante en geometría.",
+    formulas:['π = Perímetro / Diámetro ≈ 3.1416'], text:''},
+  example:{ q:'Si trazas un círculo de diámetro 1cm y mides su circunferencia con un hilo, ¿qué esperas obtener al dividir la circunferencia entre el diámetro?',
+    steps:['Sin importar el tamaño del círculo, esa razón (circunferencia/diámetro) siempre da el mismo resultado.','Esa constante es π ≈ 3.1416.'],
+    result:'circunferencia/diámetro = π ≈ 3.1416' },
+  qs:[
+    {q:'Si un círculo tiene diámetro 4cm, ¿cuánto mide aproximadamente su circunferencia (perímetro)?', a:'≈ 12.57 cm', steps:'circunferencia = π × diámetro', accept:['12.57','12.6']},
+    {q:'¿Cuántas veces cabe el radio dentro de la circunferencia completa?', a:'Aproximadamente 2π ≈ 6.28 veces (el doble de π, porque el diámetro es 2 radios)', qType:'open'},
+  ]
+},
+{
+  id:'solidos-cubicos-prismas', cat:'geometria', title:'Sólidos cúbicos y prismas: de dónde sale la fórmula de volumen', desc:'Apilar el área de la base tantas veces como indique la altura.',
+  theory:{h:'¿De qué trata este tema?',
+    intro:"El volumen de un prisma (incluyendo cubos) se puede entender apilando capas: imagina la base de la figura como una lámina delgada, y apílala tantas veces como indique la altura. Por eso la fórmula es 'área de la base × altura' — literalmente estás sumando esa área tantas veces como capas apiladas.",
+    formulas:['V = Área_base × altura','Cubo: V = lado³'], text:''},
+  example:{ q:'Imagina un cuadrado de 5×5 cm². ¿Cuántas veces tendrías que apilarlo para formar un cubo de 5×5×5 cm³?',
+    diagram:'<svg viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg"><g transform="translate(20,60)"><polygon points="0,0 40,-15 80,0 40,15" fill="none" stroke="#5B2C87" stroke-width="1"/></g><g transform="translate(20,45)"><polygon points="0,0 40,-15 80,0 40,15" fill="none" stroke="#5B2C87" stroke-width="1"/></g><g transform="translate(20,30)"><polygon points="0,0 40,-15 80,0 40,15" fill="none" stroke="#5B2C87" stroke-width="1"/></g><g transform="translate(20,15)"><polygon points="0,0 40,-15 80,0 40,15" fill="none" stroke="#5B2C87" stroke-width="1"/></g><g transform="translate(20,0)"><polygon points="0,0 40,-15 80,0 40,15" fill="#E6D9F5" stroke="#5B2C87" stroke-width="1.5"/></g><text x="140" y="40" font-size="13" fill="#2E1147" font-family="monospace">5 capas</text></svg>',
+    steps:['Cada capa aporta 1cm de altura al cubo.','Necesitas llegar a 5cm de altura total.'],
+    result:'5 veces — y por eso V = lado × lado × lado = lado³' },
+  qs:[
+    {q:'Un rectángulo de 5×8 cm² se apila para formar un prisma de 5×8×4 cm³. ¿Cuántas veces se apila?', a:'4 veces', accept:['4']},
+    {q:'¿Cuál es la fórmula para el volumen de un cilindro con tapa circular?', a:'V = π×r² × altura (área del círculo por la altura)', qType:'open'},
+  ]
+},
+{
+  id:'volumen-prismas-ejercicios', cat:'geometria', title:'Volumen de prismas: ejercicios', desc:'Prismas rectangulares, cilindros y más, con datos concretos.',
+  theory:{h:'¿De qué trata este tema?',
+    intro:"Para calcular el volumen de un prisma, identifica primero qué figura es la base (rectángulo, círculo, hexágono, etc.), calcula su área, y multiplícala por la altura del prisma.",
+    formulas:['V = Área_base × altura'], text:''},
+  example:{ q:'¿Cuánto mide el volumen de un prisma rectangular con lados a=2cm, b=3cm y c=5cm?',
+    steps:['Para un prisma rectangular, el volumen es simplemente el producto de sus tres dimensiones.','V = 2 × 3 × 5.'], result:'30 cm³' },
+  qs:[
+    {q:'¿Cuál es el volumen de una piscina en forma de prisma rectangular con base de 20m² y altura de 2.5m?', a:'50 m³', steps:'V=20×2.5', accept:['50']},
+    {q:'Calcula el volumen de una lata de refresco cilíndrica con radio 3cm y altura 10cm. Usa π≈3.1416', a:'≈ 282.7 cm³', steps:'V=π×r²×h=π×9×10', accept:['282.7','282.6','282.74']},
+    {q:'Un prisma tiene un volumen de 90cm³ y una altura de 4.5cm. ¿Cuánto mide el área de la base?', a:'20 cm²', steps:'área=volumen/altura=90/4.5', accept:['20']},
+  ]
+},
+{
+  id:'volumen-piramides', cat:'geometria', title:'Volumen de pirámides', desc:'Un tercio del área de la base por la altura.',
+  theory:{h:'¿De qué trata este tema?',
+    intro:"El volumen de una pirámide es exactamente UN TERCIO del volumen de un prisma con la misma base y altura. Por eso su fórmula lleva ese factor 1/3 — calculas el área de la base, la multiplicas por la altura, y divides entre 3.",
+    formulas:['V = (1/3) × Área_base × altura'], text:''},
+  example:{ q:'Calcula el volumen de una pirámide con base cuadrada de lado 12cm y altura 35cm.',
+    steps:['Área de la base: 12×12 = 144 cm².','Volumen = (1/3) × 144 × 35.'], result:'1,680 cm³' },
+  qs:[
+    {q:'Calcula el volumen de una pirámide con base rectangular de área 40cm² y altura 20cm.', a:'≈ 266.67 cm³', steps:'(1/3)×40×20', accept:['266.67','266.7']},
+    {q:'Pirámide de base cuadrada con lado 120cm y altura 50cm. ¿Cuál es su volumen?', a:'240,000 cm³', steps:'(1/3)×120²×50', accept:['240000','240,000']},
+  ]
+},
+{
+  id:'volumen-conos', cat:'geometria', title:'Volumen de conos', desc:'Igual que la pirámide: un tercio del área circular de la base por la altura.',
+  theory:{h:'¿De qué trata este tema?',
+    intro:"El cono se comporta como una 'pirámide con base circular' — su volumen también es un tercio del volumen de un cilindro con la misma base y altura. Primero calculas el área del círculo de la base, la multiplicas por la altura, y divides entre 3.",
+    formulas:['V = (1/3) × π × r² × altura'], text:''},
+  example:{ q:'¿Qué volumen en cm³ tendrá un cono si el radio de su base es 12cm y tiene una altura de 15cm?',
+    steps:['Área de la base: π×12² = π×144.','Volumen = (1/3) × π×144 × 15.'], result:'≈ 2,261.9 cm³' },
+  qs:[
+    {q:'Un sombrero cónico de cartón mide 15cm de altura y puede servir 500ml (500cm³) de refresco. ¿Cuánto mide el radio de la base?', a:'≈ 5.64 cm', steps:'500=(1/3)×π×r²×15 → r²=500/(5π)', qType:'open'},
+    {q:'¿Cuál es el volumen de un cono con radio 2.5cm y altura 8cm (mismas medidas que un cilindro)?', a:'≈ 52.36 cm³', steps:'(1/3)×π×6.25×8', accept:['52.36','52.4']},
+  ]
+},
+{
+  id:'problemas-volumen', cat:'geometria', title:'Problemas de volumen: aplicaciones reales', desc:'Albercas, tanques, latas y pirámides — combinando las fórmulas de volumen.',
+  theory:{h:'¿De qué trata este tema?',
+    intro:"Estos problemas aplican las fórmulas de volumen (prismas, cilindros, conos, pirámides) a situaciones de la vida real, a veces trabajando al revés: te dan el volumen y piden encontrar una medida faltante (como el radio o el área de la base).",
+    formulas:[], text:''},
+  example:{ q:'¿Cuántos litros de agua se requerirán para llenar una alberca de base heptagonal de 5m de lado, 3.5m de apotema y 5m de profundidad?',
+    steps:['Área del heptágono: (perímetro×apotema)/2 = (7×5×3.5)/2 = 61.25 m².','Volumen = área × profundidad = 61.25 × 5.','Convierte a litros: 1 m³ = 1,000 L.'],
+    result:'306.25 m³ = 306,250 litros' },
+  qs:[
+    {q:'Se construye un contenedor cilíndrico de 8m de altura y 4m de diámetro (radio=2m). ¿Cuál es su volumen?', a:'≈ 100.53 m³', steps:'π×4×8', accept:['100.53','100.5']},
+    {q:'Un tanque de agua tiene capacidad de 4.5 litros (4,500 cm³), forma de prisma rectangular, y altura 40cm. ¿Cuánto mide el área de la base?', a:'112.5 cm²', steps:'4500/40', accept:['112.5']},
+    {q:'Una lata cilíndrica almacena 60cm³ de alimento, con radio 2.5cm. ¿Cuánto mide su altura?', a:'≈ 3.06 cm', steps:'altura=volumen/(π×r²)=60/(π×6.25)', accept:['3.06','3.1']},
+  ]
+},
+
+// ---------------- APLICACIONES: PROPORCIONALIDAD ----------------
+{
+  id:'constante-proporcionalidad', cat:'aplicaciones', title:'Constante de proporcionalidad', desc:'La razón fija entre dos magnitudes directamente proporcionales.',
+  theory:{h:'¿De qué trata este tema?',
+    intro:"Dos magnitudes son directamente proporcionales si al aumentar o disminuir una, la otra lo hace en la misma proporción. La 'constante de proporcionalidad directa' es la relación fija entre ambas magnitudes — se obtiene dividiendo una entre la otra, y ese valor debe ser SIEMPRE el mismo para cualquier par de datos. Si el valor cambia entre pares de datos, entonces las magnitudes NO son directamente proporcionales.",
+    formulas:['Constante = magnitud1 / magnitud2 (debe dar siempre el mismo valor)'], text:''},
+  example:{ q:'2 camisas cuestan 30€. ¿Cuál es la constante de proporcionalidad directa entre camisas y precio? Verifica con 4 camisas (60€) y 1 camisa (15€).',
+    steps:['Constante = precio/camisas = 30/2 = 15.','Verifica con 4 camisas: 60/4 = 15 ✓ (coincide).','Verifica con 1 camisa: 15/1 = 15 ✓ (coincide).'],
+    result:'La constante de proporcionalidad es 15 (el precio por camisa)' },
+  qs:[
+    {q:'¿Cuál es la constante de proporcionalidad directa en la razón 25/150?', a:'1/6 ≈ 0.167', accept:['1/6','0.167','0.17']},
+    {q:'Para hacer un pastel se emplean 600g de harina y 250g de azúcar. ¿Cuál es la constante de proporcionalidad entre ambos ingredientes?', a:'2.4', steps:'600/250', accept:['2.4']},
+    {q:'Un obrero tarda 10 horas en levantar 1 muro, 18 horas en 2 muros, y 24 horas en 3 muros. ¿Son directamente proporcionales las horas y los muros?', a:'No — la constante cambia (10, 9, 8), no es la misma en todos los casos.', qType:'open'},
+    {q:'La constante de proporcionalidad entre estaño y cobre en una aleación es 3/5. Si se usan 45g de estaño, ¿cuánto cobre se necesita?', a:'75 g', steps:'45×(5/3)', accept:['75']},
+  ]
+},
+{
+  id:'reparto-proporcional', cat:'aplicaciones', title:'Repartición y reparto proporcional', desc:'Divide una cantidad total en partes proporcionales a ciertos valores.',
+  theory:{h:'¿De qué trata este tema?',
+    intro:"El reparto proporcional consiste en dividir una cantidad total en partes que sean proporcionales a otros valores dados (como edades, capital invertido, o tiempo trabajado). El método: suma todos los valores de referencia, divide la cantidad total entre esa suma para obtener 'cuánto vale cada unidad', y multiplica ese valor por cada parte para saber cuánto le corresponde a cada quien.",
+    formulas:['x/a = y/b = z/c = (x+y+z)/(a+b+c) = total/suma_de_partes'], text:''},
+  example:{ q:'Un abuelo reparte $450 entre sus tres nietos de 8, 12 y 16 años, proporcionalmente a sus edades. ¿Cuánto corresponde a cada uno?',
+    steps:['Suma las edades (partes de referencia): 8+12+16 = 36.','Valor de cada unidad: 450/36 = 12.5.','Multiplica cada edad por ese valor: 8×12.5=100, 12×12.5=150, 16×12.5=200.'],
+    result:'$100, $150 y $200 respectivamente' },
+  qs:[
+    {q:'Reparte 90 en partes directamente proporcionales a 2 y 4.', a:'30 y 60', steps:'total partes=6; cada unidad=90/6=15; 2×15=30, 4×15=60', accept:['30,60','30y60']},
+    {q:'Se asocian tres individuos aportando 5000, 7500 y 9000€. Ganan 6,450€ en total, repartido proporcional al capital. ¿Cuánto corresponde al que aportó 5000€?', a:'$1,500', steps:'total=21500; constante=6450/21500=0.3; 5000×0.3', accept:['1500','$1500','1,500']},
+    {q:'Se reparte dinero proporcional a 3, 5 y 7. La segunda persona recibe 735€. ¿Cuánto recibe la primera?', a:'$441', steps:'735/5=147 por unidad; 3×147', accept:['441','$441']},
+    {q:'Se reparte dinero en proporción a 5, 10 y 13; al menor le corresponden $2,500. ¿Cuánto le corresponde al que tiene proporción 10?', a:'$5,000', steps:'2500/5=500 por unidad; 10×500', accept:['5000','$5000','5,000']},
+    {q:'Un padre reparte $72 entre sus dos hijos proporcional a su edad: Luis tiene 9 años y Marta 15. ¿Cuánto le toca a Luis?', a:'$27', steps:'total edades=24; 72/24=3 por año; 9×3', accept:['27','$27']},
+  ]
+},
 ];
 
 // ======================= RENDER =======================
@@ -1435,6 +1630,20 @@ TOPICS.forEach(t => {
       <div class="ex-result">→ ${t.example.result}</div>
     </div>`;
   }
+  let numberlineHtml = '';
+  if(t.numberline){
+    const nlId = 'nl-' + t.id;
+    numberlineHtml = `<div class="numberline-box">
+      <span class="tag">Recta numérica interactiva</span>
+      <p style="font-size:13.5px;color:var(--ink-soft);margin:0 0 14px;">Escribe cualquier número (entero, decimal o fracción como 3/4) y dale "Ubicar" para ver dónde cae en la recta.</p>
+      <div class="numberline-controls">
+        <input type="text" id="${nlId}-input" placeholder="ej. 2.5 o 3/4" autocomplete="off">
+        <button data-nl="${nlId}" data-min="${t.numberline.min}" data-max="${t.numberline.max}">Ubicar en la recta</button>
+        <span class="numberline-readout" id="${nlId}-readout"></span>
+      </div>
+      <div class="numberline-svg-wrap" id="${nlId}-svg"></div>
+    </div>`;
+  }
 
   panel.innerHTML = `
     <button class="back-link" data-action="back">← Volver a todos los temas</button>
@@ -1445,6 +1654,7 @@ TOPICS.forEach(t => {
     <p class="topic-desc">${t.desc}</p>
     ${theoryHtml}
     ${exampleHtml}
+    ${numberlineHtml}
     <div class="qlist"></div>
   `;
 
@@ -1479,6 +1689,81 @@ TOPICS.forEach(t => {
   });
 
   panelsEl.appendChild(panel);
+  if(t.numberline){
+    const nlId = 'nl-' + t.id;
+    drawNumberLine(nlId + '-svg', t.numberline.min, t.numberline.max, null);
+  }
+});
+
+function parseNumberInput(str){
+  str = str.trim();
+  if(str.includes('/')){
+    const parts = str.split('/');
+    if(parts.length === 2){
+      const num = parseFloat(parts[0]);
+      const den = parseFloat(parts[1]);
+      if(!isNaN(num) && !isNaN(den) && den !== 0) return num/den;
+    }
+    return NaN;
+  }
+  return parseFloat(str);
+}
+
+function drawNumberLine(containerId, min, max, value){
+  const el = document.getElementById(containerId);
+  if(!el) return;
+  const width = Math.max(320, (max-min)*70);
+  const height = 90;
+  const padding = 30;
+  const usableWidth = width - padding*2;
+  const scale = (v) => padding + ((v-min)/(max-min))*usableWidth;
+
+  let ticks = '';
+  for(let i = Math.ceil(min); i <= Math.floor(max); i++){
+    const x = scale(i);
+    ticks += `<line x1="${x}" y1="38" x2="${x}" y2="48" stroke="#5B2C87" stroke-width="1.5"/>`;
+    ticks += `<text x="${x}" y="65" font-size="12" fill="#2E1147" text-anchor="middle" font-family="monospace">${i}</text>`;
+  }
+
+  let pointSvg = '';
+  let readoutText = '';
+  if(value !== null && !isNaN(value) && value >= min && value <= max){
+    const x = scale(value);
+    pointSvg = `<circle class="nl-point" cx="${x}" cy="43" r="7" fill="#D9A441" stroke="#2E1147" stroke-width="2"/>`;
+    readoutText = `x = ${value}`;
+  } else if(value !== null){
+    readoutText = 'Fuera de rango o no válido';
+  }
+
+  el.innerHTML = `<svg viewBox="0 0 ${width} ${height}" width="${width}" height="${height}" xmlns="http://www.w3.org/2000/svg">
+    <line x1="${padding}" y1="43" x2="${width-padding}" y2="43" stroke="#999" stroke-width="2"/>
+    ${ticks}
+    ${pointSvg}
+  </svg>`;
+
+  const idPrefix = containerId.replace('-svg','');
+  const readoutEl = document.getElementById(idPrefix + '-readout');
+  if(readoutEl) readoutEl.textContent = readoutText;
+}
+
+panelsEl.addEventListener('click', (e) => {
+  const nlBtn = e.target.closest('button[data-nl]');
+  if(nlBtn){
+    const nlId = nlBtn.dataset.nl;
+    const min = parseFloat(nlBtn.dataset.min);
+    const max = parseFloat(nlBtn.dataset.max);
+    const input = document.getElementById(nlId + '-input');
+    const value = parseNumberInput(input.value);
+    drawNumberLine(nlId + '-svg', min, max, value);
+    return;
+  }
+});
+panelsEl.addEventListener('keydown', (e) => {
+  if(e.key === 'Enter' && e.target.id && e.target.id.startsWith('nl-') && e.target.id.endsWith('-input')){
+    const nlId = e.target.id.replace('-input','');
+    const btn = panelsEl.querySelector(`button[data-nl="${nlId}"]`);
+    if(btn) btn.click();
+  }
 });
 
 function selectTopic(id){
