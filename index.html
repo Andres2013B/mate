@@ -1191,6 +1191,176 @@ const TOPICS = [
     {q:'Halla la desviación media, la varianza y la desviación típica de: 2, 3, 6, 8, 11', a:'Media=6, desv.media=2.8, σ²=10.8, σ≈3.29', steps:'Desviaciones: -4,-3,0,2,5', qType:'open'},
   ]
 },
+{
+  id:'media', cat:'probabilidad', title:'Media', desc:'El promedio: sumar todo y dividir entre cuántos hay.',
+  theory:{h:'¿De qué trata este tema?',
+    intro:"La media es el promedio de todos los números. Es fácil de calcular: se suman todos los números, y luego se divide el resultado entre cuántos números hay. Si hay números negativos, recuerda que sumar un número negativo es lo mismo que restarlo.",
+    formulas:['Media = (suma de los números) / (cuántos números hay)'], text:''},
+  example:{ q:'¿Cuál es la media de 2, 7 y 9?',
+    diagram:'<svg viewBox="0 0 260 70" xmlns="http://www.w3.org/2000/svg"><line x1="10" y1="50" x2="250" y2="50" stroke="#999" stroke-width="1.5"/><circle cx="30" cy="50" r="3" fill="#2E1147"/><text x="25" y="40" font-size="11" fill="#2E1147">0</text><circle cx="90" cy="50" r="4" fill="#D9A441"/><text x="85" y="40" font-size="11" fill="#D9A441">2</text><circle cx="150" cy="50" r="4" fill="#5B2C87"/><text x="145" y="65" font-size="11" fill="#5B2C87">6=media</text><circle cx="190" cy="50" r="4" fill="#D9A441"/><text x="185" y="40" font-size="11" fill="#D9A441">7</text><circle cx="230" cy="50" r="4" fill="#D9A441"/><text x="225" y="40" font-size="11" fill="#D9A441">9</text></svg>',
+    steps:['Suma los números: 2+7+9=18.','Divide entre la cantidad de números (3): 18÷3.'], result:'Media = 6' },
+  qs:[
+    {q:'Encuentra la media de: 3, −7, 5, 13, −2', a:'2.4', steps:'suma=3-7+5+13-2=12; 12/5', accept:['2.4']},
+    {q:'Encuentra la media de: 3,7,5,13,20,23,39,23,40,23,14,12,56,23,29 (15 números que suman 330)', a:'22', steps:'330/15', accept:['22']},
+  ]
+},
+{
+  id:'mediana', cat:'probabilidad', title:'Mediana', desc:'El número que queda justo en medio, una vez ordenados.',
+  theory:{h:'¿De qué trata este tema?',
+    intro:"La mediana es el número de la mitad en un conjunto de números. Para encontrarla, coloca los números en orden de menor a mayor y encuentra el número del medio. Si hay una cantidad PAR de números, hay dos números en el medio — se promedian esos dos (se suman y se dividen entre 2).",
+    formulas:[], text:''},
+  example:{ q:'Encuentra la mediana de {12, 3, 5, 2}',
+    diagram:'<svg viewBox="0 0 200 50" xmlns="http://www.w3.org/2000/svg"><text x="10" y="30" font-size="16" fill="#2E1147" font-family="monospace">2  3  |  5  12</text><line x1="65" y1="10" x2="65" y2="40" stroke="#D9A441" stroke-width="2"/></svg>',
+    steps:['Ordena: 2, 3, 5, 12.','Como son 4 números (cantidad par), hay dos números en el medio: 3 y 5.','Promedia esos dos: (3+5)/2.'],
+    result:'Mediana = 4' },
+  qs:[
+    {q:'Encuentra la mediana de {12, 3, 5}', a:'5', steps:'ordenados: 3,5,12 → el de en medio es 5', accept:['5']},
+    {q:'De estos 14 números ordenados: 3,5,7,12,13,14,21,23,23,23,23,29,40,56 — ¿cuál es la mediana?', a:'22', steps:'números centrales son 21 y 23 → (21+23)/2', accept:['22']},
+  ]
+},
+{
+  id:'moda', cat:'probabilidad', title:'Moda', desc:'El número que aparece más veces.',
+  theory:{h:'¿De qué trata este tema?',
+    intro:"La moda es el número que aparece más a menudo en un conjunto de números. Para calcularla, primero ordena los números que te dan — así es mucho más fácil ver cuáles se repiten más veces. Un conjunto puede tener una moda, varias modas (si hay empate), o ninguna moda (si todos los números aparecen la misma cantidad de veces).",
+    formulas:[], text:''},
+  example:{ q:'Encuentra la moda de {6, 3, 9, 6, 6, 5, 9, 3}',
+    diagram:'<svg viewBox="0 0 220 50" xmlns="http://www.w3.org/2000/svg"><text x="10" y="20" font-size="14" fill="#2E1147" font-family="monospace">3,3,5,6,6,6,9,9</text><text x="10" y="40" font-size="12" fill="#D9A441" font-family="monospace">el 6 aparece 3 veces</text></svg>',
+    steps:['Ordena los números: 3, 3, 5, 6, 6, 6, 9, 9.','Cuenta cuántas veces aparece cada uno: 3 aparece 2 veces, 5 aparece 1 vez, 6 aparece 3 veces, 9 aparece 2 veces.'],
+    result:'Moda = 6 (aparece más veces que los demás)' },
+  qs:[
+    {q:'¿Cuál es la moda de: 7, 6, 5, 8, 7, 5, 9, 3, 5, 4?', a:'5', steps:'el 5 aparece 3 veces', accept:['5']},
+    {q:'Los números 7,6,10,13,7,2,5,6,x tienen solo una moda, y la media, mediana y moda son iguales. ¿Cuál es el valor de x?', a:'7', qType:'open'},
+  ]
+},
+{
+  id:'media-mediana-moda-ejercicios', cat:'probabilidad', title:'Media, mediana y moda: ejercicios combinados', desc:'Practica las tres medidas juntas, con números y π.',
+  theory:{h:'¿De qué trata este tema?',
+    intro:"Estos ejercicios combinan las tres medidas de tendencia central (media, mediana y moda) en un mismo problema. A veces también trabajan con datos organizados en una tabla de frecuencias — en ese caso, para la media multiplicas cada valor por su frecuencia, sumas todo, y divides entre el total de datos (no entre el número de valores distintos).",
+    formulas:['Media (con tabla de frecuencias) = Σ(valor×frecuencia) / Σ(frecuencia)'], text:''},
+  example:{ q:'Naomi lanzó un dado 45 veces: 1 salió 8 veces, 2 salió 11 veces, 3 salió 4 veces, 4 salió 8 veces, 5 salió 5 veces, 6 salió 9 veces. ¿Cuál fue el promedio de sus tiros?',
+    steps:['Multiplica cada resultado por su frecuencia: 1×8=8, 2×11=22, 3×4=12, 4×8=32, 5×5=25, 6×9=54.','Suma todo: 8+22+12+32+25+54=153.','Divide entre el total de tiros (45): 153÷45.'],
+    result:'Media ≈ 3.4' },
+  qs:[
+    {q:'Obtén la media, mediana y moda de: 13, 16, 12, 11, 8, 14, 12, 18', a:'Media=13, Mediana=12.5, Moda=12', qType:'open'},
+    {q:'Los números 11, 18, 5, 24, 12, 3 y x tienen media 13. ¿Cuál es el valor de x?', a:'18', steps:'suma total=13×7=91; x=91−(11+18+5+24+12+3)', accept:['18']},
+    {q:'π = 3.14159265358979... ¿Cuáles son la mediana y la moda de los primeros 12 dígitos?', a:'Mediana=4, Moda=9', qType:'open'},
+  ]
+},
+{
+  id:'grafica-pay', cat:'probabilidad', title:'Gráfica de pay (circular)', desc:'Usa "rebanadas" para mostrar el tamaño relativo de los datos.',
+  theory:{h:'¿De qué trata este tema?',
+    intro:"Una gráfica de pay (o gráfica circular) usa 'rebanadas' para mostrar el tamaño relativo de los datos dentro de un total. Para construirla: primero divide cada valor entre el total y multiplica por 100 para obtener el porcentaje. Como un círculo completo tiene 360°, multiplicas cada porcentaje (como fracción) por 360° para saber cuántos grados debe medir cada rebanada.",
+    formulas:['grados de la rebanada = (valor/total) × 360°'], text:''},
+  example:{ q:'Se encuestó qué tipo de película gusta más: Comedia=4, Acción=5, Romance=6, Drama=1, SciFi=4 (total=20). Encuentra los grados de la rebanada de Romance.',
+    diagram:'<svg viewBox="0 0 220 160" xmlns="http://www.w3.org/2000/svg"><circle cx="110" cy="80" r="60" fill="none" stroke="#ccc" stroke-width="1"/><path d="M110,80 L110,20 A60,60 0 0,1 159.5,50 Z" fill="#3E8E5C"/><path d="M110,80 L159.5,50 A60,60 0 0,1 149.6,124.6 Z" fill="#8B5FBF"/><path d="M110,80 L149.6,124.6 A60,60 0 0,1 69.9,133.7 Z" fill="#C4493C"/><path d="M110,80 L69.9,133.7 A60,60 0 0,1 65.6,68.7 Z" fill="#5B2C87"/><path d="M110,80 L65.6,68.7 A60,60 0 0,1 110,20 Z" fill="#D9A441"/></svg>',
+    steps:['Romance: 6 de 20 → 6/20 = 30%.','Multiplica el porcentaje por 360°: 0.30 × 360°.'],
+    result:'La rebanada de Romance mide 108°' },
+  qs:[
+    {q:'Con los mismos datos, ¿cuántos grados mide la rebanada de Comedia (4 de 20)?', a:'72°', steps:'(4/20)×360°', accept:['72','72°']},
+    {q:'Calificaciones de un examen: A=4, B=12, C=10, D=2 (total=28). ¿Qué porcentaje del total sacó B?', a:'≈ 42.9%', steps:'12/28', qType:'open'},
+    {q:'En una gráfica de pay de población mundial por continente, si Asia ocupa la rebanada más grande del círculo, ¿qué significa eso?', a:'Que Asia tiene el mayor porcentaje de población respecto al total mundial.', qType:'open'},
+  ]
+},
+{
+  id:'grafica-barras', cat:'probabilidad', title:'Gráfica de barras', desc:'Representa datos con barras de diferentes alturas.',
+  theory:{h:'¿De qué trata este tema?',
+    intro:"Una gráfica de barras es una representación de datos usando barras de diferentes alturas (o longitudes, si es horizontal). Cada barra representa una categoría, y su altura (o longitud) representa la frecuencia o cantidad de esa categoría. A diferencia del histograma, en una gráfica de barras SÍ puede haber espacios entre las barras, porque las categorías son independientes entre sí.",
+    formulas:[], text:''},
+  example:{ q:'Se preguntó a 145 personas su fruta favorita: Manzana=35, Naranja=30, Plátano=10, Kiwi=25, Mora azul=40, Uva=5. Elabora una gráfica de barras horizontal.',
+    diagram:'<svg viewBox="0 0 220 140" xmlns="http://www.w3.org/2000/svg"><rect x="60" y="10" width="70" height="15" fill="#C4493C"/><rect x="60" y="30" width="60" height="15" fill="#D9A441"/><rect x="60" y="50" width="20" height="15" fill="#F0D060"/><rect x="60" y="70" width="50" height="15" fill="#3E8E5C"/><rect x="60" y="90" width="80" height="15" fill="#5B2C87"/><rect x="60" y="110" width="10" height="15" fill="#8B5FBF"/><text x="10" y="22" font-size="9" fill="#2E1147" font-family="monospace">Manzana</text><text x="10" y="42" font-size="9" fill="#2E1147" font-family="monospace">Naranja</text><text x="10" y="62" font-size="9" fill="#2E1147" font-family="monospace">Plátano</text><text x="10" y="82" font-size="9" fill="#2E1147" font-family="monospace">Kiwi</text><text x="10" y="102" font-size="9" fill="#2E1147" font-family="monospace">M.Azul</text><text x="10" y="122" font-size="9" fill="#2E1147" font-family="monospace">Uva</text></svg>',
+    steps:['Cada barra representa una fruta, y su longitud es proporcional a las personas que la eligieron.','Mora azul (40) tiene la barra más larga; Uva (5) la más corta.'],
+    result:'La fruta favorita es la mora azul, con 40 votos' },
+  qs:[
+    {q:'Se tiró un dado varias veces y se registraron los resultados en una gráfica de barras. ¿Qué representa la altura de cada barra?', a:'Cuántas veces cayó el dado en ese número (la frecuencia de cada resultado).', qType:'open'},
+    {q:'Un diagrama de barras muestra las notas de una clase: Insuficiente=3, Suficiente=8, Bien=12, Notable=6, Sobresaliente=1. ¿Cuántos estudiantes hay en la clase en total?', a:'30', steps:'3+8+12+6+1', accept:['30']},
+    {q:'Con los mismos datos (Insuf=3, Suf=8, Bien=12, Notable=6, Sobres=1), ¿cuántos estudiantes reprobaron (Insuficiente)?', a:'3', accept:['3']},
+  ]
+},
+{
+  id:'frecuencia-relativa-absoluta', cat:'probabilidad', title:'Frecuencia relativa y absoluta', desc:'Cuántas veces pasa algo (absoluta) y qué proporción representa (relativa).',
+  theory:{h:'¿De qué trata este tema?',
+    intro:"La frecuencia es el número de veces que sucede un evento. La frecuencia ABSOLUTA es el número total de veces que un valor aparece — un conteo simple. La frecuencia RELATIVA es el cociente entre la frecuencia absoluta de un valor y el número total de datos — te dice qué proporción representa. La suma de todas las frecuencias relativas siempre debe dar 1 (o 100%).",
+    formulas:['Frecuencia relativa = frecuencia absoluta / total de datos'], text:''},
+  example:{ q:'Tu equipo ha ganado 9 juegos de un total de 12 jugados. ¿Cuál es la frecuencia absoluta y relativa de ganar?',
+    steps:['La frecuencia absoluta de ganar es simplemente el conteo: 9.','La frecuencia relativa es 9/12.'], result:'Frecuencia absoluta = 9,  Frecuencia relativa = 9/12 = 75%' },
+  qs:[
+    {q:'Un dado se lanza 100 veces: 1→16, 2→18, 3→11, 4→15, 5→19, 6→21 veces. ¿Cuántas veces cayeron resultados menores a 3?', a:'34', steps:'16+18', accept:['34']},
+    {q:'Se encuestó a 92 personas cómo llegan al trabajo: 35 en coche, 42 en transporte público, 8 en bicicleta, 7 caminando. ¿Cuál es la frecuencia relativa de ir en bicicleta (a 2 decimales)?', a:'0.09', steps:'8/92', accept:['0.09']},
+    {q:'Michelle contó vocales en un texto: a=126, e=201, i=107, o=120, u=46 (total=600). ¿Cuál es la frecuencia relativa de la vocal a?', a:'0.21', steps:'126/600', accept:['0.21']},
+  ]
+},
+{
+  id:'distribucion-frecuencias', cat:'probabilidad', title:'Distribución de frecuencias', desc:'Organiza datos en una tabla, simple o agrupada.',
+  theory:{h:'¿De qué trata este tema?',
+    intro:"Una distribución de frecuencias es una tabla que muestra los valores de un conjunto de datos y su frecuencia (cuántas veces ocurre cada uno). Cuando hay muchos valores distintos, conviene agruparlos en rangos: primero ordenas los datos, encuentras el rango (mayor menos menor), y divides ese rango entre la cantidad de grupos que quieras para saber el tamaño de cada grupo.",
+    formulas:['Rango = valor mayor − valor menor', 'Tamaño de grupo = rango / cantidad de grupos'], text:''},
+  example:{ q:'En 10 días se vendieron estos periódicos: 22,20,18,23,20,25,22,20,18,20. Elabora una tabla de distribución de frecuencias.',
+    steps:['Ordena y cuenta cuántas veces aparece cada valor: 18 aparece 2 veces, 20 aparece 4 veces, 22 aparece 2 veces, 23 aparece 1 vez, 25 aparece 1 vez.','Verifica que el total de frecuencias sea 10 (la cantidad de días).'],
+    result:'18→2, 19→0, 20→4, 21→0, 22→2, 23→1, 24→0, 25→1' },
+  qs:[
+    {q:'Un equipo de fútbol metió estos goles en 20 partidos: 3,0,1,5,4,3,2,6,4,2,3,3,0,7,1,1,2,3,4,3. ¿Qué número de goles tuvo la frecuencia más alta?', a:'3 (apareció 6 veces)', accept:['3']},
+    {q:'Si agrupas datos del 15 al 29 en grupos de tamaño 5, ¿cuáles serían los tres grupos?', a:'15-19, 20-24, 25-29', qType:'open'},
+  ]
+},
+{
+  id:'frecuencia-acumulada', cat:'probabilidad', title:'Frecuencia acumulada', desc:'La suma de todas las frecuencias hasta cierto valor.',
+  theory:{h:'¿De qué trata este tema?',
+    intro:"La frecuencia acumulada es la suma de las frecuencias absolutas de todos los valores inferiores o iguales al valor considerado. Se calcula de forma progresiva: para cada valor, sumas su frecuencia a la frecuencia acumulada del valor anterior.",
+    formulas:['Frec. acumulada(x) = Frec. acumulada(anterior) + Frec. absoluta(x)'], text:''},
+  example:{ q:'Puntos: 1,1,2,2,2,2,2,3,3,3,3,4,4,5. Con frecuencias 1→2, 2→5, 3→4, 4→2, 5→1, ¿cuál es la frecuencia acumulada para el puntaje 3?',
+    steps:['Suma las frecuencias de todos los valores hasta el 3: frecuencia de 1 (2) + frecuencia de 2 (5) + frecuencia de 3 (4).'],
+    result:'2+5+4 = 11' },
+  qs:[
+    {q:'Tabla: Score 1→16, 2→18, 3→11, 4→15, 5→19, 6→21. ¿Cuál es la frecuencia acumulada de 5?', a:'79', steps:'16+18+11+15+19', accept:['79']},
+    {q:'Temperaturas de julio con esta tabla: 27→1, 28→2, 29→6, 30→7, 31→8. ¿Cuál es la frecuencia acumulada hasta 30?', a:'16', steps:'1+2+6+7', accept:['16']},
+  ]
+},
+{
+  id:'potencias-intro', cat:'algebra', title:'Potencias', desc:'Base, exponente y resultado — el concepto básico.',
+  theory:{h:'¿De qué trata este tema?',
+    intro:"Las potencias se operan multiplicando un número por sí mismo la cantidad de veces que el exponente indique. El número que se multiplica por sí mismo se llama base, la cantidad de veces que se multiplica se llama exponente, y el resultado se llama potencia (o resultado).",
+    formulas:['baseᵉˣᵖᵒⁿᵉⁿᵗᵉ = base × base × ... (exponente veces)'], text:''},
+  example:{ q:'Calcula 3²',
+    diagram:'<svg viewBox="0 0 160 60" xmlns="http://www.w3.org/2000/svg"><text x="20" y="40" font-size="28" fill="#5B2C87" font-family="monospace">3</text><text x="45" y="25" font-size="16" fill="#C4493C" font-family="monospace">2</text><text x="65" y="40" font-size="24" fill="#2E1147" font-family="monospace">= 3×3 =</text><text x="135" y="40" font-size="28" fill="#3E8E5C" font-family="monospace">9</text></svg>',
+    steps:['La base es 3, el exponente es 2.','Multiplica la base por sí misma, 2 veces: 3×3.'], result:'9' },
+  qs:[
+    {q:'Calcula 7²', a:'49', accept:['49']},
+    {q:'Calcula 4⁵', a:'1024', accept:['1024']},
+    {q:'Calcula 100⁴', a:'100,000,000', accept:['100000000','100,000,000']},
+    {q:'Calcula 9²', a:'81', accept:['81']},
+    {q:'Calcula 0.2⁴', a:'0.0016', accept:['0.0016']},
+    {q:'Calcula 1.1¹²', a:'≈ 3.14', qType:'open'},
+  ]
+},
+{
+  id:'jerarquia-operaciones', cat:'algebra', title:'Jerarquía de operaciones (con potencias y raíces)', desc:'El orden correcto: paréntesis, potencias/raíces, multiplicación/división, suma/resta.',
+  theory:{h:'¿De qué trata este tema?',
+    intro:"Cuando una expresión combina varias operaciones, hay un orden obligatorio para resolverlas: primero lo que está dentro de paréntesis y corchetes (de adentro hacia afuera), luego potencias y raíces, después multiplicaciones y divisiones (de izquierda a derecha), y al final sumas y restas (de izquierda a derecha). Seguir este orden es indispensable — cambiar el orden te da una respuesta incorrecta.",
+    formulas:['1) ( ) [ ] { }   2) potencias y raíces   3) × ÷   4) + −'], text:''},
+  example:{ q:'Resuelve: 5(1 + 2)² − 18',
+    steps:['Paréntesis primero: (1+2) = 3.','Ahora la potencia: 3² = 9.','Multiplicación: 5×9 = 45.','Resta final: 45−18.'],
+    result:'27' },
+  qs:[
+    {q:'Resuelve: 7 + [11 − 3 − (10 − 8)]', a:'15', steps:'(10-8)=2; [11-3-2]=6; 7+6', accept:['15']},
+    {q:'Resuelve: √49 + 15/3 + (−12)', a:'0', steps:'√49=7; 15/3=5; 7+5-12', accept:['0']},
+    {q:'Resuelve: [(3+2)² + (3+2²)] − 9 + 11', a:'34', steps:'(3+2)²=25; (3+2²)=7; 25+7-9+11', accept:['34']},
+    {q:'Resuelve: {34 − [9(−10) + (6÷2⁰)]}', a:'220', steps:'2⁰=1; 6÷1=6; 9(-10)=-90; -90+6=-84; 34-(-84)', qType:'open'},
+  ]
+},
+{
+  id:'tabulacion-lineal', cat:'algebra', title:'Tabulación de funciones lineales', desc:'Elige valores de x, calcula y, y grafica los puntos para formar la recta.',
+  theory:{h:'¿De qué trata este tema?',
+    intro:"La tabulación es una técnica para encontrar coordenadas de una ecuación y así trazar su gráfica. Para una función lineal, eliges varios valores de x, los sustituyes en la ecuación para encontrar la y correspondiente, y anotas cada par (x,y). Una forma más breve: solo necesitas encontrar DOS puntos — dónde la recta corta el eje y (cuando x=0) y dónde corta el eje x (cuando y=0) — y unirlos con una línea recta.",
+    formulas:['Corte con eje y: sustituye x=0', 'Corte con eje x: sustituye y=0'], text:''},
+  example:{ q:'Usando el método breve, grafica f(x) = x − 4',
+    steps:['Corte con eje y (x=0): y = 0−4 = −4. Coordenada (0,−4).','Corte con eje x (y=0): 0 = x−4 → x=4. Coordenada (4,0).','Une esos dos puntos con una línea recta — esa es la gráfica.'],
+    result:'La recta pasa por (0,−4) y (4,0)' },
+  qs:[
+    {q:'Para y = 3x − 1, tabulando con x=0, ¿cuál es el valor de y?', a:'−1', accept:['-1']},
+    {q:'Para y = 3x − 1, tabulando con x=2, ¿cuál es el valor de y?', a:'5', accept:['5']},
+    {q:'Usando el método breve para y = −4 − x, ¿en qué punto corta el eje y (x=0)?', a:'(0, −4)', qType:'open'},
+  ]
+},
 ];
 
 // ======================= RENDER =======================
